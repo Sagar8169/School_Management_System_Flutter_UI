@@ -55,31 +55,27 @@ final List<TicketDummy> _allTickets = [
   ),
 ];
 
-
 class _TicketsPageState extends State<TicketsPage> {
-
   List<TicketDummy> get _filteredTickets {
     if (_filterType == 'All') return _allTickets;
 
-    return _allTickets
-        .where((t) => t.status == _filterType)
-        .toList();
+    return _allTickets.where((t) => t.status == _filterType).toList();
   }
 
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   String _filterType = 'All';
   bool _isTelugu = true;
 
   // --- ORIGINAL NAVIGATION LOGIC ---
-  void _navigateToPage(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushNamedAndRemoveUntil(context, DriverRoutes.home, (route) => false); break;
-      case 1: Navigator.pushNamed(context, DriverRoutes.tripHistory); break;
-      case 3: Navigator.pushNamed(context, DriverRoutes.profile); break;
-    }
-  }
+  // void _navigateToPage(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushNamedAndRemoveUntil(context, DriverRoutes.home, (route) => false); break;
+  //     case 1: Navigator.pushNamed(context, DriverRoutes.tripHistory); break;
+  //     case 3: Navigator.pushNamed(context, DriverRoutes.profile); break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -96,15 +92,14 @@ class _TicketsPageState extends State<TicketsPage> {
               schoolName: 'Aditya International School',
               schoolInitial: 'A',
               selectedLanguage: _isTelugu ? 'తెలుగు' : 'English',
-              onLanguageToggle: () =>
-                  setState(() => _isTelugu = !_isTelugu),
+              onLanguageToggle: () => setState(() => _isTelugu = !_isTelugu),
             ),
 
             /// ✨ Body
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async =>
-                await Future.delayed(const Duration(seconds: 1)),
+                    await Future.delayed(const Duration(seconds: 1)),
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   padding: EdgeInsets.symmetric(horizontal: px),
@@ -124,7 +119,7 @@ class _TicketsPageState extends State<TicketsPage> {
 
                     /// 🎫 Ticket Cards (FILTERED)
                     ..._filteredTickets.map(
-                          (t) => _buildTicketCard(
+                      (t) => _buildTicketCard(
                         t.id,
                         t.title,
                         t.date,
@@ -155,84 +150,96 @@ class _TicketsPageState extends State<TicketsPage> {
       ),
 
       /// 🔽 Bottom Navigation
-      bottomNavigationBar: _buildModernNav(),
+      // bottomNavigationBar: _buildModernNav(),
     );
   }
 
   // --- ✨ UI BUILDERS ---
 
   Widget _buildCustomAppBar(double px) => Container(
-    padding: EdgeInsets.symmetric(horizontal: px, vertical: 15),
-    color: Colors.white,
-    child: Row(children: [
-      IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20)),
-      const Expanded(child: Text('My Tickets', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900))),
-      Text(_isTelugu ? "తెలుగు" : "English", style: const TextStyle(fontWeight: FontWeight.w800, color: Color(0xFFE65100))),
-    ]),
-  );
+        padding: EdgeInsets.symmetric(horizontal: px, vertical: 15),
+        color: Colors.white,
+        child: Row(children: [
+          IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20)),
+          const Expanded(
+              child: Text('My Tickets',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900))),
+          Text(_isTelugu ? "తెలుగు" : "English",
+              style: const TextStyle(
+                  fontWeight: FontWeight.w800, color: Color(0xFFE65100))),
+        ]),
+      );
 
   Widget _buildStatsBanner() => Container(
-    padding: const EdgeInsets.all(24),
-    decoration: BoxDecoration(
-      gradient: const LinearGradient(colors: [Color(0xFFE65100), Color(0xFFFB8C00)]),
-      borderRadius: BorderRadius.circular(24),
-      boxShadow: [BoxShadow(color: Colors.orange.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8))],
-    ),
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      _statItem('Total', '12', Icons.receipt_long),
-      _statItem('Pending', '3', Icons.pending_actions),
-      _statItem('Active', '1', Icons.bolt),
-    ]),
-  );
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+              colors: [Color(0xFFE65100), Color(0xFFFB8C00)]),
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.orange.withOpacity(0.3),
+                blurRadius: 15,
+                offset: const Offset(0, 8))
+          ],
+        ),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          _statItem('Total', '12', Icons.receipt_long),
+          _statItem('Pending', '3', Icons.pending_actions),
+          _statItem('Active', '1', Icons.bolt),
+        ]),
+      );
 
   Widget _buildFilterChips() => SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: Row(
-      children: ['All', 'Pending', 'Resolved', 'Closed']
-          .map(
-            (t) => Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: ChoiceChip(
-            label: Text(t),
-            selected: _filterType == t,
-            onSelected: (_) => setState(() => _filterType = t),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: ['All', 'Pending', 'Resolved', 'Closed']
+              .map(
+                (t) => Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: ChoiceChip(
+                    label: Text(t),
+                    selected: _filterType == t,
+                    onSelected: (_) => setState(() => _filterType = t),
 
-            /// 🎨 Background
-            selectedColor: const Color(0xFF1E293B),
-            backgroundColor: const Color(0xFFF8FAFC),
+                    /// 🎨 Background
+                    selectedColor: const Color(0xFF1E293B),
+                    backgroundColor: const Color(0xFFF8FAFC),
 
-            /// ✅ DEFAULT TICK → WHITE
-            checkmarkColor: Colors.white,
+                    /// ✅ DEFAULT TICK → WHITE
+                    checkmarkColor: Colors.white,
 
-            /// 🧱 Border
-            side: BorderSide(
-              color: _filterType == t
-                  ? const Color(0xFF1E293B)
-                  : const Color(0xFFE5E7EB),
-            ),
+                    /// 🧱 Border
+                    side: BorderSide(
+                      color: _filterType == t
+                          ? const Color(0xFF1E293B)
+                          : const Color(0xFFE5E7EB),
+                    ),
 
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
 
-            labelStyle: TextStyle(
-              color: _filterType == t
-                  ? Colors.white
-                  : const Color(0xFF1E293B),
-              fontWeight: FontWeight.w800,
-              fontSize: 12,
-            ),
+                    labelStyle: TextStyle(
+                      color: _filterType == t
+                          ? Colors.white
+                          : const Color(0xFF1E293B),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 12,
+                    ),
 
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 10,
-            ),
-          ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
         ),
-      )
-          .toList(),
-    ),
-  );
+      );
 
   Widget _statItem(String label, String value, IconData icon) {
     return Column(
@@ -264,13 +271,13 @@ class _TicketsPageState extends State<TicketsPage> {
   }
 
   Widget _buildTicketCard(
-      String id,
-      String title,
-      String date,
-      String status,
-      String priority,
-      String desc,
-      ) {
+    String id,
+    String title,
+    String date,
+    String status,
+    String priority,
+    String desc,
+  ) {
     return InkWell(
       onTap: () => _showTicketDetails(context, id, title, desc),
       borderRadius: BorderRadius.circular(16),
@@ -343,12 +350,13 @@ class _TicketsPageState extends State<TicketsPage> {
       ),
     );
   }
+
   Widget _statusBadge(String status) {
     final Color color = status == 'Resolved'
         ? const Color(0xFF16A34A)
         : status == 'Pending'
-        ? const Color(0xFFF59E0B)
-        : const Color(0xFF2563EB);
+            ? const Color(0xFFF59E0B)
+            : const Color(0xFF2563EB);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -366,9 +374,9 @@ class _TicketsPageState extends State<TicketsPage> {
       ),
     );
   }
+
   Widget _priorityChip(String priority) {
-    final Color color =
-    priority == 'High' ? Colors.red : Colors.orange;
+    final Color color = priority == 'High' ? Colors.red : Colors.orange;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -387,16 +395,23 @@ class _TicketsPageState extends State<TicketsPage> {
     );
   }
 
-  Widget _badge(String t) => Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(8)), child: Text(t, style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 10)));
+  Widget _badge(String t) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+          color: Colors.blue.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8)),
+      child: Text(t,
+          style: const TextStyle(
+              color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 10)));
 
   // --- ✨ FIXED: TICKET DETAILS (SAFE AREA & NO OVERFLOW) ---
 
   void _showTicketDetails(
-      BuildContext context,
-      String id,
-      String title,
-      String description,
-      ) {
+    BuildContext context,
+    String id,
+    String title,
+    String description,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -428,8 +443,8 @@ class _TicketsPageState extends State<TicketsPage> {
                 ),
 
                 /// 🌿 Header
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Icon(Icons.confirmation_number_rounded,
                         color: Color(0xFF16A34A)),
                     SizedBox(width: 8),
@@ -472,8 +487,7 @@ class _TicketsPageState extends State<TicketsPage> {
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Text(
-                      description +
-                          "\n\nOriginal issue description will appear here for the driver to review properly.",
+                      "$description\n\nOriginal issue description will appear here for the driver to review properly.",
                       style: const TextStyle(
                         fontSize: 13,
                         color: Color(0xFF475569),
@@ -523,7 +537,8 @@ class _TicketsPageState extends State<TicketsPage> {
       context: context,
       barrierDismissible: false,
       builder: (context) => Dialog(
-        insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24), // ✅ WIDTH INCREASE
+        insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20, vertical: 24), // ✅ WIDTH INCREASE
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(26),
         ),
@@ -537,8 +552,8 @@ class _TicketsPageState extends State<TicketsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// 🌿 Header
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     CircleAvatar(
                       radius: 20,
                       backgroundColor: Color(0xFFDCFCE7),
@@ -589,9 +604,12 @@ class _TicketsPageState extends State<TicketsPage> {
                   ),
                   icon: const Icon(Icons.keyboard_arrow_down_rounded),
                   items: const [
-                    DropdownMenuItem(value: 'maint', child: Text('Maintenance')),
-                    DropdownMenuItem(value: 'route', child: Text('Route Change')),
-                    DropdownMenuItem(value: 'student', child: Text('Student Issue')),
+                    DropdownMenuItem(
+                        value: 'maint', child: Text('Maintenance')),
+                    DropdownMenuItem(
+                        value: 'route', child: Text('Route Change')),
+                    DropdownMenuItem(
+                        value: 'student', child: Text('Student Issue')),
                   ],
                   onChanged: (v) {},
                 ),
@@ -706,18 +724,30 @@ class _TicketsPageState extends State<TicketsPage> {
     );
   }
 
-  Widget _detailRow(String l, String v) => Padding(padding: const EdgeInsets.only(bottom: 12), child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(l, style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w600)), Text(v, style: const TextStyle(fontWeight: FontWeight.bold))]));
+  Widget _detailRow(String l, String v) => Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text(l,
+            style: const TextStyle(
+                color: Colors.grey, fontWeight: FontWeight.w600)),
+        Text(v, style: const TextStyle(fontWeight: FontWeight.bold))
+      ]));
 
-  Widget _buildSectionTitle(String t) => Text(t, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Color(0xFF94A3B8), letterSpacing: 1.2));
+  Widget _buildSectionTitle(String t) => Text(t,
+      style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w900,
+          color: Color(0xFF94A3B8),
+          letterSpacing: 1.2));
 
-  Widget _buildModernNav() => BottomNavigationBar(
-    backgroundColor: Colors.white,
-    currentIndex: _currentIndex, onTap: _navigateToPage, type: BottomNavigationBarType.fixed, selectedItemColor: const Color(0xFFE65100), elevation: 0,
-    items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-      BottomNavigationBarItem(icon: Icon(Icons.alt_route_rounded), label: 'Trip'),
-      BottomNavigationBarItem(icon: Icon(Icons.confirmation_number), label: 'Tickets'),
-      BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
-    ],
-  );
+  // Widget _buildModernNav() => BottomNavigationBar(
+  //   backgroundColor: Colors.white,
+  //   currentIndex: _currentIndex, onTap: _navigateToPage, type: BottomNavigationBarType.fixed, selectedItemColor: const Color(0xFFE65100), elevation: 0,
+  //   items: const [
+  //     BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
+  //     BottomNavigationBarItem(icon: Icon(Icons.alt_route_rounded), label: 'Trip'),
+  //     BottomNavigationBarItem(icon: Icon(Icons.confirmation_number), label: 'Tickets'),
+  //     BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
+  //   ],
+  // );
 }

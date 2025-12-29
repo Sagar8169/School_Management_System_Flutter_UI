@@ -13,11 +13,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-
   File? _profileImage;
   final ImagePicker _picker = ImagePicker();
-
 
   int _currentIndex = 3;
   bool _isTelugu = true;
@@ -30,7 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-
     super.initState();
     _nameController.text = 'Krishna Murthy';
     _phoneController.text = '+91 9876543210';
@@ -54,15 +50,15 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  void _navigateToPage(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushNamedAndRemoveUntil(context, DriverRoutes.home, (route) => false); break;
-      case 1: Navigator.pushNamed(context, DriverRoutes.tripHistory); break;
-      case 2: Navigator.pushNamed(context, DriverRoutes.tickets); break;
-    }
-  }
+  // void _navigateToPage(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushNamedAndRemoveUntil(context, DriverRoutes.home, (route) => false); break;
+  //     case 1: Navigator.pushNamed(context, DriverRoutes.tripHistory); break;
+  //     case 2: Navigator.pushNamed(context, DriverRoutes.tickets); break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
               schoolName: 'Aditya International School',
               schoolInitial: 'A',
               selectedLanguage: _isTelugu ? 'తెలుగు' : 'English',
-              onLanguageToggle: () =>
-                  setState(() => _isTelugu = !_isTelugu),
+              onLanguageToggle: () => setState(() => _isTelugu = !_isTelugu),
             ),
 
             Expanded(
@@ -93,14 +88,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   _buildHeroHeader(px),
 
                   Padding(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: px, vertical: 24),
+                    padding: EdgeInsets.symmetric(horizontal: px, vertical: 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildEditControlRow(),
                         const SizedBox(height: 20),
-
                         _buildSectionTitle("PERSONAL INFORMATION"),
                         const SizedBox(height: 16),
                         _profileInfoTile(
@@ -123,12 +116,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           _licenseController,
                           Icons.badge_outlined,
                         ),
-
                         const SizedBox(height: 32),
                         _buildSectionTitle("PERFORMANCE STATS"),
                         const SizedBox(height: 16),
                         _buildStatsGrid(),
-
                         const SizedBox(height: 32),
                         _buildSectionTitle("ACCOUNT SETTINGS"),
                         const SizedBox(height: 16),
@@ -136,19 +127,19 @@ class _ProfilePageState extends State<ProfilePage> {
                           Icons.notifications_none_rounded,
                           'Notifications',
                           'Trip & safety alerts',
-                              () => _showNotificationSheet(context),
+                          () => _showNotificationSheet(context),
                         ),
                         _buildActionCard(
                           Icons.lock_outline_rounded,
                           'Change Password',
                           'Update login security',
-                              () => _showPasswordSheet(context),
+                          () => _showPasswordSheet(context),
                         ),
                         _buildActionCard(
                           Icons.help_outline_rounded,
                           'Help & Support',
                           'FAQs and contact us',
-                              () => _showSupportSheet(context),
+                          () => _showSupportSheet(context),
                         ),
                         _buildActionCard(
                           Icons.logout_rounded,
@@ -168,14 +159,12 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
 
       /// ✅ Bottom navigation
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: _buildModernNav(),
-      ),
+      // bottomNavigationBar: SafeArea(
+      //   top: false,
+      //   child: _buildModernNav(),
+      // ),
     );
   }
-
-
 
   // --- UI COMPONENTS WITH SAFE AREA ---
 
@@ -206,10 +195,16 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _langToggle() => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-    decoration: BoxDecoration(color: const Color(0xFFF1F5F9), borderRadius: BorderRadius.circular(20)),
-    child: Text(_isTelugu ? "తెలుగు" : "English", style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFFE65100))),
-  );
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+            color: const Color(0xFFF1F5F9),
+            borderRadius: BorderRadius.circular(20)),
+        child: Text(_isTelugu ? "తెలుగు" : "English",
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFFE65100))),
+      );
 
   Widget _buildHeroHeader(px) {
     return Container(
@@ -233,13 +228,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 radius: 50,
                 backgroundColor: Colors.white,
                 backgroundImage:
-                _profileImage != null ? FileImage(_profileImage!) : null,
+                    _profileImage != null ? FileImage(_profileImage!) : null,
                 child: _profileImage == null
                     ? const Icon(
-                  Icons.person,
-                  size: 50,
-                  color: Color(0xFFE65100),
-                )
+                        Icons.person,
+                        size: 50,
+                        color: Color(0xFFE65100),
+                      )
                     : null,
               ),
 
@@ -263,9 +258,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
             ],
           ),
-
           const SizedBox(height: 16),
-
           const Text(
             'Krishna Murthy',
             style: TextStyle(
@@ -274,7 +267,6 @@ class _ProfilePageState extends State<ProfilePage> {
               fontWeight: FontWeight.w900,
             ),
           ),
-
           const Text(
             'ID: AIS-DRIVER-102',
             style: TextStyle(
@@ -304,7 +296,6 @@ class _ProfilePageState extends State<ProfilePage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const SizedBox(height: 20),
-
             ListTile(
               leading: const Icon(Icons.camera_alt),
               title: const Text("Camera"),
@@ -313,7 +304,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 await _pickImage(ImageSource.camera);
               },
             ),
-
             ListTile(
               leading: const Icon(Icons.photo_library),
               title: const Text("Gallery"),
@@ -322,7 +312,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 await _pickImage(ImageSource.gallery);
               },
             ),
-
             const SizedBox(height: 20),
           ],
         ),
@@ -340,7 +329,7 @@ class _ProfilePageState extends State<ProfilePage> {
           onPressed: () => setState(() => _editMode = !isEdit),
           style: ElevatedButton.styleFrom(
             backgroundColor:
-            isEdit ? const Color(0xFF16A34A) : const Color(0xFFE65100),
+                isEdit ? const Color(0xFF16A34A) : const Color(0xFFE65100),
             foregroundColor: Colors.white, // ✅ icon + text white
             elevation: 2,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -368,10 +357,10 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _profileInfoTile(
-      String label,
-      TextEditingController ctrl,
-      IconData icon,
-      ) {
+    String label,
+    TextEditingController ctrl,
+    IconData icon,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -379,9 +368,7 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: _editMode
-              ? const Color(0xFFE65100)
-              : const Color(0xFFE5E7EB),
+          color: _editMode ? const Color(0xFFE65100) : const Color(0xFFE5E7EB),
         ),
       ),
       child: Row(
@@ -389,7 +376,6 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Icon(icon, size: 22, color: Colors.black87),
           const SizedBox(width: 14),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,25 +395,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 // 🔹 Value
                 _editMode
                     ? TextField(
-                  controller: ctrl,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    border: InputBorder.none,
-                  ),
-                )
+                        controller: ctrl,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          border: InputBorder.none,
+                        ),
+                      )
                     : Text(
-                  ctrl.text,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
-                ),
+                        ctrl.text,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
               ],
             ),
           ),
@@ -465,7 +451,6 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Icon(icon, size: 22, color: const Color(0xFFE65100)),
           const SizedBox(width: 12),
-
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -494,20 +479,37 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
   Widget _statItem(String l, String v, IconData i, Color c) => Container(
-    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
-    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(i, color: c, size: 22), Text(v, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18)), Text(l, style: const TextStyle(color: Colors.grey, fontSize: 11))]),
-  );
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(i, color: c, size: 22),
+          Text(v,
+              style:
+                  const TextStyle(fontWeight: FontWeight.w900, fontSize: 18)),
+          Text(l, style: const TextStyle(color: Colors.grey, fontSize: 11))
+        ]),
+      );
 
-  Widget _buildActionCard(IconData icon, String title, String sub, VoidCallback onTap, {bool isRed = false}) {
+  Widget _buildActionCard(
+      IconData icon, String title, String sub, VoidCallback onTap,
+      {bool isRed = false}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         onTap: onTap,
-        leading: CircleAvatar(backgroundColor: isRed ? Colors.red.withOpacity(0.1) : const Color(0xFFF1F5F9), child: Icon(icon, color: isRed ? Colors.red : Colors.blueGrey, size: 20)),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: isRed ? Colors.red : Colors.black)),
+        leading: CircleAvatar(
+            backgroundColor:
+                isRed ? Colors.red.withOpacity(0.1) : const Color(0xFFF1F5F9),
+            child: Icon(icon,
+                color: isRed ? Colors.red : Colors.blueGrey, size: 20)),
+        title: Text(title,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: isRed ? Colors.red : Colors.black)),
         subtitle: Text(sub, style: const TextStyle(fontSize: 11)),
         trailing: const Icon(Icons.chevron_right, size: 18),
       ),
@@ -515,7 +517,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   // --- FUNCTIONAL LOGIC ---
-
 
   void _showPasswordSheet(BuildContext context) {
     showModalBottomSheet(
@@ -617,6 +618,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
   Widget _passwordField({
     required String label,
     required IconData icon,
@@ -641,7 +643,8 @@ class _ProfilePageState extends State<ProfilePage> {
         prefixIcon: Icon(icon, color: const Color(0xFF64748B)),
         filled: true,
         fillColor: const Color(0xFFF8FAFC),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
@@ -655,7 +658,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _showNotificationSheet(BuildContext context) {
-    bool tripUpdates = true;   // 👈 dummy state
+    bool tripUpdates = true; // 👈 dummy state
     bool safetyAlerts = true; // 👈 dummy state
 
     showModalBottomSheet(
@@ -805,7 +808,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
   void _showSupportSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -888,6 +890,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
   Widget _supportTile({
     required IconData icon,
     required Color iconColor,
@@ -946,7 +949,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
   void _handleLogout() {
     showDialog(
       context: context,
@@ -961,8 +963,8 @@ class _ProfilePageState extends State<ProfilePage> {
         actionsPadding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
 
         /// 🔴 Title with icon
-        title: Row(
-          children: const [
+        title: const Row(
+          children: [
             Icon(Icons.logout_rounded, color: Color(0xFFE11D48)),
             SizedBox(width: 10),
             Text(
@@ -1007,7 +1009,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 '/mobile-login',
-                    (r) => false,
+                (r) => false,
               );
             },
             style: ElevatedButton.styleFrom(
@@ -1029,22 +1031,26 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  Widget _buildSectionTitle(String t) => Text(t,
+      style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w900,
+          color: Colors.black,
+          letterSpacing: 1.2));
 
-  Widget _buildSectionTitle(String t) => Text(t, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.black, letterSpacing: 1.2));
-
-  Widget _buildModernNav() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-      child: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        currentIndex: _currentIndex, onTap: _navigateToPage, type: BottomNavigationBarType.fixed, selectedItemColor: const Color(0xFFE65100), elevation: 0,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.alt_route_rounded), label: 'Trip'),
-          BottomNavigationBarItem(icon: Icon(Icons.confirmation_number_outlined), label: 'Tickets'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
-    );
-  }
+  // Widget _buildModernNav() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //     child: BottomNavigationBar(
+  //       backgroundColor: Colors.white,
+  //       currentIndex: _currentIndex, onTap: _navigateToPage, type: BottomNavigationBarType.fixed, selectedItemColor: const Color(0xFFE65100), elevation: 0,
+  //       items: const [
+  //         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.alt_route_rounded), label: 'Trip'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.confirmation_number_outlined), label: 'Tickets'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

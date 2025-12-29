@@ -9,6 +9,7 @@ class TripHistoryPage extends StatefulWidget {
   @override
   State<TripHistoryPage> createState() => _TripHistoryPageState();
 }
+
 class TripDummy {
   final String id;
   final String date;
@@ -29,9 +30,7 @@ class TripDummy {
   });
 }
 
-
 class _TripHistoryPageState extends State<TripHistoryPage> {
-
   final List<TripDummy> _defaultTrips = [
     TripDummy(
       id: "TRIP-DEFAULT-01",
@@ -50,7 +49,6 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
       dist: "18 km",
     ),
   ];
-
 
   final Map<String, List<TripDummy>> _tripDataByMonth = {
     "October 2024": [
@@ -80,7 +78,6 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
         isCancelled: true,
       ),
     ],
-
     "September 2024": [
       TripDummy(
         id: "TRIP-021",
@@ -99,7 +96,6 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
         dist: "21 km",
       ),
     ],
-
     "August 2024": [
       TripDummy(
         id: "TRIP-041",
@@ -121,34 +117,43 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
     return trips;
   }
 
-
-
   String get _formattedMonth {
     return "${_monthName(_selectedMonth.month)} ${_selectedMonth.year}";
   }
 
   String _monthName(int m) {
     const months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ];
     return months[m - 1];
   }
+
   DateTime _selectedMonth = DateTime.now();
 
   int _currentIndex = 1;
   bool _isTelugu = true;
 
   // --- 100% ORIGINAL NAVIGATION LOGIC ---
-  void _navigateToPage(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushNamedAndRemoveUntil(context, DriverRoutes.home, (route) => false); break;
-      case 2: Navigator.pushNamed(context, DriverRoutes.tickets); break;
-      case 3: Navigator.pushNamed(context, DriverRoutes.profile); break;
-    }
-  }
+  // void _navigateToPage(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushNamedAndRemoveUntil(context, DriverRoutes.home, (route) => false); break;
+  //     case 2: Navigator.pushNamed(context, DriverRoutes.tickets); break;
+  //     case 3: Navigator.pushNamed(context, DriverRoutes.profile); break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -164,8 +169,7 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
               schoolName: 'Aditya International School',
               schoolInitial: 'A',
               selectedLanguage: _isTelugu ? 'తెలుగు' : 'English',
-              onLanguageToggle: () =>
-                  setState(() => _isTelugu = !_isTelugu),
+              onLanguageToggle: () => setState(() => _isTelugu = !_isTelugu),
             ),
 
             /// ✨ Body
@@ -189,7 +193,7 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
 
                   /// 🚍 Dynamic Trip Cards
                   ..._currentTrips.map(
-                        (trip) => _buildModernTripCard(
+                    (trip) => _buildModernTripCard(
                       id: trip.id,
                       date: trip.date,
                       time: trip.time,
@@ -200,10 +204,10 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
                       onTap: trip.isCancelled
                           ? () {}
                           : () => Navigator.pushNamed(
-                        context,
-                        DriverRoutes.tripDetail,
-                        arguments: {'tripId': trip.id},
-                      ),
+                                context,
+                                DriverRoutes.tripDetail,
+                                arguments: {'tripId': trip.id},
+                              ),
                     ),
                   ),
 
@@ -215,69 +219,84 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
         ),
       ),
 
-      /// 🔽 Bottom Navigation
-      bottomNavigationBar: _buildModernNav(),
+      // /// 🔽 Bottom Navigation
+      // bottomNavigationBar: _buildModernNav(),
     );
   }
 
   // --- ✨ UI BUILDER METHODS ---
 
   Widget _buildCustomAppBar(double px) => Container(
-    padding: EdgeInsets.symmetric(horizontal: px, vertical: 15),
-    color: Colors.white,
-    child: Row(children: [
-      IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20)),
-      const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('Trip History', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-        Text('Records of your journeys', style: TextStyle(fontSize: 12, color: Colors.grey)),
-      ])),
-      _langBadge(),
-    ]),
-  );
+        padding: EdgeInsets.symmetric(horizontal: px, vertical: 15),
+        color: Colors.white,
+        child: Row(children: [
+          IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20)),
+          const Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text('Trip History',
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+                Text('Records of your journeys',
+                    style: TextStyle(fontSize: 12, color: Colors.grey)),
+              ])),
+          _langBadge(),
+        ]),
+      );
 
   Widget _langBadge() => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-    decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFFDBEAFE))),
-    child: Text(_isTelugu ? "తెలుగు" : "English", style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFF2563EB))),
-  );
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+            color: const Color(0xFFEFF6FF),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: const Color(0xFFDBEAFE))),
+        child: Text(_isTelugu ? "తెలుగు" : "English",
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF2563EB))),
+      );
 
   Widget _buildDateFilter() => InkWell(
-    onTap: () => _pickMonth(context),
-    borderRadius: BorderRadius.circular(16),
-    child: Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
+        onTap: () => _pickMonth(context),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.calendar_month_rounded,
-            color: Color(0xFFE65100),
-            size: 20,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFFF1F5F9)),
           ),
-          const SizedBox(width: 12),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.calendar_month_rounded,
+                color: Color(0xFFE65100),
+                size: 20,
+              ),
+              const SizedBox(width: 12),
 
-          /// 📆 Selected Month
-          Text(
-            _formattedMonth,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
-          ),
+              /// 📆 Selected Month
+              Text(
+                _formattedMonth,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
 
-          const Spacer(),
-          const Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: Colors.grey,
+              const Spacer(),
+              const Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: Colors.grey,
+              ),
+            ],
           ),
-        ],
-      ),
-    ),
-  );
+        ),
+      );
   Future<void> _pickMonth(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -305,14 +324,27 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
     }
   }
 
-  Widget _buildModernTripCard({required String id, required String date, required String time, required String status, required String stops, required String dist, bool isCancelled = false, required VoidCallback onTap}) {
+  Widget _buildModernTripCard(
+      {required String id,
+      required String date,
+      required String time,
+      required String status,
+      required String stops,
+      required String dist,
+      bool isCancelled = false,
+      required VoidCallback onTap}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0xFFF1F5F9)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.02),
+              blurRadius: 10,
+              offset: const Offset(0, 4))
+        ],
       ),
       child: InkWell(
         onTap: onTap,
@@ -323,8 +355,16 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(id, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Color(0xFF94A3B8))),
-                  Text(date, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF1E293B))),
+                  Text(id,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 13,
+                          color: Color(0xFF94A3B8))),
+                  Text(date,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Color(0xFF1E293B))),
                 ]),
                 _statusBadge(status, isCancelled),
               ]),
@@ -333,7 +373,9 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
                 _statRow(Icons.wb_twilight_rounded, time),
                 _statRow(Icons.pin_drop_rounded, "$stops Stops"),
                 _statRow(Icons.speed_rounded, dist),
-                if (!isCancelled) const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Color(0xFFCBD5E1)),
+                if (!isCancelled)
+                  const Icon(Icons.arrow_forward_ios_rounded,
+                      size: 14, color: Color(0xFFCBD5E1)),
               ]),
             ],
           ),
@@ -343,26 +385,45 @@ class _TripHistoryPageState extends State<TripHistoryPage> {
   }
 
   Widget _statusBadge(String t, bool isCan) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-    decoration: BoxDecoration(color: isCan ? const Color(0xFFFEF2F2) : const Color(0xFFF0FDF4), borderRadius: BorderRadius.circular(10)),
-    child: Text(t, style: TextStyle(color: isCan ? Colors.red : Colors.green, fontWeight: FontWeight.w900, fontSize: 11)),
-  );
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+            color: isCan ? const Color(0xFFFEF2F2) : const Color(0xFFF0FDF4),
+            borderRadius: BorderRadius.circular(10)),
+        child: Text(t,
+            style: TextStyle(
+                color: isCan ? Colors.red : Colors.green,
+                fontWeight: FontWeight.w900,
+                fontSize: 11)),
+      );
 
-  Widget _statRow(IconData i, String v) => Row(children: [Icon(i, size: 16, color: Colors.grey[400]), const SizedBox(width: 6), Text(v, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF64748B)))]);
+  Widget _statRow(IconData i, String v) => Row(children: [
+        Icon(i, size: 16, color: Colors.grey[400]),
+        const SizedBox(width: 6),
+        Text(v,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                color: Color(0xFF64748B)))
+      ]);
 
-  Widget _buildSectionTitle(String t) => Text(t, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Color(0xFF94A3B8), letterSpacing: 1.2));
+  Widget _buildSectionTitle(String t) => Text(t,
+      style: const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w900,
+          color: Color(0xFF94A3B8),
+          letterSpacing: 1.2));
 
-  Widget _buildModernNav() => Container(
-    decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-    child: BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _navigateToPage, type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-      selectedItemColor: const Color(0xFFE65100), unselectedItemColor: const Color(0xFF94A3B8), elevation: 0,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home_max_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), activeIcon: Icon(Icons.alt_route_rounded), label: 'Trip'),
-        BottomNavigationBarItem(icon: Icon(Icons.confirmation_number_outlined), activeIcon: Icon(Icons.confirmation_number_rounded), label: 'Tickets'),
-        BottomNavigationBarItem(icon: Icon(Icons.person_outline_rounded), activeIcon: Icon(Icons.person_rounded), label: 'Profile'),
-      ],
-    ),
-  );
+  // Widget _buildModernNav() => Container(
+  //   decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //   child: BottomNavigationBar(
+  //     currentIndex: _currentIndex, onTap: _navigateToPage, type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
+  //     selectedItemColor: const Color(0xFFE65100), unselectedItemColor: const Color(0xFF94A3B8), elevation: 0,
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home_max_rounded), label: 'Home'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), activeIcon: Icon(Icons.alt_route_rounded), label: 'Trip'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.confirmation_number_outlined), activeIcon: Icon(Icons.confirmation_number_rounded), label: 'Tickets'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.person_outline_rounded), activeIcon: Icon(Icons.person_rounded), label: 'Profile'),
+  //     ],
+  //   ),
+  // );
 }

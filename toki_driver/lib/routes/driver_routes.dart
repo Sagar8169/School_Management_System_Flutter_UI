@@ -19,7 +19,7 @@ class DriverRoutes {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(
-          builder: (_) => const HomeDriver(),
+          builder: (_) => HomeDriver(),
         );
       case tripDetail:
         final args = settings.arguments as Map<String, dynamic>?;
@@ -48,7 +48,7 @@ class DriverRoutes {
           builder: (_) => const ProfilePage(),
         );
       default:
-      // Return null for any non-driver routes so they can be handled by other route generators
+        // Return null for any non-driver routes so they can be handled by other route generators
         return null;
     }
   }
