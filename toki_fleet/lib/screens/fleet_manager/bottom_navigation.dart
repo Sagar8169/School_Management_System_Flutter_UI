@@ -11,8 +11,8 @@ class HomeFleetManager extends ConsumerWidget {
   final Color primaryTeal = const Color(0xFF009A86);
   final Color backgroundGrey = const Color(0xFFF5F5F5);
   final List<Widget> pages = [
-    const FleetHomePage(),
-    const FleetSearchRoutes(),
+    FleetHomePage(),
+    FleetSearchRoutes(),
     const FleetTickets(),
     const FleetMoreOptions()
   ];
@@ -45,8 +45,8 @@ class HomeFleetManager extends ConsumerWidget {
       ),
     );
   }
-
-  final bottomNaviationIndexProvider = StateProvider((ref) {
-    return 0;
-  });
 }
+
+final bottomNaviationIndexProvider = StateProvider((ref) {
+  return 0;
+});

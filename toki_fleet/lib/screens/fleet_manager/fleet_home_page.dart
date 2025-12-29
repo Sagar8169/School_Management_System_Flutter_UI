@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toki/routes/fleet_manager_routes.dart';
+import 'package:toki/screens/fleet_manager/bottom_navigation.dart';
 import 'package:toki/screens/fleet_manager/fleet_trips.dart';
 import 'package:toki/screens/fleet_manager/notification_page.dart';
 
-class FleetHomePage extends StatefulWidget {
+class FleetHomePage extends ConsumerStatefulWidget {
   const FleetHomePage({super.key});
 
   @override
-  State<FleetHomePage> createState() => _FleetHomePageState();
+  ConsumerState<FleetHomePage> createState() => _FleetHomePageState();
 }
 
-class _FleetHomePageState extends State<FleetHomePage> {
+class _FleetHomePageState extends ConsumerState<FleetHomePage> {
   final Color primaryTeal = const Color(0xFF009A86);
   final Color backgroundGrey = const Color(0xFFF5F5F5);
   bool _showAlert = true;
@@ -1365,10 +1367,10 @@ class _FleetHomePageState extends State<FleetHomePage> {
                           color: Colors.orange, size: 18),
                     ),
                     const SizedBox(width: 12),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Avg/Trip",
+                        Text("Avg/Trip",
                             style: TextStyle(
                                 fontSize: 10,
                                 color: Colors.grey,
@@ -1385,45 +1387,6 @@ class _FleetHomePageState extends State<FleetHomePage> {
               ),
 
               // NEW PREMIUM FULL REPORT BUTTON
-              InkWell(
-                onTap: () => Navigator.pushNamed(
-                    context, FleetManagerRoutes.tripHistory),
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [primaryTeal, primaryTeal.withOpacity(0.8)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: primaryTeal.withOpacity(0.3),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: const Row(
-                    children: [
-                      Text(
-                        "FULL REPORT",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 0.5),
-                      ),
-                      SizedBox(width: 8),
-                      Icon(Icons.analytics_outlined,
-                          color: Colors.white, size: 16),
-                    ],
-                  ),
-                ),
-              ),
             ],
           )
         ],
@@ -1601,37 +1564,39 @@ class _FleetHomePageState extends State<FleetHomePage> {
           const SizedBox(height: 25),
 
           // --- PREMIUM EXPLORE BUTTON ---
-          InkWell(
-            onTap: () =>
-                Navigator.pushNamed(context, FleetManagerRoutes.search),
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC), // Light Slate Background
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "EXPLORE ALL 8 ROUTES",
-                    style: TextStyle(
-                      color: primaryTeal,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.1,
+          Consumer(builder: (context, ref, child) {
+            return InkWell(
+              onTap: () =>
+                  ref.read(bottomNaviationIndexProvider.notifier).state = 1,
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF8FAFC), // Light Slate Background
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "EXPLORE ALL 8 ROUTES",
+                      style: TextStyle(
+                        color: primaryTeal,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.1,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Icon(Icons.arrow_forward_rounded,
-                      size: 16, color: primaryTeal),
-                ],
+                    const SizedBox(width: 8),
+                    Icon(Icons.arrow_forward_rounded,
+                        size: 16, color: primaryTeal),
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          })
         ],
       ),
     );

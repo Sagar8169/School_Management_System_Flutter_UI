@@ -157,7 +157,7 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
               ],
             ),
           ),
-          Text("తెలుగు",
+          const Text("తెలుగు",
               style: TextStyle(
                   color: primaryTeal,
                   fontWeight: FontWeight.bold,
@@ -477,9 +477,9 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
   }
 
   Widget _buildAppVersion() {
-    return Center(
+    return const Center(
       child: Column(
-        children: const [
+        children: [
           Text('Version 2.4.0',
               style: TextStyle(
                   color: Colors.grey,
