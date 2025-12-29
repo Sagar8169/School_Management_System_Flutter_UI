@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'routes.dart';
-import 'screens/splash/splash_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
