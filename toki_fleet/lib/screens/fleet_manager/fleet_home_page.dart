@@ -1,46 +1,23 @@
 import 'package:flutter/material.dart';
-import '../../routes/fleet_manager_routes.dart';
-import 'fleet_trips_page.dart';
-import 'notification_page.dart';
+import 'package:toki/routes/fleet_manager_routes.dart';
+import 'package:toki/screens/fleet_manager/fleet_trips.dart';
+import 'package:toki/screens/fleet_manager/notification_page.dart';
 
-
-class HomeFleetManager extends StatefulWidget {
-  const HomeFleetManager({Key? key}) : super(key: key);
+class FleetHomePage extends StatefulWidget {
+  const FleetHomePage({super.key});
 
   @override
-  State<HomeFleetManager> createState() => _HomeFleetManagerState();
+  State<FleetHomePage> createState() => _FleetHomePageState();
 }
 
-class _HomeFleetManagerState extends State<HomeFleetManager> {
+class _FleetHomePageState extends State<FleetHomePage> {
   final Color primaryTeal = const Color(0xFF009A86);
   final Color backgroundGrey = const Color(0xFFF5F5F5);
-  int _bottomIndex = 0;
   bool _showAlert = true;
-  bool _isTelugu = true; // Default is Telugu, click turns to English
-
-  void _onBottomTap(int idx) {
-    if (idx == _bottomIndex) return;
-    setState(() => _bottomIndex = idx);
-
-    switch (idx) {
-      case 0:
-        break;
-      case 1:
-        Navigator.pushNamed(context, FleetManagerRoutes.search);
-        break;
-      case 2:
-        Navigator.pushNamed(context, FleetManagerRoutes.tickets);
-        break;
-      case 3:
-        Navigator.pushNamed(context, FleetManagerRoutes.moreOptions);
-        break;
-    }
-  }
-
+  bool _isTelugu = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundGrey,
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -64,24 +41,6 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _bottomIndex,
-        onTap: _onBottomTap,
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF00BFA5),
-        unselectedItemColor: Colors.grey,
-        selectedLabelStyle: const TextStyle(fontSize: 12),
-        unselectedLabelStyle: const TextStyle(fontSize: 12),
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.grid_view), label: 'Dashboard'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline), label: 'Tickets'),
-          BottomNavigationBarItem(icon: Icon(Icons.more_vert), label: 'More'),
-        ],
       ),
     );
   }
@@ -111,11 +70,11 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             ),
           ),
           const SizedBox(width: 12),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text('Aditya International School',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -163,7 +122,9 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: primaryTeal.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: primaryTeal.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10)),
             child: Icon(Icons.school_rounded, color: primaryTeal, size: 22),
           ),
           const SizedBox(width: 12),
@@ -171,12 +132,19 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aditya International', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-                Text('Fleet Management System', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                Text('Aditya International',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                Text('Fleet Management System',
+                    style: TextStyle(color: Colors.grey, fontSize: 10)),
               ],
             ),
           ),
-          Text("తెలుగు", style: TextStyle(color: primaryTeal, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text("తెలుగు",
+              style: TextStyle(
+                  color: primaryTeal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12)),
         ],
       ),
     );
@@ -239,7 +207,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NotificationPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const NotificationPage()),
                 ),
                 child: _topIconButton(Icons.notifications_active_outlined),
               ),
@@ -251,11 +220,16 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           // --- STATS (COMPACT GLASS STYLE) ---
           Row(
             children: [
-              Expanded(child: _miniStatGlass('12', 'Buses', Icons.directions_bus_filled_rounded)),
+              Expanded(
+                  child: _miniStatGlass(
+                      '12', 'Buses', Icons.directions_bus_filled_rounded)),
               const SizedBox(width: 10),
-              Expanded(child: _miniStatGlass('08', 'Live', Icons.sensors_rounded)),
+              Expanded(
+                  child: _miniStatGlass('08', 'Live', Icons.sensors_rounded)),
               const SizedBox(width: 10),
-              Expanded(child: _miniStatGlass('18', 'Staff', Icons.people_alt_rounded)),
+              Expanded(
+                  child:
+                      _miniStatGlass('18', 'Staff', Icons.people_alt_rounded)),
             ],
           ),
         ],
@@ -277,7 +251,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           const SizedBox(height: 4),
           Text(
             val,
-            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),
           ),
           Text(
             label,
@@ -298,7 +273,6 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
       child: Icon(icon, color: Colors.white, size: 20),
     );
   }
-
 
   Widget _miniStatCard(String big, String label) {
     return Expanded(
@@ -513,7 +487,11 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           // --- 1. Operations Timeline ---
           const Text(
             "OPERATIONS TIMELINE",
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.blueGrey, letterSpacing: 1.2),
+            style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w900,
+                color: Colors.blueGrey,
+                letterSpacing: 1.2),
           ),
           const SizedBox(height: 16),
           _buildTimelineItem(
@@ -521,7 +499,11 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             "07:00 AM - 08:30 AM",
             "8 Buses Active",
             true,
-                () => Navigator.push(context, MaterialPageRoute(builder: (context) => FleetTripsPage(shift: 'Morning Pickup'))),
+            () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const FleetTripsPage(shift: 'Morning Pickup'))),
           ),
           const SizedBox(height: 12),
           _buildTimelineItem(
@@ -529,7 +511,11 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             "03:00 PM - 04:30 PM",
             "8 Buses Scheduled",
             true,
-                () => Navigator.push(context, MaterialPageRoute(builder: (context) => FleetTripsPage(shift: 'Evening Drop'))),
+            () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const FleetTripsPage(shift: 'Evening Drop'))),
           ),
 
           const SizedBox(height: 24),
@@ -539,7 +525,11 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           // --- 2. Fleet Status Grid ---
           const Text(
             "FLEET ANALYTICS",
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.blueGrey, letterSpacing: 1.2),
+            style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w900,
+                color: Colors.blueGrey,
+                letterSpacing: 1.2),
           ),
           const SizedBox(height: 16),
           Row(
@@ -562,7 +552,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
 
           // --- 3. PREMIUM VIEW FULL FLEET BUTTON ---
           InkWell(
-            onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.busOverview),
+            onTap: () =>
+                Navigator.pushNamed(context, FleetManagerRoutes.busOverview),
             borderRadius: BorderRadius.circular(16),
             child: Container(
               width: double.infinity,
@@ -581,10 +572,14 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                       color: Colors.white,
                       shape: BoxShape.circle,
                       boxShadow: [
-                        BoxShadow(color: primaryTeal.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 2))
+                        BoxShadow(
+                            color: primaryTeal.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 2))
                       ],
                     ),
-                    child: Icon(Icons.directions_bus_filled_rounded, size: 18, color: primaryTeal),
+                    child: Icon(Icons.directions_bus_filled_rounded,
+                        size: 18, color: primaryTeal),
                   ),
                   const SizedBox(width: 16),
                   // Text Column
@@ -598,19 +593,22 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                               color: primaryTeal,
                               fontSize: 14,
                               fontWeight: FontWeight.w900,
-                              letterSpacing: -0.3
-                          ),
+                              letterSpacing: -0.3),
                         ),
                         const SizedBox(height: 2),
                         Text(
                           "Track maintenance, documents & logs",
-                          style: TextStyle(color: primaryTeal.withOpacity(0.6), fontSize: 11, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: primaryTeal.withOpacity(0.6),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ),
                   // Trailing Arrow
-                  Icon(Icons.arrow_forward_ios_rounded, size: 14, color: primaryTeal),
+                  Icon(Icons.arrow_forward_ios_rounded,
+                      size: 14, color: primaryTeal),
                 ],
               ),
             ),
@@ -620,16 +618,22 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
     );
   }
 
-  Widget _buildTimelineItem(String title, String time, String status, bool isActive, VoidCallback onTap) {
+  Widget _buildTimelineItem(String title, String time, String status,
+      bool isActive, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isActive ? primaryTeal.withOpacity(0.05) : const Color(0xFFF8FAFC),
+          color: isActive
+              ? primaryTeal.withOpacity(0.05)
+              : const Color(0xFFF8FAFC),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: isActive ? primaryTeal.withOpacity(0.1) : Colors.black.withOpacity(0.03)),
+          border: Border.all(
+              color: isActive
+                  ? primaryTeal.withOpacity(0.1)
+                  : Colors.black.withOpacity(0.03)),
         ),
         child: Row(
           children: [
@@ -642,10 +646,20 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                   decoration: BoxDecoration(
                     color: isActive ? primaryTeal : Colors.grey.shade300,
                     shape: BoxShape.circle,
-                    boxShadow: isActive ? [BoxShadow(color: primaryTeal.withOpacity(0.3), blurRadius: 10, spreadRadius: 2)] : [],
+                    boxShadow: isActive
+                        ? [
+                            BoxShadow(
+                                color: primaryTeal.withOpacity(0.3),
+                                blurRadius: 10,
+                                spreadRadius: 2)
+                          ]
+                        : [],
                   ),
                 ),
-                Container(width: 2, height: 20, color: Colors.black.withOpacity(0.05)),
+                Container(
+                    width: 2,
+                    height: 20,
+                    color: Colors.black.withOpacity(0.05)),
               ],
             ),
             const SizedBox(width: 16),
@@ -653,17 +667,28 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14)),
                   const SizedBox(height: 4),
-                  Text("$time  •  $status", style: TextStyle(color: Colors.grey.shade600, fontSize: 11, fontWeight: FontWeight.w600)),
+                  Text("$time  •  $status",
+                      style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600)),
                 ],
               ),
             ),
             if (isActive)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(color: primaryTeal, borderRadius: BorderRadius.circular(6)),
-                child: const Text("LIVE", style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w900)),
+                decoration: BoxDecoration(
+                    color: primaryTeal, borderRadius: BorderRadius.circular(6)),
+                child: const Text("LIVE",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w900)),
               ),
           ],
         ),
@@ -682,15 +707,25 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
         child: Row(
           children: [
             Container(
-                height: 35, width: 4,
-                decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(10))
-            ),
+                height: 35,
+                width: 4,
+                decoration: BoxDecoration(
+                    color: color, borderRadius: BorderRadius.circular(10))),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(val, style: TextStyle(color: color, fontWeight: FontWeight.w900, fontSize: 20)),
-                Text(label, style: TextStyle(color: color.withOpacity(0.8), fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 0.5)),
+                Text(val,
+                    style: TextStyle(
+                        color: color,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20)),
+                Text(label,
+                    style: TextStyle(
+                        color: color.withOpacity(0.8),
+                        fontSize: 9,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.5)),
               ],
             ),
           ],
@@ -698,6 +733,7 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
       ),
     );
   }
+
   Widget _overviewStat(String big, String label, Color color) {
     return Expanded(
       child: Column(
@@ -721,8 +757,7 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
     );
   }
 
-  Widget _listRow(
-      String title, String badge, Color badgeBg, Color badgeText) {
+  Widget _listRow(String title, String badge, Color badgeBg, Color badgeText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -739,7 +774,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           ),
           child: Text(
             badge,
-            style: TextStyle(color: badgeText, fontSize: 11, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                color: badgeText, fontSize: 11, fontWeight: FontWeight.w600),
           ),
         ),
       ],
@@ -759,14 +795,17 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             CircleAvatar(
               radius: 30,
               backgroundColor: Colors.orange.withOpacity(0.1),
-              child: const Icon(Icons.time_to_leave_rounded, color: Colors.orange, size: 30),
+              child: const Icon(Icons.time_to_leave_rounded,
+                  color: Colors.orange, size: 30),
             ),
             const SizedBox(height: 16),
-            const Text("Leave Request", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+            const Text("Leave Request",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
             const SizedBox(height: 8),
             Text(
               "Request from $driverName",
-              style: TextStyle(color: Colors.grey[600], fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Colors.grey[600], fontWeight: FontWeight.w600),
             ),
 
             const SizedBox(height: 20),
@@ -781,12 +820,16 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, size: 16, color: Colors.blueGrey),
+                  const Icon(Icons.info_outline,
+                      size: 16, color: Colors.blueGrey),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       "Reason: $reason",
-                      style: const TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: Colors.blueGrey),
+                      style: const TextStyle(
+                          fontSize: 13,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.blueGrey),
                     ),
                   ),
                 ],
@@ -802,14 +845,20 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Request Rejected"), backgroundColor: Colors.redAccent));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Request Rejected"),
+                          backgroundColor: Colors.redAccent));
                     },
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       side: const BorderSide(color: Colors.redAccent),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text("REJECT", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                    child: const Text("REJECT",
+                        style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -817,15 +866,20 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Request Approved"), backgroundColor: Colors.green));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Request Approved"),
+                          backgroundColor: Colors.green));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text("APPROVE", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    child: const Text("APPROVE",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
@@ -858,7 +912,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
 
           // --- 2. Interactive Leave Request Section ---
           InkWell(
-            onTap: () => _showLeaveApprovalSheet("Vikram Singh", "Family Emergency"),
+            onTap: () =>
+                _showLeaveApprovalSheet("Vikram Singh", "Family Emergency"),
             borderRadius: BorderRadius.circular(18),
             child: Container(
               padding: const EdgeInsets.all(14),
@@ -874,10 +929,14 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                        height: 36, width: 36,
-                        decoration: BoxDecoration(color: Colors.orange.withOpacity(0.15), shape: BoxShape.circle),
+                        height: 36,
+                        width: 36,
+                        decoration: BoxDecoration(
+                            color: Colors.orange.withOpacity(0.15),
+                            shape: BoxShape.circle),
                       ),
-                      const Icon(Icons.notification_important_rounded, size: 20, color: Colors.orange),
+                      const Icon(Icons.notification_important_rounded,
+                          size: 20, color: Colors.orange),
                     ],
                   ),
                   const SizedBox(width: 12),
@@ -887,16 +946,23 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                       children: [
                         Text(
                           "Leave Requests",
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Color(0xFF7C2D12)),
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF7C2D12)),
                         ),
                         Text(
                           "1 Driver is waiting for approval",
-                          style: TextStyle(fontSize: 11, color: Color(0xFF9A3412), fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF9A3412),
+                              fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
                   ),
-                  const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: Colors.orange),
+                  const Icon(Icons.arrow_forward_ios_rounded,
+                      size: 12, color: Colors.orange),
                 ],
               ),
             ),
@@ -906,7 +972,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
 
           // --- 3. Manage Directory Button ---
           InkWell(
-            onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.drivers),
+            onTap: () =>
+                Navigator.pushNamed(context, FleetManagerRoutes.drivers),
             borderRadius: BorderRadius.circular(16),
             child: Container(
               width: double.infinity,
@@ -914,21 +981,30 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [primaryTeal, primaryTeal.withOpacity(0.85)],
-                  begin: Alignment.topLeft, end: Alignment.bottomRight,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
-                  BoxShadow(color: primaryTeal.withOpacity(0.3), blurRadius: 12, offset: const Offset(0, 6)),
+                  BoxShadow(
+                      color: primaryTeal.withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6)),
                 ],
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.manage_accounts_rounded, color: Colors.white, size: 20),
+                  Icon(Icons.manage_accounts_rounded,
+                      color: Colors.white, size: 20),
                   SizedBox(width: 10),
                   Text(
                     "MANAGE DIRECTORY",
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 13, letterSpacing: 0.8),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 13,
+                        letterSpacing: 0.8),
                   ),
                 ],
               ),
@@ -1113,7 +1189,6 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
     );
   }
 
-
 // --- 5. Supporting Stat Box Widget ---
   Widget _driverStatBox(String count, String label, Color color) {
     return Expanded(
@@ -1126,9 +1201,15 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
         ),
         child: Column(
           children: [
-            Text(count, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: color)),
+            Text(count,
+                style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.w900, color: color)),
             const SizedBox(height: 2),
-            Text(label, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w800, color: color.withOpacity(0.8))),
+            Text(label,
+                style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.w800,
+                    color: color.withOpacity(0.8))),
           ],
         ),
       ),
@@ -1150,7 +1231,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           child: Center(
             child: Text(
               count,
-              style: TextStyle(color: color, fontWeight: FontWeight.w900, fontSize: 19),
+              style: TextStyle(
+                  color: color, fontWeight: FontWeight.w900, fontSize: 19),
             ),
           ),
         ),
@@ -1167,6 +1249,7 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
       ],
     );
   }
+
   Widget _smallDriverStat(String big, String label, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1211,23 +1294,40 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text("TODAY'S OPERATIONS",
-                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Colors.blueGrey, letterSpacing: 1.1)),
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.blueGrey,
+                              letterSpacing: 1.1)),
                       const SizedBox(height: 4),
                       const Text("24 Trips Completed",
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF1E293B))),
                       Text("Total distance: 140 km",
-                          style: TextStyle(fontSize: 12, color: Colors.blueGrey.shade400, fontWeight: FontWeight.w500)),
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.blueGrey.shade400,
+                              fontWeight: FontWeight.w500)),
                     ],
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(color: Colors.green.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8)),
                   child: const Row(
                     children: [
                       Icon(Icons.trending_up, color: Colors.green, size: 12),
                       SizedBox(width: 4),
-                      Text("12%", style: TextStyle(color: Colors.green, fontSize: 10, fontWeight: FontWeight.bold)),
+                      Text("12%",
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                 )
@@ -1238,12 +1338,14 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
           const SizedBox(height: 20),
 
           // --- 2. Weekly & Monthly Stats ---
-          _buildModernHistoryItem("This Week", '168', '1,250 km', Icons.calendar_view_week_rounded),
+          _buildModernHistoryItem(
+              "This Week", '168', '1,250 km', Icons.calendar_view_week_rounded),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 12),
             child: Divider(height: 1, thickness: 0.5),
           ),
-          _buildModernHistoryItem("This Month", '672', '5,800 km', Icons.insert_invitation_rounded),
+          _buildModernHistoryItem(
+              "This Month", '672', '5,800 km', Icons.insert_invitation_rounded),
 
           const SizedBox(height: 25),
 
@@ -1256,15 +1358,26 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                   children: [
                     Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(color: Colors.orange.withOpacity(0.1), shape: BoxShape.circle),
-                      child: const Icon(Icons.speed_rounded, color: Colors.orange, size: 18),
+                      decoration: BoxDecoration(
+                          color: Colors.orange.withOpacity(0.1),
+                          shape: BoxShape.circle),
+                      child: const Icon(Icons.speed_rounded,
+                          color: Colors.orange, size: 18),
                     ),
                     const SizedBox(width: 12),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Avg/Trip", style: TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w700)),
-                        Text("5.8 KM", style: TextStyle(color: Color(0xFF1E293B), fontWeight: FontWeight.w900, fontSize: 16)),
+                        const Text("Avg/Trip",
+                            style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w700)),
+                        Text("5.8 KM",
+                            style: TextStyle(
+                                color: Color(0xFF1E293B),
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16)),
                       ],
                     ),
                   ],
@@ -1273,10 +1386,12 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
 
               // NEW PREMIUM FULL REPORT BUTTON
               InkWell(
-                onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.tripHistory),
+                onTap: () => Navigator.pushNamed(
+                    context, FleetManagerRoutes.tripHistory),
                 borderRadius: BorderRadius.circular(14),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [primaryTeal, primaryTeal.withOpacity(0.8)],
@@ -1296,10 +1411,15 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                     children: [
                       Text(
                         "FULL REPORT",
-                        style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.5),
                       ),
                       SizedBox(width: 8),
-                      Icon(Icons.analytics_outlined, color: Colors.white, size: 16),
+                      Icon(Icons.analytics_outlined,
+                          color: Colors.white, size: 16),
                     ],
                   ),
                 ),
@@ -1325,35 +1445,54 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             valueColor: AlwaysStoppedAnimation<Color>(color),
           ),
         ),
-        Text(val, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14)),
+        Text(val,
+            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14)),
       ],
     );
   }
 
-  Widget _buildModernHistoryItem(String title, String trips, String km, IconData icon) {
+  Widget _buildModernHistoryItem(
+      String title, String trips, String km, IconData icon) {
     return Row(
       children: [
         Icon(icon, size: 18, color: Colors.blueGrey.shade300),
         const SizedBox(width: 12),
-        Text(title, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF475569))),
+        Text(title,
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF475569))),
         const Spacer(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text("$trips Trips", style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF1E293B))),
-            Text(km, style: TextStyle(fontSize: 11, color: Colors.blueGrey.shade300, fontWeight: FontWeight.w500)),
+            Text("$trips Trips",
+                style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                    color: Color(0xFF1E293B))),
+            Text(km,
+                style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.blueGrey.shade300,
+                    fontWeight: FontWeight.w500)),
           ],
         )
       ],
     );
   }
-  Widget _buildHistoryItem(String label, String tripCount, String distance, bool isHighlight) {
+
+  Widget _buildHistoryItem(
+      String label, String tripCount, String distance, bool isHighlight) {
     return Container(
       padding: EdgeInsets.all(isHighlight ? 16 : 12),
       decoration: BoxDecoration(
         color: isHighlight ? primaryTeal.withOpacity(0.05) : Colors.transparent,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: isHighlight ? primaryTeal.withOpacity(0.1) : Colors.transparent),
+        border: Border.all(
+            color: isHighlight
+                ? primaryTeal.withOpacity(0.1)
+                : Colors.transparent),
       ),
       child: Row(
         children: [
@@ -1364,11 +1503,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               color: isHighlight ? primaryTeal : Colors.grey.shade100,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-                isHighlight ? Icons.speed : Icons.route_outlined,
-                color: isHighlight ? Colors.white : Colors.grey,
-                size: 16
-            ),
+            child: Icon(isHighlight ? Icons.speed : Icons.route_outlined,
+                color: isHighlight ? Colors.white : Colors.grey, size: 16),
           ),
           const SizedBox(width: 12),
           // Label
@@ -1377,9 +1513,9 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               label,
               style: TextStyle(
                   fontWeight: isHighlight ? FontWeight.bold : FontWeight.w500,
-                  color: isHighlight ? Colors.black87 : Colors.blueGrey.shade600,
-                  fontSize: 14
-              ),
+                  color:
+                      isHighlight ? Colors.black87 : Colors.blueGrey.shade600,
+                  fontSize: 14),
             ),
           ),
           // Data points
@@ -1388,11 +1524,17 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             children: [
               Text(
                 distance,
-                style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14, color: Color(0xFF1E293B)),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 14,
+                    color: Color(0xFF1E293B)),
               ),
               Text(
                 "$tripCount Trips",
-                style: const TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -1400,6 +1542,7 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
       ),
     );
   }
+
   // Updated to include distance
   Widget _historyRow(String title, String count, String distance, Color color) {
     return Row(
@@ -1446,17 +1589,21 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // --- Route Items with modern progress bars ---
-          _buildModernRouteItem('North Zone', 'Route 1', '45 Students', '2 Buses', 0.85, Colors.teal),
+          _buildModernRouteItem('North Zone', 'Route 1', '45 Students',
+              '2 Buses', 0.85, Colors.teal),
           const SizedBox(height: 16),
-          _buildModernRouteItem('South Zone', 'Route 2', '52 Students', '2 Buses', 0.95, Colors.orange),
+          _buildModernRouteItem('South Zone', 'Route 2', '52 Students',
+              '2 Buses', 0.95, Colors.orange),
           const SizedBox(height: 16),
-          _buildModernRouteItem('East Zone', 'Route 3', '28 Students', '1 Bus', 0.60, Colors.blue),
+          _buildModernRouteItem('East Zone', 'Route 3', '28 Students', '1 Bus',
+              0.60, Colors.blue),
 
           const SizedBox(height: 25),
 
           // --- PREMIUM EXPLORE BUTTON ---
           InkWell(
-            onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.search),
+            onTap: () =>
+                Navigator.pushNamed(context, FleetManagerRoutes.search),
             borderRadius: BorderRadius.circular(12),
             child: Container(
               width: double.infinity,
@@ -1479,7 +1626,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Icon(Icons.arrow_forward_rounded, size: 16, color: primaryTeal),
+                  Icon(Icons.arrow_forward_rounded,
+                      size: 16, color: primaryTeal),
                 ],
               ),
             ),
@@ -1490,7 +1638,8 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
   }
 
 // --- NEW MODERN ROUTE ITEM HELPER ---
-  Widget _buildModernRouteItem(String zone, String routeCode, String students, String buses, double progress, Color color) {
+  Widget _buildModernRouteItem(String zone, String routeCode, String students,
+      String buses, double progress, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1500,15 +1649,31 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(zone, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF1E293B))),
-                Text(routeCode, style: TextStyle(color: Colors.grey.shade500, fontSize: 11, fontWeight: FontWeight.w600)),
+                Text(zone,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                        color: Color(0xFF1E293B))),
+                Text(routeCode,
+                    style: TextStyle(
+                        color: Colors.grey.shade500,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600)),
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(students, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: Color(0xFF334155))),
-                Text(buses, style: TextStyle(color: Colors.grey.shade500, fontSize: 10, fontWeight: FontWeight.w500)),
+                Text(students,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: Color(0xFF334155))),
+                Text(buses,
+                    style: TextStyle(
+                        color: Colors.grey.shade500,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500)),
               ],
             ),
           ],
@@ -1520,16 +1685,24 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
             Container(
               height: 6,
               width: double.infinity,
-              decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10)),
             ),
             FractionallySizedBox(
               widthFactor: progress,
               child: Container(
                 height: 6,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [color, color.withOpacity(0.7)]),
+                  gradient:
+                      LinearGradient(colors: [color, color.withOpacity(0.7)]),
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [BoxShadow(color: color.withOpacity(0.2), blurRadius: 4, offset: const Offset(0, 2))],
+                  boxShadow: [
+                    BoxShadow(
+                        color: color.withOpacity(0.2),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2))
+                  ],
                 ),
               ),
             ),
@@ -1538,7 +1711,9 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
       ],
     );
   }
-  Widget _buildRouteItem(String name, String students, String buses, double occupancy, Color color) {
+
+  Widget _buildRouteItem(String name, String students, String buses,
+      double occupancy, Color color) {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -1563,14 +1738,20 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                    Text(name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14)),
                     const SizedBox(height: 2),
                     Text("$students  •  $buses",
-                        style: TextStyle(color: Colors.grey.shade600, fontSize: 11, fontWeight: FontWeight.w600)),
+                        style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 20),
+              const Icon(Icons.chevron_right_rounded,
+                  color: Colors.grey, size: 20),
             ],
           ),
           const SizedBox(height: 12),
@@ -1581,9 +1762,16 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Occupancy", style: TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold)),
+                  const Text("Occupancy",
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold)),
                   Text("${(occupancy * 100).toInt()}% Full",
-                      style: TextStyle(fontSize: 10, color: color, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: color,
+                          fontWeight: FontWeight.bold)),
                 ],
               ),
               const SizedBox(height: 6),
@@ -1604,7 +1792,6 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
   }
 
 // --- Fixed _cardWrapper Function ---
-
   Widget _routeRow(String title, String subtitle) {
     return Row(
       children: [
@@ -1615,7 +1802,7 @@ class _HomeFleetManagerState extends State<HomeFleetManager> {
               Text(
                 title,
                 style:
-                const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
               ),
               const SizedBox(height: 4),
               Text(

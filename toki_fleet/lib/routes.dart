@@ -1,5 +1,6 @@
 // lib/routes.dart
 import 'package:flutter/material.dart';
+import 'package:toki/screens/fleet_manager/bottom_navigation.dart';
 
 // MAIN SCREENS
 import 'screens/splash/splash_screen.dart';
@@ -8,7 +9,7 @@ import 'screens/otp_verification_page.dart';
 import 'screens/parents/home_parents.dart';
 import 'screens/class_teacher/home_class_teacher.dart';
 import 'screens/subject_teacher/home_subject_teacher.dart';
-import 'screens/fleet_manager/home_fleet_manager.dart';
+
 import 'screens/driver/home_driver.dart';
 import 'screens/principal/home_principal.dart';
 
@@ -62,7 +63,7 @@ class Routes {
 
     // 2️⃣ Normal top-level routing
     switch (settings.name) {
-    // ───────── AUTH / COMMON ─────────
+      // ───────── AUTH / COMMON ─────────
       case splash:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -81,7 +82,7 @@ class Routes {
           ),
         );
 
-    // ───────── TOP-LEVEL HOME SCREENS ─────────
+      // ───────── TOP-LEVEL HOME SCREENS ─────────
       case parentsHome:
         return MaterialPageRoute(
           builder: (_) => const HomeParents(),
@@ -99,7 +100,7 @@ class Routes {
 
       case fleetManagerHome:
         return MaterialPageRoute(
-          builder: (_) => const HomeFleetManager(),
+          builder: (_) => HomeFleetManager(),
         );
 
       case driverHome:
@@ -112,14 +113,15 @@ class Routes {
           builder: (_) => const HomePrincipal(),
         );
 
-    // ───────── EVERYTHING ELSE: DELEGATE TO OTHER FEATURE ROUTERS ─────────
+      // ───────── EVERYTHING ELSE: DELEGATE TO OTHER FEATURE ROUTERS ─────────
       default:
-      // 1. Principal routes
+        // 1. Principal routes
         final principalRoute = PrincipalRoutes.generateRoute(settings);
         if (principalRoute != null) return principalRoute;
 
         // 2. Subject Teacher routes
-        final subjectTeacherRoute = SubjectTeacherRoutes.generateRoute(settings);
+        final subjectTeacherRoute =
+            SubjectTeacherRoutes.generateRoute(settings);
         if (subjectTeacherRoute != null) return subjectTeacherRoute;
 
         // Note: Class Teacher routes already handled at the top

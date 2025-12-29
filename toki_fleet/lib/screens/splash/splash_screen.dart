@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../routes.dart';
 import '../mobile_login_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,7 +8,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 

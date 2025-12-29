@@ -22,14 +22,21 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
     if (index == _bottomIndex) return;
     setState(() => _bottomIndex = index);
     switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, FleetManagerRoutes.home); break;
-      case 2: Navigator.pushReplacementNamed(context, FleetManagerRoutes.tickets); break;
-      case 3: Navigator.pushReplacementNamed(context, FleetManagerRoutes.moreOptions); break;
+      case 0:
+        Navigator.pushReplacementNamed(context, FleetManagerRoutes.home);
+        break;
+      case 2:
+        Navigator.pushReplacementNamed(context, FleetManagerRoutes.tickets);
+        break;
+      case 3:
+        Navigator.pushReplacementNamed(context, FleetManagerRoutes.moreOptions);
+        break;
     }
   }
 
 // --- 2. PREMIUM & ATTRACTIVE DETAIL SHEET ---
-  void _showInfoSheet(String title, List<String> data, Color themeColor, IconData headerIcon) {
+  void _showInfoSheet(
+      String title, List<String> data, Color themeColor, IconData headerIcon) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -52,7 +59,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
             // Elegant Handle
             const SizedBox(height: 15),
             Container(
-              width: 45, height: 4,
+              width: 45,
+              height: 4,
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(10),
@@ -75,7 +83,10 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                       ),
                       borderRadius: BorderRadius.circular(18),
                       boxShadow: [
-                        BoxShadow(color: themeColor.withOpacity(0.3), blurRadius: 12, offset: const Offset(0, 6))
+                        BoxShadow(
+                            color: themeColor.withOpacity(0.3),
+                            blurRadius: 12,
+                            offset: const Offset(0, 6))
                       ],
                     ),
                     child: Icon(headerIcon, color: Colors.white, size: 26),
@@ -87,18 +98,33 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                       children: [
                         Text(
                           title,
-                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF0F172A), letterSpacing: -0.5),
+                          style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF0F172A),
+                              letterSpacing: -0.5),
                         ),
                         const SizedBox(height: 4),
                         Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                              decoration: BoxDecoration(color: Colors.green[50], borderRadius: BorderRadius.circular(6)),
-                              child: Text("ACTIVE", style: TextStyle(color: Colors.green[700], fontSize: 10, fontWeight: FontWeight.bold)),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 2),
+                              decoration: BoxDecoration(
+                                  color: Colors.green[50],
+                                  borderRadius: BorderRadius.circular(6)),
+                              child: Text("ACTIVE",
+                                  style: TextStyle(
+                                      color: Colors.green[700],
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             const SizedBox(width: 8),
-                            Text("${data.length} Total Records", style: TextStyle(color: Colors.grey[500], fontSize: 13, fontWeight: FontWeight.w500)),
+                            Text("${data.length} Total Records",
+                                style: TextStyle(
+                                    color: Colors.grey[500],
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500)),
                           ],
                         ),
                       ],
@@ -109,7 +135,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     shape: const CircleBorder(),
                     child: IconButton(
                       onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.close_rounded, color: Colors.black54, size: 20),
+                      icon: const Icon(Icons.close_rounded,
+                          color: Colors.black54, size: 20),
                     ),
                   ),
                 ],
@@ -128,11 +155,13 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                 itemBuilder: (context, i) {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 14),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 18),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(22),
-                      border: Border.all(color: const Color(0xFFF1F5F9), width: 1.5),
+                      border: Border.all(
+                          color: const Color(0xFFF1F5F9), width: 1.5),
                       boxShadow: [
                         BoxShadow(
                           color: const Color(0xFF0F172A).withOpacity(0.03),
@@ -145,7 +174,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                       children: [
                         // Letter Avatar with Gradient
                         Container(
-                          height: 52, width: 52,
+                          height: 52,
+                          width: 52,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: themeColor.withOpacity(0.08),
@@ -153,7 +183,10 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                           ),
                           child: Text(
                             data[i][0].toUpperCase(),
-                            style: TextStyle(color: themeColor, fontWeight: FontWeight.w900, fontSize: 20),
+                            style: TextStyle(
+                                color: themeColor,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 20),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -164,12 +197,19 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                             children: [
                               Text(
                                 data[i],
-                                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: Color(0xFF1E293B)),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 16,
+                                    color: Color(0xFF1E293B)),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 "Ref ID: AIS-DRV-0${i + 402}",
-                                style: TextStyle(color: Colors.grey[500], fontSize: 12, fontWeight: FontWeight.w600, letterSpacing: 0.3),
+                                style: TextStyle(
+                                    color: Colors.grey[500],
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.3),
                               ),
                             ],
                           ),
@@ -182,9 +222,11 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                             decoration: BoxDecoration(
                               color: const Color(0xFFF8FAFC),
                               borderRadius: BorderRadius.circular(14),
-                              border: Border.all(color: const Color(0xFFE2E8F0)),
+                              border:
+                                  Border.all(color: const Color(0xFFE2E8F0)),
                             ),
-                            child: const Icon(Icons.chevron_right_rounded, color: Color(0xFF64748B)),
+                            child: const Icon(Icons.chevron_right_rounded,
+                                color: Color(0xFF64748B)),
                           ),
                         ),
                       ],
@@ -198,6 +240,7 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
       ),
     );
   }
+
   // Small Helper for Sheet Actions
   Widget _sheetActionBtn(IconData icon, Color color) {
     return Container(
@@ -244,20 +287,20 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _bottomIndex,
-        onTap: _onBottomTap,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: primaryTeal,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard_rounded), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.local_activity_rounded), label: 'Tickets'),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz_rounded), label: 'More'),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _bottomIndex,
+      //   onTap: _onBottomTap,
+      //   type: BottomNavigationBarType.fixed,
+      //   selectedItemColor: primaryTeal,
+      //   unselectedItemColor: Colors.grey,
+      //   backgroundColor: Colors.white,
+      //   items: const [
+      //     BottomNavigationBarItem(icon: Icon(Icons.dashboard_rounded), label: 'Home'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.local_activity_rounded), label: 'Tickets'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.more_horiz_rounded), label: 'More'),
+      //   ],
+      // ),
     );
   }
 
@@ -291,7 +334,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     color: primaryTeal.withOpacity(0.12),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Icon(Icons.route_rounded, color: primaryTeal, size: 24),
+                  child:
+                      Icon(Icons.route_rounded, color: primaryTeal, size: 24),
                 ),
                 const SizedBox(width: 14),
                 Expanded(
@@ -321,7 +365,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
@@ -348,8 +393,10 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _routeMiniStat(Icons.groups_rounded, route.studentsCount.toString(), "Students"),
-                _routeMiniStat(Icons.badge_rounded, route.driversCount.toString(), "Drivers"),
+                _routeMiniStat(Icons.groups_rounded,
+                    route.studentsCount.toString(), "Students"),
+                _routeMiniStat(Icons.badge_rounded,
+                    route.driversCount.toString(), "Drivers"),
                 _routeMiniStat(Icons.schedule_rounded, "45m", "Duration"),
               ],
             ),
@@ -369,7 +416,7 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     "STUDENTS",
                     Icons.groups_rounded,
                     primaryTeal,
-                        () => _showInfoSheet(
+                    () => _showInfoSheet(
                       "Route Students",
                       ["Rahul Sharma", "Sneha Kapoor", "Amit Verma"],
                       primaryTeal,
@@ -383,7 +430,7 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     "DRIVERS",
                     Icons.badge_rounded,
                     secondaryIndigo,
-                        () => _showInfoSheet(
+                    () => _showInfoSheet(
                       "Route Drivers",
                       ["Vikram Singh", "Prakash Rao"],
                       secondaryIndigo,
@@ -424,31 +471,46 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
     );
   }
 
-
 // --- Supporting Widgets ---
 
-  Widget _fullWidthStat(IconData icon, String value, String label, Color color) {
+  Widget _fullWidthStat(
+      IconData icon, String value, String label, Color color) {
     return Expanded(
       child: Column(
         children: [
           Icon(icon, size: 20, color: color.withOpacity(0.8)),
           const SizedBox(height: 8),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: Color(0xFF1E293B))),
-          Text(label, style: const TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.w500)),
+          Text(value,
+              style: const TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16,
+                  color: Color(0xFF1E293B))),
+          Text(label,
+              style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500)),
         ],
       ),
     );
   }
 
   Widget _statDivider() {
-    return Container(height: 30, width: 1, color: Colors.black.withOpacity(0.05));
+    return Container(
+        height: 30, width: 1, color: Colors.black.withOpacity(0.05));
   }
 
-  Widget _premiumActionBtn(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _premiumActionBtn(
+      String label, IconData icon, Color color, VoidCallback onTap) {
     return ElevatedButton.icon(
       onPressed: onTap,
       icon: Icon(icon, size: 16, color: color),
-      label: Text(label, style: TextStyle(color: color, fontWeight: FontWeight.w900, fontSize: 12, letterSpacing: 0.5)),
+      label: Text(label,
+          style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w900,
+              fontSize: 12,
+              letterSpacing: 0.5)),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         foregroundColor: color,
@@ -461,6 +523,7 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
       ),
     );
   }
+
   // Helper for mini stats inside the card
   Widget _quickStat(IconData icon, String value, String label) {
     return Column(
@@ -469,11 +532,18 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
         const SizedBox(height: 6),
         Text(
           value,
-          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15, color: Color(0xFF334155)),
+          style: const TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 15,
+              color: Color(0xFF334155)),
         ),
         Text(
           label,
-          style: TextStyle(color: Colors.grey.shade500, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+          style: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5),
         ),
       ],
     );
@@ -511,7 +581,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                         color: Colors.orange.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Icon(Icons.directions_bus_rounded, color: Colors.orange, size: 28),
+                      child: const Icon(Icons.directions_bus_rounded,
+                          color: Colors.orange, size: 28),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -520,16 +591,23 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                         children: [
                           Text(
                             route.busNumber ?? 'N/A',
-                            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: Color(0xFF1E293B)),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 18,
+                                color: Color(0xFF1E293B)),
                           ),
                           const SizedBox(height: 4),
                           Row(
                             children: [
-                              const Icon(Icons.circle, size: 8, color: Colors.green),
+                              const Icon(Icons.circle,
+                                  size: 8, color: Colors.green),
                               const SizedBox(width: 6),
                               Text(
                                 "ON ROUTE",
-                                style: TextStyle(color: Colors.grey.shade600, fontSize: 11, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    color: Colors.grey.shade600,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -560,8 +638,10 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: const Color(0xFFF8FAFC),
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(28)),
-              border: Border(top: BorderSide(color: Colors.black.withOpacity(0.04))),
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(28)),
+              border: Border(
+                  top: BorderSide(color: Colors.black.withOpacity(0.04))),
             ),
             child: Row(
               children: [
@@ -570,7 +650,7 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     "HISTORY",
                     Icons.history_rounded, // Icon added
                     Colors.blueGrey,
-                        () => _showInfoSheet(
+                    () => _showInfoSheet(
                       "Service History",
                       ["Engine Oil (Nov 24)", "Brake Check (Oct 24)"],
                       Colors.blueGrey,
@@ -584,8 +664,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     "TRACK",
                     Icons.location_on_rounded, // Icon added
                     Colors.redAccent,
-                    () => _showLiveTrackingSheet(route), // Sheet yahan se trigger hogi
-
+                    () => _showLiveTrackingSheet(
+                        route), // Sheet yahan se trigger hogi
                   ),
                 ),
               ],
@@ -611,7 +691,12 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
         child: Column(
           children: [
             const SizedBox(height: 12),
-            Container(width: 50, height: 5, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+            Container(
+                width: 50,
+                height: 5,
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10))),
 
             Padding(
               padding: const EdgeInsets.all(25),
@@ -621,11 +706,19 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Tracking: ${route.busNumber}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-                      const Text("Status: On Time • Moving", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 13)),
+                      Text("Tracking: ${route.busNumber}",
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w900)),
+                      const Text("Status: On Time • Moving",
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13)),
                     ],
                   ),
-                  IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.close_fullscreen_rounded)),
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.close_fullscreen_rounded)),
                 ],
               ),
             ),
@@ -641,7 +734,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                       color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(30),
                       image: const DecorationImage(
-                        image: NetworkImage('https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.4241,37.78,14.25,0,60/600x600?access_token=YOUR_TOKEN_HERE'), // You can replace with a local asset map image
+                        image: NetworkImage(
+                            'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-122.4241,37.78,14.25,0,60/600x600?access_token=YOUR_TOKEN_HERE'), // You can replace with a local asset map image
                         fit: BoxFit.cover,
                         opacity: 0.6,
                       ),
@@ -659,15 +753,28 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                             color: primaryTeal,
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 3),
-                            boxShadow: [BoxShadow(color: primaryTeal.withOpacity(0.4), blurRadius: 20, spreadRadius: 10)],
+                            boxShadow: [
+                              BoxShadow(
+                                  color: primaryTeal.withOpacity(0.4),
+                                  blurRadius: 20,
+                                  spreadRadius: 10)
+                            ],
                           ),
-                          child: const Icon(Icons.directions_bus_rounded, color: Colors.white, size: 30),
+                          child: const Icon(Icons.directions_bus_rounded,
+                              color: Colors.white, size: 30),
                         ),
                         const SizedBox(height: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                          decoration: BoxDecoration(color: Colors.black87, borderRadius: BorderRadius.circular(8)),
-                          child: const Text("Current Location", style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                              color: Colors.black87,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: const Text("Current Location",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -680,9 +787,11 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     right: 40,
                     child: Row(
                       children: [
-                        _trackInfoCard("ETA", "14 MIN", Icons.timer_outlined, Colors.orange),
+                        _trackInfoCard("ETA", "14 MIN", Icons.timer_outlined,
+                            Colors.orange),
                         const SizedBox(width: 15),
-                        _trackInfoCard("DIST", "3.2 KM", Icons.map_outlined, Colors.blue),
+                        _trackInfoCard(
+                            "DIST", "3.2 KM", Icons.map_outlined, Colors.blue),
                       ],
                     ),
                   ),
@@ -695,12 +804,16 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
               padding: const EdgeInsets.all(25),
               child: ElevatedButton.icon(
                 onPressed: () {},
-                icon: const Icon(Icons.phone_in_talk_rounded, color: Colors.white),
-                label: const Text("CONTACT DRIVER", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900)),
+                icon: const Icon(Icons.phone_in_talk_rounded,
+                    color: Colors.white),
+                label: const Text("CONTACT DRIVER",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w900)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black87,
                   minimumSize: const Size(double.infinity, 60),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                 ),
               ),
             ),
@@ -710,21 +823,33 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
     );
   }
 
-  Widget _trackInfoCard(String label, String value, IconData icon, Color color) {
+  Widget _trackInfoCard(
+      String label, String value, IconData icon, Color color) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: const Offset(0, 5))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10,
+                offset: const Offset(0, 5))
+          ],
         ),
         child: Column(
           children: [
             Icon(icon, color: color, size: 20),
             const SizedBox(height: 8),
-            Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
-            Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold)),
+            Text(value,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+            Text(label,
+                style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -735,8 +860,11 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
   Widget _miniFuelIndicator(int percent) {
     return Column(
       children: [
-        Icon(Icons.local_gas_station_rounded, size: 16, color: Colors.grey.shade400),
-        Text("$percent%", style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey)),
+        Icon(Icons.local_gas_station_rounded,
+            size: 16, color: Colors.grey.shade400),
+        Text("$percent%",
+            style: const TextStyle(
+                fontSize: 10, fontWeight: FontWeight.bold, color: Colors.grey)),
       ],
     );
   }
@@ -749,7 +877,9 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: primaryTeal.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: primaryTeal.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10)),
             child: Icon(Icons.school_rounded, color: primaryTeal, size: 22),
           ),
           const SizedBox(width: 12),
@@ -757,12 +887,19 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aditya International', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-                Text('Fleet Management System', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                Text('Aditya International',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                Text('Fleet Management System',
+                    style: TextStyle(color: Colors.grey, fontSize: 10)),
               ],
             ),
           ),
-          Text("తెలుగు", style: TextStyle(color: primaryTeal, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text("తెలుగు",
+              style: TextStyle(
+                  color: primaryTeal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12)),
         ],
       ),
     );
@@ -776,8 +913,10 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
           height: 110,
           width: double.infinity,
           decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF0F766E), Color(0xFF14B8A6)]),
-            borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(450, 80)),
+            gradient:
+                LinearGradient(colors: [Color(0xFF0F766E), Color(0xFF14B8A6)]),
+            borderRadius:
+                BorderRadius.vertical(bottom: Radius.elliptical(450, 80)),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
@@ -787,10 +926,16 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Explorer: $_filterBy', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text('Explorer: $_filterBy',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)),
                     Container(
                       padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(12)),
+                      decoration: BoxDecoration(
+                          color: Colors.white24,
+                          borderRadius: BorderRadius.circular(12)),
                       child: Row(
                         children: [
                           _smallFilterBtn('Route'),
@@ -800,7 +945,9 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
                     ),
                   ],
                 ),
-                Text('Manage your fleet ${_filterBy.toLowerCase()}s', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 14)),
+                Text('Manage your fleet ${_filterBy.toLowerCase()}s',
+                    style: TextStyle(
+                        color: Colors.white.withOpacity(0.8), fontSize: 14)),
               ],
             ),
           ),
@@ -815,12 +962,18 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
               border: Border.all(color: Colors.black.withOpacity(0.08)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 12, offset: const Offset(0, 6))],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6))
+              ],
             ),
             child: TextField(
               onChanged: (val) => setState(() => _search = val),
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search_rounded, color: primaryTeal, size: 22),
+                prefixIcon:
+                    Icon(Icons.search_rounded, color: primaryTeal, size: 22),
                 hintText: 'Search for ${_filterBy.toLowerCase()}...',
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
                 border: InputBorder.none,
@@ -839,13 +992,20 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
       onTap: () => setState(() => _filterBy = label),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-        decoration: BoxDecoration(color: isSelected ? Colors.white : Colors.transparent, borderRadius: BorderRadius.circular(8)),
-        child: Text(label, style: TextStyle(color: isSelected ? primaryTeal : Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+        decoration: BoxDecoration(
+            color: isSelected ? Colors.white : Colors.transparent,
+            borderRadius: BorderRadius.circular(8)),
+        child: Text(label,
+            style: TextStyle(
+                color: isSelected ? primaryTeal : Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold)),
       ),
     );
   }
 
-  Widget _actionBtn(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _actionBtn(
+      String label, IconData icon, Color color, VoidCallback onTap) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -856,7 +1016,8 @@ class _FleetSearchRoutesState extends State<FleetSearchRoutes> {
           decoration: BoxDecoration(
             color: color.withOpacity(0.08), // Light Background
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: color.withOpacity(0.2), width: 1.5), // Subtle Border
+            border: Border.all(
+                color: color.withOpacity(0.2), width: 1.5), // Subtle Border
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

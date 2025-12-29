@@ -21,9 +21,15 @@ class _FleetTicketsState extends State<FleetTickets> {
     if (index == _bottomIndex) return;
     setState(() => _bottomIndex = index);
     switch (index) {
-      case 0: Navigator.pushNamed(context, FleetManagerRoutes.dashboard); break;
-      case 1: Navigator.pushNamed(context, FleetManagerRoutes.search); break;
-      case 3: Navigator.pushNamed(context, FleetManagerRoutes.moreOptions); break;
+      case 0:
+        Navigator.pushNamed(context, FleetManagerRoutes.dashboard);
+        break;
+      case 1:
+        Navigator.pushNamed(context, FleetManagerRoutes.search);
+        break;
+      case 3:
+        Navigator.pushNamed(context, FleetManagerRoutes.moreOptions);
+        break;
     }
   }
 
@@ -57,7 +63,8 @@ class _FleetTicketsState extends State<FleetTickets> {
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate(
-                            (context, index) => _buildModernTicketCard(tickets[index]),
+                        (context, index) =>
+                            _buildModernTicketCard(tickets[index]),
                         childCount: tickets.length,
                       ),
                     ),
@@ -68,7 +75,7 @@ class _FleetTicketsState extends State<FleetTickets> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      // bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -79,7 +86,9 @@ class _FleetTicketsState extends State<FleetTickets> {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: primaryTeal.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: primaryTeal.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10)),
             child: Icon(Icons.school_rounded, color: primaryTeal, size: 22),
           ),
           const SizedBox(width: 12),
@@ -87,12 +96,19 @@ class _FleetTicketsState extends State<FleetTickets> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aditya International', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-                Text('Fleet Management System', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                Text('Aditya International',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                Text('Fleet Management System',
+                    style: TextStyle(color: Colors.grey, fontSize: 10)),
               ],
             ),
           ),
-          Text("తెలుగు", style: TextStyle(color: primaryTeal, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text("తెలుగు",
+              style: TextStyle(
+                  color: primaryTeal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12)),
         ],
       ),
     );
@@ -106,8 +122,10 @@ class _FleetTicketsState extends State<FleetTickets> {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: primaryTeal, borderRadius: BorderRadius.circular(10)),
-            child: const Icon(Icons.school_rounded, color: Colors.white, size: 22),
+            decoration: BoxDecoration(
+                color: primaryTeal, borderRadius: BorderRadius.circular(10)),
+            child:
+                const Icon(Icons.school_rounded, color: Colors.white, size: 22),
           ),
           const SizedBox(width: 12),
           const Expanded(
@@ -130,9 +148,12 @@ class _FleetTicketsState extends State<FleetTickets> {
               style: TextButton.styleFrom(
                   backgroundColor: primaryTeal.withOpacity(0.1),
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  shape: const StadiumBorder()
-              ),
-              child: const Text('తెలుగు', style: TextStyle(color: primaryTeal, fontWeight: FontWeight.bold, fontSize: 11)),
+                  shape: const StadiumBorder()),
+              child: const Text('తెలుగు',
+                  style: TextStyle(
+                      color: primaryTeal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11)),
             ),
           ),
         ],
@@ -221,16 +242,22 @@ class _FleetTicketsState extends State<FleetTickets> {
     );
   }
 
-
-  Widget _buildModernStat(IconData icon, String count, String label, Color color) {
-    return Flexible( // Make stats flexible for smaller screens
+  Widget _buildModernStat(
+      IconData icon, String count, String label, Color color) {
+    return Flexible(
+      // Make stats flexible for smaller screens
       child: Column(
         children: [
           Icon(icon, color: color, size: 22),
           const SizedBox(height: 6),
-          Text(count, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(count,
+              style:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           Text(label,
-              style: TextStyle(color: Colors.grey.shade600, fontSize: 10, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600),
               maxLines: 1),
         ],
       ),
@@ -257,9 +284,12 @@ class _FleetTicketsState extends State<FleetTickets> {
               selected: isSelected,
               onSelected: (val) => setState(() => _selectedFilter = f),
               selectedColor: redHeader,
-              labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.black87, fontSize: 12),
+              labelStyle: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black87,
+                  fontSize: 12),
               backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
             ),
           );
         }).toList(),
@@ -271,7 +301,9 @@ class _FleetTicketsState extends State<FleetTickets> {
   Widget _buildModernTicketCard(FleetTicket ticket) {
     Color statusColor = ticket.status.toLowerCase() == 'open'
         ? Colors.orange
-        : (ticket.status.toLowerCase() == 'resolved' ? Colors.green : Colors.blue);
+        : (ticket.status.toLowerCase() == 'resolved'
+            ? Colors.green
+            : Colors.blue);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -294,10 +326,8 @@ class _FleetTicketsState extends State<FleetTickets> {
       ),
       child: InkWell(
         onTap: () => Navigator.pushNamed(
-            context,
-            FleetManagerRoutes.ticketDetail,
-            arguments: {'ticketId': ticket.id}
-        ),
+            context, FleetManagerRoutes.ticketDetail,
+            arguments: {'ticketId': ticket.id}),
         borderRadius: BorderRadius.circular(20),
         child: Column(
           children: [
@@ -314,9 +344,7 @@ class _FleetTicketsState extends State<FleetTickets> {
                           style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 11,
-                              fontWeight: FontWeight.bold
-                          )
-                      ),
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -324,24 +352,19 @@ class _FleetTicketsState extends State<FleetTickets> {
                       style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF1E293B)
-                      )
-                  ),
+                          color: Color(0xFF1E293B))),
                   const SizedBox(height: 6),
                   Text(ticket.description,
                       maxLines: 2,
                       style: const TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 12,
-                          height: 1.3
-                      )
-                  ),
+                          color: Colors.blueGrey, fontSize: 12, height: 1.3)),
                   const SizedBox(height: 12),
                   Wrap(
                     spacing: 16,
                     runSpacing: 8,
                     children: [
-                      _iconLabel(Icons.directions_bus_filled_rounded, ticket.busNumber),
+                      _iconLabel(Icons.directions_bus_filled_rounded,
+                          ticket.busNumber),
                       _iconLabel(Icons.map_rounded, ticket.routeName),
                     ],
                   ),
@@ -354,26 +377,25 @@ class _FleetTicketsState extends State<FleetTickets> {
               decoration: BoxDecoration(
                 color: Colors.grey.shade50,
                 border: Border(
-                    top: BorderSide(color: Colors.black.withOpacity(0.05))
-                ),
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
+                    top: BorderSide(color: Colors.black.withOpacity(0.05))),
+                borderRadius:
+                    const BorderRadius.vertical(bottom: Radius.circular(20)),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.access_time_rounded, size: 14, color: Colors.grey),
+                  const Icon(Icons.access_time_rounded,
+                      size: 14, color: Colors.grey),
                   const SizedBox(width: 6),
                   Text(ticket.footerDate,
-                      style: const TextStyle(fontSize: 10, color: Colors.grey)
-                  ),
+                      style: const TextStyle(fontSize: 10, color: Colors.grey)),
                   const Spacer(),
                   const Text('Details',
                       style: TextStyle(
                           color: primaryTeal,
                           fontSize: 12,
-                          fontWeight: FontWeight.bold
-                      )
-                  ),
-                  const Icon(Icons.arrow_forward_ios_rounded, size: 10, color: primaryTeal),
+                          fontWeight: FontWeight.bold)),
+                  const Icon(Icons.arrow_forward_ios_rounded,
+                      size: 10, color: primaryTeal),
                 ],
               ),
             ),
@@ -389,7 +411,8 @@ class _FleetTicketsState extends State<FleetTickets> {
       children: [
         Icon(icon, size: 14, color: primaryTeal),
         const SizedBox(width: 4),
-        Text(text, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+        Text(text,
+            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
       ],
     );
   }
@@ -397,8 +420,12 @@ class _FleetTicketsState extends State<FleetTickets> {
   Widget _statusBadge(String status, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(6)),
-      child: Text(status.toUpperCase(), style: TextStyle(color: color, fontSize: 9, fontWeight: FontWeight.w800)),
+      decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(6)),
+      child: Text(status.toUpperCase(),
+          style: TextStyle(
+              color: color, fontSize: 9, fontWeight: FontWeight.w800)),
     );
   }
 
@@ -413,9 +440,12 @@ class _FleetTicketsState extends State<FleetTickets> {
       selectedFontSize: 11,
       unselectedFontSize: 11,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.confirmation_num_rounded), label: 'Tickets'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.grid_view_rounded), label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.search_rounded), label: 'Search'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_num_rounded), label: 'Tickets'),
         BottomNavigationBarItem(icon: Icon(Icons.menu_rounded), label: 'More'),
       ],
     );

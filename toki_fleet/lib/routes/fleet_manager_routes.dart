@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:toki/screens/fleet_manager/bottom_navigation.dart';
 
 // Screens Imports
-import '../screens/fleet_manager/home_fleet_manager.dart';
+
 import '../screens/fleet_manager/fleet_overview.dart';
 import '../screens/fleet_manager/fleet_driver_profile.dart';
 import '../screens/fleet_manager/fleet_more_options.dart';
@@ -51,12 +52,11 @@ class FleetManagerRoutes {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     final uri = Uri.parse(settings.name ?? '');
 
-
     switch (uri.path) {
-    // ───────── MAIN TABS ─────────
+      // ───────── MAIN TABS ─────────
       case home:
       case dashboard:
-        return MaterialPageRoute(builder: (_) => const HomeFleetManager());
+        return MaterialPageRoute(builder: (_) => HomeFleetManager());
 
       case search:
         return MaterialPageRoute(builder: (_) => const FleetSearchRoutes());
@@ -67,7 +67,7 @@ class FleetManagerRoutes {
       case moreOptions:
         return MaterialPageRoute(builder: (_) => const FleetMoreOptions());
 
-    // ───────── MANAGEMENT SCREENS ─────────
+      // ───────── MANAGEMENT SCREENS ─────────
       case profileEdit:
         return MaterialPageRoute(builder: (_) => const FleetProfileEdit());
 
@@ -90,11 +90,13 @@ class FleetManagerRoutes {
       case attendance:
         return MaterialPageRoute(builder: (_) => const FleetAttendance());
 
-    // lib/routes/fleet_manager_routes.dart (Example file name)
+      // lib/routes/fleet_manager_routes.dart (Example file name)
 
       case tripHistory:
-        return MaterialPageRoute(builder: (_) => const FleetTripHistoryPage()); // Is page ko yahan bind karein
-    // ───────── DETAIL ROUTES ─────────
+        return MaterialPageRoute(
+            builder: (_) =>
+                const FleetTripHistoryPage()); // Is page ko yahan bind karein
+      // ───────── DETAIL ROUTES ─────────
       case trips:
         final qp = uri.queryParameters;
         return MaterialPageRoute(

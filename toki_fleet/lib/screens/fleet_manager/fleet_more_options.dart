@@ -21,10 +21,17 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
     setState(() => _bottomIndex = index);
 
     switch (index) {
-      case 0: Navigator.pushNamed(context, FleetManagerRoutes.home); break;
-      case 1: Navigator.pushNamed(context, FleetManagerRoutes.search); break;
-      case 2: Navigator.pushNamed(context, FleetManagerRoutes.tickets); break;
-      case 3: break;
+      case 0:
+        Navigator.pushNamed(context, FleetManagerRoutes.home);
+        break;
+      case 1:
+        Navigator.pushNamed(context, FleetManagerRoutes.search);
+        break;
+      case 2:
+        Navigator.pushNamed(context, FleetManagerRoutes.tickets);
+        break;
+      case 3:
+        break;
     }
   }
 
@@ -64,24 +71,48 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
                         children: [
                           _sectionHeader('DRIVER MANAGEMENT'),
                           _buildMenuBox([
-                            _menuItem(Icons.badge_rounded, Colors.teal, 'Driver Directory', 'Contact & license info',
-                                onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.driverDirectory)),
+                            _menuItem(Icons.badge_rounded, Colors.teal,
+                                'Driver Directory', 'Contact & license info',
+                                onTap: () => Navigator.pushNamed(context,
+                                    FleetManagerRoutes.driverDirectory)),
                             _menuDivider(),
-                            _menuItem(Icons.event_busy_rounded, Colors.deepOrange, 'Leave Management', 'Approve/Reject requests',
-                                onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.leaveMgmt)),
+                            _menuItem(
+                                Icons.event_busy_rounded,
+                                Colors.deepOrange,
+                                'Leave Management',
+                                'Approve/Reject requests',
+                                onTap: () => Navigator.pushNamed(
+                                    context, FleetManagerRoutes.leaveMgmt)),
                             _menuDivider(),
-                            _menuItem(Icons.assignment_turned_in_rounded, Colors.green, 'Attendance Report', 'Monthly log overview',
-                                onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.attendance)),
+                            _menuItem(
+                                Icons.assignment_turned_in_rounded,
+                                Colors.green,
+                                'Attendance Report',
+                                'Monthly log overview',
+                                onTap: () => Navigator.pushNamed(
+                                    context, FleetManagerRoutes.attendance)),
                           ]),
-
                           const SizedBox(height: 24),
-
                           _sectionHeader('SYSTEM'),
                           _buildMenuBox([
-                            _menuItem(Icons.help_center_rounded, Colors.amber.shade800, 'Help & Support', 'FAQs, Guide & Contact us', onTap: _showHelpSheet),                            _menuDivider(),
-                      _menuItem(Icons.settings_suggest_rounded, Colors.blueGrey, 'App Settings', 'Theme, Notifications & Privacy',
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FleetSettingsPage()))),                          ]),
-
+                            _menuItem(
+                                Icons.help_center_rounded,
+                                Colors.amber.shade800,
+                                'Help & Support',
+                                'FAQs, Guide & Contact us',
+                                onTap: _showHelpSheet),
+                            _menuDivider(),
+                            _menuItem(
+                                Icons.settings_suggest_rounded,
+                                Colors.blueGrey,
+                                'App Settings',
+                                'Theme, Notifications & Privacy',
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FleetSettingsPage()))),
+                          ]),
                           const SizedBox(height: 30),
                           _buildLogoutButton(),
                           const SizedBox(height: 30),
@@ -97,10 +128,9 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      // bottomNavigationBar: _buildBottomNav(),
     );
   }
-
 
   Widget _buildWhiteTopBar() {
     return Container(
@@ -109,7 +139,9 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: primaryTeal.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: primaryTeal.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10)),
             child: Icon(Icons.school_rounded, color: primaryTeal, size: 22),
           ),
           const SizedBox(width: 12),
@@ -117,16 +149,24 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aditya International', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-                Text('Fleet Management System', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                Text('Aditya International',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                Text('Fleet Management System',
+                    style: TextStyle(color: Colors.grey, fontSize: 10)),
               ],
             ),
           ),
-          Text("తెలుగు", style: TextStyle(color: primaryTeal, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text("తెలుగు",
+              style: TextStyle(
+                  color: primaryTeal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12)),
         ],
       ),
     );
   }
+
   // --- TOP BRANDING HEADER ---
   Widget _buildTopBrandingHeader() {
     return Container(
@@ -136,16 +176,21 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: primaryTeal, borderRadius: BorderRadius.circular(10)),
-            child: const Icon(Icons.school_rounded, color: Colors.white, size: 22),
+            decoration: BoxDecoration(
+                color: primaryTeal, borderRadius: BorderRadius.circular(10)),
+            child:
+                const Icon(Icons.school_rounded, color: Colors.white, size: 22),
           ),
           const SizedBox(width: 12),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Aditya International', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-                Text('Fleet Management System', style: TextStyle(color: Colors.grey, fontSize: 10)),
+                Text('Aditya International',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+                Text('Fleet Management System',
+                    style: TextStyle(color: Colors.grey, fontSize: 10)),
               ],
             ),
           ),
@@ -154,9 +199,12 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
             style: TextButton.styleFrom(
                 backgroundColor: primaryTeal.withOpacity(0.1),
                 shape: const StadiumBorder(),
-                padding: const EdgeInsets.symmetric(horizontal: 12)
-            ),
-            child: const Text('తెలుగు', style: TextStyle(color: primaryTeal, fontWeight: FontWeight.bold, fontSize: 11)),
+                padding: const EdgeInsets.symmetric(horizontal: 12)),
+            child: const Text('తెలుగు',
+                style: TextStyle(
+                    color: primaryTeal,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11)),
           ),
         ],
       ),
@@ -197,13 +245,13 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
     );
   }
 
-
   // --- FLOATING PROFILE CARD ---
   Widget _buildFloatingProfileCard() {
     return Positioned(
       bottom: -45,
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, FleetManagerRoutes.profileEdit),
+        onTap: () =>
+            Navigator.pushNamed(context, FleetManagerRoutes.profileEdit),
         borderRadius: BorderRadius.circular(24),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.88,
@@ -211,9 +259,13 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.black.withOpacity(0.08)), // Slight border
+            border: Border.all(
+                color: Colors.black.withOpacity(0.08)), // Slight border
             boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20, offset: const Offset(0, 8)),
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8)),
             ],
           ),
           child: Row(
@@ -221,19 +273,24 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
               CircleAvatar(
                 radius: 30,
                 backgroundColor: primaryTeal.withOpacity(0.1),
-                child: const Icon(Icons.person_rounded, size: 32, color: primaryTeal),
+                child: const Icon(Icons.person_rounded,
+                    size: 32, color: primaryTeal),
               ),
               const SizedBox(width: 16),
               const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Suresh Kumar', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                    Text('Senior Fleet Manager', style: TextStyle(color: Colors.blueGrey, fontSize: 12)),
+                    Text('Suresh Kumar',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold)),
+                    Text('Senior Fleet Manager',
+                        style: TextStyle(color: Colors.blueGrey, fontSize: 12)),
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey),
+              const Icon(Icons.arrow_forward_ios_rounded,
+                  size: 16, color: Colors.grey),
             ],
           ),
         ),
@@ -247,33 +304,54 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.black.withOpacity(0.08)), // Slight black border
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))],
+        border: Border.all(
+            color: Colors.black.withOpacity(0.08)), // Slight black border
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.02),
+              blurRadius: 10,
+              offset: const Offset(0, 4))
+        ],
       ),
       child: Column(children: children),
     );
   }
 
-  Widget _menuItem(IconData icon, Color color, String title, String sub, {VoidCallback? onTap}) {
+  Widget _menuItem(IconData icon, Color color, String title, String sub,
+      {VoidCallback? onTap}) {
     return ListTile(
       leading: Container(
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10)),
         child: Icon(icon, color: color, size: 20),
       ),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF334155))),
-      subtitle: Text(sub, style: const TextStyle(fontSize: 11, color: Colors.grey)),
-      trailing: const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 18),
+      title: Text(title,
+          style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              color: Color(0xFF334155))),
+      subtitle:
+          Text(sub, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+      trailing:
+          const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 18),
       onTap: onTap,
     );
   }
 
-  Widget _menuDivider() => Divider(height: 1, indent: 65, color: Colors.black.withOpacity(0.05));
+  Widget _menuDivider() =>
+      Divider(height: 1, indent: 65, color: Colors.black.withOpacity(0.05));
 
   Widget _sectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, bottom: 10),
-      child: Text(title, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.blueGrey.shade400, letterSpacing: 1.1)),
+      child: Text(title,
+          style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w800,
+              color: Colors.blueGrey.shade400,
+              letterSpacing: 1.1)),
     );
   }
 
@@ -283,7 +361,7 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => MobileLoginPage()),
-              (route) => false, // 🔥 clears full stack
+          (route) => false, // 🔥 clears full stack
         );
       },
       child: Container(
@@ -327,15 +405,23 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+            Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10))),
             const SizedBox(height: 25),
-            const Text('Help & Support', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+            const Text('Help & Support',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
             const SizedBox(height: 8),
-            const Text('Our team is available 24/7 for you', style: TextStyle(color: Colors.grey, fontSize: 13)),
+            const Text('Our team is available 24/7 for you',
+                style: TextStyle(color: Colors.grey, fontSize: 13)),
             const SizedBox(height: 25),
 
             // Call Option
-            _contactCard(Icons.call_rounded, Colors.green, 'Call Support', '+91 98765 43210', () {
+            _contactCard(Icons.call_rounded, Colors.green, 'Call Support',
+                '+91 98765 43210', () {
               // Yahan url_launcher use kar sakte ho asli call ke liye
               print("Calling Support...");
             }),
@@ -343,7 +429,8 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
             const SizedBox(height: 12),
 
             // Email Option
-            _contactCard(Icons.email_rounded, Colors.blue, 'Email Us', 'support@tokitech.com', () {
+            _contactCard(Icons.email_rounded, Colors.blue, 'Email Us',
+                'support@tokitech.com', () {
               print("Opening Email...");
             }),
             const SizedBox(height: 20),
@@ -353,7 +440,8 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
     );
   }
 
-  Widget _contactCard(IconData icon, Color color, String title, String sub, VoidCallback onTap) {
+  Widget _contactCard(IconData icon, Color color, String title, String sub,
+      VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(15),
@@ -365,17 +453,23 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
         ),
         child: Row(
           children: [
-            CircleAvatar(backgroundColor: color.withOpacity(0.1), child: Icon(icon, color: color, size: 20)),
+            CircleAvatar(
+                backgroundColor: color.withOpacity(0.1),
+                child: Icon(icon, color: color, size: 20)),
             const SizedBox(width: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                Text(sub, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14)),
+                Text(sub,
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
             ),
             const Spacer(),
-            const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey),
+            const Icon(Icons.arrow_forward_ios_rounded,
+                size: 14, color: Colors.grey),
           ],
         ),
       ),
@@ -386,8 +480,13 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
     return Center(
       child: Column(
         children: const [
-          Text('Version 2.4.0', style: TextStyle(color: Colors.grey, fontSize: 11, fontWeight: FontWeight.bold)),
-          Text('Powered by Toki Tech', style: TextStyle(color: Colors.grey, fontSize: 9)),
+          Text('Version 2.4.0',
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold)),
+          Text('Powered by Toki Tech',
+              style: TextStyle(color: Colors.grey, fontSize: 9)),
         ],
       ),
     );
@@ -404,9 +503,12 @@ class _FleetMoreOptionsState extends State<FleetMoreOptions> {
       selectedFontSize: 11,
       unselectedFontSize: 11,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.confirmation_num_rounded), label: 'Tickets'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.grid_view_rounded), label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.search_rounded), label: 'Search'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.confirmation_num_rounded), label: 'Tickets'),
         BottomNavigationBarItem(icon: Icon(Icons.menu_rounded), label: 'More'),
       ],
     );
