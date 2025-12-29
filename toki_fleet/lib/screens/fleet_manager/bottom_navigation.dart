@@ -40,7 +40,8 @@ class HomeFleetManager extends ConsumerWidget {
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(
               icon: Icon(Icons.chat_bubble_outline), label: 'Tickets'),
-          BottomNavigationBarItem(icon: Icon(Icons.more_vert), label: 'More'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.menu_rounded), label: 'More'),
         ],
       ),
     );
