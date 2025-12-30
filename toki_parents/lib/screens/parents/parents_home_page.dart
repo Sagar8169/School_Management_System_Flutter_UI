@@ -1143,14 +1143,19 @@ class _ParentsHomePageState extends State<ParentsHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
                     "Route 05",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
                   ),
                   const SizedBox(width: 8),
                   Text(
                     "• KA-AD-1234",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
                   ),
                 ],
@@ -1185,11 +1190,10 @@ class _ParentsHomePageState extends State<ParentsHomePage> {
               border: Border.all(color: Colors.grey.shade100),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildBusDetail(Icons.speed, "32 km/h"),
-                const VerticalDivider(width: 24),
                 _buildBusDetail(Icons.person_pin, "Ravi Kumar"),
-                const Spacer(),
                 const Text(
                   "ETA: 15 mins",
                   style: TextStyle(
@@ -1228,27 +1232,31 @@ class _ParentsHomePageState extends State<ParentsHomePage> {
 
   /// Helper: Live Pulsing Badge
   Widget _buildLivePulseBadge() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.green.shade50,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 8,
-            height: 8,
-            decoration: const BoxDecoration(
-                color: Colors.green, shape: BoxShape.circle),
-          ),
-          const SizedBox(width: 6),
-          const Text(
-            "LIVE",
-            style: TextStyle(
-                color: Colors.green, fontSize: 10, fontWeight: FontWeight.w900),
-          ),
-        ],
+    return Flexible(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.green.shade50,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 8,
+              height: 8,
+              decoration: const BoxDecoration(
+                  color: Colors.green, shape: BoxShape.circle),
+            ),
+            const Text(
+              "LIVE",
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w900),
+            ),
+          ],
+        ),
       ),
     );
   }
