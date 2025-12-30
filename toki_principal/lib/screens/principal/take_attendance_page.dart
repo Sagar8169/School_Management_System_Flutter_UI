@@ -10,7 +10,7 @@ class TakeAttendancePage extends StatefulWidget {
 }
 
 class _TakeAttendancePageState extends State<TakeAttendancePage> {
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   bool _isTelugu = true;
   String _selectedClass = 'Class 10-A';
   String _selectedDateLabel = 'Today';
@@ -20,19 +20,73 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
   bool _isReadOnly = false; // Naya: History mode ke liye
 
   final List<String> _classes = [
-    'Class 10-A', 'Class 10-B', 'Class 9-A', 'Class 9-B',
-    'Class 8-A', 'Class 8-B', 'Class 7-A', 'Class 7-B',
+    'Class 10-A',
+    'Class 10-B',
+    'Class 9-A',
+    'Class 9-B',
+    'Class 8-A',
+    'Class 8-B',
+    'Class 7-A',
+    'Class 7-B',
   ];
 
   List<Map<String, dynamic>> _students = [
-    {'id': '1', 'name': 'Rahul Sharma', 'rollNumber': '1001', 'isPresent': true, 'avatarColor': Color(0xFF10B981)},
-    {'id': '2', 'name': 'Priya Patel', 'rollNumber': '1002', 'isPresent': true, 'avatarColor': Color(0xFF2563EB)},
-    {'id': '3', 'name': 'Amit Kumar', 'rollNumber': '1003', 'isPresent': true, 'avatarColor': Color(0xFFF59E0B)},
-    {'id': '4', 'name': 'Sneha Reddy', 'rollNumber': '1004', 'isPresent': false, 'avatarColor': Color(0xFF8B5CF6)},
-    {'id': '5', 'name': 'Vikram Singh', 'rollNumber': '1005', 'isPresent': true, 'avatarColor': Color(0xFFEF4444)},
-    {'id': '6', 'name': 'Anjali Gupta', 'rollNumber': '1006', 'isPresent': true, 'avatarColor': Color(0xFF06B6D4)},
-    {'id': '7', 'name': 'Rajesh Iyer', 'rollNumber': '1007', 'isPresent': true, 'avatarColor': Color(0xFF84CC16)},
-    {'id': '8', 'name': 'Meera Joshi', 'rollNumber': '1008', 'isPresent': false, 'avatarColor': Color(0xFFF97316)},
+    {
+      'id': '1',
+      'name': 'Rahul Sharma',
+      'rollNumber': '1001',
+      'isPresent': true,
+      'avatarColor': Color(0xFF10B981)
+    },
+    {
+      'id': '2',
+      'name': 'Priya Patel',
+      'rollNumber': '1002',
+      'isPresent': true,
+      'avatarColor': Color(0xFF2563EB)
+    },
+    {
+      'id': '3',
+      'name': 'Amit Kumar',
+      'rollNumber': '1003',
+      'isPresent': true,
+      'avatarColor': Color(0xFFF59E0B)
+    },
+    {
+      'id': '4',
+      'name': 'Sneha Reddy',
+      'rollNumber': '1004',
+      'isPresent': false,
+      'avatarColor': Color(0xFF8B5CF6)
+    },
+    {
+      'id': '5',
+      'name': 'Vikram Singh',
+      'rollNumber': '1005',
+      'isPresent': true,
+      'avatarColor': Color(0xFFEF4444)
+    },
+    {
+      'id': '6',
+      'name': 'Anjali Gupta',
+      'rollNumber': '1006',
+      'isPresent': true,
+      'avatarColor': Color(0xFF06B6D4)
+    },
+    {
+      'id': '7',
+      'name': 'Rajesh Iyer',
+      'rollNumber': '1007',
+      'isPresent': true,
+      'avatarColor': Color(0xFF84CC16)
+    },
+    {
+      'id': '8',
+      'name': 'Meera Joshi',
+      'rollNumber': '1008',
+      'isPresent': false,
+      'avatarColor': Color(0xFFF97316)
+    },
   ];
 
   final List<String> _dateOptions = ['Today', 'Yesterday', 'Custom Date'];
@@ -60,7 +114,8 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
       firstDate: DateTime(2023),
       lastDate: DateTime.now(),
       builder: (context, child) => Theme(
-        data: Theme.of(context).copyWith(colorScheme: const ColorScheme.light(primary: Color(0xFF1D4ED8))),
+        data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(primary: Color(0xFF1D4ED8))),
         child: child!,
       ),
     );
@@ -103,7 +158,8 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
 
   void _toggleStudentAttendance(int index) {
     if (_isReadOnly) return;
-    setState(() => _students[index]['isPresent'] = !_students[index]['isPresent']);
+    setState(
+        () => _students[index]['isPresent'] = !_students[index]['isPresent']);
   }
 
   void _saveOrUpdateAttendance() {
@@ -117,15 +173,15 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
     });
   }
 
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, PrincipalRoutes.home); break;
-      case 1: Navigator.pushNamed(context, PrincipalRoutes.search); break;
-      case 3: Navigator.pushNamed(context, PrincipalRoutes.morePage); break;
-    }
-  }
+  // void _onBottomNavTapped(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushReplacementNamed(context, PrincipalRoutes.home); break;
+  //     case 1: Navigator.pushNamed(context, PrincipalRoutes.search); break;
+  //     case 3: Navigator.pushNamed(context, PrincipalRoutes.morePage); break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +220,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildModernBottomNav(),
+      // bottomNavigationBar: _buildModernBottomNav(),
     );
   }
 
@@ -262,7 +318,6 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
     );
   }
 
-
   void _openClassPickerSheet() {
     showModalBottomSheet(
       context: context,
@@ -351,9 +406,9 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                           ),
                           trailing: isSelected
                               ? const Icon(Icons.check_circle_rounded,
-                              color: Color(0xFF1D4ED8))
+                                  color: Color(0xFF1D4ED8))
                               : const Icon(Icons.arrow_forward_ios_rounded,
-                              size: 14),
+                                  size: 14),
                           onTap: () {
                             setState(() => _selectedClass = cls);
                             Navigator.pop(context);
@@ -370,7 +425,6 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
       },
     );
   }
-
 
   Widget _buildClassSelectionCard() {
     return Container(
@@ -433,7 +487,6 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
     );
   }
 
-
   Widget _buildDateSelection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -480,13 +533,13 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                     decoration: BoxDecoration(
                       gradient: isSelected
                           ? const LinearGradient(
-                        colors: [
-                          Color(0xFF1D4ED8),
-                          Color(0xFF2563EB),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      )
+                              colors: [
+                                Color(0xFF1D4ED8),
+                                Color(0xFF2563EB),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            )
                           : null,
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -502,11 +555,10 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                                   ? Colors.white
                                   : const Color(0xFF94A3B8),
                             ),
-                          if (date == "Custom Date")
-                            const SizedBox(width: 6),
+                          if (date == "Custom Date") const SizedBox(width: 6),
                           Text(
                             date == 'Custom Date' &&
-                                _selectedDateLabel.contains('/')
+                                    _selectedDateLabel.contains('/')
                                 ? _selectedDateLabel
                                 : date,
                             style: TextStyle(
@@ -565,33 +617,30 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
       ),
       child: Row(
         children: [
-          _buildSummaryItem(
-              "Present",
-              "$present",
-              Icons.person_pin_rounded,
+          _buildSummaryItem("Present", "$present", Icons.person_pin_rounded,
               const Color(0xFF10B981) // Emerald Green
-          ),
+              ),
           _buildVerticalDivider(),
-          _buildSummaryItem(
-              "Absent",
-              "$absent",
-              Icons.person_off_rounded,
+          _buildSummaryItem("Absent", "$absent", Icons.person_off_rounded,
               const Color(0xFFEF4444) // Rose Red
-          ),
+              ),
           _buildVerticalDivider(),
           _buildSummaryItem(
               "Status",
               _isReadOnly ? "History" : "Editing",
-              _isReadOnly ? Icons.auto_stories_rounded : Icons.edit_note_rounded,
+              _isReadOnly
+                  ? Icons.auto_stories_rounded
+                  : Icons.edit_note_rounded,
               const Color(0xFFF59E0B) // Amber/Orange
-          ),
+              ),
         ],
       ),
     );
   }
 
 // Custom Stat Item Widget
-  Widget _buildSummaryItem(String label, String value, IconData icon, Color color) {
+  Widget _buildSummaryItem(
+      String label, String value, IconData icon, Color color) {
     return Expanded(
       child: Column(
         children: [
@@ -651,8 +700,18 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
   Widget _summaryPill(String label, String val, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(15), border: Border.all(color: color.withOpacity(0.2))),
-      child: Column(children: [Text(val, style: TextStyle(fontWeight: FontWeight.w900, color: color, fontSize: 16)), Text(label, style: TextStyle(fontSize: 10, color: color, fontWeight: FontWeight.bold))]),
+      decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: color.withOpacity(0.2))),
+      child: Column(children: [
+        Text(val,
+            style: TextStyle(
+                fontWeight: FontWeight.w900, color: color, fontSize: 16)),
+        Text(label,
+            style: TextStyle(
+                fontSize: 10, color: color, fontWeight: FontWeight.bold))
+      ]),
     );
   }
 
@@ -667,7 +726,9 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
               width: 4,
               height: 16,
               decoration: BoxDecoration(
-                color: _isReadOnly ? Colors.blueGrey.shade300 : const Color(0xFF1D4ED8),
+                color: _isReadOnly
+                    ? Colors.blueGrey.shade300
+                    : const Color(0xFF1D4ED8),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -688,7 +749,9 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
         if (!_isReadOnly)
           _buildHeaderAction(
             onTap: _toggleAllPresent,
-            icon: _allPresent ? Icons.check_circle_rounded : Icons.radio_button_off_rounded,
+            icon: _allPresent
+                ? Icons.check_circle_rounded
+                : Icons.radio_button_off_rounded,
             label: _allPresent ? "All Marked" : "Mark All",
             color: const Color(0xFF1D4ED8),
             isOutlined: !_allPresent,
@@ -757,7 +820,9 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
         final bool present = student['isPresent'];
 
         // Dynamic Colors based on attendance status
-        final Color statusColor = present ? const Color(0xFF10B981) : const Color(0xFFEF4444); // Green vs Red
+        final Color statusColor = present
+            ? const Color(0xFF10B981)
+            : const Color(0xFFEF4444); // Green vs Red
 
         return AnimatedContainer(
           duration: const Duration(milliseconds: 300),
@@ -785,22 +850,17 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                 padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                      color: statusColor.withOpacity(0.3),
-                      width: 1
-                  ),
+                  border:
+                      Border.all(color: statusColor.withOpacity(0.3), width: 1),
                 ),
                 child: CircleAvatar(
                   radius: 20,
                   backgroundColor: statusColor.withOpacity(0.08),
-                  child: Text(
-                      student['name'][0],
+                  child: Text(student['name'][0],
                       style: TextStyle(
                           color: statusColor,
                           fontWeight: FontWeight.w900,
-                          fontSize: 14
-                      )
-                  ),
+                          fontSize: 14)),
                 ),
               ),
               const SizedBox(width: 14),
@@ -815,8 +875,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                       style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 15,
-                          color: Color(0xFF1E293B)
-                      ),
+                          color: Color(0xFF1E293B)),
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -825,8 +884,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                           fontSize: 10,
                           color: Colors.grey.shade500,
                           fontWeight: FontWeight.w800,
-                          letterSpacing: 0.5
-                      ),
+                          letterSpacing: 0.5),
                     ),
                   ],
                 ),
@@ -857,8 +915,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
             color: color,
             fontWeight: FontWeight.w900,
             fontSize: 10,
-            letterSpacing: 0.5
-        ),
+            letterSpacing: 0.5),
       ),
     );
   }
@@ -894,6 +951,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
       ),
     );
   }
+
   Widget _buildActionButtons() {
     if (_isReadOnly) {
       return Container(
@@ -905,14 +963,18 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
         ),
         child: OutlinedButton.icon(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color(0xFF64748B)),
-          label: const Text(
-              "Return to Dashboard",
-              style: TextStyle(fontWeight: FontWeight.w900, color: Color(0xFF1E293B), fontSize: 15)
-          ),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+              size: 18, color: Color(0xFF64748B)),
+          label: const Text("Return to Dashboard",
+              style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E293B),
+                  fontSize: 15)),
           style: OutlinedButton.styleFrom(
-            side: BorderSide.none, // Custom border container se handle ho raha hai
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            side: BorderSide
+                .none, // Custom border container se handle ho raha hai
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
         ),
       );
@@ -939,25 +1001,37 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF10B981),
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22)),
               elevation: 0,
             ),
             child: _isMarking
                 ? const SizedBox(
-              height: 24, width: 24,
-              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
-            )
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(
+                        color: Colors.white, strokeWidth: 3),
+                  )
                 : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(_selectedDateLabel == 'Today' ? Icons.check_circle_outline : Icons.cloud_upload_outlined, size: 20),
-                const SizedBox(width: 10),
-                Text(
-                  _selectedDateLabel == 'Today' ? "Confirm Attendance" : "Update Records",
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 0.5),
-                ),
-              ],
-            ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                          _selectedDateLabel == 'Today'
+                              ? Icons.check_circle_outline
+                              : Icons.cloud_upload_outlined,
+                          size: 20),
+                      const SizedBox(width: 10),
+                      Text(
+                        _selectedDateLabel == 'Today'
+                            ? "Confirm Attendance"
+                            : "Update Records",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 16,
+                            letterSpacing: 0.5),
+                      ),
+                    ],
+                  ),
           ),
         ),
 
@@ -968,7 +1042,8 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
           onPressed: () => setState(() => _isReadOnly = true),
           style: TextButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -981,8 +1056,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                     color: Colors.red.shade400,
                     fontWeight: FontWeight.w800,
                     fontSize: 13,
-                    letterSpacing: 0.3
-                ),
+                    letterSpacing: 0.3),
               ),
             ],
           ),
@@ -990,6 +1064,7 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
       ],
     );
   }
+
   void _showSuccessDialog() {
     showDialog(
       context: context,
@@ -1049,7 +1124,8 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
                     backgroundColor: const Color(0xFF1E293B), // Dark Slate
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
                     elevation: 0,
                   ),
                   child: const Text(
@@ -1064,18 +1140,18 @@ class _TakeAttendancePageState extends State<TakeAttendancePage> {
       ),
     );
   }
-  Widget _buildModernBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed, selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
-      elevation: 20, backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'More'),
-      ],
-    );
-  }
+  // Widget _buildModernBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: _currentIndex, onTap: _onBottomNavTapped,
+  //     type: BottomNavigationBarType.fixed, selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
+  //     elevation: 20, backgroundColor: Colors.white,
+  //     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded), label: 'Activity'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'More'),
+  //     ],
+  //   );
+  // }
 }

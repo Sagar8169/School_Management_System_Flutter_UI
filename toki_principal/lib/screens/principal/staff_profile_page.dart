@@ -28,29 +28,29 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-    setState(() {
-      _currentIndex = index;
-    });
+  // void _onBottomNavTapped(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() {
+  //     _currentIndex = index;
+  //   });
 
-    switch (index) {
-      case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          PrincipalRoutes.home,
-              (route) => false,
-        );
-        break;
-      case 1:
-        break;
-      case 2:
-        _navigateTo(PrincipalRoutes.activity);
-        break;
-      case 3:
-        _navigateTo(PrincipalRoutes.morePage);
-        break;
-    }
-  }
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.of(context).pushNamedAndRemoveUntil(
+  //         PrincipalRoutes.home,
+  //             (route) => false,
+  //       );
+  //       break;
+  //     case 1:
+  //       break;
+  //     case 2:
+  //       _navigateTo(PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       _navigateTo(PrincipalRoutes.morePage);
+  //       break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,17 +75,20 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                     const SizedBox(height: 24),
 
                     // Contact Info
-                    _buildInfoSection("Contact Information", Icons.contact_phone_outlined, _buildContactContent()),
+                    _buildInfoSection("Contact Information",
+                        Icons.contact_phone_outlined, _buildContactContent()),
 
                     const SizedBox(height: 20),
 
                     // Work Details
-                    _buildInfoSection("Work Details", Icons.work_history_rounded, _buildWorkContent()),
+                    _buildInfoSection("Work Details",
+                        Icons.work_history_rounded, _buildWorkContent()),
 
                     // Class Information (only for teachers)
                     if (widget.staffData['type'] == 'teacher') ...[
                       const SizedBox(height: 20),
-                      _buildInfoSection("Class Information", Icons.school_rounded, _buildClassContent()),
+                      _buildInfoSection("Class Information",
+                          Icons.school_rounded, _buildClassContent()),
                     ],
 
                     const SizedBox(height: 30),
@@ -101,7 +104,7 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -208,36 +211,36 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
             children: [
               // ✨ White-Glass Container for Icon/Avatar
               Container(
-                width: 65, height: 65,
+                width: 65,
+                height: 65,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(color: Colors.white.withOpacity(0.1)),
                 ),
                 child: Icon(
-                    widget.staffData['type'] == 'teacher' ? Icons.person_rounded : Icons.badge_rounded,
+                    widget.staffData['type'] == 'teacher'
+                        ? Icons.person_rounded
+                        : Icons.badge_rounded,
                     size: 30,
-                    color: Colors.white
-                ),
+                    color: Colors.white),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                        widget.staffData['name'],
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white)
-                    ),
-                    Text(
-                        widget.staffData['role'].toString().toUpperCase(),
+                    Text(widget.staffData['name'],
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white)),
+                    Text(widget.staffData['role'].toString().toUpperCase(),
                         style: TextStyle(
                             color: Colors.white.withOpacity(0.85),
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
-                            letterSpacing: 0.5
-                        )
-                    ),
+                            letterSpacing: 0.5)),
                     const SizedBox(height: 10),
                     // ✨ Status Badge customized for Gradient Background
                     _buildStatusBadgeOnGradient(isActive),
@@ -256,8 +259,10 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildCompactInfoOnGradient("DEPARTMENT", widget.staffData['department']),
-              _buildCompactInfoOnGradient("EMPLOYEE ID", widget.staffData['employeeId']),
+              _buildCompactInfoOnGradient(
+                  "DEPARTMENT", widget.staffData['department']),
+              _buildCompactInfoOnGradient(
+                  "EMPLOYEE ID", widget.staffData['employeeId']),
             ],
           ),
         ],
@@ -270,15 +275,18 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-            label,
-            style: const TextStyle(fontSize: 9, color: Colors.white70, fontWeight: FontWeight.w900, letterSpacing: 0.8)
-        ),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 9,
+                color: Colors.white70,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.8)),
         const SizedBox(height: 4),
-        Text(
-            value,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)
-        ),
+        Text(value,
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+                color: Colors.white)),
       ],
     );
   }
@@ -296,7 +304,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 6, height: 6,
+            width: 6,
+            height: 6,
             decoration: BoxDecoration(
               color: isActive ? const Color(0xFF4ADE80) : Colors.white60,
               shape: BoxShape.circle,
@@ -305,27 +314,50 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
           const SizedBox(width: 6),
           Text(
             isActive ? "ACTIVE" : "INACTIVE",
-            style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 9,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.5),
           ),
         ],
       ),
     );
   }
+
   Widget _buildStatusBadge(bool active) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(color: active ? const Color(0xFFE6F9ED) : const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(8)),
-      child: Text(active ? 'ACTIVE' : 'AWAY', style: TextStyle(color: active ? const Color(0xFF16A34A) : const Color(0xFFE11D48), fontSize: 9, fontWeight: FontWeight.w900)),
+      decoration: BoxDecoration(
+          color: active ? const Color(0xFFE6F9ED) : const Color(0xFFFFF1F2),
+          borderRadius: BorderRadius.circular(8)),
+      child: Text(active ? 'ACTIVE' : 'AWAY',
+          style: TextStyle(
+              color: active ? const Color(0xFF16A34A) : const Color(0xFFE11D48),
+              fontSize: 9,
+              fontWeight: FontWeight.w900)),
     );
   }
 
   Widget _buildCompactInfo(String label, String value, {bool isBlue = false}) {
     return Column(
-      crossAxisAlignment: isBlue ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isBlue ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.w900, letterSpacing: 0.5)),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 10,
+                color: Color(0xFF94A3B8),
+                fontWeight: FontWeight.w900,
+                letterSpacing: 0.5)),
         const SizedBox(height: 4),
-        Text(value, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: isBlue ? const Color(0xFF1D4ED8) : const Color(0xFF334155))),
+        Text(value,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+                color: isBlue
+                    ? const Color(0xFF1D4ED8)
+                    : const Color(0xFF334155))),
       ],
     );
   }
@@ -404,10 +436,10 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
     ]);
   }
 
-
   Widget _buildClassContent() {
     return Column(children: [
-      _buildDataRow("Assigned Class", widget.staffData['assignedClass'] ?? 'N/A'),
+      _buildDataRow(
+          "Assigned Class", widget.staffData['assignedClass'] ?? 'N/A'),
       const Divider(height: 24, color: Color(0xFFF1F5F9)),
       _buildDataRow("Strength", "42 students"),
     ]);
@@ -417,8 +449,16 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF94A3B8), fontWeight: FontWeight.w700)),
-        Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF94A3B8),
+                fontWeight: FontWeight.w700)),
+        Text(value,
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF1E293B))),
       ],
     );
   }
@@ -434,7 +474,11 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
         children: [
           const Text(
             "QUICK ACTIONS",
-            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Color(0xFF64748B), letterSpacing: 1.2),
+            style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF64748B),
+                letterSpacing: 1.2),
           ),
           const SizedBox(height: 16),
           _actionTile(
@@ -444,7 +488,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
             isFullWidth: true,
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Opening Schedule for ${widget.staffData['name']}'),
+                content:
+                    Text('Opening Schedule for ${widget.staffData['name']}'),
                 behavior: SnackBarBehavior.floating,
               ));
             },
@@ -458,7 +503,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                   icon: Icons.chat_bubble_outline_rounded,
                   color: const Color(0xFF1D4ED8),
                   isFullWidth: false,
-                  onTap: () => _showContactOptions(context, widget.staffData['name']),
+                  onTap: () =>
+                      _showContactOptions(context, widget.staffData['name']),
                 ),
               ),
               if (isTeacher) ...[
@@ -473,7 +519,10 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                       _navigateTo(PrincipalRoutes.classDetails, arguments: {
                         'className': widget.staffData['assignedClass'],
                         'teacher': widget.staffData['name'],
-                        'section': widget.staffData['assignedClass'].toString().split(' ').last,
+                        'section': widget.staffData['assignedClass']
+                            .toString()
+                            .split(' ')
+                            .last,
                       });
                     },
                   ),
@@ -487,7 +536,12 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
   }
 
   // --- 2. REUSABLE PREMIUM TILE ---
-  Widget _actionTile({required String label, required IconData icon, required Color color, required bool isFullWidth, required VoidCallback onTap}) {
+  Widget _actionTile(
+      {required String label,
+      required IconData icon,
+      required Color color,
+      required bool isFullWidth,
+      required VoidCallback onTap}) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
@@ -496,10 +550,14 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
         decoration: BoxDecoration(
           color: isFullWidth ? color : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: isFullWidth ? null : Border.all(color: const Color(0xFFE2E8F0), width: 1.5),
+          border: isFullWidth
+              ? null
+              : Border.all(color: const Color(0xFFE2E8F0), width: 1.5),
           boxShadow: [
             BoxShadow(
-              color: isFullWidth ? color.withOpacity(0.3) : Colors.black.withOpacity(0.03),
+              color: isFullWidth
+                  ? color.withOpacity(0.3)
+                  : Colors.black.withOpacity(0.03),
               blurRadius: 15,
               offset: const Offset(0, 8),
             ),
@@ -507,24 +565,34 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
         ),
         child: isFullWidth
             ? Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 20),
-            const SizedBox(width: 10),
-            Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 15)),
-          ],
-        )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, color: Colors.white, size: 20),
+                  const SizedBox(width: 10),
+                  Text(label,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15)),
+                ],
+              )
             : Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
-              child: Icon(icon, color: color, size: 20),
-            ),
-            const SizedBox(height: 10),
-            Text(label, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF1E293B))),
-          ],
-        ),
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: color.withOpacity(0.1), shape: BoxShape.circle),
+                    child: Icon(icon, color: color, size: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(label,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 13,
+                          color: Color(0xFF1E293B))),
+                ],
+              ),
       ),
     );
   }
@@ -536,20 +604,37 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (context) => Container(
-        padding: EdgeInsets.only(left: 24, right: 24, top: 24, bottom: MediaQuery.of(context).padding.bottom + 20),
-        decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
+        padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            top: 24,
+            bottom: MediaQuery.of(context).padding.bottom + 20),
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+            Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10))),
             const SizedBox(height: 20),
-            Text("Contact $staffName", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF0F172A))),
+            Text("Contact $staffName",
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0F172A))),
             const SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _contactMethod(Icons.call_rounded, "Call", const Color(0xFF1D4ED8), () => Navigator.pop(context)),
-                _contactMethod(Icons.chat_bubble_rounded, "Message", const Color(0xFF10B981), () => Navigator.pop(context)),
+                _contactMethod(Icons.call_rounded, "Call",
+                    const Color(0xFF1D4ED8), () => Navigator.pop(context)),
+                _contactMethod(Icons.chat_bubble_rounded, "Message",
+                    const Color(0xFF10B981), () => Navigator.pop(context)),
               ],
             ),
           ],
@@ -558,70 +643,87 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
     );
   }
 
-  Widget _contactMethod(IconData icon, String label, Color color, VoidCallback onTap) {
+  Widget _contactMethod(
+      IconData icon, String label, Color color, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
+            decoration: BoxDecoration(
+                color: color.withOpacity(0.1), shape: BoxShape.circle),
             child: Icon(icon, color: color, size: 28),
           ),
           const SizedBox(height: 8),
-          Text(label, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: color)),
+          Text(label,
+              style: TextStyle(
+                  fontWeight: FontWeight.w800, fontSize: 13, color: color)),
         ],
       ),
     );
   }
 
-
-  Widget _buildBtn(String label, IconData icon, Color color, bool isPrimary, VoidCallback onTap) {
+  Widget _buildBtn(String label, IconData icon, Color color, bool isPrimary,
+      VoidCallback onTap) {
     return SizedBox(
-      width: double.infinity, height: 54,
+      width: double.infinity,
+      height: 54,
       child: isPrimary
           ? ElevatedButton.icon(
-        onPressed: onTap,
-        icon: Icon(icon, size: 18), label: Text(label, style: const TextStyle(fontWeight: FontWeight.w800)),
-        style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), elevation: 0),
-      )
+              onPressed: onTap,
+              icon: Icon(icon, size: 18),
+              label: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w800)),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: color,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  elevation: 0),
+            )
           : OutlinedButton.icon(
-        onPressed: onTap,
-        icon: Icon(icon, size: 18, color: color), label: Text(label, style: TextStyle(fontWeight: FontWeight.w800, color: color)),
-        style: OutlinedButton.styleFrom(side: BorderSide(color: color, width: 1.5), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-      ),
+              onPressed: onTap,
+              icon: Icon(icon, size: 18, color: color),
+              label: Text(label,
+                  style: TextStyle(fontWeight: FontWeight.w800, color: color)),
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: color, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16))),
+            ),
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex, onTap: _onBottomNavTapped,
-        type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildBottomNavigationBar() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex, onTap: _onBottomNavTapped,
+  //       type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
+  //       selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {

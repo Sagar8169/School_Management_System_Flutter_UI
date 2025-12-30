@@ -11,7 +11,7 @@ class StudentProfilePage extends StatefulWidget {
 }
 
 class _StudentProfilePageState extends State<StudentProfilePage> {
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   bool _isTelugu = true;
 
   // --- ORIGINAL DATA (Unchanged) ---
@@ -32,28 +32,26 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
-
-
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +86,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                     const SizedBox(height: 24),
 
                     // ✨ PARENT INFORMATION
-                    _buildInfoSection("Parent Information", Icons.family_restroom_rounded, _buildParentDetails()),
+                    _buildInfoSection("Parent Information",
+                        Icons.family_restroom_rounded, _buildParentDetails()),
 
                     const SizedBox(height: 30),
 
@@ -103,7 +102,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -120,7 +119,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
           // Back Button
           GestureDetector(
             onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back_ios_new_rounded, size: 20, color: Color(0xFF1E293B)),
+            child: const Icon(Icons.arrow_back_ios_new_rounded,
+                size: 20, color: Color(0xFF1E293B)),
           ),
           const SizedBox(width: 16),
           // Title Section
@@ -131,11 +131,17 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
               children: [
                 const Text(
                   'Student Profile', // ✨ Header Text
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF1E293B)),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF1E293B)),
                 ),
                 Text(
                   'Aditya International School',
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.w500),
                 ),
               ],
             ),
@@ -145,8 +151,14 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
             onTap: _toggleLanguage,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(20)),
-              child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.w800, fontSize: 11)),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFEFF6FF),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(_isTelugu ? 'తెలుగు' : 'English',
+                  style: const TextStyle(
+                      color: Color(0xFF1D4ED8),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 11)),
             ),
           ),
         ],
@@ -163,42 +175,69 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
           colors: _isCritical
               ? [const Color(0xFFE11D48), const Color(0xFFBE123C)]
               : [const Color(0xFF1D4ED8), const Color(0xFF1E40AF)],
-          begin: Alignment.topLeft, end: Alignment.bottomRight,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(28),
-        boxShadow: [BoxShadow(color: (_isCritical ? Colors.red : Colors.blue).withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: (_isCritical ? Colors.red : Colors.blue).withOpacity(0.2),
+              blurRadius: 15,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Column(
         children: [
           Row(
             children: [
               Container(
-                width: 60, height: 60,
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(18)),
-                child: const Icon(Icons.person_rounded, size: 32, color: Colors.white),
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(18)),
+                child: const Icon(Icons.person_rounded,
+                    size: 32, color: Colors.white),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.studentData['name'], style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Colors.white)),
-                    Text("Class: ${widget.studentData['grade']} • Roll: 15", style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 13)),
+                    Text(widget.studentData['name'],
+                        style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white)),
+                    Text("Class: ${widget.studentData['grade']} • Roll: 15",
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.8),
+                            fontSize: 13)),
                   ],
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(8)),
-                child: Text(_isCritical ? 'CRITICAL' : 'STABLE', style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w900)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(_isCritical ? 'CRITICAL' : 'STABLE',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w900)),
               ),
             ],
           ),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 18), child: Divider(height: 1, color: Colors.white24)),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 18),
+              child: Divider(height: 1, color: Colors.white24)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildCompactInfo("STUDENT ID", widget.studentData['id'] ?? 'N/A'),
+              _buildCompactInfo(
+                  "STUDENT ID", widget.studentData['id'] ?? 'N/A'),
               _buildCompactInfo("ACADEMIC YEAR", "2024-25"),
             ],
           ),
@@ -211,9 +250,17 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 9, color: Colors.white70, fontWeight: FontWeight.bold)),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 9,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
-        Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
+        Text(value,
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                color: Colors.white)),
       ],
     );
   }
@@ -227,12 +274,18 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () => _navigateTo(PrincipalRoutes.gradesAnalytics, arguments: {'studentData': widget.studentData}),
-            child: _statBox("${widget.studentData['avgGrade']}%", "Avg Grade", _getGradeColor(widget.studentData['avgGrade'])),
+            onTap: () => _navigateTo(PrincipalRoutes.gradesAnalytics,
+                arguments: {'studentData': widget.studentData}),
+            child: _statBox("${widget.studentData['avgGrade']}%", "Avg Grade",
+                _getGradeColor(widget.studentData['avgGrade'])),
           ),
           GestureDetector(
-            onTap: () => _navigateTo(PrincipalRoutes.attendanceAnalytics, arguments: {'studentData': widget.studentData}),
-            child: _statBox("${widget.studentData['attendance']}%", "Attendance", _getAttendanceColor(widget.studentData['attendance'])),
+            onTap: () => _navigateTo(PrincipalRoutes.attendanceAnalytics,
+                arguments: {'studentData': widget.studentData}),
+            child: _statBox(
+                "${widget.studentData['attendance']}%",
+                "Attendance",
+                _getAttendanceColor(widget.studentData['attendance'])),
           ),
         ],
       ),
@@ -389,15 +442,17 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     );
   }
 
-
 // ✨ MODERN DATA ROW WITH FLOATING CAPSULE PROGRESS
   Widget _buildModernSubjectRow(Map<String, dynamic> s) {
     final double score = double.tryParse(s['score'].toString()) ?? 0.0;
     final double progress = score / 100;
 
     // Status Logic
-    final Color statusColor = score >= 80 ? const Color(0xFF10B981) : (score >= 50 ? const Color(0xFFF59E0B) : const Color(0xFFEF4444));
-    final String statusText = score >= 80 ? "Exceeding" : (score >= 50 ? "Average" : "Critical");
+    final Color statusColor = score >= 80
+        ? const Color(0xFF10B981)
+        : (score >= 50 ? const Color(0xFFF59E0B) : const Color(0xFFEF4444));
+    final String statusText =
+        score >= 80 ? "Exceeding" : (score >= 50 ? "Average" : "Critical");
 
     return Column(
       children: [
@@ -405,7 +460,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
           children: [
             // Icon Avatar with Depth
             Container(
-              width: 42, height: 42,
+              width: 42,
+              height: 42,
               decoration: BoxDecoration(
                 color: statusColor.withOpacity(0.08),
                 borderRadius: BorderRadius.circular(14),
@@ -414,7 +470,10 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
               child: Center(
                 child: Text(
                   s['subject'].toString()[0].toUpperCase(),
-                  style: TextStyle(color: statusColor, fontWeight: FontWeight.w900, fontSize: 16),
+                  style: TextStyle(
+                      color: statusColor,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 16),
                 ),
               ),
             ),
@@ -426,11 +485,18 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                 children: [
                   Text(
                     s['subject'],
-                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15, color: Color(0xFF1E293B)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15,
+                        color: Color(0xFF1E293B)),
                   ),
                   Text(
                     statusText,
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: statusColor.withOpacity(0.8), letterSpacing: 0.3),
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        color: statusColor.withOpacity(0.8),
+                        letterSpacing: 0.3),
                   ),
                 ],
               ),
@@ -441,9 +507,17 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
               children: [
                 Text(
                   "${score.toInt()}%",
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17, color: statusColor, letterSpacing: -0.5),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 17,
+                      color: statusColor,
+                      letterSpacing: -0.5),
                 ),
-                const Text("SCORE", style: TextStyle(fontSize: 8, fontWeight: FontWeight.w900, color: Color(0xFFCBD5E1))),
+                const Text("SCORE",
+                    style: TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFFCBD5E1))),
               ],
             ),
           ],
@@ -463,14 +537,18 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 800),
               height: 8,
-              width: (MediaQuery.of(context).size.width - 84) * progress, // Responsive calculation
+              width: (MediaQuery.of(context).size.width - 84) *
+                  progress, // Responsive calculation
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(
                   colors: [statusColor, statusColor.withOpacity(0.7)],
                 ),
                 boxShadow: [
-                  BoxShadow(color: statusColor.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 3)),
+                  BoxShadow(
+                      color: statusColor.withOpacity(0.2),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3)),
                 ],
               ),
             ),
@@ -483,7 +561,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
 // Custom View More Button
   Widget _buildViewMoreBtn() {
     return InkWell(
-      onTap: () => _navigateTo(PrincipalRoutes.gradesAnalytics, arguments: {'studentData': widget.studentData}),
+      onTap: () => _navigateTo(PrincipalRoutes.gradesAnalytics,
+          arguments: {'studentData': widget.studentData}),
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -493,7 +572,11 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         ),
         child: const Row(
           children: [
-            Text("Trends", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 10)),
+            Text("Trends",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 10)),
             SizedBox(width: 6),
             Icon(Icons.trending_up_rounded, size: 12, color: Colors.white),
           ],
@@ -501,13 +584,16 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       ),
     );
   }
+
 // ✨ PREMIUM SUBJECT ROW WITH PROGRESS BAR
   Widget _buildSubjectProgressRow(Map<String, dynamic> s) {
     final double score = double.parse(s['score'].toString());
     final double progress = score / 100;
 
     // Dynamic color based on score
-    final Color statusColor = score >= 80 ? const Color(0xFF10B981) : (score >= 50 ? const Color(0xFFF59E0B) : const Color(0xFFEF4444));
+    final Color statusColor = score >= 80
+        ? const Color(0xFF10B981)
+        : (score >= 50 ? const Color(0xFFF59E0B) : const Color(0xFFEF4444));
 
     return Column(
       children: [
@@ -517,7 +603,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
             Row(
               children: [
                 Container(
-                  width: 32, height: 32,
+                  width: 32,
+                  height: 32,
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
@@ -525,20 +612,29 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   child: Center(
                     child: Text(
                       s['subject'].toString()[0].toUpperCase(),
-                      style: TextStyle(color: statusColor, fontWeight: FontWeight.w900, fontSize: 12),
+                      style: TextStyle(
+                          color: statusColor,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 12),
                     ),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Text(
                   s['subject'],
-                  style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF334155)),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14,
+                      color: Color(0xFF334155)),
                 ),
               ],
             ),
             Text(
               "$score%",
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 15, color: statusColor),
+              style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 15,
+                  color: statusColor),
             ),
           ],
         ),
@@ -556,21 +652,34 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       ],
     );
   }
+
   Widget _buildSubjectRow(Map<String, dynamic> s) {
     Color c = _getGradeColor(s['score'].toDouble());
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18), border: Border.all(color: const Color(0xFFF1F5F9))),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: const Color(0xFFF1F5F9))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(s['subject'], style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14)),
+            Text(s['subject'],
+                style:
+                    const TextStyle(fontWeight: FontWeight.w800, fontSize: 14)),
             const SizedBox(height: 4),
-            Text(s['status'], style: TextStyle(color: c, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5)),
+            Text(s['status'],
+                style: TextStyle(
+                    color: c,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5)),
           ]),
-          Text("${s['score']}%", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: c)),
+          Text("${s['score']}%",
+              style: TextStyle(
+                  fontSize: 17, fontWeight: FontWeight.w900, color: c)),
         ],
       ),
     );
@@ -652,6 +761,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       ],
     );
   }
+
   Widget _softDivider() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
@@ -674,8 +784,16 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF94A3B8), fontWeight: FontWeight.w700)),
-        Text(val, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF94A3B8),
+                fontWeight: FontWeight.w700)),
+        Text(val,
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF1E293B))),
       ],
     );
   }
@@ -705,8 +823,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
               "View Detailed Report",
               Icons.analytics_outlined,
               const Color(0xFF1D4ED8),
-                  () => _navigateTo(PrincipalRoutes.gradesAnalytics, arguments: {'studentData': widget.studentData})
-          ),
+              () => _navigateTo(PrincipalRoutes.gradesAnalytics,
+                  arguments: {'studentData': widget.studentData})),
 
           const SizedBox(height: 12),
 
@@ -715,8 +833,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
               "View Attendance History",
               Icons.calendar_today_outlined,
               const Color(0xFF1D4ED8),
-                  () => _navigateTo(PrincipalRoutes.attendanceAnalytics, arguments: {'studentData': widget.studentData})
-          ),
+              () => _navigateTo(PrincipalRoutes.attendanceAnalytics,
+                  arguments: {'studentData': widget.studentData})),
 
           const SizedBox(height: 12),
 
@@ -725,7 +843,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
             "Quick Contact Parent",
             Icons.chat_bubble_outline_rounded,
             const Color(0xFF16A34A),
-                () => _openParentContactOptions(context),
+            () => _openParentContactOptions(context),
           ),
 
           // 4. Critical Meeting (Only if applicable)
@@ -735,13 +853,15 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                 "Schedule Parent Meeting",
                 Icons.notification_important_outlined,
                 const Color(0xFFE11D48),
-                    () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Meeting request sent!'), behavior: SnackBarBehavior.floating))
-            ),
+                () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Meeting request sent!'),
+                    behavior: SnackBarBehavior.floating))),
           ],
         ],
       ),
     );
   }
+
   void _openParentContactOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -852,6 +972,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       ),
     );
   }
+
   void _dummyAction(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -863,7 +984,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
   }
 
 // --- MINIMALIST BUTTON HELPER ---
-  Widget _buildMinimalBtn(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildMinimalBtn(
+      String label, IconData icon, Color color, VoidCallback onTap) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -898,13 +1020,15 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   ),
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: Color(0xFFCBD5E1)),
+              const Icon(Icons.arrow_forward_ios_rounded,
+                  size: 12, color: Color(0xFFCBD5E1)),
             ],
           ),
         ),
       ),
     );
   }
+
 // --- REUSABLE PREMIUM ACTION TILE HELPER ---
   Widget _buildActionTile({
     required String label,
@@ -921,10 +1045,14 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         decoration: BoxDecoration(
           color: isFullWidth ? color : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: isFullWidth ? null : Border.all(color: const Color(0xFFF1F5F9), width: 1.5),
+          border: isFullWidth
+              ? null
+              : Border.all(color: const Color(0xFFF1F5F9), width: 1.5),
           boxShadow: [
             BoxShadow(
-              color: isFullWidth ? color.withOpacity(0.3) : Colors.black.withOpacity(0.02),
+              color: isFullWidth
+                  ? color.withOpacity(0.3)
+                  : Colors.black.withOpacity(0.02),
               blurRadius: 15,
               offset: const Offset(0, 8),
             ),
@@ -932,69 +1060,95 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         ),
         child: isFullWidth
             ? Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 20),
-            const SizedBox(width: 10),
-            Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 15)),
-          ],
-        )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, color: Colors.white, size: 20),
+                  const SizedBox(width: 10),
+                  Text(label,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15)),
+                ],
+              )
             : Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
-              child: Icon(icon, color: color, size: 20),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF1E293B)),
-            ),
-          ],
-        ),
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: color.withOpacity(0.1), shape: BoxShape.circle),
+                    child: Icon(icon, color: color, size: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    label,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
+                        color: Color(0xFF1E293B)),
+                  ),
+                ],
+              ),
       ),
     );
   }
 
   Widget _btn(String label, Color c, bool primary, VoidCallback onTap) {
     return SizedBox(
-      width: double.infinity, height: 55,
+      width: double.infinity,
+      height: 55,
       child: primary
-          ? ElevatedButton(onPressed: onTap, style: ElevatedButton.styleFrom(backgroundColor: c, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), elevation: 0), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w800)))
-          : OutlinedButton(onPressed: onTap, style: OutlinedButton.styleFrom(foregroundColor: c, side: BorderSide(color: c, width: 1.5), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w800))),
+          ? ElevatedButton(
+              onPressed: onTap,
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: c,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  elevation: 0),
+              child: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w800)))
+          : OutlinedButton(
+              onPressed: onTap,
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: c,
+                  side: BorderSide(color: c, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16))),
+              child: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w800))),
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex, onTap: _onBottomNavTap,
-        type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildBottomNavigationBar() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex, onTap: _onBottomNavTap,
+  //       type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
+  //       selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Color _getGradeColor(double grade) {
     if (grade < 40) return const Color(0xFFE11D48);
@@ -1007,6 +1161,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     return const Color(0xFF16A34A);
   }
 }
+
 class StudentGradesDetailPage extends StatelessWidget {
   final Map<String, dynamic> studentData;
   const StudentGradesDetailPage({super.key, required this.studentData});
@@ -1041,14 +1196,17 @@ class StudentGradesDetailPage extends StatelessWidget {
           final exam = exams[index];
           return Card(
             margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: ExpansionTile(
-              title: Text(exam['title'], style: const TextStyle(fontWeight: FontWeight.bold)),
+              title: Text(exam['title'],
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(exam['date']),
               children: (exam['marks'] as Map<String, int>).entries.map((e) {
                 return ListTile(
                   title: Text(e.key),
-                  trailing: Text("${e.value}/100", style: const TextStyle(fontWeight: FontWeight.w800)),
+                  trailing: Text("${e.value}/100",
+                      style: const TextStyle(fontWeight: FontWeight.w800)),
                 );
               }).toList(),
             ),
@@ -1058,6 +1216,7 @@ class StudentGradesDetailPage extends StatelessWidget {
     );
   }
 }
+
 class StudentAttendanceHistoryPage extends StatelessWidget {
   final Map<String, dynamic> studentData;
   const StudentAttendanceHistoryPage({super.key, required this.studentData});
@@ -1077,7 +1236,9 @@ class StudentAttendanceHistoryPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: index % 5 == 0 ? Colors.red.withOpacity(0.1) : Colors.green.withOpacity(0.1),
+                    backgroundColor: index % 5 == 0
+                        ? Colors.red.withOpacity(0.1)
+                        : Colors.green.withOpacity(0.1),
                     child: Icon(
                       index % 5 == 0 ? Icons.close : Icons.check,
                       color: index % 5 == 0 ? Colors.red : Colors.green,
@@ -1085,7 +1246,10 @@ class StudentAttendanceHistoryPage extends StatelessWidget {
                   ),
                   title: Text("Date: ${20 - index} Dec 2024"),
                   trailing: Text(index % 5 == 0 ? "ABSENT" : "PRESENT",
-                      style: TextStyle(color: index % 5 == 0 ? Colors.red : Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                      style: TextStyle(
+                          color: index % 5 == 0 ? Colors.red : Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
                 );
               },
             ),
@@ -1102,9 +1266,27 @@ class StudentAttendanceHistoryPage extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Column(children: [Text("Total Days"), Text("120", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))]),
-          Column(children: [Text("Present"), Text("102", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green))]),
-          Column(children: [Text("Absent"), Text("18", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red))]),
+          Column(children: [
+            Text("Total Days"),
+            Text("120",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+          ]),
+          Column(children: [
+            Text("Present"),
+            Text("102",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green))
+          ]),
+          Column(children: [
+            Text("Absent"),
+            Text("18",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red))
+          ]),
         ],
       ),
     );

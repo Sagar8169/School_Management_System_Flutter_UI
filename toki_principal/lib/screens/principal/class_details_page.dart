@@ -13,15 +13,31 @@ class ClassDetailsPage extends StatefulWidget {
 }
 
 class _ClassDetailsPageState extends State<ClassDetailsPage> {
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   bool _isTelugu = true;
 
   // --- ORIGINAL DATA LISTS (Unchanged) ---
   final List<Map<String, dynamic>> _performanceData = [
-    {'category': 'Excellent (Above 80%)', 'students': 18, 'color': const Color(0xFF10B981)},
-    {'category': 'Good (60-80%)', 'students': 15, 'color': const Color(0xFF3B82F6)},
-    {'category': 'Average (40-60%)', 'students': 8, 'color': const Color(0xFFF59E0B)},
-    {'category': 'Needs Attention', 'students': 1, 'color': const Color(0xFFEF4444)},
+    {
+      'category': 'Excellent (Above 80%)',
+      'students': 18,
+      'color': const Color(0xFF10B981)
+    },
+    {
+      'category': 'Good (60-80%)',
+      'students': 15,
+      'color': const Color(0xFF3B82F6)
+    },
+    {
+      'category': 'Average (40-60%)',
+      'students': 8,
+      'color': const Color(0xFFF59E0B)
+    },
+    {
+      'category': 'Needs Attention',
+      'students': 1,
+      'color': const Color(0xFFEF4444)
+    },
   ];
 
   final List<Map<String, dynamic>> _subjectsData = [
@@ -68,7 +84,6 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
     }
   }
 
-
   void _showTimetableMessage() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -82,9 +97,12 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String className = widget.classData['className']?.toString() ?? 'Class';
-    final String section = widget.classData['section']?.toString() ?? 'Section A';
-    final String teacher = widget.classData['teacher']?.toString() ?? 'Not Assigned';
+    final String className =
+        widget.classData['className']?.toString() ?? 'Class';
+    final String section =
+        widget.classData['section']?.toString() ?? 'Section A';
+    final String teacher =
+        widget.classData['teacher']?.toString() ?? 'Not Assigned';
     final String classShort = className.split(' ').last;
 
     return Scaffold(
@@ -124,10 +142,10 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
                     _buildSectionHeader("Subjects & Faculty"),
                     const SizedBox(height: 15),
                     ..._subjectsData.map((s) => _buildSubjectTile(
-                      subject: s['subject'],
-                      teacher: s['teacher'],
-                      score: "${s['score']}%",
-                    )),
+                          subject: s['subject'],
+                          teacher: s['teacher'],
+                          score: "${s['score']}%",
+                        )),
 
                     const SizedBox(height: 30),
 
@@ -141,7 +159,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -158,7 +176,8 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
         children: [
           GestureDetector(
             onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.arrow_back_ios_new_rounded, size: 20, color: Color(0xFF1E293B)),
+            child: const Icon(Icons.arrow_back_ios_new_rounded,
+                size: 20, color: Color(0xFF1E293B)),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -166,8 +185,16 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Class Details', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF1E293B))),
-                Text('Aditya International School', style: TextStyle(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+                const Text('Class Details',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF1E293B))),
+                Text('Aditya International School',
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey.shade500,
+                        fontWeight: FontWeight.w500)),
               ],
             ),
           ),
@@ -182,8 +209,14 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-        decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(20)),
-        child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.w800, fontSize: 12)),
+        decoration: BoxDecoration(
+            color: const Color(0xFFEFF6FF),
+            borderRadius: BorderRadius.circular(20)),
+        child: Text(_isTelugu ? 'తెలుగు' : 'English',
+            style: const TextStyle(
+                color: Color(0xFF1D4ED8),
+                fontWeight: FontWeight.w800,
+                fontSize: 12)),
       ),
     );
   }
@@ -199,34 +232,67 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(32),
-        boxShadow: [BoxShadow(color: const Color(0xFF1D4ED8).withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 10))],
+        boxShadow: [
+          BoxShadow(
+              color: const Color(0xFF1D4ED8).withOpacity(0.3),
+              blurRadius: 20,
+              offset: const Offset(0, 10))
+        ],
       ),
       child: Column(
         children: [
           Row(
             children: [
               Container(
-                width: 60, height: 60,
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), shape: BoxShape.circle, border: Border.all(color: Colors.white.withOpacity(0.2))),
-                child: Center(child: Text(name, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w900))),
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white.withOpacity(0.2))),
+                child: Center(
+                    child: Text(name,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w900))),
               ),
               const SizedBox(width: 16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Class $name", style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
-                  Text(sec, style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 14, fontWeight: FontWeight.w500)),
+                  Text("Class $name",
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800)),
+                  Text(sec,
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500)),
                 ],
               )
             ],
           ),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Divider(color: Colors.white24, height: 1)),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Divider(color: Colors.white24, height: 1)),
           Row(
             children: [
-              const Icon(Icons.verified_user_rounded, color: Colors.white70, size: 18),
+              const Icon(Icons.verified_user_rounded,
+                  color: Colors.white70, size: 18),
               const SizedBox(width: 8),
-              Text("Primary In-charge: ", style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13)),
-              Expanded(child: Text(teacher, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14), overflow: TextOverflow.ellipsis)),
+              Text("Primary In-charge: ",
+                  style: TextStyle(
+                      color: Colors.white.withOpacity(0.7), fontSize: 13)),
+              Expanded(
+                  child: Text(teacher,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                      overflow: TextOverflow.ellipsis)),
             ],
           )
         ],
@@ -295,9 +361,12 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _statBox("42", "Students", const Color(0xFF1D4ED8), Icons.people_outline),
-          _statBox("82%", "Avg Grade", const Color(0xFFF59E0B), Icons.auto_graph),
-          _statBox("94%", "Attendance", const Color(0xFF10B981), Icons.done_all),
+          _statBox(
+              "42", "Students", const Color(0xFF1D4ED8), Icons.people_outline),
+          _statBox(
+              "82%", "Avg Grade", const Color(0xFFF59E0B), Icons.auto_graph),
+          _statBox(
+              "94%", "Attendance", const Color(0xFF10B981), Icons.done_all),
         ],
       ),
     );
@@ -311,15 +380,25 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: const Color(0xFFF1F5F9)),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))]
-      ),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                blurRadius: 10,
+                offset: const Offset(0, 4))
+          ]),
       child: Column(
         children: [
           Icon(icon, size: 18, color: color.withOpacity(0.6)),
           const SizedBox(height: 8),
-          Text(val, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: color)),
+          Text(val,
+              style: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.w900, color: color)),
           const SizedBox(height: 2),
-          Text(label, style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w700)),
+          Text(label,
+              style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF94A3B8),
+                  fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -351,9 +430,13 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
             children: [
               const Text(
                 "Performance Insights",
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: Color(0xFF1E293B)),
+                style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 16,
+                    color: Color(0xFF1E293B)),
               ),
-              Icon(Icons.insights_rounded, size: 20, color: Colors.grey.shade400),
+              Icon(Icons.insights_rounded,
+                  size: 20, color: Colors.grey.shade400),
             ],
           ),
           const SizedBox(height: 24),
@@ -388,18 +471,27 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
             children: [
               Text(
                 label,
-                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF475569)),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                    color: Color(0xFF475569)),
               ),
               RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: count,
-                      style: TextStyle(fontWeight: FontWeight.w900, color: color, fontSize: 14),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: color,
+                          fontSize: 14),
                     ),
                     TextSpan(
                       text: " Students",
-                      style: TextStyle(color: Colors.grey.shade500, fontSize: 11, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -446,7 +538,12 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
       ),
     );
   }
-  Widget _buildPerformanceRow({required Color color, required String label, required String value, required double percent}) {
+
+  Widget _buildPerformanceRow(
+      {required Color color,
+      required String label,
+      required String value,
+      required double percent}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
@@ -454,8 +551,14 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF64748B))),
-              Text(value, style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 13)),
+              Text(label,
+                  style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF64748B))),
+              Text(value,
+                  style: TextStyle(
+                      color: color, fontWeight: FontWeight.w800, fontSize: 13)),
             ],
           ),
           const SizedBox(height: 10),
@@ -464,17 +567,20 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
               backgroundColor: const Color(0xFFF1F5F9),
               color: color,
               minHeight: 8,
-              borderRadius: BorderRadius.circular(12)
-          ),
+              borderRadius: BorderRadius.circular(12)),
         ],
       ),
     );
   }
 
-  Widget _buildSubjectTile({required String subject, required String teacher, required String score}) {
+  Widget _buildSubjectTile(
+      {required String subject,
+      required String teacher,
+      required String score}) {
     // Score ke basis par color decide karne ka logic (Optional)
     final double scoreVal = double.tryParse(score.replaceAll('%', '')) ?? 0;
-    final Color scoreColor = scoreVal >= 80 ? const Color(0xFF0D9488) : const Color(0xFF1D4ED8);
+    final Color scoreColor =
+        scoreVal >= 80 ? const Color(0xFF0D9488) : const Color(0xFF1D4ED8);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -500,7 +606,10 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
             width: 48,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [scoreColor.withOpacity(0.15), scoreColor.withOpacity(0.05)],
+                colors: [
+                  scoreColor.withOpacity(0.15),
+                  scoreColor.withOpacity(0.05)
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -536,7 +645,8 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Icon(Icons.person_outline_rounded, size: 12, color: Colors.grey.shade500),
+                    Icon(Icons.person_outline_rounded,
+                        size: 12, color: Colors.grey.shade500),
                     const SizedBox(width: 4),
                     Text(
                       teacher,
@@ -596,7 +706,10 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
             padding: EdgeInsets.only(left: 4, bottom: 16),
             child: Text(
               "Quick Actions",
-              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 14, color: Color(0xFF64748B)),
+              style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 14,
+                  color: Color(0xFF64748B)),
             ),
           ),
           Row(
@@ -607,7 +720,8 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
                 Icons.groups_rounded,
                 const Color(0xFF1D4ED8),
                 true,
-                    () => _navigateTo(PrincipalRoutes.studentSearch, arguments: {'classFilter': widget.classData['className']}),
+                () => _navigateTo(PrincipalRoutes.studentSearch,
+                    arguments: {'classFilter': widget.classData['className']}),
               ),
               const SizedBox(width: 12),
               // Timetable
@@ -617,10 +731,8 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
                 Icons.calendar_month_rounded,
                 const Color(0xFF1D4ED8),
                 false,
-                    () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TimetablePage())
-                ),
+                () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TimetablePage())),
               ),
               const SizedBox(width: 12),
               // Attendance
@@ -629,7 +741,8 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
                 Icons.analytics_rounded,
                 const Color(0xFF1D4ED8),
                 false,
-                    () => _navigateTo(PrincipalRoutes.attendanceAnalytics, arguments: {'classData': widget.classData}),
+                () => _navigateTo(PrincipalRoutes.attendanceAnalytics,
+                    arguments: {'classData': widget.classData}),
               ),
             ],
           ),
@@ -639,7 +752,8 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
   }
 
 // Helper: Modern Action Card
-  Widget _buildActionCard(String label, IconData icon, Color color, bool isPrimary, VoidCallback onTap) {
+  Widget _buildActionCard(String label, IconData icon, Color color,
+      bool isPrimary, VoidCallback onTap) {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
@@ -654,7 +768,9 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
             ),
             boxShadow: [
               BoxShadow(
-                color: isPrimary ? color.withOpacity(0.2) : Colors.black.withOpacity(0.02),
+                color: isPrimary
+                    ? color.withOpacity(0.2)
+                    : Colors.black.withOpacity(0.02),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -662,11 +778,7 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
           ),
           child: Column(
             children: [
-              Icon(
-                  icon,
-                  color: isPrimary ? Colors.white : color,
-                  size: 22
-              ),
+              Icon(icon, color: isPrimary ? Colors.white : color, size: 22),
               const SizedBox(height: 8),
               Text(
                 label,
@@ -682,52 +794,66 @@ class _ClassDetailsPageState extends State<ClassDetailsPage> {
       ),
     );
   }
-  Widget _btn(String text, IconData icon, Color color, bool primary, VoidCallback onTap) {
+
+  Widget _btn(String text, IconData icon, Color color, bool primary,
+      VoidCallback onTap) {
     return SizedBox(
-      width: double.infinity, height: 60,
+      width: double.infinity,
+      height: 60,
       child: primary
           ? ElevatedButton.icon(
-          onPressed: onTap,
-          icon: Icon(icon, size: 20),
-          label: Text(text, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-          style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), elevation: 0)
-      )
+              onPressed: onTap,
+              icon: Icon(icon, size: 20),
+              label: Text(text,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800, fontSize: 15)),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: color,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  elevation: 0))
           : OutlinedButton.icon(
-          onPressed: onTap,
-          icon: Icon(icon, size: 20),
-          label: Text(text, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-          style: OutlinedButton.styleFrom(foregroundColor: color, side: BorderSide(color: color, width: 1.5), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)))
-      ),
+              onPressed: onTap,
+              icon: Icon(icon, size: 20),
+              label: Text(text,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w800, fontSize: 15)),
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: color,
+                  side: BorderSide(color: color, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)))),
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex, onTap: _onBottomNavTap,
-        type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildBottomNavigationBar() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex, onTap: _onBottomNavTap,
+  //       type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
+  //       selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

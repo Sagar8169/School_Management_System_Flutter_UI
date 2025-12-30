@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../routes/principal_routes.dart';
 import 'package:flutter/services.dart';
 
-
 class UploadGradesPage extends StatefulWidget {
   const UploadGradesPage({super.key});
 
@@ -12,7 +11,7 @@ class UploadGradesPage extends StatefulWidget {
 }
 
 class _UploadGradesPageState extends State<UploadGradesPage> {
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   bool _isTelugu = false;
   bool _isSaving = false;
 
@@ -23,20 +22,66 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
 
   // Marks configuration
   int _maxMarks = 100;
-  final TextEditingController _maxMarksController = TextEditingController(text: '100');
+  final TextEditingController _maxMarksController =
+      TextEditingController(text: '100');
 
   // Student marks data
   final List<Map<String, dynamic>> _studentsMarks = [
-    {'id': '1', 'name': 'Rahul Sharma', 'rollNumber': '1001', 'marks': '', 'percentage': 0.0, 'grade': '-'},
-    {'id': '2', 'name': 'Priya Patel', 'rollNumber': '1002', 'marks': '', 'percentage': 0.0, 'grade': '-'},
-    {'id': '3', 'name': 'Amit Kumar', 'rollNumber': '1003', 'marks': '', 'percentage': 0.0, 'grade': '-'},
-    {'id': '4', 'name': 'Sneha Reddy', 'rollNumber': '1004', 'marks': '', 'percentage': 0.0, 'grade': '-'},
-    {'id': '5', 'name': 'Vikram Singh', 'rollNumber': '1005', 'marks': '', 'percentage': 0.0, 'grade': '-'},
+    {
+      'id': '1',
+      'name': 'Rahul Sharma',
+      'rollNumber': '1001',
+      'marks': '',
+      'percentage': 0.0,
+      'grade': '-'
+    },
+    {
+      'id': '2',
+      'name': 'Priya Patel',
+      'rollNumber': '1002',
+      'marks': '',
+      'percentage': 0.0,
+      'grade': '-'
+    },
+    {
+      'id': '3',
+      'name': 'Amit Kumar',
+      'rollNumber': '1003',
+      'marks': '',
+      'percentage': 0.0,
+      'grade': '-'
+    },
+    {
+      'id': '4',
+      'name': 'Sneha Reddy',
+      'rollNumber': '1004',
+      'marks': '',
+      'percentage': 0.0,
+      'grade': '-'
+    },
+    {
+      'id': '5',
+      'name': 'Vikram Singh',
+      'rollNumber': '1005',
+      'marks': '',
+      'percentage': 0.0,
+      'grade': '-'
+    },
   ];
 
-  final List<String> _classes = ['Class 10-A', 'Class 10-B', 'Class 9-A', 'Class 9-B'];
+  final List<String> _classes = [
+    'Class 10-A',
+    'Class 10-B',
+    'Class 9-A',
+    'Class 9-B'
+  ];
   final List<String> _subjects = ['Mathematics', 'Science', 'English', 'Hindi'];
-  final List<String> _examTypes = ['Unit Test 1', 'Unit Test 2', 'Half Yearly', 'Final Exam'];
+  final List<String> _examTypes = [
+    'Unit Test 1',
+    'Unit Test 2',
+    'Half Yearly',
+    'Final Exam'
+  ];
 
   @override
   void initState() {
@@ -53,6 +98,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
   void _toggleLanguage() {
     setState(() => _isTelugu = !_isTelugu);
   }
+
   void _updateStudentMarks(int index, String value) {
     double enteredMarks = double.tryParse(value) ?? 0.0;
 
@@ -76,18 +122,15 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       _studentsMarks[index]['marks'] = value;
     }
 
-    double percentage = (_maxMarks > 0)
-        ? (enteredMarks / _maxMarks) * 100
-        : 0;
+    double percentage = (_maxMarks > 0) ? (enteredMarks / _maxMarks) * 100 : 0;
 
     setState(() {
       _studentsMarks[index]['percentage'] =
-      percentage > 100 ? 100.0 : percentage;
+          percentage > 100 ? 100.0 : percentage;
       _studentsMarks[index]['grade'] =
           _calculateGrade(_studentsMarks[index]['percentage']);
     });
   }
-
 
   void _recalculateAll() {
     for (int i = 0; i < _studentsMarks.length; i++) {
@@ -96,6 +139,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       }
     }
   }
+
   String _calculateGrade(double percentage) {
     if (percentage >= 90) return 'A+';
     if (percentage >= 80) return 'A';
@@ -105,28 +149,34 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
     return 'F'; // ❌ fail below 35%
   }
 
-
   Color _getGradeColor(String grade) {
     switch (grade) {
-      case 'A+': return Colors.green.shade700;
-      case 'A': return Colors.green;
-      case 'B+': return Colors.blue;
-      case 'B': return Colors.blue.shade300;
-      case 'C': return Colors.orange;
-      case 'F': return Colors.red;
-      default: return Colors.grey;
+      case 'A+':
+        return Colors.green.shade700;
+      case 'A':
+        return Colors.green;
+      case 'B+':
+        return Colors.blue;
+      case 'B':
+        return Colors.blue.shade300;
+      case 'C':
+        return Colors.orange;
+      case 'F':
+        return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, PrincipalRoutes.home); break;
-      case 1: Navigator.pushNamed(context, PrincipalRoutes.search); break;
-      case 3: Navigator.pushNamed(context, PrincipalRoutes.morePage); break;
-    }
-  }
+  // void _onBottomNavTapped(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushReplacementNamed(context, PrincipalRoutes.home); break;
+  //     case 1: Navigator.pushNamed(context, PrincipalRoutes.search); break;
+  //     case 3: Navigator.pushNamed(context, PrincipalRoutes.morePage); break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +209,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildScreenshotBottomNav(),
+      // bottomNavigationBar: _buildScreenshotBottomNav(),
     );
   }
 
@@ -316,7 +366,9 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(32),
-        border: Border.all(color: const Color(0xFF1D4ED8).withOpacity(0.08)), // Subtle blue border
+        border: Border.all(
+            color: const Color(0xFF1D4ED8)
+                .withOpacity(0.08)), // Subtle blue border
         boxShadow: [
           BoxShadow(
             color: const Color(0xFF1D4ED8).withOpacity(0.04),
@@ -331,14 +383,16 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
           /// CLASS SELECTION
           _buildModernLabel(Icons.class_rounded, "Target Class"),
           const SizedBox(height: 8),
-          _buildModernDropdown(_selectedClass, _classes, (v) => setState(() => _selectedClass = v!)),
+          _buildModernDropdown(_selectedClass, _classes,
+              (v) => setState(() => _selectedClass = v!)),
 
           const SizedBox(height: 20),
 
           /// SUBJECT SELECTION
           _buildModernLabel(Icons.book_rounded, "Subject"),
           const SizedBox(height: 8),
-          _buildModernDropdown(_selectedSubject, _subjects, (v) => setState(() => _selectedSubject = v!)),
+          _buildModernDropdown(_selectedSubject, _subjects,
+              (v) => setState(() => _selectedSubject = v!)),
 
           const SizedBox(height: 20),
 
@@ -353,7 +407,8 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
                   children: [
                     _buildModernLabel(Icons.assignment_rounded, "Exam Type"),
                     const SizedBox(height: 8),
-                    _buildModernDropdown(_selectedExamType, _examTypes, (v) => setState(() => _selectedExamType = v!)),
+                    _buildModernDropdown(_selectedExamType, _examTypes,
+                        (v) => setState(() => _selectedExamType = v!)),
                   ],
                 ),
               ),
@@ -393,13 +448,12 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
     );
   }
 
-
 // Helper: Styled Dropdown
   Widget _buildModernDropdown(
-      String value,
-      List<String> items,
-      Function(String?) onChanged,
-      ) {
+    String value,
+    List<String> items,
+    Function(String?) onChanged,
+  ) {
     return InkWell(
       borderRadius: BorderRadius.circular(14),
       onTap: () => _openPickerSheet(
@@ -427,13 +481,13 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
                 ),
               ),
             ),
-            const Icon(Icons.keyboard_arrow_down_rounded, color: Colors.blueGrey),
+            const Icon(Icons.keyboard_arrow_down_rounded,
+                color: Colors.blueGrey),
           ],
         ),
       ),
     );
   }
-
 
 // Helper: Max Marks Input
   Widget _buildMaxMarksInput() {
@@ -455,11 +509,11 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
   }
 
   Widget _buildDropdownField(
-      String label,
-      String value,
-      List<String> items,
-      Function(String) onSelected,
-      ) {
+    String label,
+    String value,
+    List<String> items,
+    Function(String) onSelected,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -472,7 +526,6 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
           ),
         ),
         const SizedBox(height: 6),
-
         InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () => _openPickerSheet(
@@ -511,6 +564,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       ],
     );
   }
+
   void _openPickerSheet({
     required String title,
     required List<String> items,
@@ -606,9 +660,9 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
                           ),
                           trailing: isSelected
                               ? const Icon(
-                            Icons.check_circle_rounded,
-                            color: Color(0xFF1D4ED8),
-                          )
+                                  Icons.check_circle_rounded,
+                                  color: Color(0xFF1D4ED8),
+                                )
                               : null,
                           onTap: () {
                             onSelected(item);
@@ -632,11 +686,13 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: _studentsMarks.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 12), // Spacing thodi badhai hai
+      separatorBuilder: (_, __) =>
+          const SizedBox(height: 12), // Spacing thodi badhai hai
       itemBuilder: (context, index) {
         final student = _studentsMarks[index];
         final bool hasMarks = student['marks'].isNotEmpty;
-        final bool isError = hasMarks && (double.tryParse(student['marks']) ?? 0) > _maxMarks;
+        final bool isError =
+            hasMarks && (double.tryParse(student['marks']) ?? 0) > _maxMarks;
 
         return AnimatedContainer(
           duration: const Duration(milliseconds: 300),
@@ -653,7 +709,8 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF1E293B).withOpacity(0.03), // Bahut halki shadow
+                color: const Color(0xFF1E293B)
+                    .withOpacity(0.03), // Bahut halki shadow
                 blurRadius: 15,
                 offset: const Offset(0, 6),
               )
@@ -676,8 +733,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
                       style: const TextStyle(
                           fontWeight: FontWeight.w800,
                           fontSize: 15,
-                          color: Color(0xFF1E293B)
-                      ),
+                          color: Color(0xFF1E293B)),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -688,8 +744,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
                           fontSize: 10,
                           color: Colors.grey.shade500,
                           fontWeight: FontWeight.w800,
-                          letterSpacing: 0.5
-                      ),
+                          letterSpacing: 0.5),
                     ),
                   ],
                 ),
@@ -708,6 +763,7 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       },
     );
   }
+
 // Helper: Student Avatar
   Widget _buildStudentAvatar(int index, String name) {
     return CircleAvatar(
@@ -715,7 +771,10 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       backgroundColor: const Color(0xFF1D4ED8).withOpacity(0.05),
       child: Text(
         name[0], // First Letter
-        style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.bold, fontSize: 14),
+        style: const TextStyle(
+            color: Color(0xFF1D4ED8),
+            fontWeight: FontWeight.bold,
+            fontSize: 14),
       ),
     );
   }
@@ -737,15 +796,20 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
           hintText: "00",
           hintStyle: TextStyle(color: Colors.grey.shade300, fontSize: 14),
           filled: true,
-          fillColor: isError ? Colors.red.withOpacity(0.05) : const Color(0xFFF8FAFC),
-          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          fillColor:
+              isError ? Colors.red.withOpacity(0.05) : const Color(0xFFF8FAFC),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: isError ? Colors.red.withOpacity(0.2) : Colors.transparent),
+            borderSide: BorderSide(
+                color:
+                    isError ? Colors.red.withOpacity(0.2) : Colors.transparent),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: isError ? Colors.red : const Color(0xFF1D4ED8)),
+            borderSide: BorderSide(
+                color: isError ? Colors.red : const Color(0xFF1D4ED8)),
           ),
         ),
       ),
@@ -758,7 +822,10 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
       children: [
         Text(
           hasMarks ? '${student['percentage'].toStringAsFixed(0)}%' : '--',
-          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Color(0xFF1E293B)),
+          style: const TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 13,
+              color: Color(0xFF1E293B)),
         ),
         const SizedBox(height: 4),
         Container(
@@ -782,59 +849,77 @@ class _UploadGradesPageState extends State<UploadGradesPage> {
 
   Widget _buildSaveButton() {
     return Container(
-      width: double.infinity, height: 58,
-      decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: const Color(0xFF1D4ED8).withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 8))]
-      ),
+      width: double.infinity,
+      height: 58,
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: const Color(0xFF1D4ED8).withOpacity(0.2),
+            blurRadius: 15,
+            offset: const Offset(0, 8))
+      ]),
       child: ElevatedButton(
-        onPressed: _isSaving ? null : () {
-          setState(() => _isSaving = true);
-          Future.delayed(const Duration(seconds: 2), () {
-            setState(() => _isSaving = false);
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Grades Synchronized!"), backgroundColor: Colors.green, behavior: SnackBarBehavior.floating));
-          });
-        },
-        style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1D4ED8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)), elevation: 0),
+        onPressed: _isSaving
+            ? null
+            : () {
+                setState(() => _isSaving = true);
+                Future.delayed(const Duration(seconds: 2), () {
+                  setState(() => _isSaving = false);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Grades Synchronized!"),
+                      backgroundColor: Colors.green,
+                      behavior: SnackBarBehavior.floating));
+                });
+              },
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1D4ED8),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            elevation: 0),
         child: _isSaving
-            ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 3)
-            : const Text("Save Grades", style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 16)),
+            ? const CircularProgressIndicator(
+                color: Colors.white, strokeWidth: 3)
+            : const Text("Save Grades",
+                style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                    fontSize: 16)),
       ),
     );
   }
 
-  Widget _buildScreenshotBottomNav() {
-    return Container(
-      decoration: BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1.5))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onBottomNavTapped,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF64748B),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildScreenshotBottomNav() {
+  //   return Container(
+  //     decoration: BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1.5))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
+  //       onTap: _onBottomNavTapped,
+  //       type: BottomNavigationBarType.fixed,
+  //       selectedItemColor: const Color(0xFF1D4ED8),
+  //       unselectedItemColor: const Color(0xFF64748B),
+  //       backgroundColor: Colors.white,
+  //       elevation: 0,
+  //       selectedFontSize: 12,
+  //       unselectedFontSize: 12,
+  //       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

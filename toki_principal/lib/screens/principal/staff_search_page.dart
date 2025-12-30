@@ -9,7 +9,7 @@ class StaffSearchPage extends StatefulWidget {
 }
 
 class _StaffSearchPageState extends State<StaffSearchPage> {
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   bool _isTelugu = true;
   int _selectedFilter = 0;
   final TextEditingController _searchController = TextEditingController();
@@ -110,18 +110,31 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
 
   List<Map<String, dynamic>> get _filteredStaffMembers {
     if (_selectedFilter == 0) return _allStaffMembers;
-    if (_selectedFilter == 1) return _allStaffMembers.where((staff) => staff['type'] == 'teacher').toList();
-    if (_selectedFilter == 2) return _allStaffMembers.where((staff) => staff['type'] == 'administrative').toList();
-    if (_selectedFilter == 3) return _allStaffMembers.where((staff) => staff['type'] == 'support').toList();
+    if (_selectedFilter == 1)
+      return _allStaffMembers
+          .where((staff) => staff['type'] == 'teacher')
+          .toList();
+    if (_selectedFilter == 2)
+      return _allStaffMembers
+          .where((staff) => staff['type'] == 'administrative')
+          .toList();
+    if (_selectedFilter == 3)
+      return _allStaffMembers
+          .where((staff) => staff['type'] == 'support')
+          .toList();
     return _allStaffMembers;
   }
 
   void _toggleLanguage() {
-    setState(() { _isTelugu = !_isTelugu; });
+    setState(() {
+      _isTelugu = !_isTelugu;
+    });
   }
 
   void _updateFilter(int index) {
-    setState(() { _selectedFilter = index; });
+    setState(() {
+      _selectedFilter = index;
+    });
   }
 
   void _navigateTo(String routeName, {Map<String, dynamic>? arguments}) {
@@ -149,8 +162,6 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
     }
   }
 
-
-
   void _onStaffTap(Map<String, dynamic> staffData) {
     _navigateTo(PrincipalRoutes.staffProfile, arguments: staffData);
   }
@@ -167,7 +178,6 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
             children: [
               _buildPremiumHeader(),
               _buildSearchAndFilterSection(),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -181,7 +191,7 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -277,13 +287,20 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
       ),
     );
   }
+
   Widget _buildLanguagePill() {
     return GestureDetector(
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(20)),
-        child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.w800, fontSize: 11)),
+        decoration: BoxDecoration(
+            color: const Color(0xFFEFF6FF),
+            borderRadius: BorderRadius.circular(20)),
+        child: Text(_isTelugu ? 'తెలుగు' : 'English',
+            style: const TextStyle(
+                color: Color(0xFF1D4ED8),
+                fontWeight: FontWeight.w800,
+                fontSize: 11)),
       ),
     );
   }
@@ -308,7 +325,8 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
                   hintText: 'Search by name or Employee ID...',
                   hintStyle: TextStyle(color: Color(0xFF94A3B8), fontSize: 13),
                   border: InputBorder.none,
-                  prefixIcon: Icon(Icons.search_rounded, color: Color(0xFF1D4ED8), size: 20),
+                  prefixIcon: Icon(Icons.search_rounded,
+                      color: Color(0xFF1D4ED8), size: 20),
                   contentPadding: EdgeInsets.symmetric(vertical: 12),
                 ),
               ),
@@ -324,16 +342,22 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
                   onTap: () => _updateFilter(index),
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 4),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF1D4ED8) : Colors.white,
+                      color:
+                          isSelected ? const Color(0xFF1D4ED8) : Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: isSelected ? const Color(0xFF1D4ED8) : const Color(0xFFE2E8F0)),
+                      border: Border.all(
+                          color: isSelected
+                              ? const Color(0xFF1D4ED8)
+                              : const Color(0xFFE2E8F0)),
                     ),
                     child: Text(
                       _filters[index],
                       style: TextStyle(
-                        color: isSelected ? Colors.white : const Color(0xFF64748B),
+                        color:
+                            isSelected ? Colors.white : const Color(0xFF64748B),
                         fontWeight: FontWeight.w700,
                         fontSize: 12,
                       ),
@@ -356,8 +380,17 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('STAFF MEMBERS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.blueGrey.withOpacity(0.6), letterSpacing: 1)),
-            Text('${_filteredStaffMembers.length} Total', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF64748B))),
+            Text('STAFF MEMBERS',
+                style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.blueGrey.withOpacity(0.6),
+                    letterSpacing: 1)),
+            Text('${_filteredStaffMembers.length} Total',
+                style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF64748B))),
           ],
         ),
         const SizedBox(height: 15),
@@ -366,7 +399,8 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: _filteredStaffMembers.length,
           separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemBuilder: (context, index) => _buildStaffCard(_filteredStaffMembers[index]),
+          itemBuilder: (context, index) =>
+              _buildStaffCard(_filteredStaffMembers[index]),
         ),
       ],
     );
@@ -383,35 +417,59 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: isClassTeacher ? const Color(0xFF1D4ED8).withOpacity(0.2) : Colors.white),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 15, offset: const Offset(0, 8))],
+          border: Border.all(
+              color: isClassTeacher
+                  ? const Color(0xFF1D4ED8).withOpacity(0.2)
+                  : Colors.white),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                blurRadius: 15,
+                offset: const Offset(0, 8))
+          ],
         ),
         child: Column(
           children: [
             Row(
               children: [
                 Container(
-                  width: 48, height: 48,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
                     color: staff['avatarColor'].withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(staff['type'] == 'teacher' ? Icons.person_rounded : Icons.badge_rounded, color: staff['avatarColor'], size: 24),
+                  child: Icon(
+                      staff['type'] == 'teacher'
+                          ? Icons.person_rounded
+                          : Icons.badge_rounded,
+                      color: staff['avatarColor'],
+                      size: 24),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(staff['name'], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: Color(0xFF1E293B))),
-                      Text(staff['role'], style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
+                      Text(staff['name'],
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF1E293B))),
+                      Text(staff['role'],
+                          style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF94A3B8))),
                     ],
                   ),
                 ),
                 _buildStatusBadge(isActive),
               ],
             ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 12), child: Divider(height: 1, color: Color(0xFFF1F5F9))),
+            const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: Divider(height: 1, color: Color(0xFFF1F5F9))),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -429,18 +487,34 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
   Widget _buildStatusBadge(bool active) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: active ? const Color(0xFFE6F9ED) : const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(8)),
-      child: Text(active ? 'ACTIVE' : 'AWAY', style: TextStyle(fontSize: 9, color: active ? const Color(0xFF16A34A) : const Color(0xFFE11D48), fontWeight: FontWeight.w900)),
+      decoration: BoxDecoration(
+          color: active ? const Color(0xFFE6F9ED) : const Color(0xFFFFF1F2),
+          borderRadius: BorderRadius.circular(8)),
+      child: Text(active ? 'ACTIVE' : 'AWAY',
+          style: TextStyle(
+              fontSize: 9,
+              color: active ? const Color(0xFF16A34A) : const Color(0xFFE11D48),
+              fontWeight: FontWeight.w900)),
     );
   }
 
   Widget _buildCardInfo(String label, String value, {bool isId = false}) {
     return Column(
-      crossAxisAlignment: isId ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isId ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w900, color: Color(0xFFCBD5E1))),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFFCBD5E1))),
         const SizedBox(height: 2),
-        Text(value, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: isId ? const Color(0xFF1D4ED8) : const Color(0xFF475569))),
+        Text(value,
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color:
+                    isId ? const Color(0xFF1D4ED8) : const Color(0xFF475569))),
       ],
     );
   }
@@ -451,52 +525,58 @@ class _StaffSearchPageState extends State<StaffSearchPage> {
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        decoration: BoxDecoration(color: const Color(0xFFF0F7FF), borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(
+            color: const Color(0xFFF0F7FF),
+            borderRadius: BorderRadius.circular(10)),
         child: Row(
           children: [
             const Icon(Icons.star_rounded, size: 14, color: Color(0xFF1D4ED8)),
             const SizedBox(width: 6),
-            Text('Class Teacher: $className', style: const TextStyle(fontSize: 11, color: Color(0xFF1D4ED8), fontWeight: FontWeight.w800)),
+            Text('Class Teacher: $className',
+                style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF1D4ED8),
+                    fontWeight: FontWeight.w800)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 1))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onBottomNavTap,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0,
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildBottomNavigationBar() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 1))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
+  //       onTap: _onBottomNavTap,
+  //       type: BottomNavigationBarType.fixed,
+  //       backgroundColor: Colors.white,
+  //       selectedItemColor: const Color(0xFF1D4ED8),
+  //       unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0,
+  //       selectedFontSize: 11,
+  //       unselectedFontSize: 11,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {

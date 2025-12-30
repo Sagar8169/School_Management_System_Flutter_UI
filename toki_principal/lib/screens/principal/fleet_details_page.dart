@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../widgets/common_widgets.dart';
 
 class FleetDetailsPage extends StatelessWidget {
   final Map<String, dynamic> bus;
@@ -16,7 +14,6 @@ class FleetDetailsPage extends StatelessWidget {
         title: Text(bus['busNumber'].toString()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -68,15 +65,20 @@ class FleetDetailsPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
-                              color: isActive ? const Color(0xFFD1FAE5) : const Color(0xFFF3F4F6),
+                              color: isActive
+                                  ? const Color(0xFFD1FAE5)
+                                  : const Color(0xFFF3F4F6),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               bus['status'].toString(),
                               style: TextStyle(
-                                color: isActive ? const Color(0xFF10B981) : const Color(0xFF6B7280),
+                                color: isActive
+                                    ? const Color(0xFF10B981)
+                                    : const Color(0xFF6B7280),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
                               ),
@@ -254,7 +256,9 @@ class FleetDetailsPage extends StatelessWidget {
                         child: _ticketCard(
                           'Open',
                           bus['openTickets'].toString(),
-                          bus['openTickets'] > 0 ? const Color(0xFFEF4444) : const Color(0xFF6B7280),
+                          bus['openTickets'] > 0
+                              ? const Color(0xFFEF4444)
+                              : const Color(0xFF6B7280),
                         ),
                       ),
                     ],

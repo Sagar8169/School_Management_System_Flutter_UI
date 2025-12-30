@@ -9,7 +9,7 @@ class AddEventPage extends StatefulWidget {
 }
 
 class _AddEventPageState extends State<AddEventPage> {
-  int _currentIndex = 2; // Activity index
+  // int _currentIndex = 2; // Activity index
   bool _isTelugu = false;
   bool _isPublishing = false;
 
@@ -46,9 +46,7 @@ class _AddEventPageState extends State<AddEventPage> {
 
     // ✅ Ensure initialDate is ALWAYS valid
     final DateTime safeInitialDate =
-    _eventDate.isAfter(lastAllowedDate)
-        ? lastAllowedDate
-        : _eventDate;
+        _eventDate.isAfter(lastAllowedDate) ? lastAllowedDate : _eventDate;
 
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -87,16 +85,17 @@ class _AddEventPageState extends State<AddEventPage> {
 
     // Validation
     if (finalTitle.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please enter event title"), behavior: SnackBarBehavior.floating)
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Please enter event title"),
+          behavior: SnackBarBehavior.floating));
       return;
     }
 
-    if (_selectedEventType == 'Custom Event' && _customEventController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please enter custom event name"), behavior: SnackBarBehavior.floating)
-      );
+    if (_selectedEventType == 'Custom Event' &&
+        _customEventController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Please enter custom event name"),
+          behavior: SnackBarBehavior.floating));
       return;
     }
 
@@ -216,27 +215,26 @@ class _AddEventPageState extends State<AddEventPage> {
     );
   }
 
-
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,7 +242,7 @@ class _AddEventPageState extends State<AddEventPage> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildScreenshotHeader(),
+            _buildOriginalHeader(),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -267,7 +265,100 @@ class _AddEventPageState extends State<AddEventPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildScreenshotBottomNav(),
+      // bottomNavigationBar: _buildScreenshotBottomNav(),
+    );
+  }
+
+  Widget _buildOriginalHeader() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(
+        20,
+        MediaQuery.of(context).padding.top + 0,
+        20,
+        10,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.vertical(
+          bottom: Radius.circular(32),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 6), // 👈 shadow only at bottom
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // 🔙 Circular Back Button
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Container(
+              height: 42,
+              width: 42,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF1F5F9),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                size: 18,
+                color: Color(0xFF1D4ED8),
+              ),
+            ),
+          ),
+
+          const SizedBox(width: 16),
+
+          // 🏫 Title + Subtitle
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Attendance Log',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0F172A),
+                  ),
+                ),
+                SizedBox(height: 2),
+                Text(
+                  'Aditya International School',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // 🌐 Language Toggle
+          GestureDetector(
+            onTap: () => setState(() => _isTelugu = !_isTelugu),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFFEFF6FF),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                _isTelugu ? 'తెలుగు' : 'English',
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF1D4ED8),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -282,14 +373,23 @@ class _AddEventPageState extends State<AddEventPage> {
             children: [
               IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF1D4ED8), size: 22),
+                icon: const Icon(Icons.arrow_back_ios,
+                    color: Color(0xFF1D4ED8), size: 22),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Add School Event', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+                  const Text('Add School Event',
+                      style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1E293B))),
                   const SizedBox(height: 2),
-                  Text('Aditya International School', style: TextStyle(fontSize: 13, color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+                  Text('Aditya International School',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w500)),
                 ],
               ),
             ],
@@ -299,8 +399,14 @@ class _AddEventPageState extends State<AddEventPage> {
             borderRadius: BorderRadius.circular(30),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(30)),
-              child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.w700, fontSize: 13)),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFEFF6FF),
+                  borderRadius: BorderRadius.circular(30)),
+              child: Text(_isTelugu ? 'తెలుగు' : 'English',
+                  style: const TextStyle(
+                      color: Color(0xFF1D4ED8),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13)),
             ),
           ),
         ],
@@ -313,9 +419,20 @@ class _AddEventPageState extends State<AddEventPage> {
       padding: const EdgeInsets.only(bottom: 15, left: 4),
       child: Row(
         children: [
-          CircleAvatar(radius: 11, backgroundColor: const Color(0xFFFBBF24), child: Text(number, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold))),
+          CircleAvatar(
+              radius: 11,
+              backgroundColor: const Color(0xFFFBBF24),
+              child: Text(number,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold))),
           const SizedBox(width: 10),
-          Text(text, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.blueGrey.shade800)),
+          Text(text,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.blueGrey.shade800)),
         ],
       ),
     );
@@ -355,7 +472,6 @@ class _AddEventPageState extends State<AddEventPage> {
                 .toList(),
             onChanged: (v) => setState(() => _selectedEventType = v!),
           ),
-
           if (_selectedEventType == 'Custom Event') ...[
             const SizedBox(height: 16),
             _buildLabel("Custom Event Name"),
@@ -367,7 +483,6 @@ class _AddEventPageState extends State<AddEventPage> {
               ),
             ),
           ],
-
           const SizedBox(height: 16),
           _buildLabel("Event Title / Heading"),
           TextField(
@@ -377,7 +492,6 @@ class _AddEventPageState extends State<AddEventPage> {
               hint: "e.g. Annual Sports Day 2025",
             ),
           ),
-
           const SizedBox(height: 16),
           Row(
             children: [
@@ -432,7 +546,6 @@ class _AddEventPageState extends State<AddEventPage> {
               ),
             ],
           ),
-
           const SizedBox(height: 16),
           _buildLabel("Short Description"),
           TextField(
@@ -447,6 +560,7 @@ class _AddEventPageState extends State<AddEventPage> {
       ),
     );
   }
+
   Widget _buildAudienceCard() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -475,27 +589,27 @@ class _AddEventPageState extends State<AddEventPage> {
             "Teachers App",
             Icons.school_rounded,
             _notifyTeachers,
-                (v) => setState(() => _notifyTeachers = v!),
+            (v) => setState(() => _notifyTeachers = v!),
           ),
           _audienceTile(
             "Students App",
             Icons.face_rounded,
             _notifyStudents,
-                (v) => setState(() => _notifyStudents = v!),
+            (v) => setState(() => _notifyStudents = v!),
           ),
           _audienceTile(
             "Parents App",
             Icons.family_restroom_rounded,
             _notifyParents,
-                (v) => setState(() => _notifyParents = v!),
+            (v) => setState(() => _notifyParents = v!),
           ),
         ],
       ),
     );
   }
 
-
-  Widget _audienceTile(String title, IconData icon, bool val, Function(bool?) onCh) {
+  Widget _audienceTile(
+      String title, IconData icon, bool val, Function(bool?) onCh) {
     return CheckboxListTile(
       value: val,
       onChanged: onCh,
@@ -508,57 +622,84 @@ class _AddEventPageState extends State<AddEventPage> {
 
   Widget _buildPublishButton() {
     return Container(
-      width: double.infinity, height: 58,
-      decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: const Color(0xFF1D4ED8).withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 8))]
-      ),
+      width: double.infinity,
+      height: 58,
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: const Color(0xFF1D4ED8).withOpacity(0.2),
+            blurRadius: 15,
+            offset: const Offset(0, 8))
+      ]),
       child: ElevatedButton(
         onPressed: _isPublishing ? null : _publishEvent,
-        style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1D4ED8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)), elevation: 0),
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1D4ED8),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            elevation: 0),
         child: _isPublishing
-            ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 3)
-            : const Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.send_rounded, color: Colors.white), SizedBox(width: 10), Text("Publish & Notify All", style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 16))]),
+            ? const CircularProgressIndicator(
+                color: Colors.white, strokeWidth: 3)
+            : const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Icon(Icons.send_rounded, color: Colors.white),
+                SizedBox(width: 10),
+                Text("Publish & Notify All",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                        fontSize: 16))
+              ]),
       ),
     );
   }
 
-  Widget _buildLabel(String text) => Padding(padding: const EdgeInsets.only(bottom: 6, left: 2), child: Text(text, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blueGrey)));
+  Widget _buildLabel(String text) => Padding(
+      padding: const EdgeInsets.only(bottom: 6, left: 2),
+      child: Text(text,
+          style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.blueGrey)));
 
   InputDecoration _inputDeco(IconData icon, {String? hint}) => InputDecoration(
-    prefixIcon: Icon(icon, size: 20, color: const Color(0xFF1D4ED8)),
-    hintText: hint,
-    filled: true, fillColor: const Color(0xFFF8FAFC),
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-    contentPadding: const EdgeInsets.symmetric(vertical: 12),
-  );
+        prefixIcon: Icon(icon, size: 20, color: const Color(0xFF1D4ED8)),
+        hintText: hint,
+        filled: true,
+        fillColor: const Color(0xFFF8FAFC),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none),
+        contentPadding: const EdgeInsets.symmetric(vertical: 12),
+      );
 
-  BoxDecoration _boxDeco() => BoxDecoration(color: const Color(0xFFF8FAFC), borderRadius: BorderRadius.circular(12));
+  BoxDecoration _boxDeco() => BoxDecoration(
+      color: const Color(0xFFF8FAFC), borderRadius: BorderRadius.circular(12));
 
-  Widget _buildScreenshotBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: const Color(0xFF1D4ED8),
-      unselectedItemColor: const Color(0xFF64748B),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_rounded),
-          label: "Search",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.analytics_rounded),
-          label: "Activity",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.grid_view_rounded),
-          label: "More",
-        ),
-      ],
-    );
-  }
+  // Widget _buildScreenshotBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: _currentIndex,
+  //     onTap: _onBottomNavTap,
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: const Color(0xFF1D4ED8),
+  //     unselectedItemColor: const Color(0xFF64748B),
+  //     items: const [
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.home_rounded),
+  //         label: "Home",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.search_rounded),
+  //         label: "Search",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.analytics_rounded),
+  //         label: "Activity",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.grid_view_rounded),
+  //         label: "More",
+  //       ),
+  //     ],
+  //   );
+  // }
 }

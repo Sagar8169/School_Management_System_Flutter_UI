@@ -17,7 +17,7 @@ class CollectFeePage extends StatefulWidget {
 class _CollectFeePageState extends State<CollectFeePage> {
   String _selectedDiv = 'All Div';
 
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   String _selectedStatus = 'All'; // Filters: All, Paid, Delayed, Not Paid
   String? _selectedClass = 'Class 10';
 
@@ -65,6 +65,8 @@ class _CollectFeePageState extends State<CollectFeePage> {
       'history': [],
     },
   ];
+  bool _isTelugu = false;
+  void _toggleLanguage() => setState(() => _isTelugu = !_isTelugu);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,7 @@ class _CollectFeePageState extends State<CollectFeePage> {
         top: false,
         child: Column(
           children: [
-            _buildPremiumHeader(),
+            _buildOriginalHeader(),
             _buildFilterChips(),
             Expanded(
               child: ListView.builder(
@@ -84,7 +86,8 @@ class _CollectFeePageState extends State<CollectFeePage> {
                 itemBuilder: (context, index) {
                   final student = _students[index];
                   // Simple Filter Logic
-                  if (_selectedStatus != 'All' && student['status'] != _selectedStatus) {
+                  if (_selectedStatus != 'All' &&
+                      student['status'] != _selectedStatus) {
                     return const SizedBox.shrink();
                   }
                   return _buildStudentFeeCard(student);
@@ -94,7 +97,152 @@ class _CollectFeePageState extends State<CollectFeePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      // bottomNavigationBar: _buildBottomNav(),
+    );
+  }
+
+  Widget _buildOriginalHeader() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(
+        20,
+        MediaQuery.of(context).padding.top + 0,
+        20,
+        10,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.vertical(
+          bottom: Radius.circular(32),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 6), // 👈 shadow only at bottom
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // 🔙 Circular Back Button
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Container(
+              height: 42,
+              width: 42,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF1F5F9),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                size: 18,
+                color: Color(0xFF1D4ED8),
+              ),
+            ),
+          ),
+
+          const SizedBox(width: 16),
+
+          // 🏫 Title + Subtitle
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Collect Fee',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0F172A),
+                  ),
+                ),
+                SizedBox(height: 2),
+                Text(
+                  'Aditya International School',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF64748B),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // 🌐 Language Toggle
+          GestureDetector(
+            onTap: () => setState(() => _isTelugu = !_isTelugu),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFFEFF6FF),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                _isTelugu ? 'తెలుగు' : 'English',
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF1D4ED8),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScreenshotHeader() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: const BoxDecoration(color: Colors.white),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.arrow_back_ios,
+                    color: Color(0xFF1D4ED8), size: 22),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Add School Event',
+                      style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1E293B))),
+                  const SizedBox(height: 2),
+                  Text('Aditya International School',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w500)),
+                ],
+              ),
+            ],
+          ),
+          InkWell(
+            onTap: _toggleLanguage,
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFEFF6FF),
+                  borderRadius: BorderRadius.circular(30)),
+              child: Text(_isTelugu ? 'తెలుగు' : 'English',
+                  style: const TextStyle(
+                      color: Color(0xFF1D4ED8),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -186,15 +334,15 @@ class _CollectFeePageState extends State<CollectFeePage> {
                       items: ['Class 8', 'Class 9', 'Class 10']
                           .map(
                             (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            e,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w700,
+                              value: e,
+                              child: Text(
+                                e,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )
+                          )
                           .toList(),
                       onChanged: (v) {
                         if (v == null) return;
@@ -226,15 +374,15 @@ class _CollectFeePageState extends State<CollectFeePage> {
                       items: ['All Div', 'A', 'B', 'C']
                           .map(
                             (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            e,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w700,
+                              value: e,
+                              child: Text(
+                                e,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )
+                          )
                           .toList(),
                       onChanged: (v) {
                         if (v == null) return;
@@ -307,12 +455,11 @@ class _CollectFeePageState extends State<CollectFeePage> {
   // 💳 STUDENT FEE CARD — PREMIUM
   Widget _buildStudentFeeCard(Map<String, dynamic> student) {
     final String status = student['status'];
-    final Color statusColor =
-    status == 'Paid'
+    final Color statusColor = status == 'Paid'
         ? themeGreen
         : status == 'Delayed'
-        ? themeOrange
-        : themeRed;
+            ? themeOrange
+            : themeRed;
 
     final double progress =
         (student['paid'] as num) / (student['totalFee'] as num);
@@ -386,7 +533,7 @@ class _CollectFeePageState extends State<CollectFeePage> {
                 // Status Pill
                 Container(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
@@ -430,8 +577,7 @@ class _CollectFeePageState extends State<CollectFeePage> {
                     value: progress.clamp(0.0, 1.0),
                     minHeight: 7,
                     backgroundColor: const Color(0xFFF1F5F9),
-                    valueColor:
-                    AlwaysStoppedAnimation<Color>(statusColor),
+                    valueColor: AlwaysStoppedAnimation<Color>(statusColor),
                   ),
                 ),
               ],
@@ -443,7 +589,7 @@ class _CollectFeePageState extends State<CollectFeePage> {
           // 🔹 ACTION / HISTORY
           ExpansionTile(
             tilePadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
             shape: const Border(),
             iconColor: themeBlue,
             title: const Text(
@@ -456,56 +602,56 @@ class _CollectFeePageState extends State<CollectFeePage> {
             ),
             trailing: status != 'Paid'
                 ? IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.send_to_mobile_rounded,
-                color: themeBlue,
-                size: 20,
-              ),
-              tooltip: "Send Due Reminder",
-            )
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.send_to_mobile_rounded,
+                      color: themeBlue,
+                      size: 20,
+                    ),
+                    tooltip: "Send Due Reminder",
+                  )
                 : const Icon(
-              Icons.verified_rounded,
-              color: themeGreen,
-              size: 20,
-            ),
+                    Icons.verified_rounded,
+                    color: themeGreen,
+                    size: 20,
+                  ),
             children: (student['history'] as List).isEmpty
                 ? [
-              const Padding(
-                padding: EdgeInsets.all(14),
-                child: Text(
-                  "No payments made yet",
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Color(0xFF94A3B8),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              )
-            ]
+                    const Padding(
+                      padding: EdgeInsets.all(14),
+                      child: Text(
+                        "No payments made yet",
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF94A3B8),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
+                  ]
                 : (student['history'] as List)
-                .map(
-                  (h) => ListTile(
-                dense: true,
-                leading: const Icon(
-                  Icons.receipt_long_rounded,
-                  size: 16,
-                  color: themeBlue,
-                ),
-                title: Text(
-                  "Received ₹${h['amount']}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 12,
-                  ),
-                ),
-                subtitle: Text(
-                  "${h['date']} • ${h['mode']}",
-                  style: const TextStyle(fontSize: 11),
-                ),
-              ),
-            )
-                .toList(),
+                    .map(
+                      (h) => ListTile(
+                        dense: true,
+                        leading: const Icon(
+                          Icons.receipt_long_rounded,
+                          size: 16,
+                          color: themeBlue,
+                        ),
+                        title: Text(
+                          "Received ₹${h['amount']}",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 12,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "${h['date']} • ${h['mode']}",
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                      ),
+                    )
+                    .toList(),
           ),
         ],
       ),
@@ -560,52 +706,50 @@ class _CollectFeePageState extends State<CollectFeePage> {
     }
   }
 
+  // Widget _buildBottomNav() {
+  //   return Container(
+  //     decoration: const BoxDecoration(
+  //       border: Border(
+  //         top: BorderSide(
+  //           color: Color(0xFFF1F5F9),
+  //           width: 2,
+  //         ),
+  //       ),
+  //     ),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
 
+  //       // ✅ CORRECT onTap (int only)
+  //       onTap: (index) {
+  //         if (index == _currentIndex) return;
+  //         _onBottomNavTap(index);
+  //       },
 
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: Color(0xFFF1F5F9),
-            width: 2,
-          ),
-        ),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
+  //       type: BottomNavigationBarType.fixed,
+  //       backgroundColor: Colors.white,
+  //       selectedItemColor: themeBlue,
+  //       unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0,
 
-        // ✅ CORRECT onTap (int only)
-        onTap: (index) {
-          if (index == _currentIndex) return;
-          _onBottomNavTap(index);
-        },
-
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: themeBlue,
-        unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0,
-
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

@@ -8,20 +8,43 @@ class TicketsPage extends StatefulWidget {
   State<TicketsPage> createState() => _TicketsPageState();
 }
 
-class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStateMixin {
-
+class _TicketsPageState extends State<TicketsPage>
+    with SingleTickerProviderStateMixin {
   bool _isTelugu = true;
 
-
-  int _currentIndex = 3;
+  // int _currentIndex = 3;
 
   late TabController _tabController;
 
   // Principal ke liye sample tickets (Raised by Teachers/Students)
   final List<Map<String, dynamic>> _allTickets = [
-    {'id': '#TK-901', 'raisedBy': 'Teacher: Anita Rao', 'title': 'Projector not working in 10-A', 'status': 'Open', 'priority': 'High', 'time': '30m ago', 'category': 'Infrastructure'},
-    {'id': '#TK-895', 'raisedBy': 'Student: Rahul (9B)', 'title': 'Locker key lost', 'status': 'Open', 'priority': 'Low', 'time': '1h ago', 'category': 'Admin'},
-    {'id': '#TK-880', 'raisedBy': 'Teacher: Vikram', 'title': 'Syllabus update error in app', 'status': 'Resolved', 'priority': 'Medium', 'time': '1d ago', 'category': 'Technical'},
+    {
+      'id': '#TK-901',
+      'raisedBy': 'Teacher: Anita Rao',
+      'title': 'Projector not working in 10-A',
+      'status': 'Open',
+      'priority': 'High',
+      'time': '30m ago',
+      'category': 'Infrastructure'
+    },
+    {
+      'id': '#TK-895',
+      'raisedBy': 'Student: Rahul (9B)',
+      'title': 'Locker key lost',
+      'status': 'Open',
+      'priority': 'Low',
+      'time': '1h ago',
+      'category': 'Admin'
+    },
+    {
+      'id': '#TK-880',
+      'raisedBy': 'Teacher: Vikram',
+      'title': 'Syllabus update error in app',
+      'status': 'Resolved',
+      'priority': 'Medium',
+      'time': '1d ago',
+      'category': 'Technical'
+    },
   ];
 
   @override
@@ -55,7 +78,6 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
             child: Column(
               children: [
                 _buildQuickStats(),
-
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
@@ -72,10 +94,9 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
       ),
 
       // 🔻 BOTTOM NAV (Scaffold level ONLY)
-      bottomNavigationBar: _buildCleanBottomNav(),
+      // bottomNavigationBar: _buildCleanBottomNav(),
     );
   }
-
 
   PreferredSizeWidget _buildPrincipalAppBar() {
     return PreferredSize(
@@ -177,7 +198,6 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
     );
   }
 
-
   Widget _buildPremiumHeader() {
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -271,50 +291,49 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
     );
   }
 
+  // Widget _buildCleanBottomNav() {
+  //   return Container(
+  //     decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
+  //       onTap: _onBottomNavTap,
+  //       selectedItemColor: const Color(0xFF1D4ED8),
+  //       unselectedItemColor: Colors.grey.shade400,
+  //       type: BottomNavigationBarType.fixed,
+  //       backgroundColor: Colors.white,
+  //       elevation: 0,
+  //       selectedFontSize: 12,
+  //       unselectedFontSize: 12,
+  //       items: const [
+  //         BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 24), activeIcon: Icon(Icons.home_filled), label: 'Home'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.search_rounded, size: 24), label: 'Search'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded, size: 24), label: 'Activity'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded, size: 24), label: 'More'),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildCleanBottomNav() {
-    return Container(
-      decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onBottomNavTap,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: Colors.grey.shade400,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 24), activeIcon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search_rounded, size: 24), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded, size: 24), label: 'Activity'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded, size: 24), label: 'More'),
-        ],
-      ),
-    );
-  }
-
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   Widget _buildQuickStats() {
     return Container(
@@ -333,12 +352,20 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
   Widget _statItem(String count, String label, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(
+          color: color.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(12)),
       child: Row(
         children: [
-          Text(count, style: TextStyle(color: color, fontWeight: FontWeight.w900, fontSize: 14)),
+          Text(count,
+              style: TextStyle(
+                  color: color, fontWeight: FontWeight.w900, fontSize: 14)),
           const SizedBox(width: 6),
-          Text(label, style: TextStyle(color: color.withOpacity(0.8), fontWeight: FontWeight.w700, fontSize: 11)),
+          Text(label,
+              style: TextStyle(
+                  color: color.withOpacity(0.8),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 11)),
         ],
       ),
     );
@@ -376,14 +403,26 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(ticket['id'], style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 10, color: Color(0xFF94A3B8))),
+                    Text(ticket['id'],
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 10,
+                            color: Color(0xFF94A3B8))),
                     _tag(ticket['priority'], pColor),
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text(ticket['title'], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+                Text(ticket['title'],
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF1E293B))),
                 const SizedBox(height: 6),
-                Text("Raised by: ${ticket['raisedBy']}", style: const TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w600)),
+                Text("Raised by: ${ticket['raisedBy']}",
+                    style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF64748B),
+                        fontWeight: FontWeight.w600)),
                 const SizedBox(height: 16),
                 Row(
                   children: [
@@ -402,11 +441,14 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
               child: Row(
                 children: [
                   Expanded(
-                    child: _adminActionBtn("In Progress", Colors.blue, () => _updateTicketStatus(ticket['id'], 'In Progress')),
+                    child: _adminActionBtn("In Progress", Colors.blue,
+                        () => _updateTicketStatus(ticket['id'], 'In Progress')),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _adminActionBtn("Solve Ticket", Colors.green, () => _updateTicketStatus(ticket['id'], 'Resolved'), isPrimary: true),
+                    child: _adminActionBtn("Solve Ticket", Colors.green,
+                        () => _updateTicketStatus(ticket['id'], 'Resolved'),
+                        isPrimary: true),
                   ),
                 ],
               ),
@@ -417,7 +459,8 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
     );
   }
 
-  Widget _adminActionBtn(String label, Color color, VoidCallback onTap, {bool isPrimary = false}) {
+  Widget _adminActionBtn(String label, Color color, VoidCallback onTap,
+      {bool isPrimary = false}) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -429,13 +472,32 @@ class _TicketsPageState extends State<TicketsPage> with SingleTickerProviderStat
           border: isPrimary ? null : Border.all(color: color.withOpacity(0.5)),
         ),
         child: Center(
-          child: Text(label, style: TextStyle(color: isPrimary ? Colors.white : color, fontWeight: FontWeight.w800, fontSize: 12)),
+          child: Text(label,
+              style: TextStyle(
+                  color: isPrimary ? Colors.white : color,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 12)),
         ),
       ),
     );
   }
 
-  Widget _miniInfo(IconData icon, String text) => Row(children: [Icon(icon, size: 14, color: const Color(0xFFCBD5E1)), const SizedBox(width: 5), Text(text, style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w600))]);
+  Widget _miniInfo(IconData icon, String text) => Row(children: [
+        Icon(icon, size: 14, color: const Color(0xFFCBD5E1)),
+        const SizedBox(width: 5),
+        Text(text,
+            style: const TextStyle(
+                fontSize: 11,
+                color: Color(0xFF64748B),
+                fontWeight: FontWeight.w600))
+      ]);
 
-  Widget _tag(String text, Color color) => Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: color.withOpacity(0.08), borderRadius: BorderRadius.circular(8)), child: Text(text, style: TextStyle(color: color, fontSize: 9, fontWeight: FontWeight.w900)));
+  Widget _tag(String text, Color color) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+          color: color.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(8)),
+      child: Text(text,
+          style: TextStyle(
+              color: color, fontSize: 9, fontWeight: FontWeight.w900)));
 }

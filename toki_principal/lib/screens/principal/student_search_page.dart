@@ -10,7 +10,7 @@ class StudentSearchPage extends StatefulWidget {
 }
 
 class _StudentSearchPageState extends State<StudentSearchPage> {
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   String _selectedFilter = "Class 8A";
   bool _isTelugu = true;
   final TextEditingController _searchController = TextEditingController();
@@ -79,7 +79,8 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
-  void _onFilterSelected(String filter) => setState(() => _selectedFilter = filter);
+  void _onFilterSelected(String filter) =>
+      setState(() => _selectedFilter = filter);
 
   void _onBottomNavTap(int index) {
     switch (index) {
@@ -101,8 +102,6 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
         break;
     }
   }
-
-
 
   void _onStudentTap(Map<String, dynamic> studentData) {
     _navigateTo(PrincipalRoutes.studentProfile, arguments: studentData);
@@ -147,7 +146,7 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -243,6 +242,7 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
       ),
     );
   }
+
   Widget _buildSearchBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -251,7 +251,12 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: const Color(0xFFE2E8F0)),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 15, offset: const Offset(0, 8))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                blurRadius: 15,
+                offset: const Offset(0, 8))
+          ],
         ),
         child: TextField(
           controller: _searchController,
@@ -259,7 +264,8 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
           decoration: InputDecoration(
             hintText: "Search by name or student ID...",
             hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-            prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF1D4ED8), size: 22),
+            prefixIcon: const Icon(Icons.search_rounded,
+                color: Color(0xFF1D4ED8), size: 22),
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(vertical: 15),
           ),
@@ -285,12 +291,18 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
               decoration: BoxDecoration(
                 color: selected ? const Color(0xFF1D4ED8) : Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: selected ? const Color(0xFF1D4ED8) : const Color(0xFFE2E8F0)),
+                border: Border.all(
+                    color: selected
+                        ? const Color(0xFF1D4ED8)
+                        : const Color(0xFFE2E8F0)),
               ),
               child: Center(
                 child: Text(
                   _filters[i],
-                  style: TextStyle(color: selected ? Colors.white : const Color(0xFF64748B), fontWeight: FontWeight.w700, fontSize: 12),
+                  style: TextStyle(
+                      color: selected ? Colors.white : const Color(0xFF64748B),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12),
                 ),
               ),
             ),
@@ -299,6 +311,7 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
       ),
     );
   }
+
   Widget _buildStudentResults() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -318,25 +331,20 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
                 ),
               ),
               const SizedBox(width: 10),
-              Text(
-                  'STUDENT LIST',
+              Text('STUDENT LIST',
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w900,
-                      color: const Color(0xFF1E293B), // Darker for better visibility
-                      letterSpacing: 0.8
-                  )
-              ),
+                      color: const Color(
+                          0xFF1E293B), // Darker for better visibility
+                      letterSpacing: 0.8)),
               const Spacer(),
               // Minimal Count Pill
-              Text(
-                  '${_students.length} Total',
+              Text('${_students.length} Total',
                   style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF94A3B8)
-                  )
-              ),
+                      color: Color(0xFF94A3B8))),
             ],
           ),
         ),
@@ -385,14 +393,17 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
                   children: [
                     // Avatar with Border
                     Container(
-                      width: 54, height: 54,
+                      width: 54,
+                      height: 54,
                       decoration: BoxDecoration(
                         color: const Color(0xFFF8FAFC),
                         borderRadius: BorderRadius.circular(16),
                         // ✨ INNER BORDER for Avatar
-                        border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
+                        border: Border.all(
+                            color: const Color(0xFFE2E8F0), width: 1),
                       ),
-                      child: const Icon(Icons.person_rounded, color: Color(0xFF1D4ED8), size: 28),
+                      child: const Icon(Icons.person_rounded,
+                          color: Color(0xFF1D4ED8), size: 28),
                     ),
                     const SizedBox(width: 14),
                     Expanded(
@@ -401,12 +412,19 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
                         children: [
                           Text(
                             student['name'],
-                            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900, color: Color(0xFF0F172A), letterSpacing: -0.5),
+                            style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w900,
+                                color: Color(0xFF0F172A),
+                                letterSpacing: -0.5),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             "ID: ${student['id']} • ${student['grade']}",
-                            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w700),
+                            style: const TextStyle(
+                                fontSize: 11,
+                                color: Color(0xFF94A3B8),
+                                fontWeight: FontWeight.w700),
                           ),
                         ],
                       ),
@@ -417,15 +435,22 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
 
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Divider(height: 1, color: Color(0xFFF1F5F9), thickness: 1.2),
+                  child: Divider(
+                      height: 1, color: Color(0xFFF1F5F9), thickness: 1.2),
                 ),
 
                 // --- BOTTOM SECTION: PERFORMANCE METRICS ---
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildMetricWithAccent("AVG GRADE", "${student['avgGrade']}%", _getGradeColor(student['avgGrade'])),
-                    _buildMetricWithAccent("ATTENDANCE", "${student['attendance']}%", _getAttendanceColor(student['attendance'])),
+                    _buildMetricWithAccent(
+                        "AVG GRADE",
+                        "${student['avgGrade']}%",
+                        _getGradeColor(student['avgGrade'])),
+                    _buildMetricWithAccent(
+                        "ATTENDANCE",
+                        "${student['attendance']}%",
+                        _getAttendanceColor(student['attendance'])),
                   ],
                 ),
               ],
@@ -443,26 +468,35 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w800, color: Color(0xFFCBD5E1), letterSpacing: 0.8),
+          style: const TextStyle(
+              fontSize: 9,
+              fontWeight: FontWeight.w800,
+              color: Color(0xFFCBD5E1),
+              letterSpacing: 0.8),
         ),
         const SizedBox(height: 4),
         Row(
           children: [
             // Small Color Dot
             Container(
-              width: 8, height: 8,
+              width: 8,
+              height: 8,
               decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 8),
             Text(
               value,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFF334155)),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF334155)),
             ),
           ],
         ),
       ],
     );
   }
+
   Widget _buildStatusChip(String label, bool critical) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -472,7 +506,11 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
       ),
       child: Text(
         label.toUpperCase(),
-        style: TextStyle(color: critical ? const Color(0xFFE11D48) : const Color(0xFF16A34A), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+        style: TextStyle(
+            color: critical ? const Color(0xFFE11D48) : const Color(0xFF16A34A),
+            fontSize: 10,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.5),
       ),
     );
   }
@@ -481,9 +519,15 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w900, color: Color(0xFFCBD5E1))),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFFCBD5E1))),
         const SizedBox(height: 4),
-        Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: color)),
+        Text(value,
+            style: TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w800, color: color)),
       ],
     );
   }
@@ -499,35 +543,35 @@ class _StudentSearchPageState extends State<StudentSearchPage> {
     return const Color(0xFF16A34A);
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex, onTap: _onBottomNavTap,
-        type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildBottomNavigationBar() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex, onTap: _onBottomNavTap,
+  //       type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
+  //       selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {

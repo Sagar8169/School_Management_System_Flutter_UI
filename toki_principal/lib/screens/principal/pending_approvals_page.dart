@@ -8,9 +8,10 @@ class AssignTaskPage extends StatefulWidget {
   State<AssignTaskPage> createState() => _AssignTaskPageState();
 }
 
-class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProviderStateMixin {
+class _AssignTaskPageState extends State<AssignTaskPage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   bool _isTelugu = false;
   bool _isAssigning = false;
 
@@ -45,8 +46,10 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
 
   // --- LOGIC: Task History Update ---
   void _openEditTaskForm(Map<String, dynamic> task) {
-    final TextEditingController editTitle = TextEditingController(text: task['title']);
-    final TextEditingController editDesc = TextEditingController(text: task['desc']);
+    final TextEditingController editTitle =
+        TextEditingController(text: task['title']);
+    final TextEditingController editDesc =
+        TextEditingController(text: task['desc']);
     DateTime? editDate = DateTime.now();
 
     List<Map<String, dynamic>> tempTeachers = _teachers.map((t) {
@@ -77,13 +80,22 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
           child: Column(
             mainAxisSize: MainAxisSize.min, // Content ke hisab se height lega
             children: [
-              Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+              Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10))),
               const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Edit Task Details", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.close_rounded)),
+                  const Text("Edit Task Details",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.close_rounded)),
                 ],
               ),
               const Divider(),
@@ -93,18 +105,29 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      _buildInputFields(editTitle, editDesc, editDate, (d) => setModalState(() => editDate = d)),
+                      _buildInputFields(editTitle, editDesc, editDate,
+                          (d) => setModalState(() => editDate = d)),
                       const SizedBox(height: 15),
-                      const Align(alignment: Alignment.centerLeft, child: Text("Update Teachers", style: TextStyle(fontWeight: FontWeight.bold))),
+                      const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Update Teachers",
+                              style: TextStyle(fontWeight: FontWeight.bold))),
                       const SizedBox(height: 10),
-                      ...tempTeachers.map((t) => CheckboxListTile(
-                        value: t['isSelected'],
-                        onChanged: (v) => setModalState(() => t['isSelected'] = v!),
-                        title: Text(t['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                        subtitle: Text(t['class'], style: const TextStyle(fontSize: 12)),
-                        activeColor: const Color(0xFF1D4ED8),
-                        contentPadding: EdgeInsets.zero,
-                      )).toList(),
+                      ...tempTeachers
+                          .map((t) => CheckboxListTile(
+                                value: t['isSelected'],
+                                onChanged: (v) =>
+                                    setModalState(() => t['isSelected'] = v!),
+                                title: Text(t['name'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14)),
+                                subtitle: Text(t['class'],
+                                    style: const TextStyle(fontSize: 12)),
+                                activeColor: const Color(0xFF1D4ED8),
+                                contentPadding: EdgeInsets.zero,
+                              ))
+                          .toList(),
                     ],
                   ),
                 ),
@@ -144,7 +167,7 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
           ],
         ),
       ),
-      bottomNavigationBar: _buildModernBottomNav(),
+      // bottomNavigationBar: _buildModernBottomNav(),
     );
   }
 
@@ -164,7 +187,7 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
               _titleController,
               _descController,
               _selectedDate,
-                  (d) => setState(() => _selectedDate = d),
+              (d) => setState(() => _selectedDate = d),
             ),
 
             const SizedBox(height: 30),
@@ -173,7 +196,8 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _sectionHeader("Select Staff / Teachers", Icons.people_alt_rounded),
+                _sectionHeader(
+                    "Select Staff / Teachers", Icons.people_alt_rounded),
                 Text(
                   "${_teachers.where((t) => t['isSelected']).length} Selected",
                   style: const TextStyle(
@@ -273,7 +297,7 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
                             ),
                             child: isSelected
                                 ? const Icon(Icons.check,
-                                size: 16, color: Colors.white)
+                                    size: 16, color: Colors.white)
                                 : null,
                           ),
                         ],
@@ -295,7 +319,6 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
     );
   }
 
-
   // Helper for Section Titles
   Widget _sectionHeader(String title, IconData icon) {
     return Row(
@@ -314,15 +337,20 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
       ],
     );
   }
+
   Widget _buildHistoryTab() {
     return DefaultTabController(
       length: 2,
       child: Column(
         children: [
           const TabBar(tabs: [Tab(text: "Pending"), Tab(text: "Done")]),
-          Expanded(child: TabBarView(children: [
-            _buildTaskList(_tasks.where((t) => t['status'] == 'pending').toList(), true),
-            _buildTaskList(_tasks.where((t) => t['status'] == 'completed').toList(), false),
+          Expanded(
+              child: TabBarView(children: [
+            _buildTaskList(
+                _tasks.where((t) => t['status'] == 'pending').toList(), true),
+            _buildTaskList(
+                _tasks.where((t) => t['status'] == 'completed').toList(),
+                false),
           ])),
         ],
       ),
@@ -335,21 +363,26 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.assignment_turned_in_rounded, size: 60, color: Colors.grey.shade200),
+            Icon(Icons.assignment_turned_in_rounded,
+                size: 60, color: Colors.grey.shade200),
             const SizedBox(height: 12),
-            Text("No tasks found", style: TextStyle(color: Colors.grey.shade400, fontWeight: FontWeight.w600)),
+            Text("No tasks found",
+                style: TextStyle(
+                    color: Colors.grey.shade400, fontWeight: FontWeight.w600)),
           ],
         ),
       );
     }
 
     return ListView.builder(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 80), // Bottom padding for FAB
+      padding:
+          const EdgeInsets.fromLTRB(16, 8, 16, 80), // Bottom padding for FAB
       itemCount: list.length,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         final task = list[index];
-        final Color statusColor = isPending ? const Color(0xFFF59E0B) : const Color(0xFF10B981);
+        final Color statusColor =
+            isPending ? const Color(0xFFF59E0B) : const Color(0xFF10B981);
 
         return Container(
           margin: const EdgeInsets.only(bottom: 16),
@@ -371,7 +404,10 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
             child: Column(
               children: [
                 // --- TOP ACCENT BAR ---
-                Container(height: 4, width: double.infinity, color: statusColor.withOpacity(0.4)),
+                Container(
+                    height: 4,
+                    width: double.infinity,
+                    color: statusColor.withOpacity(0.4)),
 
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -389,7 +425,9 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
                               borderRadius: BorderRadius.circular(14),
                             ),
                             child: Icon(
-                              isPending ? Icons.timer_outlined : Icons.check_circle_outline_rounded,
+                              isPending
+                                  ? Icons.timer_outlined
+                                  : Icons.check_circle_outline_rounded,
                               color: statusColor,
                               size: 22,
                             ),
@@ -415,7 +453,8 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
                                     CircleAvatar(
                                       radius: 9,
                                       backgroundColor: Colors.blue.shade50,
-                                      child: const Icon(Icons.person, size: 10, color: Color(0xFF1D4ED8)),
+                                      child: const Icon(Icons.person,
+                                          size: 10, color: Color(0xFF1D4ED8)),
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
@@ -448,17 +487,25 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
                           // Priority Badge
                           _taskTag(
                             isPending ? "HIGH PRIORITY" : "COMPLETED",
-                            isPending ? Colors.red.shade700 : Colors.green.shade700,
-                            isPending ? Colors.red.shade50 : Colors.green.shade50,
+                            isPending
+                                ? Colors.red.shade700
+                                : Colors.green.shade700,
+                            isPending
+                                ? Colors.red.shade50
+                                : Colors.green.shade50,
                           ),
                           // Date/Deadline
                           Row(
                             children: [
-                              Icon(Icons.calendar_today_rounded, size: 12, color: Colors.grey.shade400),
+                              Icon(Icons.calendar_today_rounded,
+                                  size: 12, color: Colors.grey.shade400),
                               const SizedBox(width: 4),
                               Text(
                                 "Due 28 Dec",
-                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.grey.shade400),
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.grey.shade400),
                               ),
                             ],
                           ),
@@ -478,36 +525,54 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
   Widget _taskTag(String label, Color textColor, Color bgColor) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(8)),
+      decoration:
+          BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(8)),
       child: Text(
         label,
-        style: TextStyle(color: textColor, fontSize: 9, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+        style: TextStyle(
+            color: textColor,
+            fontSize: 9,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.5),
       ),
     );
   }
 
   Widget _buildActionMenu(Map<String, dynamic> task) {
     return PopupMenuButton(
-      icon: Icon(Icons.more_vert_rounded, color: Colors.grey.shade400, size: 20),
+      icon:
+          Icon(Icons.more_vert_rounded, color: Colors.grey.shade400, size: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       onSelected: (val) {
         if (val == 'edit') _openEditTaskForm(task);
         if (val == 'done') _markDone(task['id']);
       },
       itemBuilder: (context) => [
-        const PopupMenuItem(value: 'edit', child: Row(children: [Icon(Icons.edit_outlined, size: 18), SizedBox(width: 8), Text("Edit")])),
-        const PopupMenuItem(value: 'done', child: Row(children: [Icon(Icons.done_all_rounded, size: 18, color: Colors.green), SizedBox(width: 8), Text("Close Task")])),
+        const PopupMenuItem(
+            value: 'edit',
+            child: Row(children: [
+              Icon(Icons.edit_outlined, size: 18),
+              SizedBox(width: 8),
+              Text("Edit")
+            ])),
+        const PopupMenuItem(
+            value: 'done',
+            child: Row(children: [
+              Icon(Icons.done_all_rounded, size: 18, color: Colors.green),
+              SizedBox(width: 8),
+              Text("Close Task")
+            ])),
       ],
     );
   }
   // --- REUSABLE HELPERS ---
 
   Widget _buildInputFields(
-      TextEditingController t,
-      TextEditingController d,
-      DateTime? dt,
-      Function(DateTime) onPick,
-      ) {
+    TextEditingController t,
+    TextEditingController d,
+    DateTime? dt,
+    Function(DateTime) onPick,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -590,8 +655,8 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
                     dt == null
                         ? "Select due date"
                         : "${dt.day.toString().padLeft(2, '0')}/"
-                        "${dt.month.toString().padLeft(2, '0')}/"
-                        "${dt.year}",
+                            "${dt.month.toString().padLeft(2, '0')}/"
+                            "${dt.year}",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -612,6 +677,7 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
       ],
     );
   }
+
   Widget _inputCard({required Widget child}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -644,11 +710,11 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
   }
 
   Widget _buildUpdateBtn(
-      String id,
-      TextEditingController t,
-      TextEditingController d,
-      List<Map<String, dynamic>> tList,
-      ) {
+    String id,
+    TextEditingController t,
+    TextEditingController d,
+    List<Map<String, dynamic>> tList,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 34), // 👈 yaha gap milega
       child: SizedBox(
@@ -688,13 +754,21 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
   }
 
   Widget _buildSubmitBtn() {
-    return SizedBox(width: double.infinity, height: 55, child: ElevatedButton(
-      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1D4ED8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-      onPressed: () {
-        // Create Logic
-      },
-      child: const Text("Assign Task", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-    ));
+    return SizedBox(
+        width: double.infinity,
+        height: 55,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1D4ED8),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15))),
+          onPressed: () {
+            // Create Logic
+          },
+          child: const Text("Assign Task",
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        ));
   }
 
   Widget _buildOriginalHeader() {
@@ -762,8 +836,12 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
   Widget _buildLanguagePill() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-      decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(20)),
-      child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.bold)),
+      decoration: BoxDecoration(
+          color: const Color(0xFFEFF6FF),
+          borderRadius: BorderRadius.circular(20)),
+      child: Text(_isTelugu ? 'తెలుగు' : 'English',
+          style: const TextStyle(
+              color: Color(0xFF1D4ED8), fontWeight: FontWeight.bold)),
     );
   }
 
@@ -788,8 +866,14 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
     }
   }
 
-  InputDecoration _inputDeco(IconData i, String h) => InputDecoration(prefixIcon: Icon(i, size: 20, color: const Color(0xFF1D4ED8)), hintText: h, filled: true, fillColor: const Color(0xFFF8FAFC), border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none));
-
+  InputDecoration _inputDeco(IconData i, String h) => InputDecoration(
+      prefixIcon: Icon(i, size: 20, color: const Color(0xFF1D4ED8)),
+      hintText: h,
+      filled: true,
+      fillColor: const Color(0xFFF8FAFC),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none));
 
   void _markDone(String id) {
     setState(() {
@@ -798,30 +882,30 @@ class _AssignTaskPageState extends State<AssignTaskPage> with SingleTickerProvid
     });
   }
 
-  Widget _buildModernBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: (i) => setState(() => _currentIndex = i),
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: const Color(0xFF1D4ED8),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_rounded),
-          label: "Search",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.analytics_rounded),
-          label: "Activity",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.grid_view_rounded),
-          label: "More",
-        ),
-      ],
-    );
-  }
+  // Widget _buildModernBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: _currentIndex,
+  //     onTap: (i) => setState(() => _currentIndex = i),
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: const Color(0xFF1D4ED8),
+  //     items: const [
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.home_rounded),
+  //         label: "Home",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.search_rounded),
+  //         label: "Search",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.analytics_rounded),
+  //         label: "Activity",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.grid_view_rounded),
+  //         label: "More",
+  //       ),
+  //     ],
+  //   );
+  // }
 }

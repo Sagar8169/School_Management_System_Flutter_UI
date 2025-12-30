@@ -5,9 +5,9 @@ class OtpVerificationPage extends StatefulWidget {
   final String mobileNumber;
 
   const OtpVerificationPage({
-    Key? key,
+    super.key,
     required this.mobileNumber,
-  }) : super(key: key);
+  });
 
   @override
   _OtpVerificationPageState createState() => _OtpVerificationPageState();
@@ -20,7 +20,8 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   void _verifyOTP() {
     String otp = _otpController.text.trim();
     if (otp.length != 6) {
-      _showSnackBar('Please enter complete 6-digit OTP', const Color(0xFFE11D48));
+      _showSnackBar(
+          'Please enter complete 6-digit OTP', const Color(0xFFE11D48));
       return;
     }
 
@@ -39,7 +40,8 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
           routeName = Routes.mobileLogin;
           break;
         default:
-          _showSnackBar('Invalid OTP. Please try again.', const Color(0xFFE11D48));
+          _showSnackBar(
+              'Invalid OTP. Please try again.', const Color(0xFFE11D48));
           return;
       }
       Navigator.pushReplacementNamed(context, routeName);
@@ -49,7 +51,8 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   void _showSnackBar(String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message, style: const TextStyle(fontWeight: FontWeight.w600)),
+        content:
+            Text(message, style: const TextStyle(fontWeight: FontWeight.w600)),
         backgroundColor: color,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -79,7 +82,8 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                   end: Alignment.bottomRight,
                   colors: [Color(0xFF1D4ED8), Color(0xFF1E3A8A)],
                 ),
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(60)),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(60)),
               ),
             ),
           ),
@@ -91,12 +95,14 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 children: [
                   // Back Button Section
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 22),
+                        icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                            color: Colors.white, size: 22),
                       ),
                     ),
                   ),
@@ -116,7 +122,10 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                   const SizedBox(height: 12),
                   const Text(
                     'Sunrise High School',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.white),
                   ),
 
                   const SizedBox(height: 50),
@@ -142,17 +151,23 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                       children: [
                         const Text(
                           'Verify OTP',
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Color(0xFF1E293B)),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF1E293B)),
                         ),
                         const SizedBox(height: 8),
                         RichText(
                           text: TextSpan(
                             text: 'We sent a 6-digit code to ',
-                            style: const TextStyle(color: Color(0xFF64748B), fontSize: 14),
+                            style: const TextStyle(
+                                color: Color(0xFF64748B), fontSize: 14),
                             children: [
                               TextSpan(
                                 text: widget.mobileNumber,
-                                style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1D4ED8)),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1D4ED8)),
                               ),
                             ],
                           ),
@@ -180,9 +195,11 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             decoration: const InputDecoration(
                               counterText: '',
                               hintText: '●●●●●●',
-                              hintStyle: TextStyle(color: Color(0xFFCBD5E1), letterSpacing: 12),
+                              hintStyle: TextStyle(
+                                  color: Color(0xFFCBD5E1), letterSpacing: 12),
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(vertical: 20),
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 20),
                             ),
                           ),
                         ),
@@ -199,15 +216,20 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                               backgroundColor: const Color(0xFF1D4ED8),
                               foregroundColor: Colors.white,
                               elevation: 0,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18)),
                             ),
                             child: _isLoading
                                 ? const SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(color: Colors.white, strokeWidth: 3),
-                            )
-                                : const Text('Verify & Proceed', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+                                    width: 24,
+                                    height: 24,
+                                    child: CircularProgressIndicator(
+                                        color: Colors.white, strokeWidth: 3),
+                                  )
+                                : const Text('Verify & Proceed',
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w800)),
                           ),
                         ),
 
@@ -218,11 +240,14 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                           child: TextButton(
                             onPressed: () {
                               _otpController.clear();
-                              _showSnackBar('OTP has been resent!', const Color(0xFF10B981));
+                              _showSnackBar('OTP has been resent!',
+                                  const Color(0xFF10B981));
                             },
                             child: const Text(
                               "Didn't receive code? Resend",
-                              style: TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Color(0xFF1D4ED8),
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -235,17 +260,23 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                   // Powered by Branding
                   Column(
                     children: [
-                      const Text('Powered by', style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8))),
+                      const Text('Powered by',
+                          style: TextStyle(
+                              fontSize: 12, color: Color(0xFF94A3B8))),
                       const SizedBox(height: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
                           color: const Color(0xFFF1F5F9),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Text(
                           'TOKI TECH',
-                          style: TextStyle(fontWeight: FontWeight.w900, color: Color(0xFF64748B), letterSpacing: 1),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF64748B),
+                              letterSpacing: 1),
                         ),
                       ),
                     ],

@@ -11,7 +11,7 @@ class AddHomeworkPage extends StatefulWidget {
 }
 
 class _AddHomeworkPageState extends State<AddHomeworkPage> {
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   bool _isTelugu = false;
   bool _isAssigning = false;
 
@@ -25,15 +25,31 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
   String _selectedSubject = 'Mathematics';
   DateTime _dueDate = DateTime.now().add(const Duration(days: 1));
 
-  final List<String> _classes = ['Class 10-A', 'Class 10-B', 'Class 9-A', 'Class 8-A'];
-  final List<String> _subjects = ['Mathematics', 'Science', 'English', 'Social Studies', 'Hindi'];
+  final List<String> _classes = [
+    'Class 10-A',
+    'Class 10-B',
+    'Class 9-A',
+    'Class 8-A'
+  ];
+  final List<String> _subjects = [
+    'Mathematics',
+    'Science',
+    'English',
+    'Social Studies',
+    'Hindi'
+  ];
 
   // --- LOGIC: FILE PICKER ---
   Future<void> _pickFile() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'], // PDF aur Images allowed hain
+        allowedExtensions: [
+          'pdf',
+          'jpg',
+          'jpeg',
+          'png'
+        ], // PDF aur Images allowed hain
       );
 
       if (result != null) {
@@ -67,9 +83,9 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
 
   void _assignHomework() {
     if (_titleController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please enter homework title"), behavior: SnackBarBehavior.floating)
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Please enter homework title"),
+          behavior: SnackBarBehavior.floating));
       return;
     }
 
@@ -86,11 +102,13 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        title: const Icon(Icons.assignment_turned_in_rounded, color: Color(0xFF1D4ED8), size: 50),
+        title: const Icon(Icons.assignment_turned_in_rounded,
+            color: Color(0xFF1D4ED8), size: 50),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text("Homework Assigned!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const Text("Homework Assigned!",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             const SizedBox(height: 10),
             Text(
               "Homework for $_selectedSubject has been assigned to $_selectedClass.${_pickedFile != null ? '\nWorksheet: ${_pickedFile!.name}' : ''}",
@@ -106,7 +124,8 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
                 Navigator.pop(context);
                 Navigator.pop(context);
               },
-              child: const Text("Done", style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text("Done",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           )
         ],
@@ -114,15 +133,15 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
     );
   }
 
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, PrincipalRoutes.home); break;
-      case 1: Navigator.pushNamed(context, PrincipalRoutes.search); break;
-      case 3: Navigator.pushNamed(context, PrincipalRoutes.morePage); break;
-    }
-  }
+  // void _onBottomNavTapped(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushReplacementNamed(context, PrincipalRoutes.home); break;
+  //     case 1: Navigator.pushNamed(context, PrincipalRoutes.search); break;
+  //     case 3: Navigator.pushNamed(context, PrincipalRoutes.morePage); break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +173,7 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildScreenshotBottomNav(),
+      // bottomNavigationBar: _buildScreenshotBottomNav(),
     );
   }
 
@@ -169,14 +188,23 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
             children: [
               IconButton(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF1D4ED8), size: 22),
+                icon: const Icon(Icons.arrow_back_ios,
+                    color: Color(0xFF1D4ED8), size: 22),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Add Homework', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+                  const Text('Add Homework',
+                      style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1E293B))),
                   const SizedBox(height: 2),
-                  Text('Aditya International School', style: TextStyle(fontSize: 13, color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+                  Text('Aditya International School',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w500)),
                 ],
               ),
             ],
@@ -186,8 +214,14 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
             borderRadius: BorderRadius.circular(30),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(30)),
-              child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.w700, fontSize: 13)),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFEFF6FF),
+                  borderRadius: BorderRadius.circular(30)),
+              child: Text(_isTelugu ? 'తెలుగు' : 'English',
+                  style: const TextStyle(
+                      color: Color(0xFF1D4ED8),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13)),
             ),
           ),
         ],
@@ -200,13 +234,25 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
       padding: const EdgeInsets.only(bottom: 15, left: 4),
       child: Row(
         children: [
-          CircleAvatar(radius: 11, backgroundColor: const Color(0xFFFBBF24), child: Text(number, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold))),
+          CircleAvatar(
+              radius: 11,
+              backgroundColor: const Color(0xFFFBBF24),
+              child: Text(number,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold))),
           const SizedBox(width: 10),
-          Text(text, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF334155))),
+          Text(text,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF334155))),
         ],
       ),
     );
   }
+
   Widget _buildTargetCard() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -235,14 +281,14 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
             "Select Class",
             _selectedClass,
             _classes,
-                (v) => setState(() => _selectedClass = v!),
+            (v) => setState(() => _selectedClass = v!),
           ),
           const SizedBox(height: 16),
           _buildDropdownField(
             "Select Subject",
             _selectedSubject,
             _subjects,
-                (v) => setState(() => _selectedSubject = v!),
+            (v) => setState(() => _selectedSubject = v!),
           ),
         ],
       ),
@@ -253,25 +299,46 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white, borderRadius: BorderRadius.circular(24),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 15, offset: const Offset(0, 5))],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 15,
+              offset: const Offset(0, 5))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildLabel("Homework Title"),
-          TextField(controller: _titleController, decoration: _inputDeco(Icons.edit_note_rounded, hint: "e.g. Exercise 4.2 Fractions")),
+          TextField(
+              controller: _titleController,
+              decoration: _inputDeco(Icons.edit_note_rounded,
+                  hint: "e.g. Exercise 4.2 Fractions")),
           const SizedBox(height: 16),
           _buildLabel("Detailed Instructions"),
-          TextField(controller: _descController, maxLines: 4, decoration: _inputDeco(Icons.description_rounded, hint: "Enter homework details or questions...")),
+          TextField(
+              controller: _descController,
+              maxLines: 4,
+              decoration: _inputDeco(Icons.description_rounded,
+                  hint: "Enter homework details or questions...")),
           const SizedBox(height: 16),
           _buildLabel("Submission Deadline"),
           InkWell(
             onTap: _selectDueDate,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              decoration: BoxDecoration(color: const Color(0xFFF8FAFC), borderRadius: BorderRadius.circular(12)),
-              child: Row(children: [const Icon(Icons.calendar_month_rounded, size: 20, color: Color(0xFF1D4ED8)), const SizedBox(width: 10), Text("${_dueDate.day}/${_dueDate.month}/${_dueDate.year}", style: const TextStyle(fontWeight: FontWeight.w600))]),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFF8FAFC),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Row(children: [
+                const Icon(Icons.calendar_month_rounded,
+                    size: 20, color: Color(0xFF1D4ED8)),
+                const SizedBox(width: 10),
+                Text("${_dueDate.day}/${_dueDate.month}/${_dueDate.year}",
+                    style: const TextStyle(fontWeight: FontWeight.w600))
+              ]),
             ),
           ),
           const SizedBox(height: 16),
@@ -296,14 +363,19 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
             ),
             child: Row(
               children: [
-                Icon(_pickedFile!.extension == 'pdf' ? Icons.picture_as_pdf : Icons.image, color: Colors.blue),
+                Icon(
+                    _pickedFile!.extension == 'pdf'
+                        ? Icons.picture_as_pdf
+                        : Icons.image,
+                    color: Colors.blue),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     _pickedFile!.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                 ),
                 IconButton(
@@ -316,10 +388,13 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
         OutlinedButton.icon(
           onPressed: _pickFile,
           icon: const Icon(Icons.attach_file_rounded),
-          label: Text(_pickedFile == null ? "Attach Worksheet (PDF/Image)" : "Change File"),
+          label: Text(_pickedFile == null
+              ? "Attach Worksheet (PDF/Image)"
+              : "Change File"),
           style: OutlinedButton.styleFrom(
             minimumSize: const Size(double.infinity, 50),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             side: BorderSide(color: Colors.grey.shade200),
           ),
         ),
@@ -329,32 +404,61 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
 
   Widget _buildAssignButton() {
     return Container(
-      width: double.infinity, height: 58,
-      decoration: BoxDecoration(
-          boxShadow: [BoxShadow(color: const Color(0xFF1D4ED8).withOpacity(0.2), blurRadius: 15, offset: const Offset(0, 8))]
-      ),
+      width: double.infinity,
+      height: 58,
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: const Color(0xFF1D4ED8).withOpacity(0.2),
+            blurRadius: 15,
+            offset: const Offset(0, 8))
+      ]),
       child: ElevatedButton(
         onPressed: _isAssigning ? null : _assignHomework,
-        style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF1D4ED8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)), elevation: 0),
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1D4ED8),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+            elevation: 0),
         child: _isAssigning
-            ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 3)
-            : const Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.send_rounded, color: Colors.white), SizedBox(width: 10), Text("Assign & Notify Students", style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 16))]),
+            ? const CircularProgressIndicator(
+                color: Colors.white, strokeWidth: 3)
+            : const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Icon(Icons.send_rounded, color: Colors.white),
+                SizedBox(width: 10),
+                Text("Assign & Notify Students",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                        fontSize: 16))
+              ]),
       ),
     );
   }
 
-  Widget _buildDropdownField(String label, String val, List<String> items, Function(String?) onCh) {
+  Widget _buildDropdownField(
+      String label, String val, List<String> items, Function(String?) onCh) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildLabel(label),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(color: const Color(0xFFF8FAFC), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(
+              color: const Color(0xFFF8FAFC),
+              borderRadius: BorderRadius.circular(12)),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              value: val, isExpanded: true, icon: const Icon(Icons.keyboard_arrow_down_rounded, color: Colors.blueGrey),
-              items: items.map((e) => DropdownMenuItem(value: e, child: Text(e, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)))).toList(),
+              value: val,
+              isExpanded: true,
+              icon: const Icon(Icons.keyboard_arrow_down_rounded,
+                  color: Colors.blueGrey),
+              items: items
+                  .map((e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(e,
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w600))))
+                  .toList(),
               onChanged: onCh,
             ),
           ),
@@ -363,14 +467,24 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
     );
   }
 
-  Widget _buildLabel(String text) => Padding(padding: const EdgeInsets.only(bottom: 6, left: 2), child: Text(text, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blueGrey)));
+  Widget _buildLabel(String text) => Padding(
+      padding: const EdgeInsets.only(bottom: 6, left: 2),
+      child: Text(text,
+          style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Colors.blueGrey)));
 
   InputDecoration _inputDeco(IconData icon, {String? hint}) => InputDecoration(
-    prefixIcon: Icon(icon, size: 20, color: const Color(0xFF1D4ED8)),
-    hintText: hint, filled: true, fillColor: const Color(0xFFF8FAFC),
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-    contentPadding: const EdgeInsets.symmetric(vertical: 14),
-  );
+        prefixIcon: Icon(icon, size: 20, color: const Color(0xFF1D4ED8)),
+        hintText: hint,
+        filled: true,
+        fillColor: const Color(0xFFF8FAFC),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none),
+        contentPadding: const EdgeInsets.symmetric(vertical: 14),
+      );
 
   void _onBottomNavTap(int index) {
     switch (index) {
@@ -393,31 +507,31 @@ class _AddHomeworkPageState extends State<AddHomeworkPage> {
     }
   }
 
-  Widget _buildScreenshotBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: const Color(0xFF1D4ED8),
-      unselectedItemColor: const Color(0xFF64748B),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_rounded),
-          label: "Search",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.analytics_rounded),
-          label: "Activity",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.grid_view_rounded),
-          label: "More",
-        ),
-      ],
-    );
-  }
+  // Widget _buildScreenshotBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: _currentIndex,
+  //     onTap: _onBottomNavTapped,
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: const Color(0xFF1D4ED8),
+  //     unselectedItemColor: const Color(0xFF64748B),
+  //     items: const [
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.home_rounded),
+  //         label: "Home",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.search_rounded),
+  //         label: "Search",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.analytics_rounded),
+  //         label: "Activity",
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: Icon(Icons.grid_view_rounded),
+  //         label: "More",
+  //       ),
+  //     ],
+  //   );
+  // }
 }

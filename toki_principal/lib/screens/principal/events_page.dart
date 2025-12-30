@@ -8,15 +8,43 @@ class EventsPage extends StatefulWidget {
   State<EventsPage> createState() => _EventsPageState();
 }
 
-class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateMixin {
-  int _currentIndex = 3;
+class _EventsPageState extends State<EventsPage>
+    with SingleTickerProviderStateMixin {
+  // int _currentIndex = 3;
   bool _isTelugu = true;
   late TabController _tabController;
   // --- DUMMY DATA WITH WORKING STATE ---
   final List<Map<String, dynamic>> _events = [
-    {'id': 1, 'title': 'Annual Sports Meet', 'date': '28 Dec', 'month': 'DEC', 'time': '09:00 AM', 'venue': 'Main Ground', 'status': 'Upcoming', 'category': 'Sports'},
-    {'id': 2, 'title': 'Science Exhibition', 'date': '30 Dec', 'month': 'DEC', 'time': '10:30 AM', 'venue': 'Science Lab', 'status': 'Upcoming', 'category': 'Academic'},
-    {'id': 3, 'title': 'Christmas Celebration', 'date': '25 Dec', 'month': 'DEC', 'time': '11:00 AM', 'venue': 'Hall', 'status': 'Past', 'category': 'Cultural'},
+    {
+      'id': 1,
+      'title': 'Annual Sports Meet',
+      'date': '28 Dec',
+      'month': 'DEC',
+      'time': '09:00 AM',
+      'venue': 'Main Ground',
+      'status': 'Upcoming',
+      'category': 'Sports'
+    },
+    {
+      'id': 2,
+      'title': 'Science Exhibition',
+      'date': '30 Dec',
+      'month': 'DEC',
+      'time': '10:30 AM',
+      'venue': 'Science Lab',
+      'status': 'Upcoming',
+      'category': 'Academic'
+    },
+    {
+      'id': 3,
+      'title': 'Christmas Celebration',
+      'date': '25 Dec',
+      'month': 'DEC',
+      'time': '11:00 AM',
+      'venue': 'Hall',
+      'status': 'Past',
+      'category': 'Cultural'
+    },
   ];
 
   @override
@@ -31,7 +59,9 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
       _events.removeWhere((element) => element['id'] == id);
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Event removed successfully"), behavior: SnackBarBehavior.floating),
+      const SnackBar(
+          content: Text("Event removed successfully"),
+          behavior: SnackBarBehavior.floating),
     );
   }
 
@@ -43,15 +73,31 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 24, left: 24, right: 24, top: 12),
-        decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+            left: 24,
+            right: 24,
+            top: 12),
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32))),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)))),
+            Center(
+                child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10)))),
             const SizedBox(height: 24),
-            const Text("Schedule New Event", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFF1E293B))),
+            const Text("Schedule New Event",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF1E293B))),
             const SizedBox(height: 20),
             TextField(
               controller: titleCtrl,
@@ -59,7 +105,9 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
                 hintText: "Event Title (e.g. Republic Day)",
                 filled: true,
                 fillColor: const Color(0xFFF8FAFC),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none),
               ),
             ),
             const SizedBox(height: 20),
@@ -84,8 +132,13 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
                     Navigator.pop(context);
                   }
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF059669), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
-                child: const Text("SAVE EVENT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900)),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF059669),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16))),
+                child: const Text("SAVE EVENT",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w900)),
               ),
             ),
           ],
@@ -94,49 +147,49 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildCleanBottomNav() {
-    return Container(
-      decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onBottomNavTap,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: Colors.grey.shade400,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 24), activeIcon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search_rounded, size: 24), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded, size: 24), label: 'Activity'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded, size: 24), label: 'More'),
-        ],
-      ),
-    );
-  }
+  // Widget _buildCleanBottomNav() {
+  //   return Container(
+  //     decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
+  //       onTap: _onBottomNavTap,
+  //       selectedItemColor: const Color(0xFF1D4ED8),
+  //       unselectedItemColor: Colors.grey.shade400,
+  //       type: BottomNavigationBarType.fixed,
+  //       backgroundColor: Colors.white,
+  //       elevation: 0,
+  //       selectedFontSize: 12,
+  //       unselectedFontSize: 12,
+  //       items: const [
+  //         BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 24), activeIcon: Icon(Icons.home_filled), label: 'Home'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.search_rounded, size: 24), label: 'Search'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded, size: 24), label: 'Activity'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded, size: 24), label: 'More'),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -197,10 +250,9 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
       ),
 
       // 🔻 BOTTOM NAV
-      bottomNavigationBar: _buildCleanBottomNav(),
+      // bottomNavigationBar: _buildCleanBottomNav(),
     );
   }
-
 
   Widget _buildPremiumHeader() {
     return Container(
@@ -322,11 +374,22 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
             // Date Box
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(color: const Color(0xFFF8FAFC), borderRadius: BorderRadius.circular(15), border: Border.all(color: const Color(0xFFE2E8F0))),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFF8FAFC),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: const Color(0xFFE2E8F0))),
               child: Column(
                 children: [
-                  Text(event['date'].split(' ')[0], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF059669))),
-                  Text(event['month'], style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Color(0xFF64748B))),
+                  Text(event['date'].split(' ')[0],
+                      style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xFF059669))),
+                  Text(event['month'],
+                      style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF64748B))),
                 ],
               ),
             ),
@@ -341,12 +404,17 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
                       _categoryTag(event['category']),
                       GestureDetector(
                         onTap: () => _deleteEvent(event['id']),
-                        child: const Icon(Icons.delete_outline_rounded, color: Color(0xFFEF4444), size: 20),
+                        child: const Icon(Icons.delete_outline_rounded,
+                            color: Color(0xFFEF4444), size: 20),
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Text(event['title'], style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+                  Text(event['title'],
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF1E293B))),
                   const SizedBox(height: 12),
                   Row(
                     children: [
@@ -364,9 +432,33 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
     );
   }
 
-  Widget _categoryTag(String label) => Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: const Color(0xFFECFDF5), borderRadius: BorderRadius.circular(8)), child: Text(label, style: const TextStyle(color: Color(0xFF059669), fontSize: 9, fontWeight: FontWeight.w900)));
+  Widget _categoryTag(String label) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+          color: const Color(0xFFECFDF5),
+          borderRadius: BorderRadius.circular(8)),
+      child: Text(label,
+          style: const TextStyle(
+              color: Color(0xFF059669),
+              fontSize: 9,
+              fontWeight: FontWeight.w900)));
 
-  Widget _iconDetail(IconData icon, String text) => Row(children: [Icon(icon, size: 14, color: const Color(0xFF94A3B8)), const SizedBox(width: 5), Text(text, style: const TextStyle(fontSize: 12, color: Color(0xFF64748B), fontWeight: FontWeight.w600))]);
+  Widget _iconDetail(IconData icon, String text) => Row(children: [
+        Icon(icon, size: 14, color: const Color(0xFF94A3B8)),
+        const SizedBox(width: 5),
+        Text(text,
+            style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF64748B),
+                fontWeight: FontWeight.w600))
+      ]);
 
-  Widget _buildEmptyState() => Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.event_busy_rounded, size: 60, color: Colors.grey[200]), const SizedBox(height: 16), const Text("No events found", style: TextStyle(color: Color(0xFF94A3B8), fontWeight: FontWeight.w600))]));
+  Widget _buildEmptyState() => Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Icon(Icons.event_busy_rounded, size: 60, color: Colors.grey[200]),
+        const SizedBox(height: 16),
+        const Text("No events found",
+            style: TextStyle(
+                color: Color(0xFF94A3B8), fontWeight: FontWeight.w600))
+      ]));
 }

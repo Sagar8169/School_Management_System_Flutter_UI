@@ -21,7 +21,7 @@ class Routes {
   static const String login = '/login';
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-    // ───────── AUTH / COMMON ─────────
+      // ───────── AUTH / COMMON ─────────
       case splash:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -40,15 +40,15 @@ class Routes {
           ),
         );
 
-    // ───────── PRINCIPAL ─────────
+      // ───────── PRINCIPAL ─────────
       case principalHome:
         return MaterialPageRoute(
-          builder: (_) => const HomePrincipal(),
+          builder: (_) => HomePrincipal(),
         );
 
-    // ───────── DELEGATE TO PRINCIPAL FEATURE ROUTER ─────────
+      // ───────── DELEGATE TO PRINCIPAL FEATURE ROUTER ─────────
       default:
-      // Check if the route exists within the Principal sub-routes
+        // Check if the route exists within the Principal sub-routes
         final principalRoute = PrincipalRoutes.generateRoute(settings);
         if (principalRoute != null) return principalRoute;
 

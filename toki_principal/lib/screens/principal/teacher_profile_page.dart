@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../routes/principal_routes.dart';
 import 'timetable_page.dart';
+
 class TeacherProfilePage extends StatefulWidget {
   final Map<String, dynamic> teacherData;
 
@@ -11,13 +12,23 @@ class TeacherProfilePage extends StatefulWidget {
 }
 
 class _TeacherProfilePageState extends State<TeacherProfilePage> {
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   bool _isTelugu = true;
 
   // --- ORIGINAL DATA ---
   final List<Map<String, dynamic>> _assignedClasses = [
-    {'className': 'Class 8A', 'students': 42, 'avgGrade': 85.0, 'attendance': 94.0},
-    {'className': 'Class 9B', 'students': 38, 'avgGrade': 82.0, 'attendance': 91.0},
+    {
+      'className': 'Class 8A',
+      'students': 42,
+      'avgGrade': 85.0,
+      'attendance': 94.0
+    },
+    {
+      'className': 'Class 9B',
+      'students': 38,
+      'avgGrade': 82.0,
+      'attendance': 91.0
+    },
   ];
 
   // --- ORIGINAL FUNCTIONS ---
@@ -27,27 +38,26 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
-
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +82,8 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                     const SizedBox(height: 24),
 
                     // ✨ CONTACT INFORMATION
-                    _buildInfoSection("Contact Information", Icons.contact_mail_outlined, _buildContactContent()),
+                    _buildInfoSection("Contact Information",
+                        Icons.contact_mail_outlined, _buildContactContent()),
 
                     const SizedBox(height: 24),
 
@@ -97,7 +108,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -107,14 +118,16 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 1.5)),
+        border:
+            Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 1.5)),
       ),
       child: Row(
         children: [
           // Back Button
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20, color: Color(0xFF1E293B)),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                size: 20, color: Color(0xFF1E293B)),
           ),
 
           const SizedBox(width: 4),
@@ -125,14 +138,16 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                    'Teacher Profile',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF0F172A))
-                ),
-                Text(
-                    'Aditya International School',
-                    style: TextStyle(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w600)
-                ),
+                const Text('Teacher Profile',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF0F172A))),
+                Text('Aditya International School',
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey.shade500,
+                        fontWeight: FontWeight.w600)),
               ],
             ),
           ),
@@ -152,7 +167,8 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 1.5)),
+        border:
+            Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 1.5)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,16 +176,29 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           Row(
             children: [
               Container(
-                width: 38, height: 38,
-                decoration: BoxDecoration(color: const Color(0xFF1D4ED8), borderRadius: BorderRadius.circular(10)),
-                child: const Center(child: Text('A', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18))),
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF1D4ED8),
+                    borderRadius: BorderRadius.circular(10)),
+                child: const Center(
+                    child: Text('A',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18))),
               ),
               const SizedBox(width: 12),
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Faculty Insights', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
-                  Text('Aditya International School', style: TextStyle(fontSize: 10, color: Colors.grey)),
+                  Text('Faculty Insights',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF1E293B))),
+                  Text('Aditya International School',
+                      style: TextStyle(fontSize: 10, color: Colors.grey)),
                 ],
               ),
             ],
@@ -185,8 +214,14 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(20)),
-        child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.w800, fontSize: 11)),
+        decoration: BoxDecoration(
+            color: const Color(0xFFEFF6FF),
+            borderRadius: BorderRadius.circular(20)),
+        child: Text(_isTelugu ? 'తెలుగు' : 'English',
+            style: const TextStyle(
+                color: Color(0xFF1D4ED8),
+                fontWeight: FontWeight.w800,
+                fontSize: 11)),
       ),
     );
   }
@@ -198,11 +233,16 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         children: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color(0xFF1E293B)),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                size: 18, color: Color(0xFF1E293B)),
             visualDensity: VisualDensity.compact,
           ),
           const SizedBox(width: 8),
-          const Text('Teachers Profile', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900, color: Color(0xFF0F172A))),
+          const Text('Teachers Profile',
+              style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF0F172A))),
         ],
       ),
     );
@@ -213,21 +253,35 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFFBE481E), Color(0xFFD75B28)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: const LinearGradient(
+            colors: [Color(0xFFBE481E), Color(0xFFD75B28)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight),
         borderRadius: BorderRadius.circular(28),
-        boxShadow: [BoxShadow(color: const Color(0xFFD75B28).withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 10))],
+        boxShadow: [
+          BoxShadow(
+              color: const Color(0xFFD75B28).withOpacity(0.3),
+              blurRadius: 20,
+              offset: const Offset(0, 10))
+        ],
       ),
       child: Column(
         children: [
           Row(
             children: [
               Container(
-                width: 65, height: 65,
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(18)),
+                width: 65,
+                height: 65,
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(18)),
                 child: Center(
                   child: Text(
                     widget.teacherData['name'][0].toUpperCase(),
-                    style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w900),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900),
                   ),
                 ),
               ),
@@ -236,25 +290,44 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.teacherData['name'], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Colors.white)),
-                    Text(widget.teacherData['role'] ?? 'Senior Faculty', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 13, fontWeight: FontWeight.w500)),
+                    Text(widget.teacherData['name'],
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white)),
+                    Text(widget.teacherData['role'] ?? 'Senior Faculty',
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.8),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500)),
                     const SizedBox(height: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(6)),
-                      child: const Text("OFFICIAL", style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w900)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(6)),
+                      child: const Text("OFFICIAL",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900)),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Divider(height: 1, color: Colors.white24)),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Divider(height: 1, color: Colors.white24)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildCompactInfo("SUBJECT", widget.teacherData['subject'] ?? 'N/A'),
-              _buildCompactInfo("EXPERIENCE", widget.teacherData['experience'] ?? 'N/A'),
+              _buildCompactInfo(
+                  "SUBJECT", widget.teacherData['subject'] ?? 'N/A'),
+              _buildCompactInfo(
+                  "EXPERIENCE", widget.teacherData['experience'] ?? 'N/A'),
             ],
           ),
         ],
@@ -266,9 +339,18 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: Colors.white70, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 10,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.5)),
         const SizedBox(height: 4),
-        Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)),
+        Text(value,
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+                color: Colors.white)),
       ],
     );
   }
@@ -340,7 +422,6 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       ),
     );
   }
-
 
   Widget _buildContactContent() {
     return Column(children: [
@@ -496,6 +577,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       ),
     );
   }
+
   Widget _buildPerformanceSummary() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -518,10 +600,10 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
   }
 
   Widget _statBox(
-      String val,
-      String label,
-      Color color,
-      ) {
+    String val,
+    String label,
+    Color color,
+  ) {
     return Container(
       width: (MediaQuery.of(context).size.width - 56) / 2,
       padding: const EdgeInsets.symmetric(vertical: 22),
@@ -575,7 +657,6 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
   }
 
-
   Widget _buildActionButtons() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -598,7 +679,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             "View My Performance",
             Icons.analytics_rounded,
             const Color(0xFF1D4ED8),
-                () {
+            () {
               // Agar aapke paas teacher analytics route hai toh yahan dalo
               Navigator.pushNamed(context, '/teacherPerformance');
             },
@@ -614,10 +695,11 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                   "Timetable",
                   Icons.calendar_today_rounded,
                   const Color(0xFF1D4ED8),
-                      () {
+                  () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const TimetablePage()),
+                      MaterialPageRoute(
+                          builder: (context) => const TimetablePage()),
                     );
                   },
                 ),
@@ -630,7 +712,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                   "Contact",
                   Icons.chat_bubble_outline_rounded,
                   const Color(0xFF10B981),
-                      () {
+                  () {
                     // Yahan hum teacher ka naam direct widget se uthayenge
                     // Maan lo aapke widget mein 'name' field hai
                     _showContactOptions(context, "Teacher");
@@ -732,6 +814,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       ),
     );
   }
+
   Widget _contactActionCard({
     required IconData icon,
     required String label,
@@ -780,25 +863,30 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
   }
 
-  Widget _contactMethod(IconData icon, String label, Color color, VoidCallback onTap) {
+  Widget _contactMethod(
+      IconData icon, String label, Color color, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
+            decoration: BoxDecoration(
+                color: color.withOpacity(0.1), shape: BoxShape.circle),
             child: Icon(icon, color: color, size: 28),
           ),
           const SizedBox(height: 8),
-          Text(label, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: color)),
+          Text(label,
+              style: TextStyle(
+                  fontWeight: FontWeight.w800, fontSize: 13, color: color)),
         ],
       ),
     );
   }
 
 // --- REUSABLE BUTTON HELPERS ---
-  Widget _buildMainActionBtn(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildMainActionBtn(
+      String label, IconData icon, Color color, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
@@ -808,21 +896,31 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [BoxShadow(color: color.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8))],
+          boxShadow: [
+            BoxShadow(
+                color: color.withOpacity(0.3),
+                blurRadius: 15,
+                offset: const Offset(0, 8))
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, color: Colors.white, size: 20),
             const SizedBox(width: 10),
-            Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 15)),
+            Text(label,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 15)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSecondaryTile(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildSecondaryTile(
+      String label, IconData icon, Color color, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
@@ -837,24 +935,46 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           children: [
             Container(
               padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: color.withOpacity(0.1), shape: BoxShape.circle),
               child: Icon(icon, color: color, size: 20),
             ),
             const SizedBox(height: 10),
-            Text(label, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: Color(0xFF1E293B))),
+            Text(label,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                    color: Color(0xFF1E293B))),
           ],
         ),
       ),
     );
   }
 
-
   Widget _btn(String label, Color color, bool primary) {
     return SizedBox(
-      width: double.infinity, height: 55,
+      width: double.infinity,
+      height: 55,
       child: primary
-          ? ElevatedButton(onPressed: () {}, style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)), elevation: 0), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w800)))
-          : OutlinedButton(onPressed: () {}, style: OutlinedButton.styleFrom(foregroundColor: color, side: BorderSide(color: color, width: 1.5), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))), child: Text(label, style: const TextStyle(fontWeight: FontWeight.w800))),
+          ? ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: color,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  elevation: 0),
+              child: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w800)))
+          : OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: color,
+                  side: BorderSide(color: color, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16))),
+              child: Text(label,
+                  style: const TextStyle(fontWeight: FontWeight.w800))),
     );
   }
 
@@ -862,39 +982,47 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF94A3B8), fontWeight: FontWeight.w700)),
-        Text(val, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF1E293B))),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF94A3B8),
+                fontWeight: FontWeight.w700)),
+        Text(val,
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF1E293B))),
       ],
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex, onTap: _onBottomNavTap,
-        type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildBottomNavigationBar() {
+  //   return Container(
+  //     decoration: const BoxDecoration(border: Border(top: BorderSide(color: Color(0xFFF1F5F9)))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex, onTap: _onBottomNavTap,
+  //       type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
+  //       selectedItemColor: const Color(0xFF1D4ED8), unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0, selectedFontSize: 11, unselectedFontSize: 11,
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
