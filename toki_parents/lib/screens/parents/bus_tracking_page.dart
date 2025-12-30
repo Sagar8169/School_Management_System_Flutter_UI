@@ -1,9 +1,7 @@
 // lib/screens/parents/bus_tracking_page.dart
 import 'package:flutter/material.dart';
-import '../../routes/parents_routes.dart';
-final Color _primaryOrange = const Color(0xFFFF5722);
 
-final Color _accentOrange = const Color(0xFFFF5722);
+const Color _primaryOrange = Color(0xFFFF5722);
 
 class BusTrackingPage extends StatefulWidget {
   const BusTrackingPage({Key? key}) : super(key: key);
@@ -41,14 +39,14 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
     });
   }
 
-  void _onBottomNavTap(int index) {
-    if (index == 0)
-      Navigator.pushReplacementNamed(context, ParentsRoutes.home);
-    else if (index == 1)
-      Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-    else if (index == 3) Navigator.pushReplacementNamed(
-        context, ParentsRoutes.moreOptions);
-  }
+  // void _onBottomNavTap(int index) {
+  //   if (index == 0)
+  //     Navigator.pushReplacementNamed(context, ParentsRoutes.home);
+  //   else if (index == 1)
+  //     Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
+  //   else if (index == 3) Navigator.pushReplacementNamed(
+  //       context, ParentsRoutes.moreOptions);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +76,7 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(), // Custom bottom nav for premium feel
+      // bottomNavigationBar: _buildBottomNav(), // Custom bottom nav for premium feel
     );
   }
 
@@ -87,8 +85,8 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(
-            bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        border:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
       ),
       child: Row(
         children: [
@@ -100,15 +98,18 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
                   colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
               borderRadius: BorderRadius.circular(14),
               boxShadow: [
-                BoxShadow(color: _primaryOrange.withOpacity(0.25),
+                BoxShadow(
+                    color: _primaryOrange.withOpacity(0.25),
                     blurRadius: 12,
                     offset: const Offset(0, 6))
               ],
             ),
             alignment: Alignment.center,
-            child: const Text("A", style: TextStyle(color: Colors.white,
-                fontWeight: FontWeight.w900,
-                fontSize: 22)),
+            child: const Text("A",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -116,22 +117,25 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Aditya International", style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 17,
-                    letterSpacing: -0.6,
-                    color: Color(0xFF1A1A1A))),
+                const Text("Aditya International",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        letterSpacing: -0.6,
+                        color: Color(0xFF1A1A1A))),
                 Row(
                   children: [
-                    Container(width: 6,
+                    Container(
+                        width: 6,
                         height: 6,
                         decoration: const BoxDecoration(
                             color: Color(0xFF10B981), shape: BoxShape.circle)),
                     const SizedBox(width: 6),
-                    Text("Support Portal Active", style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600)),
+                    Text("Support Portal Active",
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ],
@@ -148,16 +152,19 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: Colors.white,
+        decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: Colors.grey.shade200)),
         child: Row(
           children: [
             Icon(Icons.translate, size: 14, color: _primaryOrange),
             const SizedBox(width: 4),
-            Text(_selectedLanguage, style: TextStyle(color: _primaryOrange,
-                fontWeight: FontWeight.bold,
-                fontSize: 12)),
+            Text(_selectedLanguage,
+                style: TextStyle(
+                    color: _primaryOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12)),
           ],
         ),
       ),
@@ -166,12 +173,9 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
 
   Widget _buildHeroSection() {
     // Logic to determine session based on current time or data
-    bool isMorning = DateTime
-        .now()
-        .hour < 12;
-    String tripLabel = isMorning
-        ? "Morning Trip (Pickup)"
-        : "Evening Trip (Drop)";
+    bool isMorning = DateTime.now().hour < 12;
+    String tripLabel =
+        isMorning ? "Morning Trip (Pickup)" : "Evening Trip (Drop)";
 
     return Container(
       width: double.infinity,
@@ -195,26 +199,28 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
                       padding: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
                           color: Colors.white24, shape: BoxShape.circle),
-                      child: const Icon(
-                          Icons.arrow_back_ios_new, color: Colors.white,
-                          size: 16),
+                      child: const Icon(Icons.arrow_back_ios_new,
+                          color: Colors.white, size: 16),
                     ),
                   ),
                   const SizedBox(width: 12),
-                  const Text("Bus Tracking", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700)),
+                  const Text("Bus Tracking",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700)),
                 ],
               ),
               // ✨ Session Badge
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8)),
                 child: Text(isMorning ? "MORNING" : "EVENING",
-                    style: const TextStyle(color: Colors.white,
+                    style: const TextStyle(
+                        color: Colors.white,
                         fontSize: 10,
                         fontWeight: FontWeight.w900)),
               ),
@@ -224,35 +230,39 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(color: _darkOrangeCard,
+            decoration: BoxDecoration(
+                color: _darkOrangeCard,
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [
                 Row(
                   children: [
-                    const Icon(
-                        Icons.directions_bus, color: Colors.white, size: 28),
+                    const Icon(Icons.directions_bus,
+                        color: Colors.white, size: 28),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tripLabel, style: const TextStyle(color: Colors
-                              .white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500)),
-                          const Text("Bus Route 5", style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
+                          Text(tripLabel,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500)),
+                          const Text("Bus Route 5",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ),
-                    const Icon(Icons.wifi_tethering, color: Colors.greenAccent,
-                        size: 20),
+                    const Icon(Icons.wifi_tethering,
+                        color: Colors.greenAccent, size: 20),
                   ],
                 ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 16),
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
                     child: Divider(color: Colors.white24, height: 1)),
                 _heroStatRow("Current Location", "Sector 12 Main Road"),
                 const SizedBox(height: 8),
@@ -267,43 +277,46 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
     );
   }
 
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 2,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w700, fontSize: 11),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home_rounded),
-            label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined),
-            activeIcon: Icon(Icons.analytics_rounded),
-            label: "Reports"),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined),
-            activeIcon: Icon(Icons.directions_bus_rounded),
-            label: "Bus"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined),
-            activeIcon: Icon(Icons.grid_view_rounded),
-            label: "More"),
-      ],
-    );
-  }
-
+  // Widget _buildBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: 2,
+  //     onTap: _onBottomNavTap,
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: _accentOrange,
+  //     backgroundColor: Colors.white,
+  //     selectedLabelStyle: const TextStyle(
+  //         fontWeight: FontWeight.w900, fontSize: 11),
+  //     unselectedLabelStyle: const TextStyle(
+  //         fontWeight: FontWeight.w700, fontSize: 11),
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
+  //           activeIcon: Icon(Icons.home_rounded),
+  //           label: "Home"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined),
+  //           activeIcon: Icon(Icons.analytics_rounded),
+  //           label: "Reports"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined),
+  //           activeIcon: Icon(Icons.directions_bus_rounded),
+  //           label: "Bus"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined),
+  //           activeIcon: Icon(Icons.grid_view_rounded),
+  //           label: "More"),
+  //     ],
+  //   );
+  // }
 
   Widget _heroStatRow(String label, String value) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: TextStyle(
-            color: Colors.white.withOpacity(0.8), fontSize: 12)),
-        Text(value, style: const TextStyle(
-            color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+        Text(label,
+            style:
+                TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 12)),
+        Text(value,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600)),
       ],
     );
   }
@@ -313,14 +326,15 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(color: const Color(0xFFF3F4F6),
+        decoration: BoxDecoration(
+            color: const Color(0xFFF3F4F6),
             borderRadius: BorderRadius.circular(14)),
         child: Row(
           children: [
-            _toggleBtn("Live Tracking", _isLiveTracking, () =>
-                setState(() => _isLiveTracking = true)),
-            _toggleBtn("Trip History", !_isLiveTracking, () =>
-                setState(() => _isLiveTracking = false)),
+            _toggleBtn("Live Tracking", _isLiveTracking,
+                () => setState(() => _isLiveTracking = true)),
+            _toggleBtn("Trip History", !_isLiveTracking,
+                () => setState(() => _isLiveTracking = false)),
           ],
         ),
       ),
@@ -337,15 +351,19 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
           decoration: BoxDecoration(
             color: isSelected ? _headerOrange : Colors.transparent,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: isSelected ? [
-              BoxShadow(color: _headerOrange.withOpacity(0.3), blurRadius: 8)
-            ] : [],
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                        color: _headerOrange.withOpacity(0.3), blurRadius: 8)
+                  ]
+                : [],
           ),
           child: Center(
-            child: Text(title, style: TextStyle(
-                color: isSelected ? Colors.white : _textSecondary,
-                fontWeight: FontWeight.w600,
-                fontSize: 14)),
+            child: Text(title,
+                style: TextStyle(
+                    color: isSelected ? Colors.white : _textSecondary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14)),
           ),
         ),
       ),
@@ -363,8 +381,8 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
           const SizedBox(height: 20),
           _timelineStop("School Gate", "7:30 AM", status: "passed"),
           _timelineStop("Sector 11 Park", "7:42 AM", status: "current"),
-          _timelineStop(
-              _userStop, "8:00 AM", status: "future", isUserStop: true),
+          _timelineStop(_userStop, "8:00 AM",
+              status: "future", isUserStop: true),
           _timelineStop("School", "8:15 AM", status: "future", isLast: true),
         ],
       ),
@@ -372,10 +390,12 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
   }
 
   Widget _timelineStop(String name, String time,
-      {String status = "future", bool isUserStop = false, bool isLast = false}) {
-    Color dotColor = status == "passed" ? _greenBadgeText : (status == "current"
-        ? _headerOrange
-        : Colors.grey.shade300);
+      {String status = "future",
+      bool isUserStop = false,
+      bool isLast = false}) {
+    Color dotColor = status == "passed"
+        ? _greenBadgeText
+        : (status == "current" ? _headerOrange : Colors.grey.shade300);
     if (isUserStop) dotColor = _userStopIcon;
 
     return IntrinsicHeight(
@@ -384,23 +404,28 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
           Column(
             children: [
               Container(
-                width: 22, height: 22,
+                width: 22,
+                height: 22,
                 decoration: BoxDecoration(
                   color: dotColor,
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 4),
                   boxShadow: [
-                    if(status == "current" || isUserStop) BoxShadow(
-                        color: dotColor.withOpacity(0.4),
-                        blurRadius: 10,
-                        spreadRadius: 2)
+                    if (status == "current" || isUserStop)
+                      BoxShadow(
+                          color: dotColor.withOpacity(0.4),
+                          blurRadius: 10,
+                          spreadRadius: 2)
                   ],
                 ),
-                child: status == "passed" ? const Icon(
-                    Icons.check, size: 10, color: Colors.white) : null,
+                child: status == "passed"
+                    ? const Icon(Icons.check, size: 10, color: Colors.white)
+                    : null,
               ),
-              if (!isLast) Expanded(child: VerticalDivider(
-                  color: Colors.grey.shade300, thickness: 2, width: 22)),
+              if (!isLast)
+                Expanded(
+                    child: VerticalDivider(
+                        color: Colors.grey.shade300, thickness: 2, width: 22)),
             ],
           ),
           const SizedBox(width: 16),
@@ -420,19 +445,26 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(name, style: TextStyle(fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: isUserStop ? _userStopIcon : _textPrimary)),
-                        Text(isUserStop
-                            ? "Registered Stop for $_userChildName"
-                            : "Bus Stop", style: TextStyle(
-                            color: _textSecondary, fontSize: 11)),
+                        Text(name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                                color:
+                                    isUserStop ? _userStopIcon : _textPrimary)),
+                        Text(
+                            isUserStop
+                                ? "Registered Stop for $_userChildName"
+                                : "Bus Stop",
+                            style:
+                                TextStyle(color: _textSecondary, fontSize: 11)),
                       ],
                     ),
                   ),
-                  Text(time, style: TextStyle(fontWeight: FontWeight.bold,
-                      color: _textPrimary,
-                      fontSize: 13)),
+                  Text(time,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: _textPrimary,
+                          fontSize: 13)),
                 ],
               ),
             ),
@@ -468,7 +500,8 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.grey.shade100),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.02),
+          BoxShadow(
+              color: Colors.black.withOpacity(0.02),
               blurRadius: 10,
               offset: const Offset(0, 4))
         ],
@@ -477,10 +510,15 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(color: badgeColor.withOpacity(0.1),
+            decoration: BoxDecoration(
+                color: badgeColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12)),
-            child: Icon(type == "Pickup" ? Icons.wb_sunny_outlined : Icons
-                .nights_stay_outlined, color: badgeColor, size: 20),
+            child: Icon(
+                type == "Pickup"
+                    ? Icons.wb_sunny_outlined
+                    : Icons.nights_stay_outlined,
+                color: badgeColor,
+                size: 20),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -489,15 +527,18 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
               children: [
                 Row(
                   children: [
-                    Text(session, style: TextStyle(color: badgeColor,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 0.5)),
+                    Text(session,
+                        style: TextStyle(
+                            color: badgeColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 0.5)),
                     const SizedBox(width: 8),
-                    Text(date, style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Color(0xFF1F2937))),
+                    Text(date,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Color(0xFF1F2937))),
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -510,9 +551,11 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
                 color: _greenBadgeBg, borderRadius: BorderRadius.circular(6)),
-            child: Text("COMPLETED", style: TextStyle(color: _greenBadgeText,
-                fontSize: 9,
-                fontWeight: FontWeight.w900)),
+            child: Text("COMPLETED",
+                style: TextStyle(
+                    color: _greenBadgeText,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w900)),
           )
         ],
       ),

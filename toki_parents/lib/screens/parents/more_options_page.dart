@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-final Color _accentOrange = const Color(0xFFFF5722);
-final Color _primaryOrange = const Color(0xFFFF5722);
+
+const Color _primaryOrange = Color(0xFFFF5722);
 
 class MoreOptionsPage extends StatefulWidget {
   const MoreOptionsPage({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class MoreOptionsPage extends StatefulWidget {
 
 class _MoreOptionsPageState extends State<MoreOptionsPage> {
   String _selectedLanguage = 'తెలుగు';
-  int _currentIndex = 3;
   File? _profileImage;
   final ImagePicker _picker = ImagePicker();
 
@@ -42,16 +41,16 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
   final Color _redIconColor = const Color(0xFFEF4444);
 
   // --- NAVIGATION LOGIC ---
-  void _onBottomNavTap(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, '/parents/home'); break;
-      case 1: Navigator.pushReplacementNamed(context, '/parents/reports'); break;
-      case 2: Navigator.pushReplacementNamed(context, '/parents/bus-tracking'); break;
-      case 3: break;
-    }
-  }
+  // void _onBottomNavTap(int index) {
+  //   if (index == _currentIndex) return;
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0: Navigator.pushReplacementNamed(context, '/parents/home'); break;
+  //     case 1: Navigator.pushReplacementNamed(context, '/parents/reports'); break;
+  //     case 2: Navigator.pushReplacementNamed(context, '/parents/bus-tracking'); break;
+  //     case 3: break;
+  //   }
+  // }
 
   // --- 1. PREMIUM LOGOUT DIALOG ---
   void _logout() {
@@ -87,19 +86,24 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                     color: _redIconBg,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.logout_rounded, color: _redIconColor, size: 40),
+                  child: Icon(Icons.logout_rounded,
+                      color: _redIconColor, size: 40),
                 ),
                 const SizedBox(height: 20),
                 // Text content
                 const Text(
                   "Sign Out",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF1F2937)),
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF1F2937)),
                 ),
                 const SizedBox(height: 10),
                 const Text(
                   "Are you sure you want to logout?\nYou will need to login again to access your data.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14, color: Color(0xFF6B7280), height: 1.5),
+                  style: TextStyle(
+                      fontSize: 14, color: Color(0xFF6B7280), height: 1.5),
                 ),
                 const SizedBox(height: 32),
                 // Action Buttons
@@ -111,22 +115,31 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: Colors.grey.shade300),
                           padding: const EdgeInsets.symmetric(vertical: 15),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
                         ),
-                        child: const Text("CANCEL", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54)),
+                        child: const Text("CANCEL",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54)),
                       ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushReplacementNamed(context, '/'),
+                        onPressed: () =>
+                            Navigator.pushReplacementNamed(context, '/'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _redIconColor,
                           elevation: 0,
                           padding: const EdgeInsets.symmetric(vertical: 15),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
                         ),
-                        child: const Text("LOGOUT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                        child: const Text("LOGOUT",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ],
@@ -145,29 +158,43 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
       builder: (context) => StatefulBuilder(
         builder: (context, setSheetState) => Padding(
-          padding: EdgeInsets.fromLTRB(24, 24, 24, MediaQuery.of(context).viewPadding.bottom + 20),
+          padding: EdgeInsets.fromLTRB(
+              24, 24, 24, MediaQuery.of(context).viewPadding.bottom + 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+              Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10))),
               const SizedBox(height: 20),
-              const Text("Settings", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+              const Text("Settings",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
               SwitchListTile(
                 title: const Text("Push Notifications"),
                 subtitle: const Text("Receive daily updates"),
                 activeColor: _headerOrange,
                 value: _pushNotifications,
-                onChanged: (v) { setSheetState(() => _pushNotifications = v); setState(() {}); },
+                onChanged: (v) {
+                  setSheetState(() => _pushNotifications = v);
+                  setState(() {});
+                },
               ),
               SwitchListTile(
                 title: const Text("SMS Alerts"),
                 subtitle: const Text("Emergency notices via SMS"),
                 activeColor: _headerOrange,
                 value: _smsAlerts,
-                onChanged: (v) { setSheetState(() => _smsAlerts = v); setState(() {}); },
+                onChanged: (v) {
+                  setSheetState(() => _smsAlerts = v);
+                  setState(() {});
+                },
               ),
               const SizedBox(height: 20),
               _buildModernButton("SAVE", () => Navigator.pop(context)),
@@ -187,24 +214,36 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         height: MediaQuery.of(context).size.height * 0.8,
-        decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
         child: Column(
           children: [
             const SizedBox(height: 12),
-            Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+            Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10))),
             const Padding(
               padding: EdgeInsets.all(20),
-              child: Text("Academic Calendar 2025-26", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
+              child: Text("Academic Calendar 2025-26",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
             ),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   _buildEventTile("Jan 15", "Pongal Holidays", "School closed"),
-                  _buildEventTile("Jan 26", "Republic Day", "Flag hoisting at 8:30 AM"),
-                  _buildEventTile("Feb 12", "Unit Test - II", "Syllabus in reports"),
-                  _buildEventTile("Mar 05", "Annual Sports Meet", "School Ground"),
+                  _buildEventTile(
+                      "Jan 26", "Republic Day", "Flag hoisting at 8:30 AM"),
+                  _buildEventTile(
+                      "Feb 12", "Unit Test - II", "Syllabus in reports"),
+                  _buildEventTile(
+                      "Mar 05", "Annual Sports Meet", "School Ground"),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -242,10 +281,12 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
             12,
             24,
             mediaQuery.viewInsets.bottom + // keyboard
-                mediaQuery.viewPadding.bottom + // system safe area (gesture bar)
+                mediaQuery
+                    .viewPadding.bottom + // system safe area (gesture bar)
                 16,
           ),
-          child: SingleChildScrollView( // Added scroll for smaller screens
+          child: SingleChildScrollView(
+            // Added scroll for smaller screens
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -284,20 +325,25 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                     Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: _headerOrange.withOpacity(0.2), width: 4),
+                        border: Border.all(
+                            color: _headerOrange.withOpacity(0.2), width: 4),
                       ),
                       child: CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.grey.shade100,
-                        backgroundImage: _profileImage != null ? FileImage(_profileImage!) : null,
+                        backgroundImage: _profileImage != null
+                            ? FileImage(_profileImage!)
+                            : null,
                         child: _profileImage == null
                             ? Text(
-                          userName.isNotEmpty ? userName[0].toUpperCase() : 'A',
-                          style: TextStyle(
-                              color: _headerOrange,
-                              fontSize: 36,
-                              fontWeight: FontWeight.bold),
-                        )
+                                userName.isNotEmpty
+                                    ? userName[0].toUpperCase()
+                                    : 'A',
+                                style: TextStyle(
+                                    color: _headerOrange,
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.bold),
+                              )
                             : null,
                       ),
                     ),
@@ -306,7 +352,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                       right: 2,
                       child: GestureDetector(
                         onTap: () async {
-                          final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                          final XFile? image = await _picker.pickImage(
+                              source: ImageSource.gallery);
                           if (image != null) {
                             setState(() => _profileImage = File(image.path));
                             setSheetState(() {});
@@ -326,7 +373,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                               ),
                             ],
                           ),
-                          child: const Icon(Icons.edit_rounded, size: 18, color: Colors.white),
+                          child: const Icon(Icons.edit_rounded,
+                              size: 18, color: Colors.white),
                         ),
                       ),
                     ),
@@ -337,8 +385,10 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
 
                 /// Inputs with Better Feedback
                 _buildModernInput("Full Name", nameCtrl, Icons.person_rounded),
-                _buildModernInput("Email Address", emailCtrl, Icons.email_rounded),
-                _buildModernInput("Phone Number", phoneCtrl, Icons.phone_android_rounded),
+                _buildModernInput(
+                    "Email Address", emailCtrl, Icons.email_rounded),
+                _buildModernInput(
+                    "Phone Number", phoneCtrl, Icons.phone_android_rounded),
 
                 const SizedBox(height: 32),
 
@@ -360,7 +410,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _headerOrange,
                       foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18)),
                       elevation: 0,
                     ),
                     onPressed: () {
@@ -373,7 +424,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                     },
                     child: const Text(
                       "Save Profile",
-                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -387,7 +439,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
     );
   }
 
-  Widget _buildModernInput(String label, TextEditingController ctrl, IconData icon) {
+  Widget _buildModernInput(
+      String label, TextEditingController ctrl, IconData icon) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 18),
       child: TextField(
@@ -395,7 +448,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
         style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+          labelStyle: TextStyle(
+              color: Colors.grey.shade500, fontWeight: FontWeight.w500),
           prefixIcon: Icon(icon, color: _headerOrange, size: 22),
           filled: true,
           fillColor: Colors.grey.shade50,
@@ -407,11 +461,13 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(color: _headerOrange, width: 1.5),
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
         ),
       ),
     );
   }
+
   void _showSupportSheet() {
     showModalBottomSheet(
       context: context,
@@ -422,7 +478,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
       ),
       builder: (context) => Padding(
-        padding: EdgeInsets.fromLTRB(24, 16, 24, MediaQuery.of(context).padding.bottom + 20),
+        padding: EdgeInsets.fromLTRB(
+            24, 16, 24, MediaQuery.of(context).padding.bottom + 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -486,7 +543,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
               onPressed: () => Navigator.pop(context),
               child: Text(
                 "Dismiss",
-                style: TextStyle(color: Colors.grey.shade400, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Colors.grey.shade400, fontWeight: FontWeight.w600),
               ),
             )
           ],
@@ -569,12 +627,19 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey.shade200)),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.grey.shade200)),
         child: Row(
           children: [
             Icon(Icons.translate, size: 14, color: _primaryOrange),
             const SizedBox(width: 4),
-            Text(_selectedLanguage, style: TextStyle(color: _primaryOrange, fontWeight: FontWeight.bold, fontSize: 12)),
+            Text(_selectedLanguage,
+                style: TextStyle(
+                    color: _primaryOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12)),
           ],
         ),
       ),
@@ -597,7 +662,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
       ),
       builder: (context) => Padding(
-        padding: EdgeInsets.fromLTRB(24, 16, 24, MediaQuery.of(context).padding.bottom + 24),
+        padding: EdgeInsets.fromLTRB(
+            24, 16, 24, MediaQuery.of(context).padding.bottom + 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -613,7 +679,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
             const SizedBox(height: 24),
 
             /// Header with Icon
-            const Icon(Icons.school_rounded, size: 40, color: Color(0xFF6C63FF)), // Theme color
+            const Icon(Icons.school_rounded,
+                size: 40, color: Color(0xFF6C63FF)), // Theme color
             const SizedBox(height: 12),
             const Text(
               "Contact School",
@@ -635,7 +702,10 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
               icon: Icons.phone_forwarded_rounded,
               title: "Call Office",
               value: "+91 888 777 6666",
-              gradient: [Color(0xFF4CAF50), Color(0xFF81C784)], // Green Gradient
+              gradient: [
+                Color(0xFF4CAF50),
+                Color(0xFF81C784)
+              ], // Green Gradient
               onTap: () {
                 // Action: Call
               },
@@ -653,7 +723,10 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
               icon: Icons.location_on_rounded,
               title: "Visit Campus",
               value: "Surampalem Campus, Andhra Pradesh",
-              gradient: [Color(0xFFFF7043), Color(0xFFFFAB91)], // Orange/Red Gradient
+              gradient: [
+                Color(0xFFFF7043),
+                Color(0xFFFFAB91)
+              ], // Orange/Red Gradient
               onTap: () {
                 // Action: Maps
               },
@@ -671,11 +744,15 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.access_time_filled_rounded, size: 16, color: Colors.grey.shade400),
+                  Icon(Icons.access_time_filled_rounded,
+                      size: 16, color: Colors.grey.shade400),
                   const SizedBox(width: 8),
                   Text(
                     "Available: Mon - Sat (9:00 AM - 5:00 PM)",
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 12, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -763,7 +840,8 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                   color: Colors.grey.shade50,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey.shade400),
+                child: Icon(Icons.arrow_forward_ios_rounded,
+                    size: 14, color: Colors.grey.shade400),
               ),
             ],
           ),
@@ -787,24 +865,56 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
                   children: [
                     _buildHeroSection(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _buildSectionTitle('Profile & Settings'),
                           const SizedBox(height: 12),
-                          _buildSettingsCard('My Profile', 'View and edit details', Icons.person_outline, _blueIconBg, _blueIconColor, _showProfileForm),
-                          _buildSettingsCard('Settings', 'App preferences', Icons.settings_outlined, _purpleIconBg, _purpleIconColor, _showSettingsSheet),
+                          _buildSettingsCard(
+                              'My Profile',
+                              'View and edit details',
+                              Icons.person_outline,
+                              _blueIconBg,
+                              _blueIconColor,
+                              _showProfileForm),
+                          _buildSettingsCard(
+                              'Settings',
+                              'App preferences',
+                              Icons.settings_outlined,
+                              _purpleIconBg,
+                              _purpleIconColor,
+                              _showSettingsSheet),
                           const SizedBox(height: 24),
                           _buildSectionTitle('Academic'),
                           const SizedBox(height: 12),
-                          _buildSettingsCard('Academic Calendar', 'View year schedule', Icons.calendar_today_outlined, _orangeIconBg, _orangeIconColor, _showCalendarSheet),
+                          _buildSettingsCard(
+                              'Academic Calendar',
+                              'View year schedule',
+                              Icons.calendar_today_outlined,
+                              _orangeIconBg,
+                              _orangeIconColor,
+                              _showCalendarSheet),
                           const SizedBox(height: 24),
                           _buildSectionTitle('Support'),
                           const SizedBox(height: 12),
-                          _buildSettingsCard('Help & Support', 'Get app help', Icons.info_outline, _redIconBg, _redIconColor, _showSupportSheet),
-                          _buildSettingsCard('Contact School', 'Phone & email', Icons.chat_bubble_outline, _blueIconBg, _blueIconColor, _showContactSheet),
-                          _buildSettingsCard('Logout', 'Sign out of account', Icons.logout, _redIconBg, _redIconColor, _logout),
+                          _buildSettingsCard(
+                              'Help & Support',
+                              'Get app help',
+                              Icons.info_outline,
+                              _redIconBg,
+                              _redIconColor,
+                              _showSupportSheet),
+                          _buildSettingsCard(
+                              'Contact School',
+                              'Phone & email',
+                              Icons.chat_bubble_outline,
+                              _blueIconBg,
+                              _blueIconColor,
+                              _showContactSheet),
+                          _buildSettingsCard('Logout', 'Sign out of account',
+                              Icons.logout, _redIconBg, _redIconColor, _logout),
                           const SizedBox(height: 30),
                         ],
                       ),
@@ -816,29 +926,40 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      // bottomNavigationBar: _buildBottomNav(),
     );
   }
-
 
   Widget _buildAppHeader() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        border:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
       ),
       child: Row(
         children: [
           Container(
-            width: 44, height: 44,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
+              gradient: LinearGradient(
+                  colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
               borderRadius: BorderRadius.circular(14),
-              boxShadow: [BoxShadow(color: _primaryOrange.withOpacity(0.25), blurRadius: 12, offset: const Offset(0, 6))],
+              boxShadow: [
+                BoxShadow(
+                    color: _primaryOrange.withOpacity(0.25),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6))
+              ],
             ),
             alignment: Alignment.center,
-            child: const Text("A", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 22)),
+            child: const Text("A",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -846,12 +967,25 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Aditya International", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17, letterSpacing: -0.6, color: Color(0xFF1A1A1A))),
+                const Text("Aditya International",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        letterSpacing: -0.6,
+                        color: Color(0xFF1A1A1A))),
                 Row(
                   children: [
-                    Container(width: 6, height: 6, decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle)),
+                    Container(
+                        width: 6,
+                        height: 6,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF10B981), shape: BoxShape.circle)),
                     const SizedBox(width: 6),
-                    Text("Support Portal Active", style: TextStyle(color: Colors.grey.shade500, fontSize: 11, fontWeight: FontWeight.w600)),
+                    Text("Support Portal Active",
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ],
@@ -863,34 +997,58 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
     );
   }
 
-
-
   Widget _buildHeroSection() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
-      decoration: BoxDecoration(color: _headerOrange, borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(24), bottomRight: Radius.circular(24))),
+      decoration: BoxDecoration(
+          color: _headerOrange,
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('More Options', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+          const Text('More Options',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600)),
           const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: _profileCardColor, borderRadius: BorderRadius.circular(16)),
+            decoration: BoxDecoration(
+                color: _profileCardColor,
+                borderRadius: BorderRadius.circular(16)),
             child: Row(
               children: [
                 CircleAvatar(
                   radius: 24,
                   backgroundColor: _avatarColor,
-                  backgroundImage: _profileImage != null ? FileImage(_profileImage!) : null,
-                  child: _profileImage == null ? const Text('A', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)) : null,
+                  backgroundImage:
+                      _profileImage != null ? FileImage(_profileImage!) : null,
+                  child: _profileImage == null
+                      ? const Text('A',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20))
+                      : null,
                 ),
                 const SizedBox(width: 16),
-                Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(userName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
-                  const Text('Parents of Ananya Sharma', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                ])),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Text(userName,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16)),
+                      const Text('Parents of Ananya Sharma',
+                          style:
+                              TextStyle(color: Colors.white70, fontSize: 12)),
+                    ])),
               ],
             ),
           ),
@@ -899,84 +1057,123 @@ class _MoreOptionsPageState extends State<MoreOptionsPage> {
     );
   }
 
-  Widget _buildSettingsCard(String title, String sub, IconData icon, Color bg, Color iconCol, VoidCallback onTap) {
+  Widget _buildSettingsCard(String title, String sub, IconData icon, Color bg,
+      Color iconCol, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.shade200)),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.grey.shade200)),
         child: Row(children: [
-          Container(width: 44, height: 44, decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: iconCol, size: 22)),
+          Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                  color: bg, borderRadius: BorderRadius.circular(12)),
+              child: Icon(icon, color: iconCol, size: 22)),
           const SizedBox(width: 16),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: title == 'Logout' ? _redIconColor : _textPrimary)),
-            Text(sub, style: TextStyle(fontSize: 12, color: _textSecondary)),
-          ])),
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(title,
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color:
+                            title == 'Logout' ? _redIconColor : _textPrimary)),
+                Text(sub,
+                    style: TextStyle(fontSize: 12, color: _textSecondary)),
+              ])),
           Icon(Icons.chevron_right, color: Colors.grey[400], size: 20),
         ]),
       ),
     );
   }
 
-  Widget _buildSectionTitle(String title) => Text(title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: _textPrimary));
+  Widget _buildSectionTitle(String title) => Text(title,
+      style: TextStyle(
+          fontSize: 14, fontWeight: FontWeight.w600, color: _textPrimary));
 
-  Widget _buildCustomInput(String label, TextEditingController ctrl, IconData icon) => Padding(
-    padding: const EdgeInsets.only(top: 12),
-    child: TextField(
-      controller: ctrl,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: _headerOrange, size: 20),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    ),
-  );
+  Widget _buildCustomInput(
+          String label, TextEditingController ctrl, IconData icon) =>
+      Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: TextField(
+          controller: ctrl,
+          decoration: InputDecoration(
+            labelText: label,
+            prefixIcon: Icon(icon, color: _headerOrange, size: 20),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      );
 
   Widget _buildModernButton(String text, VoidCallback onSave) => SizedBox(
-    width: double.infinity, height: 50,
-    child: ElevatedButton(onPressed: onSave, style: ElevatedButton.styleFrom(backgroundColor: _headerOrange, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))), child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-  );
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+            onPressed: onSave,
+            style: ElevatedButton.styleFrom(
+                backgroundColor: _headerOrange,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12))),
+            child: Text(text,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold))),
+      );
 
   Widget _buildEventTile(String date, String title, String sub) => Container(
-    margin: const EdgeInsets.only(bottom: 12),
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(color: const Color(0xFFF1F5F9), borderRadius: BorderRadius.circular(15)),
-    child: Row(children: [
-      Text(date, style: TextStyle(color: _headerOrange, fontWeight: FontWeight.bold)),
-      const SizedBox(width: 16),
-      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        Text(sub, style: TextStyle(color: _textSecondary, fontSize: 13)),
-      ])),
-    ]),
-  );
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            color: const Color(0xFFF1F5F9),
+            borderRadius: BorderRadius.circular(15)),
+        child: Row(children: [
+          Text(date,
+              style:
+                  TextStyle(color: _headerOrange, fontWeight: FontWeight.bold)),
+          const SizedBox(width: 16),
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(title,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(sub,
+                    style: TextStyle(color: _textSecondary, fontSize: 13)),
+              ])),
+        ]),
+      );
 
   Widget _buildListTile(IconData icon, String title, String sub) => ListTile(
-    leading: Icon(icon, color: _headerOrange),
-    title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-    subtitle: Text(sub),
-    trailing: const Icon(Icons.arrow_forward_ios, size: 14),
-    onTap: () {},
-  );
+        leading: Icon(icon, color: _headerOrange),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(sub),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 14),
+        onTap: () {},
+      );
 
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 3,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home_rounded), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics_rounded), label: "Reports"),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), activeIcon: Icon(Icons.directions_bus_rounded), label: "Bus"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined), activeIcon: Icon(Icons.grid_view_rounded), label: "More"),
-      ],
-    );
-  }
-
+  // Widget _buildBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: 3,
+  //     onTap: _onBottomNavTap,
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: _accentOrange,
+  //     backgroundColor: Colors.white,
+  //     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
+  //     unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home_rounded), label: "Home"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics_rounded), label: "Reports"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), activeIcon: Icon(Icons.directions_bus_rounded), label: "Bus"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined), activeIcon: Icon(Icons.grid_view_rounded), label: "More"),
+  //     ],
+  //   );
+  // }
 }
