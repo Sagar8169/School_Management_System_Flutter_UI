@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toki_principal/screens/principal/tickets_page.dart';
 
 // --- Imports ---
 import '../screens/principal/add_event_page.dart';
@@ -53,6 +54,7 @@ class PrincipalRoutes {
   static const String announcements = '/principal/announcements';
   static const String timetable = '/principal/timetable';
   static const String classTimetable = '/principal/class-timetable';
+  static const String ticketsPage = '/principal/tickets';
 
   // New Functional Routes
   static const String addHomework = '/add-homework';
@@ -65,19 +67,21 @@ class PrincipalRoutes {
 
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => const HomePrincipal());
+        return MaterialPageRoute(builder: (_) => HomePrincipal());
 
       case activity:
         return MaterialPageRoute(builder: (_) => const ActivityPage());
 
       case attendanceAnalytics:
-        return MaterialPageRoute(builder: (_) => const AttendanceAnalyticsPage());
+        return MaterialPageRoute(
+            builder: (_) => const AttendanceAnalyticsPage());
 
       case gradesAnalytics:
         return MaterialPageRoute(builder: (_) => const GradesAnalyticsPage());
 
       case fleetManagement:
-        return MaterialPageRoute(builder: (_) => const fleet_screen.FleetManagementPage());
+        return MaterialPageRoute(
+            builder: (_) => const fleet_screen.FleetManagementPage());
 
       case addHomework:
         return MaterialPageRoute(builder: (_) => const AddHomeworkPage());
@@ -89,7 +93,7 @@ class PrincipalRoutes {
         return MaterialPageRoute(builder: (_) => const TakeAttendancePage());
 
       case pendingApprovals:
-      // Note: Agar constructor error aaye toh yahan se 'const' hata dein
+        // Note: Agar constructor error aaye toh yahan se 'const' hata dein
         return MaterialPageRoute(builder: (_) => const AssignTaskPage());
 
       case uploadGrades:
@@ -116,19 +120,23 @@ class PrincipalRoutes {
         return MaterialPageRoute(builder: (_) => const StaffSearchPage());
 
       case classDetails:
-        return MaterialPageRoute(builder: (_) => ClassDetailsPage(classData: args));
+        return MaterialPageRoute(
+            builder: (_) => ClassDetailsPage(classData: args));
 
       case teacherProfile:
-        return MaterialPageRoute(builder: (_) => TeacherProfilePage(teacherData: args));
+        return MaterialPageRoute(
+            builder: (_) => TeacherProfilePage(teacherData: args));
 
       case studentProfile:
-        return MaterialPageRoute(builder: (_) => StudentProfilePage(studentData: args));
+        return MaterialPageRoute(
+            builder: (_) => StudentProfilePage(studentData: args));
 
       case announcements:
         return MaterialPageRoute(builder: (_) => const AnnouncementsPage());
 
       case staffProfile:
-        return MaterialPageRoute(builder: (_) => StaffProfilePage(staffData: args));
+        return MaterialPageRoute(
+            builder: (_) => StaffProfilePage(staffData: args));
 
       case addEvent:
         return MaterialPageRoute(builder: (_) => const AddEventPage());
@@ -143,8 +151,13 @@ class PrincipalRoutes {
         return MaterialPageRoute(builder: (_) => const TimetablePage());
 
       case classTimetable:
-        return MaterialPageRoute(builder: (_) => ClassTimetablePage(classData: args));
+        return MaterialPageRoute(
+            builder: (_) => ClassTimetablePage(classData: args));
 
+      case ticketsPage:
+        return MaterialPageRoute(
+          builder: (_) => const TicketsPage(),
+        );
       default:
         return null;
     }
