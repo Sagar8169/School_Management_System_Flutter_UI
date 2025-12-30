@@ -1,6 +1,7 @@
 // lib/screens/parents/grades_page.dart
 import 'package:flutter/material.dart';
 import '../../routes/parents_routes.dart';
+
 final Color _accentOrange = const Color(0xFFFF5722);
 final Color _primaryOrange = const Color(0xFFFF5722);
 
@@ -12,9 +13,6 @@ class GradesPage extends StatefulWidget {
 }
 
 class _GradesPageState extends State<GradesPage> {
-  // ✅ ORIGINAL VARIABLE NAMES
-  int _currentIndex = 0;
-
   String _selectedLanguage = 'తెలుగు';
 
   final Color _headerOrange = const Color(0xFFFFAB00);
@@ -29,7 +27,8 @@ class _GradesPageState extends State<GradesPage> {
   final Color _orangeBadgeText = const Color(0xFFD97706);
 
   void _toggleLanguage() {
-    setState(() => _selectedLanguage = _selectedLanguage == 'తెలుగు' ? 'English' : 'తెలుగు');
+    setState(() => _selectedLanguage =
+        _selectedLanguage == 'తెలుగు' ? 'English' : 'తెలుగు');
   }
 
   // --- 3 DOTS WORKING LOGIC (FIXED BOTTOM OVERLAP) ---
@@ -45,17 +44,34 @@ class _GradesPageState extends State<GradesPage> {
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
         // ✅ Hardware notch aur navigation bar se upar rakhne ke liye padding
-        padding: EdgeInsets.fromLTRB(16, 12, 16, MediaQuery.of(context).viewPadding.bottom + 20),
+        padding: EdgeInsets.fromLTRB(
+            16, 12, 16, MediaQuery.of(context).viewPadding.bottom + 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(width: 45, height: 5, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10))),
+            Container(
+                width: 45,
+                height: 5,
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10))),
             const SizedBox(height: 24),
-            Text(examTitle, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFF1E293B))),
+            Text(examTitle,
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF1E293B))),
             const SizedBox(height: 24),
-            _buildOptionTile(Icons.picture_as_pdf_rounded, "Download PDF Report", "Save result to your phone", Colors.red, () {}),
-            _buildOptionTile(Icons.share_rounded, "Share with Family", "Send result via WhatsApp", Colors.blue, () {}),
-            _buildOptionTile(Icons.comment_bank_rounded, "Teacher's Remarks", "Read behavioral feedback", Colors.purple, () {
+            _buildOptionTile(
+                Icons.picture_as_pdf_rounded,
+                "Download PDF Report",
+                "Save result to your phone",
+                Colors.red,
+                () {}),
+            _buildOptionTile(Icons.share_rounded, "Share with Family",
+                "Send result via WhatsApp", Colors.blue, () {}),
+            _buildOptionTile(Icons.comment_bank_rounded, "Teacher's Remarks",
+                "Read behavioral feedback", Colors.purple, () {
               Navigator.pop(context); // Close current sheet
               _showRemarksSheet(); // Open remarks sheet
             }),
@@ -78,14 +94,22 @@ class _GradesPageState extends State<GradesPage> {
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
         ),
-        padding: EdgeInsets.fromLTRB(24, 12, 24, MediaQuery.of(context).viewPadding.bottom + 20),
+        padding: EdgeInsets.fromLTRB(
+            24, 12, 24, MediaQuery.of(context).viewPadding.bottom + 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: Container(width: 45, height: 5, decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(10)))),
+            Center(
+                child: Container(
+                    width: 45,
+                    height: 5,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10)))),
             const SizedBox(height: 24),
-            const Text("Teacher's Feedback", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+            const Text("Teacher's Feedback",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(20),
@@ -96,7 +120,8 @@ class _GradesPageState extends State<GradesPage> {
               ),
               child: const Text(
                 "Ananya is a bright student and shows great interest in Mathematics. Her problem-solving skills are improving. Needs slightly more focus on Science laboratory work.",
-                style: TextStyle(fontSize: 15, height: 1.6, color: Color(0xFF475569)),
+                style: TextStyle(
+                    fontSize: 15, height: 1.6, color: Color(0xFF475569)),
               ),
             ),
             const SizedBox(height: 24),
@@ -105,10 +130,14 @@ class _GradesPageState extends State<GradesPage> {
                 onPressed: () => Navigator.pop(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _headerOrange,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                 ),
-                child: const Text("CLOSE", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                child: const Text("CLOSE",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
               ),
             )
           ],
@@ -117,17 +146,26 @@ class _GradesPageState extends State<GradesPage> {
     );
   }
 
-  Widget _buildOptionTile(IconData icon, String title, String sub, Color col, VoidCallback onTap) {
+  Widget _buildOptionTile(
+      IconData icon, String title, String sub, Color col, VoidCallback onTap) {
     return ListTile(
       onTap: onTap,
       leading: Container(
         padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: col.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+        decoration: BoxDecoration(
+            color: col.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12)),
         child: Icon(icon, color: col, size: 22),
       ),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15, color: Color(0xFF1E293B))),
-      subtitle: Text(sub, style: TextStyle(fontSize: 12, color: _textSecondary)),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey),
+      title: Text(title,
+          style: const TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+              color: Color(0xFF1E293B))),
+      subtitle:
+          Text(sub, style: TextStyle(fontSize: 12, color: _textSecondary)),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded,
+          size: 14, color: Colors.grey),
     );
   }
 
@@ -164,7 +202,7 @@ class _GradesPageState extends State<GradesPage> {
                             percent: "92%",
                             rank: "Rank 3",
                             remarks:
-                            "Ananya is a bright student and shows great interest in Mathematics. "
+                                "Ananya is a bright student and shows great interest in Mathematics. "
                                 "Her problem-solving skills are improving. Needs slightly more focus on "
                                 "Science laboratory work.",
                             subjects: [
@@ -172,7 +210,8 @@ class _GradesPageState extends State<GradesPage> {
                               SubjectData("Science", "92/100", "A+", 0.92),
                               SubjectData("English", "88/100", "A", 0.88),
                               SubjectData("Hindi", "90/100", "A+", 0.90),
-                              SubjectData("Social Studies", "94/100", "A+", 0.94),
+                              SubjectData(
+                                  "Social Studies", "94/100", "A+", 0.94),
                             ],
                           ),
 
@@ -184,7 +223,7 @@ class _GradesPageState extends State<GradesPage> {
                             percent: "88%",
                             rank: "Rank 5",
                             remarks:
-                            "Good overall performance. Needs to improve consistency in Science "
+                                "Good overall performance. Needs to improve consistency in Science "
                                 "and practice Mathematics regularly.",
                             subjects: [
                               SubjectData("Mathematics", "90/100", "A+", 0.90),
@@ -201,7 +240,6 @@ class _GradesPageState extends State<GradesPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -212,19 +250,31 @@ class _GradesPageState extends State<GradesPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        border:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
       ),
       child: Row(
         children: [
           Container(
-            width: 44, height: 44,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
+              gradient: LinearGradient(
+                  colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
               borderRadius: BorderRadius.circular(14),
-              boxShadow: [BoxShadow(color: _primaryOrange.withOpacity(0.25), blurRadius: 12, offset: const Offset(0, 6))],
+              boxShadow: [
+                BoxShadow(
+                    color: _primaryOrange.withOpacity(0.25),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6))
+              ],
             ),
             alignment: Alignment.center,
-            child: const Text("A", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 22)),
+            child: const Text("A",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -232,12 +282,25 @@ class _GradesPageState extends State<GradesPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Aditya International", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17, letterSpacing: -0.6, color: Color(0xFF1A1A1A))),
+                const Text("Aditya International",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        letterSpacing: -0.6,
+                        color: Color(0xFF1A1A1A))),
                 Row(
                   children: [
-                    Container(width: 6, height: 6, decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle)),
+                    Container(
+                        width: 6,
+                        height: 6,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF10B981), shape: BoxShape.circle)),
                     const SizedBox(width: 6),
-                    Text("Support Portal Active", style: TextStyle(color: Colors.grey.shade500, fontSize: 11, fontWeight: FontWeight.w600)),
+                    Text("Support Portal Active",
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ],
@@ -248,52 +311,95 @@ class _GradesPageState extends State<GradesPage> {
       ),
     );
   }
+
   Widget _buildLanguageToggle() {
     return GestureDetector(
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey.shade200)),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.grey.shade200)),
         child: Row(
           children: [
             Icon(Icons.translate, size: 14, color: _primaryOrange),
             const SizedBox(width: 4),
-            Text(_selectedLanguage, style: TextStyle(color: _primaryOrange, fontWeight: FontWeight.bold, fontSize: 12)),
+            Text(_selectedLanguage,
+                style: TextStyle(
+                    color: _primaryOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12)),
           ],
         ),
       ),
     );
   }
 
-
   Widget _buildHeroSection() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(color: _headerOrange, borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40))),
+      decoration: BoxDecoration(
+          color: _headerOrange,
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(40))),
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
       child: Column(
         children: [
           Row(children: [
-            GestureDetector(onTap: () => Navigator.pop(context), child: Container(padding: const EdgeInsets.all(8), decoration: const BoxDecoration(color: Colors.black12, shape: BoxShape.circle), child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 16))),
+            GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                        color: Colors.black12, shape: BoxShape.circle),
+                    child: const Icon(Icons.arrow_back_ios_new,
+                        color: Colors.white, size: 16))),
             const SizedBox(width: 12),
-            const Text("Performance Report", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w900)),
+            const Text("Performance Report",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900)),
           ]),
           const SizedBox(height: 30),
           Container(
             padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(color: _heroCardBg, borderRadius: BorderRadius.circular(28)),
+            decoration: BoxDecoration(
+                color: _heroCardBg, borderRadius: BorderRadius.circular(28)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const Text("Current Standing", style: TextStyle(color: Colors.white70, fontSize: 12)),
-                  const Text("A+ Grade", style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900)),
+                  const Text("Current Standing",
+                      style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  const Text("A+ Grade",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 34,
+                          fontWeight: FontWeight.w900)),
                   const SizedBox(height: 10),
-                  Text("Rank: 03 in Class", style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13, fontWeight: FontWeight.w700)),
+                  Text("Rank: 03 in Class",
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700)),
                 ]),
-                Stack(alignment: Alignment.center, children: [
-                  SizedBox(width: 75, height: 75, child: CircularProgressIndicator(value: 0.92, strokeWidth: 8, backgroundColor: Colors.white12, color: Colors.white)),
-                  const Text("92%", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 18)),
+                const Stack(alignment: Alignment.center, children: [
+                  SizedBox(
+                      width: 75,
+                      height: 75,
+                      child: CircularProgressIndicator(
+                          value: 0.92,
+                          strokeWidth: 8,
+                          backgroundColor: Colors.white12,
+                          color: Colors.white)),
+                  Text("92%",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18)),
                 ])
               ],
             ),
@@ -420,7 +526,7 @@ class _GradesPageState extends State<GradesPage> {
 
           // 🔹 Subjects
           ...subjects.map(
-                (sub) => Padding(
+            (sub) => Padding(
               padding: const EdgeInsets.only(bottom: 18),
               child: Column(
                 children: [
@@ -471,64 +577,34 @@ class _GradesPageState extends State<GradesPage> {
     );
   }
 
-  void _navigateToMoreOptions() => Navigator.pushNamed(context, ParentsRoutes.moreOptions);
+  void _navigateToMoreOptions() =>
+      Navigator.pushNamed(context, ParentsRoutes.moreOptions);
 
-  Widget _buildSectionHeader(String title) => Text(title.toUpperCase(), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Color(0xFF94A3B8), letterSpacing: 1.5));
-  Widget _badge(String t, Color c) => Container(padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), decoration: BoxDecoration(color: c.withOpacity(0.1), borderRadius: BorderRadius.circular(10)), child: Text(t, style: TextStyle(color: c, fontWeight: FontWeight.w900, fontSize: 11)));
-  Widget _gradeSmallBadge(String g) => Container(width: 35, height: 26, alignment: Alignment.center, decoration: BoxDecoration(color: _getGradeColor(g), borderRadius: BorderRadius.circular(8)), child: Text(g, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 11)));
-  Color _getGradeColor(String g) => g.contains('A+') ? _greenBadgeText : (g == 'A' ? _blueBadgeText : _orangeBadgeText);
-  void _onBottomNavTap(int index) {
-    if (_currentIndex == index) return; // ✅ prevent re-push
-
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0:
-        break; // Already on Home
-      case 1:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-        break;
-      case 3:
-        _navigateToMoreOptions();
-        break;
-    }
-  }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 0, // koi farq nahi padega
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.pushReplacementNamed(context, ParentsRoutes.home);
-            break;
-          case 1:
-            Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-            break;
-          case 2:
-            Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-            break;
-          case 3:
-            Navigator.pushNamed(context, ParentsRoutes.moreOptions);
-            break;
-        }
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), label: "Reports"),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), label: "Bus"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined), label: "More"),
-      ],
-    );
-  }
-
+  Widget _buildSectionHeader(String title) => Text(title.toUpperCase(),
+      style: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w900,
+          color: Color(0xFF94A3B8),
+          letterSpacing: 1.5));
+  Widget _badge(String t, Color c) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+          color: c.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+      child: Text(t,
+          style:
+              TextStyle(color: c, fontWeight: FontWeight.w900, fontSize: 11)));
+  Widget _gradeSmallBadge(String g) => Container(
+      width: 35,
+      height: 26,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: _getGradeColor(g), borderRadius: BorderRadius.circular(8)),
+      child: Text(g,
+          style: const TextStyle(
+              color: Colors.white, fontWeight: FontWeight.w900, fontSize: 11)));
+  Color _getGradeColor(String g) => g.contains('A+')
+      ? _greenBadgeText
+      : (g == 'A' ? _blueBadgeText : _orangeBadgeText);
 }
 
 class SubjectData {

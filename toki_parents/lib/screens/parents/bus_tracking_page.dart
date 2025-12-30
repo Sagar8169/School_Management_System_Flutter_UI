@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 const Color _primaryOrange = Color(0xFFFF5722);
 
 class BusTrackingPage extends StatefulWidget {
-  const BusTrackingPage({Key? key}) : super(key: key);
+  final bool showBackButton;
+  const BusTrackingPage({Key? key, required this.showBackButton})
+      : super(key: key);
 
   @override
   _BusTrackingPageState createState() => _BusTrackingPageState();
@@ -61,7 +63,7 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    _buildHeroSection(),
+                    _buildHeroSection(widget.showBackButton),
                     const SizedBox(height: 20),
                     _buildToggleButtons(),
                     const SizedBox(height: 24),
@@ -158,10 +160,10 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
             border: Border.all(color: Colors.grey.shade200)),
         child: Row(
           children: [
-            Icon(Icons.translate, size: 14, color: _primaryOrange),
+            const Icon(Icons.translate, size: 14, color: _primaryOrange),
             const SizedBox(width: 4),
             Text(_selectedLanguage,
-                style: TextStyle(
+                style: const TextStyle(
                     color: _primaryOrange,
                     fontWeight: FontWeight.bold,
                     fontSize: 12)),
@@ -171,7 +173,7 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
     );
   }
 
-  Widget _buildHeroSection() {
+  Widget _buildHeroSection(bool showBackButton) {
     // Logic to determine session based on current time or data
     bool isMorning = DateTime.now().hour < 12;
     String tripLabel =
@@ -182,88 +184,125 @@ class _BusTrackingPageState extends State<BusTrackingPage> {
       decoration: BoxDecoration(
         color: _headerOrange,
         borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
       ),
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// 🔹 Top Bar
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                          color: Colors.white24, shape: BoxShape.circle),
-                      child: const Icon(Icons.arrow_back_ios_new,
-                          color: Colors.white, size: 16),
+                  /// ⬅ Back Button (only when opened from Home)
+                  if (showBackButton)
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: const BoxDecoration(
+                          color: Colors.white24,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
+                    ),
+
+                  if (showBackButton) const SizedBox(width: 12),
+
+                  const Text(
+                    "Bus Tracking",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  const Text("Bus Tracking",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700)),
                 ],
               ),
-              // ✨ Session Badge
+
+              /// ✨ Session Badge
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text(isMorning ? "MORNING" : "EVENING",
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w900)),
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  isMorning ? "MORNING" : "EVENING",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
             ],
           ),
+
           const SizedBox(height: 20),
+
+          /// 🔹 Hero Card
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-                color: _darkOrangeCard,
-                borderRadius: BorderRadius.circular(20)),
+              color: _darkOrangeCard,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Column(
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.directions_bus,
-                        color: Colors.white, size: 28),
+                    const Icon(
+                      Icons.directions_bus,
+                      color: Colors.white,
+                      size: 28,
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tripLabel,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500)),
-                          const Text("Bus Route 5",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            tripLabel,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Text(
+                            "Bus Route 5",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    const Icon(Icons.wifi_tethering,
-                        color: Colors.greenAccent, size: 20),
+                    const Icon(
+                      Icons.wifi_tethering,
+                      color: Colors.greenAccent,
+                      size: 20,
+                    ),
                   ],
                 ),
                 const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    child: Divider(color: Colors.white24, height: 1)),
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Divider(color: Colors.white24, height: 1),
+                ),
                 _heroStatRow("Current Location", "Sector 12 Main Road"),
                 const SizedBox(height: 8),
                 _heroStatRow("Estimated Time", "15 minutes"),

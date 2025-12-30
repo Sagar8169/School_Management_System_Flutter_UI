@@ -1,6 +1,7 @@
 // lib/screens/parents/homework_page.dart
 import 'package:flutter/material.dart';
 import 'package:toki/routes/parents_routes.dart';
+
 final Color _primaryOrange = const Color(0xFFFF5722);
 
 final Color _accentOrange = const Color(0xFFFF5722);
@@ -13,7 +14,6 @@ class HomeworkPage extends StatefulWidget {
 }
 
 class _HomeworkPageState extends State<HomeworkPage> {
-  int _currentIndex = 0;
   String _selectedLanguage = 'తెలుగు';
 
   String _selectedFilter = 'All';
@@ -29,7 +29,8 @@ class _HomeworkPageState extends State<HomeworkPage> {
       "subject": "Mathematics",
       "status": "Pending",
       "title": "Exercise 5.2 - All Qs",
-      "desc": "Complete all questions from Exercise 5.2 in your textbook. Show all working.",
+      "desc":
+          "Complete all questions from Exercise 5.2 in your textbook. Show all working.",
       "assigned": "Nov 7, 2025",
       "due": "Nov 9, 2025",
       "color": Colors.blue,
@@ -38,7 +39,8 @@ class _HomeworkPageState extends State<HomeworkPage> {
       "subject": "Science",
       "status": "Pending",
       "title": "Lab Report - Chemical Reactions",
-      "desc": "Write a detailed report on the chemical reaction experiment conducted in class.",
+      "desc":
+          "Write a detailed report on the chemical reaction experiment conducted in class.",
       "assigned": "Nov 6, 2025",
       "due": "Nov 12, 2025",
       "color": Colors.blue,
@@ -47,7 +49,8 @@ class _HomeworkPageState extends State<HomeworkPage> {
       "subject": "English",
       "status": "Pending",
       "title": "Essay Writing - My School",
-      "desc": "Write an essay of 200-250 words describing your school and what you like about it.",
+      "desc":
+          "Write an essay of 200-250 words describing your school and what you like about it.",
       "assigned": "Nov 8, 2025",
       "due": "Nov 15, 2025",
       "color": Colors.blue,
@@ -56,7 +59,8 @@ class _HomeworkPageState extends State<HomeworkPage> {
       "subject": "Social Studies",
       "status": "Checked",
       "title": "Map Work - India Political",
-      "desc": "Mark all states and capitals on the India political map provided.",
+      "desc":
+          "Mark all states and capitals on the India political map provided.",
       "assigned": "Nov 1, 2025",
       "due": "Nov 8, 2025",
       "color": Colors.blue,
@@ -81,7 +85,8 @@ class _HomeworkPageState extends State<HomeworkPage> {
                   const SizedBox(height: 10),
                   ..._homeworks
                       .where((h) =>
-                  _selectedFilter == 'All' || h['status'] == _selectedFilter)
+                          _selectedFilter == 'All' ||
+                          h['status'] == _selectedFilter)
                       .map((h) => _buildHomeworkCard(h))
                       .toList(),
                   const SizedBox(height: 20),
@@ -91,7 +96,6 @@ class _HomeworkPageState extends State<HomeworkPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -100,19 +104,31 @@ class _HomeworkPageState extends State<HomeworkPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        border:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
       ),
       child: Row(
         children: [
           Container(
-            width: 44, height: 44,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
+              gradient: LinearGradient(
+                  colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
               borderRadius: BorderRadius.circular(14),
-              boxShadow: [BoxShadow(color: _primaryOrange.withOpacity(0.25), blurRadius: 12, offset: const Offset(0, 6))],
+              boxShadow: [
+                BoxShadow(
+                    color: _primaryOrange.withOpacity(0.25),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6))
+              ],
             ),
             alignment: Alignment.center,
-            child: const Text("A", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 22)),
+            child: const Text("A",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -120,12 +136,25 @@ class _HomeworkPageState extends State<HomeworkPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Aditya International", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17, letterSpacing: -0.6, color: Color(0xFF1A1A1A))),
+                const Text("Aditya International",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        letterSpacing: -0.6,
+                        color: Color(0xFF1A1A1A))),
                 Row(
                   children: [
-                    Container(width: 6, height: 6, decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle)),
+                    Container(
+                        width: 6,
+                        height: 6,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF10B981), shape: BoxShape.circle)),
                     const SizedBox(width: 6),
-                    Text("Support Portal Active", style: TextStyle(color: Colors.grey.shade500, fontSize: 11, fontWeight: FontWeight.w600)),
+                    Text("Support Portal Active",
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ],
@@ -136,7 +165,6 @@ class _HomeworkPageState extends State<HomeworkPage> {
       ),
     );
   }
-
 
   Widget _buildHeroSection() {
     return Container(
@@ -154,30 +182,34 @@ class _HomeworkPageState extends State<HomeworkPage> {
             children: [
               GestureDetector(
                 onTap: () => Navigator.pop(context),
-                child: const CircleAvatar(backgroundColor: Colors.white24,
+                child: const CircleAvatar(
+                    backgroundColor: Colors.white24,
                     radius: 18,
-                    child: Icon(Icons.arrow_back_ios_new, color: Colors.white,
-                        size: 14)),
+                    child: Icon(Icons.arrow_back_ios_new,
+                        color: Colors.white, size: 14)),
               ),
               const SizedBox(width: 12),
-              const Text("Homework Assignments", style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold)),
+              const Text("Homework Assignments",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
           const SizedBox(height: 25),
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.15),
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Homework Summary", style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600)),
+                const Text("Homework Summary",
+                    style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600)),
                 const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,12 +227,14 @@ class _HomeworkPageState extends State<HomeworkPage> {
     );
   }
 
-  Widget _statItem(String val, String label) =>
-      Column(
+  Widget _statItem(String val, String label) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(val, style: const TextStyle(
-              color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+          Text(val,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold)),
           Text(label,
               style: const TextStyle(color: Colors.white70, fontSize: 12)),
         ],
@@ -212,39 +246,51 @@ class _HomeworkPageState extends State<HomeworkPage> {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: tabs.map((tab) =>
-            GestureDetector(
-              onTap: () => setState(() => _selectedFilter = tab),
-              child: Container(
-                margin: const EdgeInsets.only(right: 10),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 8),
-                decoration: BoxDecoration(
-                  color: _selectedFilter == tab ? _purpleHero : const Color(
-                      0xFFF1F5F9),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(tab, style: TextStyle(
-                    color: _selectedFilter == tab ? Colors.white : Colors
-                        .black87, fontSize: 13, fontWeight: FontWeight.w600)),
-              ),
-            )).toList(),
+        children: tabs
+            .map((tab) => GestureDetector(
+                  onTap: () => setState(() => _selectedFilter = tab),
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: _selectedFilter == tab
+                          ? _purpleHero
+                          : const Color(0xFFF1F5F9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(tab,
+                        style: TextStyle(
+                            color: _selectedFilter == tab
+                                ? Colors.white
+                                : Colors.black87,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
-
 
   Widget _buildLanguageToggle() {
     return GestureDetector(
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey.shade200)),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.grey.shade200)),
         child: Row(
           children: [
             Icon(Icons.translate, size: 14, color: _primaryOrange),
             const SizedBox(width: 4),
-            Text(_selectedLanguage, style: TextStyle(color: _primaryOrange, fontWeight: FontWeight.bold, fontSize: 12)),
+            Text(_selectedLanguage,
+                style: TextStyle(
+                    color: _primaryOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12)),
           ],
         ),
       ),
@@ -277,28 +323,33 @@ class _HomeworkPageState extends State<HomeworkPage> {
             children: [
               _tag(h['subject'], const Color(0xFFEFF6FF), Colors.blue),
               const SizedBox(width: 8),
-              _tag(h['status'],
+              _tag(
+                  h['status'],
                   isPending ? const Color(0xFFFFF7ED) : const Color(0xFFECFDF5),
                   isPending ? Colors.orange : Colors.green),
             ],
           ),
           const SizedBox(height: 14),
-          Text(h['title'], style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(h['title'],
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
           const SizedBox(height: 6),
-          Text(h['desc'], style: TextStyle(
-              color: _textSecondary, fontSize: 13, height: 1.4)),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 14),
+          Text(h['desc'],
+              style:
+                  TextStyle(color: _textSecondary, fontSize: 13, height: 1.4)),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 14),
               child: Divider(height: 1, color: Color(0xFFF1F5F9))),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Assigned: ${h['assigned']}",
                   style: const TextStyle(color: Colors.grey, fontSize: 12)),
-              Text("Due: ${h['due']}", style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                  color: Colors.black87)),
+              Text("Due: ${h['due']}",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.black87)),
             ],
           ),
         ],
@@ -306,58 +357,15 @@ class _HomeworkPageState extends State<HomeworkPage> {
     );
   }
 
-  Widget _tag(String txt, Color bg, Color text) =>
-      Container(
+  Widget _tag(String txt, Color bg, Color text) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(
-            color: bg, borderRadius: BorderRadius.circular(8)),
-        child: Text(txt, style: TextStyle(
-            color: text, fontSize: 11, fontWeight: FontWeight.bold)),
+        decoration:
+            BoxDecoration(color: bg, borderRadius: BorderRadius.circular(8)),
+        child: Text(txt,
+            style: TextStyle(
+                color: text, fontSize: 11, fontWeight: FontWeight.bold)),
       );
 
-  void _navigateToMoreOptions() => Navigator.pushNamed(context, ParentsRoutes.moreOptions);
-
-  void _onBottomNavTap(int index) {
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0:
-        break; // Already on Home
-      case 1:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-        break;
-      case 3:
-        _navigateToMoreOptions();
-        break;
-    }
-  }
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 0,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w700, fontSize: 11),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home_rounded),
-            label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined),
-            activeIcon: Icon(Icons.analytics_rounded),
-            label: "Reports"),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined),
-            activeIcon: Icon(Icons.directions_bus_rounded),
-            label: "Bus"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined),
-            activeIcon: Icon(Icons.grid_view_rounded),
-            label: "More"),
-      ],
-    );
-  }
+  void _navigateToMoreOptions() =>
+      Navigator.pushNamed(context, ParentsRoutes.moreOptions);
 }

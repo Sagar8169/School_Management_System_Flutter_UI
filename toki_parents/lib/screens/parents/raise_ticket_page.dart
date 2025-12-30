@@ -1,6 +1,7 @@
 // lib/screens/parents/raise_ticket_page.dart
 import 'package:flutter/material.dart';
 import '../../routes/parents_routes.dart';
+
 final Color _headerOrange = const Color(0xFFFF5722); // Vibrant Deep Orange
 final Color _accentOrange = const Color(0xFFFF5722);
 
@@ -13,7 +14,6 @@ class RaiseTicketPage extends StatefulWidget {
 
 class _RaiseTicketPageState extends State<RaiseTicketPage> {
   String _selectedLanguage = 'తెలుగు';
-  int _currentIndex = 3; // More tab active when coming from More page
 
   // Colors
   final Color _primaryBlue = const Color(0xFF2563EB);
@@ -31,18 +31,6 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
     setState(() {
       _selectedLanguage = _selectedLanguage == 'తెలుగు' ? 'English' : 'తెలుగు';
     });
-  }
-
-  void _onBottomNavTap(int index) {
-    if (index == 0) {
-      Navigator.pushReplacementNamed(context, ParentsRoutes.home);
-    } else if (index == 1) {
-      Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-    } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-    } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, ParentsRoutes.moreOptions);
-    }
   }
 
   void _submitTicket() {
@@ -83,7 +71,8 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FB), // Subtle off-white for premium feel
+      backgroundColor:
+          const Color(0xFFF8F9FB), // Subtle off-white for premium feel
       body: SafeArea(
         child: Column(
           children: [
@@ -159,11 +148,13 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.info_outline, size: 14, color: Colors.grey.shade400),
+                          Icon(Icons.info_outline,
+                              size: 14, color: Colors.grey.shade400),
                           const SizedBox(width: 6),
                           Text(
                             "Typical response time: < 24 hours",
-                            style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                            style: TextStyle(
+                                color: Colors.grey.shade500, fontSize: 12),
                           ),
                         ],
                       ),
@@ -175,7 +166,6 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -189,7 +179,8 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color(0xFFFF5722), Color(0xFFFF8A65)]),
+              gradient: const LinearGradient(
+                  colors: [Color(0xFFFF5722), Color(0xFFFF8A65)]),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Icon(Icons.school, color: Colors.white, size: 20),
@@ -199,8 +190,12 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text("Aditya International",
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15, letterSpacing: -0.5)),
-              Text("Support Portal", style: TextStyle(color: Colors.grey.shade500, fontSize: 11)),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                      letterSpacing: -0.5)),
+              Text("Support Portal",
+                  style: TextStyle(color: Colors.grey.shade500, fontSize: 11)),
             ],
           ),
           const Spacer(),
@@ -215,14 +210,24 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
       padding: const EdgeInsets.only(bottom: 8, left: 4),
       child: Row(
         children: [
-          Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: Color(0xFF2D2D2D))),
-          if (isRequired) Text(" *", style: TextStyle(color: Colors.red.shade400, fontWeight: FontWeight.bold)),
+          Text(label,
+              style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                  color: Color(0xFF2D2D2D))),
+          if (isRequired)
+            Text(" *",
+                style: TextStyle(
+                    color: Colors.red.shade400, fontWeight: FontWeight.bold)),
         ],
       ),
     );
   }
 
-  Widget _buildModernTextField({required TextEditingController controller, required String hint, int maxLines = 1}) {
+  Widget _buildModernTextField(
+      {required TextEditingController controller,
+      required String hint,
+      int maxLines = 1}) {
     return TextField(
       controller: controller,
       maxLines: maxLines,
@@ -231,7 +236,8 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
         hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         filled: true,
         fillColor: Colors.grey.shade50,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: Colors.grey.shade100),
@@ -256,16 +262,22 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-            child: const Icon(Icons.mic_rounded, color: Color(0xFF6C63FF), size: 24),
+            decoration: const BoxDecoration(
+                color: Colors.white, shape: BoxShape.circle),
+            child: const Icon(Icons.mic_rounded,
+                color: Color(0xFF6C63FF), size: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Tap to record audio", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
-                Text("Max 2:00 mins", style: TextStyle(color: Colors.grey.shade600, fontSize: 11)),
+                const Text("Tap to record audio",
+                    style:
+                        TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+                Text("Max 2:00 mins",
+                    style:
+                        TextStyle(color: Colors.grey.shade600, fontSize: 11)),
               ],
             ),
           ),
@@ -282,17 +294,25 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: const Color(0xFF6C63FF).withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8)),
+          BoxShadow(
+              color: const Color(0xFF6C63FF).withOpacity(0.3),
+              blurRadius: 15,
+              offset: const Offset(0, 8)),
         ],
       ),
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF6C63FF), // Modern Purple/Blue
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 0,
         ),
-        child: const Text("Submit Ticket", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+        child: const Text("Submit Ticket",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16)),
       ),
     );
   }
@@ -387,11 +407,14 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
         ),
         child: Row(
           children: [
-            Icon(Icons.category_outlined, size: 20, color: Colors.grey.shade600),
+            Icon(Icons.category_outlined,
+                size: 20, color: Colors.grey.shade600),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                _categoryController.text.isEmpty ? hint : _categoryController.text,
+                _categoryController.text.isEmpty
+                    ? hint
+                    : _categoryController.text,
                 style: TextStyle(
                   fontSize: 14,
                   color: _categoryController.text.isEmpty
@@ -415,7 +438,13 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
 
 // Category select karne ke liye ek clean Modal Sheet
   void _showCategoryPicker(BuildContext context) {
-    final List<String> categories = ['Fees Issue', 'Bus Route', 'Academic', 'Technical Support', 'Others'];
+    final List<String> categories = [
+      'Fees Issue',
+      'Bus Route',
+      'Academic',
+      'Technical Support',
+      'Others'
+    ];
 
     showModalBottomSheet(
       context: context,
@@ -441,81 +470,18 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
             const SizedBox(height: 10),
             ...categories.map((cat) => ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-              title: Text(cat, style: const TextStyle(fontWeight: FontWeight.w500)),
-              trailing: _categoryController.text == cat
-                  ? const Icon(Icons.check_circle, color: Color(0xFF6C63FF))
-                  : null,
-              onTap: () {
-                setState(() => _categoryController.text = cat);
-                Navigator.pop(context);
-              },
-            )),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+                  title: Text(cat,
+                      style: const TextStyle(fontWeight: FontWeight.w500)),
+                  trailing: _categoryController.text == cat
+                      ? const Icon(Icons.check_circle, color: Color(0xFF6C63FF))
+                      : null,
+                  onTap: () {
+                    setState(() => _categoryController.text = cat);
+                    Navigator.pop(context);
+                  },
+                )),
             const SizedBox(height: 20),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 0,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home_rounded), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics_rounded), label: "Reports"),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), activeIcon: Icon(Icons.directions_bus_rounded), label: "Bus"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined), activeIcon: Icon(Icons.grid_view_rounded), label: "More"),
-      ],
-    );
-  }
-
-  Widget _buildNavItem(int index, IconData activeIcon, IconData inactiveIcon, String label) {
-    final isSelected = _currentIndex == index;
-    final color = isSelected ? const Color(0xFFFF5722) : Colors.grey.shade400;
-
-    return GestureDetector(
-      onTap: () => _onBottomNavTap(index),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Icon with slight scale effect
-            Icon(
-              isSelected ? activeIcon : inactiveIcon,
-              color: color,
-              size: 26,
-            ),
-            const SizedBox(height: 4),
-            // Label text
-            Text(
-              label,
-              style: TextStyle(
-                color: color,
-                fontSize: 11,
-                fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 4),
-            // Indicator Dot
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              height: 4,
-              width: isSelected ? 4 : 0,
-              decoration: BoxDecoration(
-                color: color,
-                shape: BoxShape.circle,
-              ),
-            ),
           ],
         ),
       ),
@@ -575,6 +541,7 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
       ),
     );
   }
+
   Widget _buildInputField({
     required TextEditingController controller,
     required String hint,
@@ -590,12 +557,13 @@ class _RaiseTicketPageState extends State<RaiseTicketPage> {
           color: Colors.grey[400],
           fontSize: 14,
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         suffixIcon: icon != null
             ? Icon(
-          icon,
-          color: Colors.grey[500],
-        )
+                icon,
+                color: Colors.grey[500],
+              )
             : null,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),

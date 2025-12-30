@@ -13,7 +13,7 @@ class AttendanceRecordPage extends StatefulWidget {
 }
 
 class _AttendanceRecordPageState extends State<AttendanceRecordPage> {
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
 
   String _selectedLanguage = 'తెలుగు';
   String _activeFilter = 'Recent';
@@ -99,7 +99,7 @@ class _AttendanceRecordPageState extends State<AttendanceRecordPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      // bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -490,63 +490,63 @@ class _AttendanceRecordPageState extends State<AttendanceRecordPage> {
                 TextStyle(color: c, fontSize: 26, fontWeight: FontWeight.w900)),
         Text(l, style: const TextStyle(color: Colors.grey, fontSize: 12))
       ]);
-  void _onBottomNavTap(int index) {
-    if (_currentIndex == index) return; // ✅ prevent re-push
+  // void _onBottomNavTap(int index) {
+  //   if (_currentIndex == index) return; // ✅ prevent re-push
 
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0:
-        break; // Already on Home
-      case 1:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-        break;
-      case 3:
-        _navigateToMoreOptions();
-        break;
-    }
-  }
+  //   setState(() => _currentIndex = index);
+  //   switch (index) {
+  //     case 0:
+  //       break; // Already on Home
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
+  //       break;
+  //     case 3:
+  //       _navigateToMoreOptions();
+  //       break;
+  //   }
+  // }
 
-  void _navigateToMoreOptions() =>
-      Navigator.pushNamed(context, ParentsRoutes.moreOptions);
+  // void _navigateToMoreOptions() =>
+  //     Navigator.pushNamed(context, ParentsRoutes.moreOptions);
 
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 0, // koi farq nahi padega
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle:
-          const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle:
-          const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.pushReplacementNamed(context, ParentsRoutes.home);
-            break;
-          case 1:
-            Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-            break;
-          case 2:
-            Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-            break;
-          case 3:
-            Navigator.pushNamed(context, ParentsRoutes.moreOptions);
-            break;
-        }
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_outlined), label: "Reports"),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.directions_bus_outlined), label: "Bus"),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_outlined), label: "More"),
-      ],
-    );
-  }
+  // Widget _buildBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: 0, // koi farq nahi padega
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: _accentOrange,
+  //     backgroundColor: Colors.white,
+  //     selectedLabelStyle:
+  //         const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
+  //     unselectedLabelStyle:
+  //         const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
+  //     onTap: (index) {
+  //       switch (index) {
+  //         case 0:
+  //           Navigator.pushReplacementNamed(context, ParentsRoutes.home);
+  //           break;
+  //         case 1:
+  //           Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
+  //           break;
+  //         case 2:
+  //           Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
+  //           break;
+  //         case 3:
+  //           Navigator.pushNamed(context, ParentsRoutes.moreOptions);
+  //           break;
+  //       }
+  //     },
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_outlined), label: "Reports"),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(Icons.directions_bus_outlined), label: "Bus"),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_outlined), label: "More"),
+  //     ],
+  //   );
+  // }
 }

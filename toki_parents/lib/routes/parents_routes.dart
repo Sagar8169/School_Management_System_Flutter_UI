@@ -41,34 +41,41 @@ class ParentsRoutes {
       case home:
         return MaterialPageRoute(builder: (_) => HomeParents());
       case attendance:
-        return MaterialPageRoute(builder: (_) => AttendanceRecordPage());
+        return MaterialPageRoute(builder: (_) => const AttendanceRecordPage());
       case grades:
-        return MaterialPageRoute(builder: (_) => GradesPage());
+        return MaterialPageRoute(builder: (_) => const GradesPage());
       case homework:
-        return MaterialPageRoute(builder: (_) => HomeworkPage());
+        return MaterialPageRoute(builder: (_) => const HomeworkPage());
       case announcements:
-        return MaterialPageRoute(builder: (_) => AnnouncementsPage());
+        return MaterialPageRoute(builder: (_) => const AnnouncementsPage());
       case events:
-        return MaterialPageRoute(builder: (_) => EventsPage());
+        return MaterialPageRoute(builder: (_) => const EventsPage());
       case reports:
-        return MaterialPageRoute(builder: (_) => ReportsPage());
+        return MaterialPageRoute(builder: (_) => const ReportsPage());
       case busTracking:
-        return MaterialPageRoute(builder: (_) => BusTrackingPage());
+        return MaterialPageRoute(
+            builder: (_) => const BusTrackingPage(
+                  showBackButton: true,
+                ));
       case tickets:
-        return MaterialPageRoute(builder: (_) => TicketsPage());
+        return MaterialPageRoute(builder: (_) => const TicketsPage());
       case raiseTicket:
-        return MaterialPageRoute(builder: (_) => RaiseTicketPage());
+        return MaterialPageRoute(builder: (_) => const RaiseTicketPage());
       case moreOptions:
-        return MaterialPageRoute(builder: (_) => MoreOptionsPage());
+        return MaterialPageRoute(builder: (_) => const MoreOptionsPage());
       case todayFullDetails:
-        return MaterialPageRoute(builder: (_) => TodayFullDetailsPage());
+        return MaterialPageRoute(builder: (_) => const TodayFullDetailsPage());
       case feesStatus: // ✅ NEW CASE
-        return MaterialPageRoute(builder: (_) => FeesStatusPage());
+        return MaterialPageRoute(builder: (_) => const FeesStatusPage());
 
       case profile:
-        return MaterialPageRoute(builder: (_) => _ParentsPlaceholderScreen(title: 'My Profile', message: 'Not implemented'));
+        return MaterialPageRoute(
+            builder: (_) => const _ParentsPlaceholderScreen(
+                title: 'My Profile', message: 'Not implemented'));
       case settings:
-        return MaterialPageRoute(builder: (_) => _ParentsPlaceholderScreen(title: 'Settings', message: 'Not implemented'));
+        return MaterialPageRoute(
+            builder: (_) => const _ParentsPlaceholderScreen(
+                title: 'Settings', message: 'Not implemented'));
       default:
         return null;
     }
@@ -78,9 +85,12 @@ class ParentsRoutes {
 class _ParentsPlaceholderScreen extends StatelessWidget {
   final String title;
   final String message;
-  const _ParentsPlaceholderScreen({Key? key, required this.title, required this.message}) : super(key: key);
+  const _ParentsPlaceholderScreen(
+      {Key? key, required this.title, required this.message})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text(title)), body: Center(child: Text(message)));
+    return Scaffold(
+        appBar: AppBar(title: Text(title)), body: Center(child: Text(message)));
   }
 }

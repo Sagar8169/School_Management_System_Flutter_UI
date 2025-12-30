@@ -14,7 +14,9 @@ class HomeParents extends ConsumerWidget {
   final List<Widget> bottomNavPages = [
     const ParentsHomePage(),
     const ReportsPage(),
-    const BusTrackingPage(),
+    const BusTrackingPage(
+      showBackButton: false,
+    ),
     const MoreOptionsPage()
   ];
 

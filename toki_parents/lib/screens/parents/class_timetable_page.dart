@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../routes/parents_routes.dart';
+
 final Color _primaryOrange = const Color(0xFFFF5722);
 
 final Color _accentOrange = const Color(0xFFFF5722);
 
 class ClassTimetablePage extends StatefulWidget {
   final Map<String, dynamic> classData;
-  const ClassTimetablePage({Key? key, required this.classData}) : super(key: key);
+  const ClassTimetablePage({Key? key, required this.classData})
+      : super(key: key);
 
   @override
   _ClassTimetablePageState createState() => _ClassTimetablePageState();
@@ -15,60 +17,319 @@ class ClassTimetablePage extends StatefulWidget {
 class _ClassTimetablePageState extends State<ClassTimetablePage> {
   String _selectedLanguage = 'తెలుగు';
 
-  int _currentIndex = 3;
+  // int _currentIndex = 3;
   int _selectedDayIndex = 0;
   bool _isTelugu = false;
 
-  final List<String> _days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  final List<String> _days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
 
   final Map<String, List<Map<String, dynamic>>> _timetableData = {
     'Monday': [
-      {'subject': 'Mathematics', 'teacher': 'Miss Raghini Sharma', 'startTime': '08:30 AM', 'endTime': '09:15 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Science', 'teacher': 'Mr. Vijay Prasad', 'startTime': '09:15 AM', 'endTime': '10:00 AM', 'type': 'class', 'room': 'Lab 1'},
-      {'subject': 'English', 'teacher': 'Mrs. Anita Desai', 'startTime': '10:00 AM', 'endTime': '10:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Break', 'teacher': '', 'startTime': '10:45 AM', 'endTime': '11:00 AM', 'type': 'break', 'room': ''},
-      {'subject': 'Hindi', 'teacher': 'Mrs. Lakshmi Devi', 'startTime': '11:00 AM', 'endTime': '11:45 AM', 'type': 'class', 'room': 'Room 102'},
-      {'subject': 'Social Studies', 'teacher': 'Mr. K. Rao', 'startTime': '11:45 AM', 'endTime': '12:30 PM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Games', 'teacher': 'Mr. Suresh Babu', 'startTime': '12:30 PM', 'endTime': '01:15 PM', 'type': 'class', 'room': 'Playground'},
+      {
+        'subject': 'Mathematics',
+        'teacher': 'Miss Raghini Sharma',
+        'startTime': '08:30 AM',
+        'endTime': '09:15 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Science',
+        'teacher': 'Mr. Vijay Prasad',
+        'startTime': '09:15 AM',
+        'endTime': '10:00 AM',
+        'type': 'class',
+        'room': 'Lab 1'
+      },
+      {
+        'subject': 'English',
+        'teacher': 'Mrs. Anita Desai',
+        'startTime': '10:00 AM',
+        'endTime': '10:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Break',
+        'teacher': '',
+        'startTime': '10:45 AM',
+        'endTime': '11:00 AM',
+        'type': 'break',
+        'room': ''
+      },
+      {
+        'subject': 'Hindi',
+        'teacher': 'Mrs. Lakshmi Devi',
+        'startTime': '11:00 AM',
+        'endTime': '11:45 AM',
+        'type': 'class',
+        'room': 'Room 102'
+      },
+      {
+        'subject': 'Social Studies',
+        'teacher': 'Mr. K. Rao',
+        'startTime': '11:45 AM',
+        'endTime': '12:30 PM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Games',
+        'teacher': 'Mr. Suresh Babu',
+        'startTime': '12:30 PM',
+        'endTime': '01:15 PM',
+        'type': 'class',
+        'room': 'Playground'
+      },
     ],
     'Tuesday': [
-      {'subject': 'English', 'teacher': 'Mrs. Anita Desai', 'startTime': '08:30 AM', 'endTime': '09:15 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Mathematics', 'teacher': 'Miss Raghini Sharma', 'startTime': '09:15 AM', 'endTime': '10:00 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Science Lab', 'teacher': 'Mr. Vijay Prasad', 'startTime': '10:00 AM', 'endTime': '10:45 AM', 'type': 'lab', 'room': 'Lab 1'},
-      {'subject': 'Break', 'teacher': '', 'startTime': '10:45 AM', 'endTime': '11:00 AM', 'type': 'break', 'room': ''},
-      {'subject': 'Hindi', 'teacher': 'Mrs. Lakshmi Devi', 'startTime': '11:00 AM', 'endTime': '11:45 AM', 'type': 'class', 'room': 'Room 102'},
-      {'subject': 'Moral Science', 'teacher': 'Mrs. Sunita Rao', 'startTime': '11:45 AM', 'endTime': '12:30 PM', 'type': 'class', 'room': 'Room 101'},
+      {
+        'subject': 'English',
+        'teacher': 'Mrs. Anita Desai',
+        'startTime': '08:30 AM',
+        'endTime': '09:15 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Mathematics',
+        'teacher': 'Miss Raghini Sharma',
+        'startTime': '09:15 AM',
+        'endTime': '10:00 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Science Lab',
+        'teacher': 'Mr. Vijay Prasad',
+        'startTime': '10:00 AM',
+        'endTime': '10:45 AM',
+        'type': 'lab',
+        'room': 'Lab 1'
+      },
+      {
+        'subject': 'Break',
+        'teacher': '',
+        'startTime': '10:45 AM',
+        'endTime': '11:00 AM',
+        'type': 'break',
+        'room': ''
+      },
+      {
+        'subject': 'Hindi',
+        'teacher': 'Mrs. Lakshmi Devi',
+        'startTime': '11:00 AM',
+        'endTime': '11:45 AM',
+        'type': 'class',
+        'room': 'Room 102'
+      },
+      {
+        'subject': 'Moral Science',
+        'teacher': 'Mrs. Sunita Rao',
+        'startTime': '11:45 AM',
+        'endTime': '12:30 PM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
     ],
     'Wednesday': [
-      {'subject': 'Computers', 'teacher': 'Ms. Techy', 'startTime': '08:30 AM', 'endTime': '09:15 AM', 'type': 'lab', 'room': 'Computer Lab'},
-      {'subject': 'Library', 'teacher': 'Mr. Bookman', 'startTime': '09:15 AM', 'endTime': '10:00 AM', 'type': 'library', 'room': 'Library'},
-      {'subject': 'English', 'teacher': 'Mrs. Anita Desai', 'startTime': '10:00 AM', 'endTime': '10:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Break', 'teacher': '', 'startTime': '10:45 AM', 'endTime': '11:00 AM', 'type': 'break', 'room': ''},
-      {'subject': 'Mathematics', 'teacher': 'Miss Raghini Sharma', 'startTime': '11:00 AM', 'endTime': '11:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Art & Craft', 'teacher': 'Ms. Creative', 'startTime': '11:45 AM', 'endTime': '12:30 PM', 'type': 'class', 'room': 'Art Room'},
+      {
+        'subject': 'Computers',
+        'teacher': 'Ms. Techy',
+        'startTime': '08:30 AM',
+        'endTime': '09:15 AM',
+        'type': 'lab',
+        'room': 'Computer Lab'
+      },
+      {
+        'subject': 'Library',
+        'teacher': 'Mr. Bookman',
+        'startTime': '09:15 AM',
+        'endTime': '10:00 AM',
+        'type': 'library',
+        'room': 'Library'
+      },
+      {
+        'subject': 'English',
+        'teacher': 'Mrs. Anita Desai',
+        'startTime': '10:00 AM',
+        'endTime': '10:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Break',
+        'teacher': '',
+        'startTime': '10:45 AM',
+        'endTime': '11:00 AM',
+        'type': 'break',
+        'room': ''
+      },
+      {
+        'subject': 'Mathematics',
+        'teacher': 'Miss Raghini Sharma',
+        'startTime': '11:00 AM',
+        'endTime': '11:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Art & Craft',
+        'teacher': 'Ms. Creative',
+        'startTime': '11:45 AM',
+        'endTime': '12:30 PM',
+        'type': 'class',
+        'room': 'Art Room'
+      },
     ],
     'Thursday': [
-      {'subject': 'Science', 'teacher': 'Mr. Vijay Prasad', 'startTime': '08:30 AM', 'endTime': '09:15 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Hindi', 'teacher': 'Mrs. Lakshmi Devi', 'startTime': '09:15 AM', 'endTime': '10:00 AM', 'type': 'class', 'room': 'Room 102'},
-      {'subject': 'English', 'teacher': 'Mrs. Anita Desai', 'startTime': '10:00 AM', 'endTime': '10:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Break', 'teacher': '', 'startTime': '10:45 AM', 'endTime': '11:00 AM', 'type': 'break', 'room': ''},
-      {'subject': 'Mathematics', 'teacher': 'Miss Raghini Sharma', 'startTime': '11:00 AM', 'endTime': '11:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Physical Education', 'teacher': 'Mr. Suresh Babu', 'startTime': '11:45 AM', 'endTime': '12:30 PM', 'type': 'class', 'room': 'Playground'},
+      {
+        'subject': 'Science',
+        'teacher': 'Mr. Vijay Prasad',
+        'startTime': '08:30 AM',
+        'endTime': '09:15 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Hindi',
+        'teacher': 'Mrs. Lakshmi Devi',
+        'startTime': '09:15 AM',
+        'endTime': '10:00 AM',
+        'type': 'class',
+        'room': 'Room 102'
+      },
+      {
+        'subject': 'English',
+        'teacher': 'Mrs. Anita Desai',
+        'startTime': '10:00 AM',
+        'endTime': '10:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Break',
+        'teacher': '',
+        'startTime': '10:45 AM',
+        'endTime': '11:00 AM',
+        'type': 'break',
+        'room': ''
+      },
+      {
+        'subject': 'Mathematics',
+        'teacher': 'Miss Raghini Sharma',
+        'startTime': '11:00 AM',
+        'endTime': '11:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Physical Education',
+        'teacher': 'Mr. Suresh Babu',
+        'startTime': '11:45 AM',
+        'endTime': '12:30 PM',
+        'type': 'class',
+        'room': 'Playground'
+      },
     ],
     'Friday': [
-      {'subject': 'English', 'teacher': 'Mrs. Anita Desai', 'startTime': '08:30 AM', 'endTime': '09:15 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Science', 'teacher': 'Mr. Vijay Prasad', 'startTime': '09:15 AM', 'endTime': '10:00 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Hindi', 'teacher': 'Mrs. Lakshmi Devi', 'startTime': '10:00 AM', 'endTime': '10:45 AM', 'type': 'class', 'room': 'Room 102'},
-      {'subject': 'Break', 'teacher': '', 'startTime': '10:45 AM', 'endTime': '11:00 AM', 'type': 'break', 'room': ''},
-      {'subject': 'Mathematics', 'teacher': 'Miss Raghini Sharma', 'startTime': '11:00 AM', 'endTime': '11:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'General Knowledge', 'teacher': 'Mr. K. Rao', 'startTime': '11:45 AM', 'endTime': '12:30 PM', 'type': 'class', 'room': 'Room 101'},
+      {
+        'subject': 'English',
+        'teacher': 'Mrs. Anita Desai',
+        'startTime': '08:30 AM',
+        'endTime': '09:15 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Science',
+        'teacher': 'Mr. Vijay Prasad',
+        'startTime': '09:15 AM',
+        'endTime': '10:00 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Hindi',
+        'teacher': 'Mrs. Lakshmi Devi',
+        'startTime': '10:00 AM',
+        'endTime': '10:45 AM',
+        'type': 'class',
+        'room': 'Room 102'
+      },
+      {
+        'subject': 'Break',
+        'teacher': '',
+        'startTime': '10:45 AM',
+        'endTime': '11:00 AM',
+        'type': 'break',
+        'room': ''
+      },
+      {
+        'subject': 'Mathematics',
+        'teacher': 'Miss Raghini Sharma',
+        'startTime': '11:00 AM',
+        'endTime': '11:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'General Knowledge',
+        'teacher': 'Mr. K. Rao',
+        'startTime': '11:45 AM',
+        'endTime': '12:30 PM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
     ],
     'Saturday': [
-      {'subject': 'Social Studies', 'teacher': 'Mr. K. Rao', 'startTime': '08:30 AM', 'endTime': '09:15 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'English', 'teacher': 'Mrs. Anita Desai', 'startTime': '09:15 AM', 'endTime': '10:00 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Mathematics', 'teacher': 'Miss Raghini Sharma', 'startTime': '10:00 AM', 'endTime': '10:45 AM', 'type': 'class', 'room': 'Room 101'},
-      {'subject': 'Break', 'teacher': '', 'startTime': '10:45 AM', 'endTime': '11:00 AM', 'type': 'break', 'room': ''},
-      {'subject': 'Club Activities', 'teacher': 'Various', 'startTime': '11:00 AM', 'endTime': '12:30 PM', 'type': 'activity', 'room': 'Various'},
+      {
+        'subject': 'Social Studies',
+        'teacher': 'Mr. K. Rao',
+        'startTime': '08:30 AM',
+        'endTime': '09:15 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'English',
+        'teacher': 'Mrs. Anita Desai',
+        'startTime': '09:15 AM',
+        'endTime': '10:00 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Mathematics',
+        'teacher': 'Miss Raghini Sharma',
+        'startTime': '10:00 AM',
+        'endTime': '10:45 AM',
+        'type': 'class',
+        'room': 'Room 101'
+      },
+      {
+        'subject': 'Break',
+        'teacher': '',
+        'startTime': '10:45 AM',
+        'endTime': '11:00 AM',
+        'type': 'break',
+        'room': ''
+      },
+      {
+        'subject': 'Club Activities',
+        'teacher': 'Various',
+        'startTime': '11:00 AM',
+        'endTime': '12:30 PM',
+        'type': 'activity',
+        'room': 'Various'
+      },
     ],
   };
 
@@ -77,24 +338,9 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
       _isTelugu = !_isTelugu;
     });
   }
-  void _navigateToMoreOptions() => Navigator.pushNamed(context, ParentsRoutes.moreOptions);
 
-  void _onBottomNavTap(int index) {
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0:
-        break; // Already on Home
-      case 1:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.reports);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, ParentsRoutes.busTracking);
-        break;
-      case 3:
-        _navigateToMoreOptions();
-        break;
-    }
-  }
+  void _navigateToMoreOptions() =>
+      Navigator.pushNamed(context, ParentsRoutes.moreOptions);
 
   Color _getPeriodColor(String type) {
     switch (type) {
@@ -133,7 +379,6 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
                     const SizedBox(height: 16),
                     _buildDaySelector(),
                     const SizedBox(height: 16),
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
@@ -144,7 +389,6 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
                             .toList(),
                       ),
                     ),
-
                     _buildClassSummary(),
                     const SizedBox(height: 30),
                   ],
@@ -154,10 +398,8 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
-
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
@@ -235,12 +477,19 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
       onTap: _toggleLanguage,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey.shade200)),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.grey.shade200)),
         child: Row(
           children: [
             Icon(Icons.translate, size: 14, color: _primaryOrange),
             const SizedBox(width: 4),
-            Text(_selectedLanguage, style: TextStyle(color: _primaryOrange, fontWeight: FontWeight.bold, fontSize: 12)),
+            Text(_selectedLanguage,
+                style: TextStyle(
+                    color: _primaryOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12)),
           ],
         ),
       ),
@@ -332,7 +581,8 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        _heroBadge("${widget.classData['totalStudents']} Students"),
+                        _heroBadge(
+                            "${widget.classData['totalStudents']} Students"),
                         const SizedBox(width: 8),
                         _heroBadge("Class Teacher"),
                       ],
@@ -425,7 +675,8 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildHeaderStat('${widget.classData['totalStudents']}', 'Students'),
+                _buildHeaderStat(
+                    '${widget.classData['totalStudents']}', 'Students'),
                 _buildHeaderStat('7', 'Periods/Day'),
                 _buildHeaderStat('6', 'Working Days'),
               ],
@@ -441,19 +692,31 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
+        border:
+            Border(bottom: BorderSide(color: Colors.grey.shade100, width: 1)),
       ),
       child: Row(
         children: [
           Container(
-            width: 44, height: 44,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
+              gradient: LinearGradient(
+                  colors: [_primaryOrange, _primaryOrange.withOpacity(0.8)]),
               borderRadius: BorderRadius.circular(14),
-              boxShadow: [BoxShadow(color: _primaryOrange.withOpacity(0.25), blurRadius: 12, offset: const Offset(0, 6))],
+              boxShadow: [
+                BoxShadow(
+                    color: _primaryOrange.withOpacity(0.25),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6))
+              ],
             ),
             alignment: Alignment.center,
-            child: const Text("A", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 22)),
+            child: const Text("A",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -461,12 +724,25 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text("Aditya International", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17, letterSpacing: -0.6, color: Color(0xFF1A1A1A))),
+                const Text("Aditya International",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        letterSpacing: -0.6,
+                        color: Color(0xFF1A1A1A))),
                 Row(
                   children: [
-                    Container(width: 6, height: 6, decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle)),
+                    Container(
+                        width: 6,
+                        height: 6,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF10B981), shape: BoxShape.circle)),
                     const SizedBox(width: 6),
-                    Text("Support Portal Active", style: TextStyle(color: Colors.grey.shade500, fontSize: 11, fontWeight: FontWeight.w600)),
+                    Text("Support Portal Active",
+                        style: TextStyle(
+                            color: Colors.grey.shade500,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600)),
                   ],
                 ),
               ],
@@ -516,7 +792,9 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
                 color: isSelected ? const Color(0xff4A7BFF) : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: isSelected ? const Color(0xff4A7BFF) : Colors.grey.shade300,
+                  color: isSelected
+                      ? const Color(0xff4A7BFF)
+                      : Colors.grey.shade300,
                 ),
               ),
               child: Text(
@@ -601,7 +879,8 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
                         color: periodColor,
                         borderRadius: BorderRadius.circular(20),
@@ -762,7 +1041,8 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
   }
 
 // Helper: Modern Info Tile
-  Widget _buildModernInfoTile(IconData icon, String label, String value, Color color) {
+  Widget _buildModernInfoTile(
+      IconData icon, String label, String value, Color color) {
     return Expanded(
       child: Row(
         children: [
@@ -847,23 +1127,4 @@ class _ClassTimetablePageState extends State<ClassTimetablePage> {
       ),
     );
   }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: 0,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _accentOrange,
-      backgroundColor: Colors.white,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 11),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home_rounded), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics_rounded), label: "Reports"),
-        BottomNavigationBarItem(icon: Icon(Icons.directions_bus_outlined), activeIcon: Icon(Icons.directions_bus_rounded), label: "Bus"),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_outlined), activeIcon: Icon(Icons.grid_view_rounded), label: "More"),
-      ],
-    );
-  }
-
 }

@@ -1827,7 +1827,9 @@ class _ParentsHomePageState extends State<ParentsHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const BusTrackingPage(),
+                      builder: (_) => const BusTrackingPage(
+                        showBackButton: true,
+                      ),
                     ),
                   );
                 },
@@ -1962,7 +1964,9 @@ class _ParentsHomePageState extends State<ParentsHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => BusTrackingPage(),
+                      builder: (_) => const BusTrackingPage(
+                        showBackButton: true,
+                      ),
                     ),
                   );
                 },
