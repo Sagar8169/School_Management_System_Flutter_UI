@@ -15,10 +15,9 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-
   List<Map<String, dynamic>> _filteredCategories = [];
 
-  int _currentIndex = 1;
+  // int _currentIndex = 1;
   bool _isTelugu = true;
   final TextEditingController _searchController = TextEditingController();
 
@@ -73,10 +72,11 @@ class _SearchPageState extends State<SearchPage> {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: const Color(0xFFDBEAFE)),
         ),
-        child: Text(_isTelugu ? "తెలుగు" : "English", style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w800,
-            color: Color(0xFF3B82F6))),
+        child: Text(_isTelugu ? "తెలుగు" : "English",
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF3B82F6))),
       ),
     );
   }
@@ -84,27 +84,26 @@ class _SearchPageState extends State<SearchPage> {
   void _toggleLanguage() {
     setState(() => _isTelugu = !_isTelugu);
   }
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
-
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,14 +118,18 @@ class _SearchPageState extends State<SearchPage> {
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
                     const Text(
                       "Global Search",
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF0F172A)),
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xFF0F172A)),
                     ),
                     const SizedBox(height: 6),
                     const Text(
@@ -143,13 +146,17 @@ class _SearchPageState extends State<SearchPage> {
 
                     const Text(
                       "Browse by Category",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF334155)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF334155)),
                     ),
 
                     const SizedBox(height: 15),
 
                     // ✨ Categories List
-                    ..._filteredCategories.map((cat) => _buildCategoryCard(cat)),
+                    ..._filteredCategories
+                        .map((cat) => _buildCategoryCard(cat)),
 
                     const SizedBox(height: 40),
                   ],
@@ -159,7 +166,7 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildModernBottomNav(),
+      // bottomNavigationBar: _buildModernBottomNav(),
     );
   }
 
@@ -179,7 +186,6 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-
   Widget _buildCustomHeader() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -187,32 +193,43 @@ class _SearchPageState extends State<SearchPage> {
       child: Row(
         children: [
           Container(
-            width: 40, height: 40,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [themeBlue, themeLightBlue]),
+              gradient: LinearGradient(colors: [themeBlue, themeLightBlue]),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Center(child: Text("A", style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20))),
+            child: const Center(
+                child: Text("A",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20))),
           ),
           const SizedBox(width: 12),
-          const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text("Aditya International School", style: TextStyle(fontSize: 16,
-                fontWeight: FontWeight.w900,
-                color: Color(0xFF1E293B))),
-            Text("Powered by Toki Tech",
-                style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8))),
-          ]),
-          const Spacer(),
+          const Expanded(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Aditya International School",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0xFF1E293B))),
+                  Text("Powered by Toki Tech",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8))),
+                ]),
+          ),
           _langTogglePill(),
         ],
       ),
     );
   }
-
 
   Widget _buildLanguagePill() {
     return InkWell(
@@ -220,8 +237,14 @@ class _SearchPageState extends State<SearchPage> {
       borderRadius: BorderRadius.circular(30),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-        decoration: BoxDecoration(color: const Color(0xFFEFF6FF), borderRadius: BorderRadius.circular(30)),
-        child: Text(_isTelugu ? 'తెలుగు' : 'English', style: const TextStyle(color: Color(0xFF1D4ED8), fontWeight: FontWeight.bold, fontSize: 12)),
+        decoration: BoxDecoration(
+            color: const Color(0xFFEFF6FF),
+            borderRadius: BorderRadius.circular(30)),
+        child: Text(_isTelugu ? 'తెలుగు' : 'English',
+            style: const TextStyle(
+                color: Color(0xFF1D4ED8),
+                fontWeight: FontWeight.bold,
+                fontSize: 12)),
       ),
     );
   }
@@ -231,7 +254,12 @@ class _SearchPageState extends State<SearchPage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 15, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 15,
+              offset: const Offset(0, 8))
+        ],
         border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: TextField(
@@ -241,7 +269,8 @@ class _SearchPageState extends State<SearchPage> {
         decoration: InputDecoration(
           hintText: "Search students, roll no, teachers...",
           hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-          prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF1D4ED8), size: 22),
+          prefixIcon: const Icon(Icons.search_rounded,
+              color: Color(0xFF1D4ED8), size: 22),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 15),
         ),
@@ -326,24 +355,24 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _buildModernBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTap,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: const Color(0xFF1D4ED8),
-      unselectedItemColor: const Color(0xFF94A3B8),
-      showUnselectedLabels: true,
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
-      unselectedLabelStyle: const TextStyle(fontSize: 11),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_rounded), activeIcon: Icon(Icons.home_filled), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), activeIcon: Icon(Icons.search), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded), activeIcon: Icon(Icons.bolt), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'More'),
-      ],
-    );
-  }
+  // Widget _buildModernBottomNav() {
+  //   return BottomNavigationBar(
+  //     currentIndex: _currentIndex,
+  //     onTap: _onBottomNavTap,
+  //     type: BottomNavigationBarType.fixed,
+  //     selectedItemColor: const Color(0xFF1D4ED8),
+  //     unselectedItemColor: const Color(0xFF94A3B8),
+  //     showUnselectedLabels: true,
+  //     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+  //     unselectedLabelStyle: const TextStyle(fontSize: 11),
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home_rounded), activeIcon: Icon(Icons.home_filled), label: 'Home'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.search_rounded), activeIcon: Icon(Icons.search), label: 'Search'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded), activeIcon: Icon(Icons.bolt), label: 'Activity'),
+  //       BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'More'),
+  //     ],
+  //   );
+  // }
 
   @override
   void dispose() {

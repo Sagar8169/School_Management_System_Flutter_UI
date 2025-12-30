@@ -12,6 +12,7 @@ import 'timetable_page.dart';
 import 'events_page.dart';
 import 'tickets_page.dart';
 import 'approvals_page.dart';
+
 const Color themeBlue = Color(0xFF1E3A8A);
 const Color themeLightBlue = Color(0xFF3B82F6);
 const Color themeGreen = Color(0xFF059669);
@@ -26,13 +27,14 @@ class MorePage extends StatefulWidget {
 }
 
 class _MorePageState extends State<MorePage> {
-  int _currentIndex = 3;
+  // int _currentIndex = 3;
   bool _isTelugu = true;
   bool _isDarkMode = false;
 
   // --- Original Data Reference Restored ---
   String principalName = "Dr. Ramesh Kumar"; // Principal Name
-  String principalRole = "Principal • Aditya International School"; // Role + School
+  String principalRole =
+      "Principal • Aditya International School"; // Role + School
 
   File? _profileImage;
   final ImagePicker _picker = ImagePicker();
@@ -127,28 +129,26 @@ class _MorePageState extends State<MorePage> {
     }
   }
 
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
-
-
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   // ==========================================
   // --- MODERN UI DIALOGS (FUNCTIONAL) ---
@@ -162,91 +162,98 @@ class _MorePageState extends State<MorePage> {
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-      builder: (context) =>
-          StatefulBuilder(
-            builder: (context, setModalState) =>
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery
-                        .of(context)
-                        .viewInsets
-                        .bottom + 20, left: 24, right: 24, top: 12),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(child: Container(width: 40,
-                              height: 4,
-                              decoration: BoxDecoration(color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(10)))),
-                          const SizedBox(height: 25),
-                          const Text("Submit a Ticket", style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF1E3A8A))),
-                          const SizedBox(height: 20),
-                          DropdownButtonFormField<String>(
-                            decoration: _modernInputDecoration(
-                                "Select Issue Type", Icons.category_rounded),
-                            items: [
-                              'App Bug',
-                              'Data Correction',
-                              'Login Issue',
-                              'Other'
-                            ].map((e) =>
-                                DropdownMenuItem(value: e,
-                                    child: Text(e))).toList(),
-                            onChanged: (val) {},
-                          ),
-                          const SizedBox(height: 15),
-                          TextField(maxLines: 3,
-                              decoration: _modernInputDecoration(
-                                  "Tell us about the issue...",
-                                  Icons.edit_note_rounded)),
-                          const SizedBox(height: 15),
-                          GestureDetector(
-                            onTap: () async {
-                              final XFile? img = await _picker.pickImage(
-                                  source: ImageSource.gallery,
-                                  imageQuality: 80);
-                              if (img != null) setModalState(() =>
-                              ticketImage = File(img.path));
-                            },
-                            child: Container(
-                              height: 140, width: double.infinity,
-                              decoration: BoxDecoration(color: Colors.grey[50],
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: Colors.grey[200]!)),
-                              child: ticketImage == null
-                                  ? const Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.add_a_photo, color: Colors.blue,
-                                        size: 30),
-                                    Text("Attach Screenshot")
-                                  ])
-                                  : ClipRRect(borderRadius: BorderRadius
-                                  .circular(15), child: Image.file(
-                                  ticketImage!, fit: BoxFit.cover)),
-                            ),
-                          ),
-                          const SizedBox(height: 25),
-                          SizedBox(width: double.infinity,
-                              child: ElevatedButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  style: ElevatedButton.styleFrom(
-                                      minimumSize: const Size(
-                                          double.infinity, 54)),
-                                  child: const Text("Submit Report"))),
-                        ],
-                      ),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setModalState) => SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                left: 24,
+                right: 24,
+                top: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                      child: Container(
+                          width: 40,
+                          height: 4,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(10)))),
+                  const SizedBox(height: 25),
+                  const Text("Submit a Ticket",
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1E3A8A))),
+                  const SizedBox(height: 20),
+                  DropdownButtonFormField<String>(
+                    decoration: _modernInputDecoration(
+                        "Select Issue Type", Icons.category_rounded),
+                    items: [
+                      'App Bug',
+                      'Data Correction',
+                      'Login Issue',
+                      'Other'
+                    ]
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (val) {},
+                  ),
+                  const SizedBox(height: 15),
+                  TextField(
+                      maxLines: 3,
+                      decoration: _modernInputDecoration(
+                          "Tell us about the issue...",
+                          Icons.edit_note_rounded)),
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () async {
+                      final XFile? img = await _picker.pickImage(
+                          source: ImageSource.gallery, imageQuality: 80);
+                      if (img != null)
+                        setModalState(() => ticketImage = File(img.path));
+                    },
+                    child: Container(
+                      height: 140,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[50],
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.grey[200]!)),
+                      child: ticketImage == null
+                          ? const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                  Icon(Icons.add_a_photo,
+                                      color: Colors.blue, size: 30),
+                                  Text("Attach Screenshot")
+                                ])
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child:
+                                  Image.file(ticketImage!, fit: BoxFit.cover)),
                     ),
                   ),
-                ),
+                  const SizedBox(height: 25),
+                  SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.infinity, 54)),
+                          child: const Text("Submit Report"))),
+                ],
+              ),
+            ),
           ),
+        ),
+      ),
     );
   }
+
   void _showContactSupport() {
     showModalBottomSheet(
       context: context,
@@ -265,21 +272,31 @@ class _MorePageState extends State<MorePage> {
               children: [
                 // --- Pill Handle ---
                 Container(
-                  width: 50, height: 5,
-                  decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(10)),
+                  width: 50,
+                  height: 5,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10)),
                 ),
                 const SizedBox(height: 30),
 
                 // --- Header Section ---
-                const Icon(Icons.headset_mic_rounded, size: 50, color: themeBlue),
+                const Icon(Icons.headset_mic_rounded,
+                    size: 50, color: themeBlue),
                 const SizedBox(height: 15),
                 const Text(
                   "How can we help?",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Color(0xFF1E293B)),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF1E293B)),
                 ),
                 const Text(
                   "Our team is available for your assistance",
-                  style: TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 35),
 
@@ -307,7 +324,8 @@ class _MorePageState extends State<MorePage> {
                   subtitle: "Instant response for quick queries",
                   icon: Icons.chat_bubble_outline_rounded,
                   color: const Color(0xFF25D366),
-                  onTap: () => _handleAction("whatsapp://send?phone=+919876543210"),
+                  onTap: () =>
+                      _handleAction("whatsapp://send?phone=+919876543210"),
                 ),
 
                 const SizedBox(height: 30),
@@ -315,7 +333,10 @@ class _MorePageState extends State<MorePage> {
                 // --- Footer ---
                 Text(
                   "Available: Mon - Sat (9 AM - 6 PM)",
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade400, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade400,
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
               ],
@@ -366,13 +387,22 @@ class _MorePageState extends State<MorePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15, color: Color(0xFF1E293B))),
+                  Text(title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 15,
+                          color: Color(0xFF1E293B))),
                   const SizedBox(height: 2),
-                  Text(subtitle, style: const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500)),
+                  Text(subtitle,
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500)),
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey[300]),
+            Icon(Icons.arrow_forward_ios_rounded,
+                size: 14, color: Colors.grey[300]),
           ],
         ),
       ),
@@ -389,14 +419,14 @@ class _MorePageState extends State<MorePage> {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: const Color(0xFFDBEAFE)),
         ),
-        child: Text(_isTelugu ? "తెలుగు" : "English", style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w800,
-            color: Color(0xFF3B82F6))),
+        child: Text(_isTelugu ? "తెలుగు" : "English",
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF3B82F6))),
       ),
     );
   }
-
 
   void _editProfile() {
     final nameCtrl = TextEditingController(text: principalName);
@@ -442,7 +472,8 @@ class _MorePageState extends State<MorePage> {
                             children: [
                               // 🔝 Header
                               Container(
-                                padding: const EdgeInsets.symmetric(vertical: 18),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 18),
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
                                   color: Color(0xFFF8FAFC),
@@ -471,7 +502,8 @@ class _MorePageState extends State<MorePage> {
                               ),
 
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(24, 24, 24, 28),
+                                padding:
+                                    const EdgeInsets.fromLTRB(24, 24, 24, 28),
                                 child: Column(
                                   children: [
                                     // 🧑‍💼 Profile Image Picker
@@ -503,16 +535,16 @@ class _MorePageState extends State<MorePage> {
                                             child: CircleAvatar(
                                               radius: 52,
                                               backgroundColor:
-                                              const Color(0xFFEFF6FF),
+                                                  const Color(0xFFEFF6FF),
                                               backgroundImage: tempImage != null
                                                   ? FileImage(tempImage!)
                                                   : null,
                                               child: tempImage == null
                                                   ? const Icon(
-                                                Icons.camera_alt_rounded,
-                                                color: Color(0xFF2563EB),
-                                                size: 30,
-                                              )
+                                                      Icons.camera_alt_rounded,
+                                                      color: Color(0xFF2563EB),
+                                                      size: 30,
+                                                    )
                                                   : null,
                                             ),
                                           ),
@@ -538,7 +570,7 @@ class _MorePageState extends State<MorePage> {
                                     TextField(
                                       controller: nameCtrl,
                                       textCapitalization:
-                                      TextCapitalization.words,
+                                          TextCapitalization.words,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         color: Color(0xFF1E293B),
@@ -554,18 +586,17 @@ class _MorePageState extends State<MorePage> {
                                           color: Color(0xFF2563EB),
                                         ),
                                         filled: true,
-                                        fillColor:
-                                        const Color(0xFFF8FAFC),
+                                        fillColor: const Color(0xFFF8FAFC),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(18),
+                                              BorderRadius.circular(18),
                                           borderSide: const BorderSide(
                                             color: Color(0xFFE2E8F0),
                                           ),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(18),
+                                              BorderRadius.circular(18),
                                           borderSide: const BorderSide(
                                             color: Color(0xFF2563EB),
                                             width: 2,
@@ -584,11 +615,12 @@ class _MorePageState extends State<MorePage> {
                                             onPressed: () =>
                                                 Navigator.pop(context),
                                             style: TextButton.styleFrom(
-                                              padding: const EdgeInsets.symmetric(
-                                                  vertical: 16),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 16),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(18),
+                                                    BorderRadius.circular(18),
                                               ),
                                             ),
                                             child: const Text(
@@ -613,14 +645,14 @@ class _MorePageState extends State<MorePage> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor:
-                                              const Color(0xFF2563EB),
+                                                  const Color(0xFF2563EB),
                                               elevation: 0,
                                               padding:
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 16),
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 16),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(18),
+                                                    BorderRadius.circular(18),
                                               ),
                                             ),
                                             child: const Text(
@@ -692,8 +724,8 @@ class _MorePageState extends State<MorePage> {
         _showAboutDialog();
         break;
       default:
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Feature $id coming soon')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Feature $id coming soon')));
     }
   }
 
@@ -701,8 +733,9 @@ class _MorePageState extends State<MorePage> {
     setState(() {
       _isTelugu = !_isTelugu;
     });
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
-        'Language switched to ${_isTelugu ? 'Telugu' : 'English'}'),
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content:
+            Text('Language switched to ${_isTelugu ? 'Telugu' : 'English'}'),
         backgroundColor: Colors.blueAccent));
   }
 
@@ -787,77 +820,81 @@ class _MorePageState extends State<MorePage> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) =>
-          Container(
-            padding: EdgeInsets.only(
-              left: 24,
-              right: 24,
-              top: 12,
-              // ✨ Niche ka Safe Area + Keyboard gap handle karne ke liye
-              bottom: MediaQuery
-                  .of(context)
-                  .viewInsets
-                  .bottom +
-                  MediaQuery
-                      .of(context)
-                      .padding
-                      .bottom + 24,
-            ),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(child: Container(width: 40,
+      builder: (context) => Container(
+        padding: EdgeInsets.only(
+          left: 24,
+          right: 24,
+          top: 12,
+          // ✨ Niche ka Safe Area + Keyboard gap handle karne ke liye
+          bottom: MediaQuery.of(context).viewInsets.bottom +
+              MediaQuery.of(context).padding.bottom +
+              24,
+        ),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+                child: Container(
+                    width: 40,
                     height: 4,
-                    decoration: BoxDecoration(color: Colors.grey[200],
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(10)))),
-                const SizedBox(height: 24),
-                const Text("Share Your Feedback", style: TextStyle(fontSize: 20,
+            const SizedBox(height: 24),
+            const Text("Share Your Feedback",
+                style: TextStyle(
+                    fontSize: 20,
                     fontWeight: FontWeight.w900,
                     color: Color(0xFF1E293B))),
-                const SizedBox(height: 8),
-                const Text("Help us improve the Principal dashboard",
-                    style: TextStyle(color: Colors.grey,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600)),
-                const SizedBox(height: 20),
-                Row(
-                  children: List.generate(5, (index) =>
-                  const Icon(
-                      Icons.star_rounded, color: Color(0xFFF59E0B), size: 32)),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  maxLines: 3,
-                  autofocus: true, // Form khulte hi keyboard aa jaye
-                  decoration: InputDecoration(
-                    hintText: "What can we do better?",
-                    filled: true, fillColor: const Color(0xFFF8FAFC),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity, height: 55,
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1D4ED8),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16))),
-                    child: const Text("SUBMIT FEEDBACK", style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w900)),
-                  ),
-                )
-              ],
+            const SizedBox(height: 8),
+            const Text("Help us improve the Principal dashboard",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600)),
+            const SizedBox(height: 20),
+            Row(
+              children: List.generate(
+                  5,
+                  (index) => const Icon(Icons.star_rounded,
+                      color: Color(0xFFF59E0B), size: 32)),
             ),
-          ),
+            const SizedBox(height: 20),
+            TextField(
+              maxLines: 3,
+              autofocus: true, // Form khulte hi keyboard aa jaye
+              decoration: InputDecoration(
+                hintText: "What can we do better?",
+                filled: true,
+                fillColor: const Color(0xFFF8FAFC),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none),
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1D4ED8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16))),
+                child: const Text("SUBMIT FEEDBACK",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w900)),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -902,7 +939,9 @@ class _MorePageState extends State<MorePage> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFECFDF5), // Light Green
                     shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFF10B981).withOpacity(0.2), width: 4),
+                    border: Border.all(
+                        color: const Color(0xFF10B981).withOpacity(0.2),
+                        width: 4),
                   ),
                   child: const Icon(
                     Icons.verified_user_rounded,
@@ -938,9 +977,18 @@ class _MorePageState extends State<MorePage> {
                 const SizedBox(height: 30),
 
                 // --- Feature Points (UI improvement) ---
-                _buildPrivacyPoint(Icons.lock_outline_rounded, "256-Bit SSL Encryption", "Military-grade data protection."),
-                _buildPrivacyPoint(Icons.visibility_off_outlined, "Zero Third-Party Sharing", "Your records stay within the school."),
-                _buildPrivacyPoint(Icons.cloud_done_outlined, "Automated Backups", "Secure cloud storage with daily sync."),
+                _buildPrivacyPoint(
+                    Icons.lock_outline_rounded,
+                    "256-Bit SSL Encryption",
+                    "Military-grade data protection."),
+                _buildPrivacyPoint(
+                    Icons.visibility_off_outlined,
+                    "Zero Third-Party Sharing",
+                    "Your records stay within the school."),
+                _buildPrivacyPoint(
+                    Icons.cloud_done_outlined,
+                    "Automated Backups",
+                    "Secure cloud storage with daily sync."),
 
                 const SizedBox(height: 30),
 
@@ -952,7 +1000,8 @@ class _MorePageState extends State<MorePage> {
                     onPressed: () => Navigator.pop(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1E3A8A), // themeBlue
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
                       elevation: 0,
                     ),
                     child: const Text(
@@ -992,8 +1041,16 @@ class _MorePageState extends State<MorePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1E293B))),
-              Text(sub, style: const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500)),
+              Text(title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Color(0xFF1E293B))),
+              Text(sub,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500)),
             ],
           ),
         ],
@@ -1003,26 +1060,31 @@ class _MorePageState extends State<MorePage> {
 
   Future<void> _handleAction(String url) async {
     final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) await launchUrl(
-        uri, mode: LaunchMode.externalApplication);
+    if (await canLaunchUrl(uri))
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   InputDecoration _modernInputDecoration(String hint, IconData icon) =>
-      InputDecoration(prefixIcon: Icon(icon, color: Colors.blue),
+      InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.blue),
           hintText: hint,
           filled: true,
           fillColor: Colors.grey[50],
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide.none));
 
   Widget _buildContactTile(String title, String sub, IconData icon, Color color,
-      VoidCallback onTap) =>
-      ListTile(onTap: onTap,
-      leading: CircleAvatar(backgroundColor: color.withOpacity(0.1),
-          child: Icon(icon, color: color)),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-      subtitle: Text(sub),
-      trailing: const Icon(Icons.chevron_right, size: 16));
+          VoidCallback onTap) =>
+      ListTile(
+          onTap: onTap,
+          leading: CircleAvatar(
+              backgroundColor: color.withOpacity(0.1),
+              child: Icon(icon, color: color)),
+          title:
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          subtitle: Text(sub),
+          trailing: const Icon(Icons.chevron_right, size: 16));
 
   // ==========================================
   // --- MAIN LAYOUT BUILD ---
@@ -1062,7 +1124,7 @@ class _MorePageState extends State<MorePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+      // bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -1097,27 +1159,33 @@ class _MorePageState extends State<MorePage> {
                 ),
               ),
               const SizedBox(width: 12),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Aditya International School",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF1E293B),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Aditya International School",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF1E293B),
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Powered by Toki Tech",
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF94A3B8),
+                    Text(
+                      "Powered by Toki Tech",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFF94A3B8),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              const Spacer(),
               _langTogglePill(),
             ],
           ),
@@ -1126,8 +1194,7 @@ class _MorePageState extends State<MorePage> {
     );
   }
 
-  Widget _buildProfileCardUI() =>
-      Container(
+  Widget _buildProfileCardUI() => Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -1136,32 +1203,40 @@ class _MorePageState extends State<MorePage> {
               end: Alignment.bottomRight),
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
-            BoxShadow(color: Colors.blue.withOpacity(0.3),
+            BoxShadow(
+                color: Colors.blue.withOpacity(0.3),
                 blurRadius: 20,
                 offset: const Offset(0, 10))
           ],
         ),
         child: Row(
           children: [
-            CircleAvatar(radius: 35,
+            CircleAvatar(
+                radius: 35,
                 backgroundColor: Colors.white24,
-                backgroundImage: _profileImage != null ? FileImage(
-                    _profileImage!) : null,
-                child: _profileImage == null ? const Icon(
-                    Icons.person, size: 40, color: Colors.white) : null),
+                backgroundImage:
+                    _profileImage != null ? FileImage(_profileImage!) : null,
+                child: _profileImage == null
+                    ? const Icon(Icons.person, size: 40, color: Colors.white)
+                    : null),
             const SizedBox(width: 15),
-            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(principalName, style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold)),
-                  Text(principalRole, style: const TextStyle(
-                      color: Colors.white70, fontSize: 12))
+            Expanded(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Text(principalName,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
+                  Text(principalRole,
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 12))
                 ])),
-            IconButton(onPressed: _editProfile,
-                icon: const Icon(
-                    Icons.edit_note_rounded, color: Colors.white, size: 30)),
+            IconButton(
+                onPressed: _editProfile,
+                icon: const Icon(Icons.edit_note_rounded,
+                    color: Colors.white, size: 30)),
           ],
         ),
       );
@@ -1207,12 +1282,12 @@ class _MorePageState extends State<MorePage> {
           // --- 2. DOWNLOAD REPORTS (Working Loader) ---
           ListTile(
             onTap: () => _handleDownloadReport(),
-            leading: _buildIconContainer(
-                Icons.file_download_outlined, Colors.brown),
+            leading:
+                _buildIconContainer(Icons.file_download_outlined, Colors.brown),
             title: const Text("Download Reports",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-            trailing: const Icon(
-                Icons.chevron_right, size: 20, color: Colors.grey),
+            trailing:
+                const Icon(Icons.chevron_right, size: 20, color: Colors.grey),
           ),
           const Divider(height: 1, indent: 60, color: Color(0xFFF1F5F9)),
 
@@ -1222,8 +1297,8 @@ class _MorePageState extends State<MorePage> {
             leading: _buildIconContainer(Icons.share_outlined, Colors.cyan),
             title: const Text("Share App",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-            trailing: const Icon(
-                Icons.chevron_right, size: 20, color: Colors.grey),
+            trailing:
+                const Icon(Icons.chevron_right, size: 20, color: Colors.grey),
           ),
         ],
       ),
@@ -1237,24 +1312,21 @@ class _MorePageState extends State<MorePage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) =>
-          AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20)),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const CircularProgressIndicator(
-                    strokeWidth: 3, color: Colors.blue),
-                const SizedBox(height: 20),
-                const Text("Generating Analytics PDF...",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Text("Please wait while we prepare the data",
-                    style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-              ],
-            ),
-          ),
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(strokeWidth: 3, color: Colors.blue),
+            const SizedBox(height: 20),
+            const Text("Generating Analytics PDF...",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Text("Please wait while we prepare the data",
+                style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+          ],
+        ),
+      ),
     );
 
     // Auto close loader after 2 seconds
@@ -1329,28 +1401,28 @@ class _MorePageState extends State<MorePage> {
                   ),
                   trailing: item['hasBadge'] == true
                       ? Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: item['badgeColor'],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      item['badgeCount'].toString(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: item['badgeColor'],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            item['badgeCount'].toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
                       : const Icon(
-                    Icons.chevron_right,
-                    size: 18,
-                    color: Color(0xFF94A3B8),
-                  ),
+                          Icons.chevron_right,
+                          size: 18,
+                          color: Color(0xFF94A3B8),
+                        ),
                 ),
                 if (!isLast)
                   const Divider(
@@ -1366,187 +1438,194 @@ class _MorePageState extends State<MorePage> {
     );
   }
 
-  Widget _buildIconContainer(IconData icon, Color color) =>
-      Container(
+  Widget _buildIconContainer(IconData icon, Color color) => Container(
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: color.withOpacity(0.1),
+      decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12)),
       child: Icon(icon, color: color, size: 20));
 
-  Widget _buildSectionHeader(String title) =>
-      Padding(
+  Widget _buildSectionHeader(String title) => Padding(
       padding: const EdgeInsets.only(left: 4, bottom: 10),
-      child: Text(title, style: const TextStyle(fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Colors.blueGrey)));
+      child: Text(title,
+          style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.blueGrey)));
 
-  Widget _buildLogoutButton() =>
-      InkWell(
-        onTap: () =>
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
-            builder: (context) => const MobileLoginPage()), (route) => false),
-        child: Container(width: double.infinity,
+  Widget _buildLogoutButton() => InkWell(
+        onTap: () => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const MobileLoginPage()),
+            (route) => false),
+        child: Container(
+            width: double.infinity,
             padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(color: Colors.red[50],
+            decoration: BoxDecoration(
+                color: Colors.red[50],
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.red[100]!)),
-            child: const Center(child: Text("Logout Session", style: TextStyle(
-                color: Colors.red, fontWeight: FontWeight.bold)))),
+            child: const Center(
+                child: Text("Logout Session",
+                    style: TextStyle(
+                        color: Colors.red, fontWeight: FontWeight.bold)))),
       );
 
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: Color(0xFFF1F5F9),
-            width: 2,
-          ),
-        ),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
+  // Widget _buildBottomNav() {
+  //   return Container(
+  //     decoration: const BoxDecoration(
+  //       border: Border(
+  //         top: BorderSide(
+  //           color: Color(0xFFF1F5F9),
+  //           width: 2,
+  //         ),
+  //       ),
+  //     ),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
 
-        // ✅ CORRECT onTap (int only)
-        onTap: (index) {
-          if (index == _currentIndex) return;
-          _onBottomNavTap(index);
-        },
+  //       // ✅ CORRECT onTap (int only)
+  //       onTap: (index) {
+  //         if (index == _currentIndex) return;
+  //         _onBottomNavTap(index);
+  //       },
 
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: themeBlue,
-        unselectedItemColor: const Color(0xFF94A3B8),
-        elevation: 0,
+  //       type: BottomNavigationBarType.fixed,
+  //       backgroundColor: Colors.white,
+  //       selectedItemColor: themeBlue,
+  //       unselectedItemColor: const Color(0xFF94A3B8),
+  //       elevation: 0,
 
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: "Search",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_rounded),
-            label: "Activity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view_rounded),
-            label: "More",
-          ),
-        ],
-      ),
-    );
-  }
+  //       items: const [
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.home_rounded),
+  //           label: "Home",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.search_rounded),
+  //           label: "Search",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.analytics_rounded),
+  //           label: "Activity",
+  //         ),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.grid_view_rounded),
+  //           label: "More",
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-
-
-void _showAboutDialog() {
+  void _showAboutDialog() {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
-      builder: (context) =>
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-            ),
-            child: SafeArea(
-              top: false,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24, vertical: 12),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Handle Bar
-                    Container(width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(10))),
-                    const SizedBox(height: 30),
+      builder: (context) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: SafeArea(
+          top: false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle Bar
+                Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10))),
+                const SizedBox(height: 30),
 
-                    // App Logo Placeholder
-                    Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                            colors: [Color(0xFF1E3A8A), Color(0xFF3B82F6)]),
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(color: Colors.blue.withOpacity(0.2),
-                              blurRadius: 15,
-                              offset: const Offset(0, 8))
-                        ],
-                      ),
-                      child: const Center(
-                        child: Text("TOKI", style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18)),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+                // App Logo Placeholder
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                        colors: [Color(0xFF1E3A8A), Color(0xFF3B82F6)]),
+                    borderRadius: BorderRadius.circular(22),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.blue.withOpacity(0.2),
+                          blurRadius: 15,
+                          offset: const Offset(0, 8))
+                    ],
+                  ),
+                  child: const Center(
+                    child: Text("TOKI",
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
+                  ),
+                ),
+                const SizedBox(height: 20),
 
-                    const Text("Toki Tech", style: TextStyle(fontSize: 22,
+                const Text("Toki Tech",
+                    style: TextStyle(
+                        fontSize: 22,
                         fontWeight: FontWeight.w900,
                         color: Color(0xFF0F172A))),
-                    const SizedBox(height: 5),
+                const SizedBox(height: 5),
 
-                    // Version Badge
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Text("Version 1.0.1", style: TextStyle(
+                // Version Badge
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: const Text("Version 1.0.1",
+                      style: TextStyle(
                           color: Colors.blue,
                           fontSize: 12,
                           fontWeight: FontWeight.w800)),
+                ),
+
+                const SizedBox(height: 25),
+                const Divider(color: Color(0xFFF1F5F9)),
+                const SizedBox(height: 20),
+
+                _aboutTile(Icons.verified_user_outlined, "Official Product",
+                    "Licensed for Aditya International School"),
+                const SizedBox(height: 15),
+                _aboutTile(Icons.code_rounded, "Developer",
+                    "Powered by Toki Technologies Pvt Ltd"),
+                const SizedBox(height: 15),
+                _aboutTile(Icons.copyright_rounded, "Legal",
+                    "All rights reserved 2025"),
+
+                const SizedBox(height: 30),
+
+                // Close Button
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: const Color(0xFFF8FAFC),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
                     ),
-
-                    const SizedBox(height: 25),
-                    const Divider(color: Color(0xFFF1F5F9)),
-                    const SizedBox(height: 20),
-
-                    _aboutTile(Icons.verified_user_outlined, "Official Product",
-                        "Licensed for Aditya International School"),
-                    const SizedBox(height: 15),
-                    _aboutTile(Icons.code_rounded, "Developer",
-                        "Powered by Toki Technologies Pvt Ltd"),
-                    const SizedBox(height: 15),
-                    _aboutTile(Icons.copyright_rounded, "Legal",
-                        "All rights reserved 2025"),
-
-                    const SizedBox(height: 30),
-
-                    // Close Button
-                    SizedBox(
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: const Color(0xFFF8FAFC),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                        child: const Text("CLOSE", style: TextStyle(
+                    child: const Text("CLOSE",
+                        style: TextStyle(
                             color: Color(0xFF64748B),
                             fontWeight: FontWeight.w900,
                             letterSpacing: 1.2)),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 10),
+              ],
             ),
           ),
+        ),
+      ),
     );
   }
 
@@ -1556,7 +1635,8 @@ void _showAboutDialog() {
       children: [
         Container(
           padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(color: const Color(0xFFF8FAFC),
+          decoration: BoxDecoration(
+              color: const Color(0xFFF8FAFC),
               borderRadius: BorderRadius.circular(12)),
           child: Icon(icon, color: const Color(0xFF475569), size: 20),
         ),
@@ -1564,12 +1644,16 @@ void _showAboutDialog() {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.w800,
-                fontSize: 14,
-                color: Color(0xFF1E293B))),
-            Text(sub, style: const TextStyle(fontSize: 12,
-                color: Color(0xFF94A3B8),
-                fontWeight: FontWeight.w500)),
+            Text(title,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14,
+                    color: Color(0xFF1E293B))),
+            Text(sub,
+                style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF94A3B8),
+                    fontWeight: FontWeight.w500)),
           ],
         )
       ],

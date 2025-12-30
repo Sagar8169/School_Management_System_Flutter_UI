@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../routes/principal_routes.dart';
+
 const Color themeBlue = Color(0xFF1E3A8A);
 const Color themeLightBlue = Color(0xFF3B82F6);
 const Color themeGreen = Color(0xFF059669);
 const Color backgroundSlate = Color(0xFFF8FAFC);
+
 class ActivityPage extends StatefulWidget {
   const ActivityPage({super.key});
 
@@ -12,7 +14,7 @@ class ActivityPage extends StatefulWidget {
 }
 
 class _ActivityPageState extends State<ActivityPage> {
-  int _currentIndex = 2;
+  // int _currentIndex = 2;
   bool _isTelugu = true;
 
   // --- ORIGINAL DATA LIST ---
@@ -41,7 +43,6 @@ class _ActivityPageState extends State<ActivityPage> {
       'iconColor': const Color(0xFFF9A825),
       'route': PrincipalRoutes.collectFee, // ✅
     },
-
     {
       'title': 'Add Event (School)',
       'subtitle': 'Next: Sports Day (Nov 15)',
@@ -75,7 +76,8 @@ class _ActivityPageState extends State<ActivityPage> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(_isTelugu ? "తెలుగు భాషలోకి మార్చబడింది" : "Switched to English"),
+        content: Text(
+            _isTelugu ? "తెలుగు భాషలోకి మార్చబడింది" : "Switched to English"),
         duration: const Duration(seconds: 1),
         behavior: SnackBarBehavior.floating,
       ),
@@ -96,36 +98,35 @@ class _ActivityPageState extends State<ActivityPage> {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: const Color(0xFFDBEAFE)),
         ),
-        child: Text(_isTelugu ? "తెలుగు" : "English", style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w800,
-            color: Color(0xFF3B82F6))),
+        child: Text(_isTelugu ? "తెలుగు" : "English",
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: Color(0xFF3B82F6))),
       ),
     );
   }
 
-  void _onBottomNavTap(int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
-        break;
-      case 2:
-        Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushReplacementNamed(
-          context,
-          PrincipalRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
-    }
-  }
-
-
+  // void _onBottomNavTap(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.home);
+  //       break;
+  //     case 1:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.search);
+  //       break;
+  //     case 2:
+  //       Navigator.pushReplacementNamed(context, PrincipalRoutes.activity);
+  //       break;
+  //     case 3:
+  //       Navigator.pushReplacementNamed(
+  //         context,
+  //         PrincipalRoutes.morePage,
+  //         arguments: {'section': null},
+  //       );
+  //       break;
+  //   }
+  // }
 
   void _handleActivityTap(Map<String, dynamic> item) {
     if (item['route'] != null) {
@@ -135,7 +136,8 @@ class _ActivityPageState extends State<ActivityPage> {
       if (item['title'].contains('Fee')) sectionKey = 'fee';
       if (item['title'].contains('Event')) sectionKey = 'events';
       if (item['title'].contains('Homework')) sectionKey = 'homework';
-      Navigator.pushNamed(context, PrincipalRoutes.morePage, arguments: {'initialSection': sectionKey});
+      Navigator.pushNamed(context, PrincipalRoutes.morePage,
+          arguments: {'initialSection': sectionKey});
     }
   }
 
@@ -154,7 +156,10 @@ class _ActivityPageState extends State<ActivityPage> {
               const SizedBox(height: 15),
               const Text(
                 "Quick Actions",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
               ),
               const SizedBox(height: 5),
               Text(
@@ -168,10 +173,9 @@ class _ActivityPageState extends State<ActivityPage> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildCleanBottomNav(),
+      // bottomNavigationBar: _buildCleanBottomNav(),
     );
   }
-
 
   PreferredSizeWidget _buildTopBar() {
     return PreferredSize(
@@ -204,27 +208,33 @@ class _ActivityPageState extends State<ActivityPage> {
                 ),
               ),
               const SizedBox(width: 12),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Aditya International School",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF1E293B),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Aditya International School",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF1E293B),
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Powered by Toki Tech",
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF94A3B8),
+                    Text(
+                      "Powered by Toki Tech",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFF94A3B8),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              const Spacer(),
               _langTogglePill(),
             ],
           ),
@@ -319,26 +329,26 @@ class _ActivityPageState extends State<ActivityPage> {
     );
   }
 
-  Widget _buildCleanBottomNav() {
-    return Container(
-      decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1))),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onBottomNavTap,
-        selectedItemColor: const Color(0xFF1D4ED8),
-        unselectedItemColor: Colors.grey.shade400,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 24), activeIcon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search_rounded, size: 24), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded, size: 24), label: 'Activity'),
-          BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded, size: 24), label: 'More'),
-        ],
-      ),
-    );
-  }
+  // Widget _buildCleanBottomNav() {
+  //   return Container(
+  //     decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.grey.shade100, width: 1))),
+  //     child: BottomNavigationBar(
+  //       currentIndex: _currentIndex,
+  //       onTap: _onBottomNavTap,
+  //       selectedItemColor: const Color(0xFF1D4ED8),
+  //       unselectedItemColor: Colors.grey.shade400,
+  //       type: BottomNavigationBarType.fixed,
+  //       backgroundColor: Colors.white,
+  //       elevation: 0,
+  //       selectedFontSize: 12,
+  //       unselectedFontSize: 12,
+  //       items: const [
+  //         BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 24), activeIcon: Icon(Icons.home_filled), label: 'Home'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.search_rounded, size: 24), label: 'Search'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded, size: 24), label: 'Activity'),
+  //         BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded, size: 24), label: 'More'),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
