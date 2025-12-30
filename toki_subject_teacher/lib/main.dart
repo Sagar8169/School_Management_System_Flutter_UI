@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
 
@@ -11,15 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'School Management',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xFF1E40AF),
-        scaffoldBackgroundColor: Color(0xFFF8FAFC),
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'School Management',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Color(0xFF1E40AF),
+          scaffoldBackgroundColor: Color(0xFFF8FAFC),
+        ),
+        initialRoute: Routes.splash,
+        onGenerateRoute: Routes.generateRoute,
       ),
-      initialRoute: Routes.splash,
-      onGenerateRoute: Routes.generateRoute,
     );
   }
 }
