@@ -12,7 +12,6 @@ class StaffProfilePage extends StatefulWidget {
 }
 
 class _StaffProfilePageState extends State<StaffProfilePage> {
-  int _currentIndex = 1;
   bool _isTelugu = true;
 
   void _toggleLanguage() {
@@ -23,29 +22,6 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
 
   void _navigateTo(String routeName, {Map<String, dynamic>? arguments}) {
     Navigator.pushNamed(context, routeName, arguments: arguments);
-  }
-
-  void _onBottomNavTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          SubjectTeacherRoutes.home,
-              (route) => false,
-        );
-        break;
-      case 1:
-        break;
-      case 2:
-        _navigateTo(SubjectTeacherRoutes.gradesAnalytics);
-        break;
-      case 3:
-        _navigateTo(SubjectTeacherRoutes.morePage);
-        break;
-    }
   }
 
   @override
@@ -59,7 +35,6 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
               selectedLanguage: _isTelugu ? 'తెలుగు' : 'English',
               onLanguageToggle: _toggleLanguage,
             ),
-
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -159,18 +134,20 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
   Widget _buildProfileCard() {
     final bool isActive = widget.staffData['isActive'] as bool;
     final bool isClassTeacher = widget.staffData['isClassTeacher'] ?? false;
-    final Color statusColor = isActive ? const Color(0xFF27AE60) : const Color(0xFFE6A100);
-    final Color statusBgColor = isActive ? const Color(0xFFE5FFF0) : const Color(0xFFFFF4D9);
+    final Color statusColor =
+        isActive ? const Color(0xFF27AE60) : const Color(0xFFE6A100);
+    final Color statusBgColor =
+        isActive ? const Color(0xFFE5FFF0) : const Color(0xFFFFF4D9);
     final String statusText = isActive ? 'Active' : 'Not Active';
-    final Color avatarColor = widget.staffData['type'] == 'teacher' ?
-    const Color(0xFFFFF3D9) : const Color(0xFFEAF2FF);
+    final Color avatarColor = widget.staffData['type'] == 'teacher'
+        ? const Color(0xFFFFF3D9)
+        : const Color(0xFFEAF2FF);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -204,7 +181,9 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Icon(
-                    widget.staffData['type'] == 'teacher' ? Icons.person : Icons.badge,
+                    widget.staffData['type'] == 'teacher'
+                        ? Icons.person
+                        : Icons.badge,
                     size: 24,
                     color: Colors.orange,
                   ),
@@ -225,14 +204,16 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                       const SizedBox(height: 2),
                       Text(
                         widget.staffData['role'].toString(),
-                        style: const TextStyle(fontSize: 13, color: Colors.grey),
+                        style:
+                            const TextStyle(fontSize: 13, color: Colors.grey),
                       ),
                     ],
                   ),
                 ),
                 // Status Chip
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: statusBgColor,
                     borderRadius: BorderRadius.circular(10),
@@ -305,7 +286,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                           style: TextStyle(fontSize: 12, color: Colors.grey)),
                       const SizedBox(height: 6),
                       Text(
-                        widget.staffData['assignedClass']?.toString() ?? 'Multiple Classes',
+                        widget.staffData['assignedClass']?.toString() ??
+                            'Multiple Classes',
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
@@ -316,7 +298,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
                   // Class Teacher Badge
                   if (isClassTeacher)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: const Color(0xFFE5FFF0),
                         borderRadius: BorderRadius.circular(10),
@@ -452,7 +435,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
             const SizedBox(height: 12),
             Divider(height: 1, color: Colors.grey.shade200),
             const SizedBox(height: 12),
-            _buildWorkDetailItem('License Number', 'DL-${widget.staffData['employeeId']}'),
+            _buildWorkDetailItem(
+                'License Number', 'DL-${widget.staffData['employeeId']}'),
           ],
         ],
       ),
@@ -476,7 +460,8 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
       ),
       child: Column(
         children: [
-          _buildWorkDetailItem('Subjects Taught', getSubjectsForRole(widget.staffData['role'])),
+          _buildWorkDetailItem(
+              'Subjects Taught', getSubjectsForRole(widget.staffData['role'])),
           const SizedBox(height: 12),
           Divider(height: 1, color: Colors.grey.shade200),
           const SizedBox(height: 12),
@@ -583,12 +568,10 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
         ),
         if (widget.staffData['type'] == 'teacher') ...[
           const SizedBox(height: 12),
-
         ],
         if (widget.staffData['department'] == 'Fleet Management') ...[
           const SizedBox(height: 12),
           // View Bus Details Button
-
         ],
       ],
     );
@@ -609,37 +592,6 @@ class _StaffProfilePageState extends State<StaffProfilePage> {
         content: Text('Contact ${widget.staffData['name']}'),
         backgroundColor: const Color(0xFF10B981),
       ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: const Color(0xFF1D4ED8),
-      unselectedItemColor: const Color(0xFF6B7280),
-      selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-      unselectedLabelStyle: const TextStyle(fontSize: 12),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_rounded),
-          label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.show_chart_rounded),
-          label: 'Activity',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.more_horiz_rounded),
-          label: 'More',
-        ),
-      ],
     );
   }
 }

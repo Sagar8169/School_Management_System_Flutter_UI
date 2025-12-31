@@ -9,7 +9,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  int _currentIndex = 1; // Search page active
   bool _isTelugu = true;
   final TextEditingController _searchController = TextEditingController();
 
@@ -61,30 +60,6 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   // LOGIC: Bottom Nav (Same as before)
-  void _onBottomNavTapped(int index) {
-    if (_currentIndex == index) return;
-    setState(() {
-      _currentIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          SubjectTeacherRoutes.home,
-              (route) => false,
-        );
-        break;
-      case 1:
-      // Already on search
-        break;
-      case 2:
-        _navigateTo(SubjectTeacherRoutes.activity);
-        break;
-      case 3:
-        _navigateTo(SubjectTeacherRoutes.settings);
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,11 +113,15 @@ class _SearchPageState extends State<SearchPage> {
                           controller: _searchController,
                           style: const TextStyle(fontSize: 15),
                           decoration: InputDecoration(
-                            hintText: "Search for classes, teachers, or students",
-                            hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-                            prefixIcon: Icon(Icons.search, color: _primaryPurple),
+                            hintText:
+                                "Search for classes, teachers, or students",
+                            hintStyle: TextStyle(
+                                color: Colors.grey.shade400, fontSize: 14),
+                            prefixIcon:
+                                Icon(Icons.search, color: _primaryPurple),
                             border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 16),
                           ),
                         ),
                       ),
@@ -165,7 +144,8 @@ class _SearchPageState extends State<SearchPage> {
                     const SizedBox(height: 12),
 
                     // Categories List using same logic map
-                    ..._categories.map((category) => _buildCategoryCardWithUI(category)),
+                    ..._categories
+                        .map((category) => _buildCategoryCardWithUI(category)),
 
                     const SizedBox(height: 30),
                   ],
@@ -175,7 +155,6 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildSubjectTeacherBottomNavigationBar(),
     );
   }
 
@@ -187,22 +166,29 @@ class _SearchPageState extends State<SearchPage> {
       child: Row(
         children: [
           Container(
-            width: 36, height: 36,
+            width: 36,
+            height: 36,
             decoration: BoxDecoration(
-                color: _primaryPurple,
-                borderRadius: BorderRadius.circular(8)
-            ),
+                color: _primaryPurple, borderRadius: BorderRadius.circular(8)),
             child: const Center(
-                child: Text("ST", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14))
-            ),
+                child: Text("ST",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14))),
           ),
           const SizedBox(width: 12),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Subject Teacher", style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                Text("Aditya International School", style: TextStyle(color: Colors.grey, fontSize: 10)),
+                Text("Subject Teacher",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
+                Text("Aditya International School",
+                    style: TextStyle(color: Colors.grey, fontSize: 10)),
               ],
             ),
           ),
@@ -214,10 +200,11 @@ class _SearchPageState extends State<SearchPage> {
                 border: Border.all(color: _primaryPurple.withOpacity(0.3)),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Text(
-                  _isTelugu ? 'తెలుగు' : 'English',
-                  style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold)
-              ),
+              child: Text(_isTelugu ? 'తెలుగు' : 'English',
+                  style: TextStyle(
+                      color: _primaryPurple,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold)),
             ),
           ),
         ],
@@ -283,7 +270,8 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Colors.grey.shade300),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  size: 14, color: Colors.grey.shade300),
             ],
           ),
         ),
@@ -292,40 +280,6 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   // BOTTOM NAV: Same Logic and Labels
-  Widget _buildSubjectTeacherBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: _primaryPurple,
-      unselectedItemColor: const Color(0xFF94A3B8),
-      selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-      unselectedLabelStyle: const TextStyle(fontSize: 12),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home_rounded),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_outlined),
-          activeIcon: Icon(Icons.search_rounded),
-          label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.analytics_outlined),
-          activeIcon: Icon(Icons.analytics_rounded),
-          label: 'Activity',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.more_horiz_outlined),
-          activeIcon: Icon(Icons.more_horiz_rounded),
-          label: 'More',
-        ),
-      ],
-    );
-  }
 
   @override
   void dispose() {

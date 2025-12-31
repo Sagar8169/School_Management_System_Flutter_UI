@@ -7,15 +7,20 @@ class AttendanceAnalyticsPage extends StatefulWidget {
   const AttendanceAnalyticsPage({super.key, this.studentData});
 
   @override
-  State<AttendanceAnalyticsPage> createState() => _AttendanceAnalyticsPageState();
+  State<AttendanceAnalyticsPage> createState() =>
+      _AttendanceAnalyticsPageState();
 }
 
 class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
-  int _currentIndex = 2; // Activity active
   int _selectedTimeFilter = 0;
   bool _isTelugu = true;
   bool _sortAscending = false;
-  final List<String> _timeFilters = ['Today', 'This Week', 'This Month', '6 Month'];
+  final List<String> _timeFilters = [
+    'Today',
+    'This Week',
+    'This Month',
+    '6 Month'
+  ];
 
   final Color _primaryPurple = const Color(0xFF7C3AED);
   final Color _scaffoldBg = const Color(0xFFF1F5F9);
@@ -25,12 +30,53 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
 
   final Map<int, List<Map<String, dynamic>>> _timeFilterData = {
     0: [
-      {'className': 'Class 10-A', 'teacher': 'Mr. Rajesh Kumar', 'percentage': 93.3, 'present': 42, 'absent': 3, 'total': 45},
-      {'className': 'Class 9-A', 'teacher': 'Mr. Suresh Patel', 'percentage': 97.4, 'present': 38, 'absent': 1, 'total': 39},
+      {
+        'className': 'Class 10-A',
+        'teacher': 'Mr. Rajesh Kumar',
+        'percentage': 93.3,
+        'present': 42,
+        'absent': 3,
+        'total': 45
+      },
+      {
+        'className': 'Class 9-A',
+        'teacher': 'Mr. Suresh Patel',
+        'percentage': 97.4,
+        'present': 38,
+        'absent': 1,
+        'total': 39
+      },
     ],
-    1: [{'className': 'Class 10-A', 'teacher': 'Mr. Rajesh Kumar', 'percentage': 91.5, 'present': 215, 'absent': 20, 'total': 235}],
-    2: [{'className': 'Class 10-A', 'teacher': 'Mr. Rajesh Kumar', 'percentage': 92.8, 'present': 890, 'absent': 69, 'total': 959}],
-    3: [{'className': 'Class 10-A', 'teacher': 'Mr. Rajesh Kumar', 'percentage': 94.1, 'present': 2540, 'absent': 159, 'total': 2699}],
+    1: [
+      {
+        'className': 'Class 10-A',
+        'teacher': 'Mr. Rajesh Kumar',
+        'percentage': 91.5,
+        'present': 215,
+        'absent': 20,
+        'total': 235
+      }
+    ],
+    2: [
+      {
+        'className': 'Class 10-A',
+        'teacher': 'Mr. Rajesh Kumar',
+        'percentage': 92.8,
+        'present': 890,
+        'absent': 69,
+        'total': 959
+      }
+    ],
+    3: [
+      {
+        'className': 'Class 10-A',
+        'teacher': 'Mr. Rajesh Kumar',
+        'percentage': 94.1,
+        'present': 2540,
+        'absent': 159,
+        'total': 2699
+      }
+    ],
   };
 
   final Map<int, Map<String, dynamic>> _overallAttendanceData = {
@@ -60,19 +106,10 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
   void _updateDataForFilter(int index) {
     setState(() {
       _selectedTimeFilter = index;
-      _classBreakdown = List.from(_timeFilterData[index] ?? _timeFilterData[0]!);
+      _classBreakdown =
+          List.from(_timeFilterData[index] ?? _timeFilterData[0]!);
       _sortClassBreakdown();
     });
-  }
-
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushNamedAndRemoveUntil(context, SubjectTeacherRoutes.home, (route) => false); break;
-      case 1: Navigator.pushNamed(context, SubjectTeacherRoutes.search); break;
-      case 3: Navigator.pushNamed(context, SubjectTeacherRoutes.morePage, arguments: {'section': null}); break;
-    }
   }
 
   @override
@@ -109,7 +146,6 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -119,7 +155,9 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))],
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))
+        ],
       ),
       child: Row(
         children: [
@@ -127,18 +165,32 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
             onTap: () => Navigator.pop(context),
             child: Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: _primaryPurple.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-              child: Icon(Icons.arrow_back_ios_new_rounded, color: _primaryPurple, size: 20),
+              decoration: BoxDecoration(
+                  color: _primaryPurple.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: _primaryPurple, size: 20),
             ),
           ),
           const SizedBox(width: 16),
-          const Expanded(child: Text("Attendance Analytics", style: TextStyle(color: Color(0xFF1E293B), fontSize: 18, fontWeight: FontWeight.bold))),
+          const Expanded(
+              child: Text("Attendance Analytics",
+                  style: TextStyle(
+                      color: Color(0xFF1E293B),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold))),
           InkWell(
             onTap: _toggleLanguage,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(border: Border.all(color: _primaryPurple.withOpacity(0.3)), borderRadius: BorderRadius.circular(20)),
-              child: Text(_isTelugu ? 'తెలుగు' : 'English', style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold)),
+              decoration: BoxDecoration(
+                  border: Border.all(color: _primaryPurple.withOpacity(0.3)),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(_isTelugu ? 'తెలుగు' : 'English',
+                  style: TextStyle(
+                      color: _primaryPurple,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold)),
             ),
           ),
         ],
@@ -155,20 +207,35 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF6CCF8E), Color(0xFF4CAF50)],
-          begin: Alignment.topCenter, end: Alignment.bottomCenter,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, 4))
+        ],
       ),
       child: Column(
         children: [
           Row(
             children: [
-              const Icon(Icons.calendar_month_rounded, color: Colors.white, size: 22),
+              const Icon(Icons.calendar_month_rounded,
+                  color: Colors.white, size: 22),
               const SizedBox(width: 8),
-              const Text("Overall Attendance", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              const Text("Overall Attendance",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16)),
               const Spacer(),
-              Text(_timeFilters[_selectedTimeFilter], style: const TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.bold)),
+              Text(_timeFilters[_selectedTimeFilter],
+                  style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
           const SizedBox(height: 20),
@@ -186,11 +253,17 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
   }
 
   Widget _summaryItem(String v, String l) => Column(
-    children: [
-      Text(v, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-      Text(l, style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 11)),
-    ],
-  );
+        children: [
+          Text(v,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold)),
+          Text(l,
+              style: TextStyle(
+                  color: Colors.white.withOpacity(0.8), fontSize: 11)),
+        ],
+      );
 
   // --- FILTERS ---
   Widget _buildFilterTabs() {
@@ -209,10 +282,15 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
               decoration: BoxDecoration(
                 color: isSelected ? _primaryPurple : Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: isSelected ? _primaryPurple : Colors.grey.shade300),
+                border: Border.all(
+                    color: isSelected ? _primaryPurple : Colors.grey.shade300),
               ),
               alignment: Alignment.center,
-              child: Text(_timeFilters[index], style: TextStyle(color: isSelected ? Colors.white : Colors.grey.shade700, fontWeight: FontWeight.bold, fontSize: 13)),
+              child: Text(_timeFilters[index],
+                  style: TextStyle(
+                      color: isSelected ? Colors.white : Colors.grey.shade700,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13)),
             ),
           );
         },
@@ -224,16 +302,32 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text("Class Performance", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+        const Text("Class Performance",
+            style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF1E293B))),
         InkWell(
-          onTap: () { setState(() { _sortAscending = !_sortAscending; _sortClassBreakdown(); }); },
+          onTap: () {
+            setState(() {
+              _sortAscending = !_sortAscending;
+              _sortClassBreakdown();
+            });
+          },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(color: _primaryPurple.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: _primaryPurple.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10)),
             child: Row(children: [
-              Icon(_sortAscending ? Icons.arrow_upward : Icons.arrow_downward, size: 14, color: _primaryPurple),
+              Icon(_sortAscending ? Icons.arrow_upward : Icons.arrow_downward,
+                  size: 14, color: _primaryPurple),
               const SizedBox(width: 4),
-              Text(_sortAscending ? 'Low-High' : 'High-Low', style: TextStyle(color: _primaryPurple, fontWeight: FontWeight.bold, fontSize: 11)),
+              Text(_sortAscending ? 'Low-High' : 'High-Low',
+                  style: TextStyle(
+                      color: _primaryPurple,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11)),
             ]),
           ),
         ),
@@ -255,23 +349,40 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(22),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))],
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.02),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4))
+            ],
           ),
           child: InkWell(
-            onTap: () => Navigator.pushNamed(context, SubjectTeacherRoutes.classDetails, arguments: item),
+            onTap: () => Navigator.pushNamed(
+                context, SubjectTeacherRoutes.classDetails,
+                arguments: item),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(item['className'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Color(0xFF1E293B))),
-                      Text("Teacher: ${item['teacher']}", style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                    ]),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(item['className'],
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  color: Color(0xFF1E293B))),
+                          Text("Teacher: ${item['teacher']}",
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 12)),
+                        ]),
                     _buildCompactDonut(item['percentage']),
                   ],
                 ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Divider(height: 1)),
+                const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Divider(height: 1)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -290,35 +401,52 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
 
   Widget _buildCompactDonut(double percent) {
     return SizedBox(
-      width: 60, height: 60,
+      width: 60,
+      height: 60,
       child: Stack(
         alignment: Alignment.center,
         children: [
           PieChart(
             PieChartData(
-              sectionsSpace: 2, centerSpaceRadius: 18,
+              sectionsSpace: 2,
+              centerSpaceRadius: 18,
               sections: [
-                PieChartSectionData(color: _primaryPurple, value: percent, radius: 7, showTitle: false),
-                PieChartSectionData(color: _primaryPurple.withOpacity(0.1), value: 100 - percent, radius: 7, showTitle: false),
+                PieChartSectionData(
+                    color: _primaryPurple,
+                    value: percent,
+                    radius: 7,
+                    showTitle: false),
+                PieChartSectionData(
+                    color: _primaryPurple.withOpacity(0.1),
+                    value: 100 - percent,
+                    radius: 7,
+                    showTitle: false),
               ],
             ),
           ),
-          Text("${percent.toInt()}%", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: _primaryPurple)),
+          Text("${percent.toInt()}%",
+              style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: _primaryPurple)),
         ],
       ),
     );
   }
 
   Widget _miniDetail(String l, String v, Color c) => Column(children: [
-    Text(v, style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: c)),
-    Text(l, style: const TextStyle(fontSize: 11, color: Colors.grey)),
-  ]);
+        Text(v,
+            style:
+                TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: c)),
+        Text(l, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+      ]);
 
   // --- FOOTER BUTTONS ---
   Widget _buildFooterActions() {
     return Column(
       children: [
-        _fullBtn("Download PDF Report", Icons.file_download_outlined, _primaryPurple, true),
+        _fullBtn("Download PDF Report", Icons.file_download_outlined,
+            _primaryPurple, true),
         const SizedBox(height: 12),
         _fullBtn("Share Analysis", Icons.share_outlined, _primaryPurple, false),
       ],
@@ -326,26 +454,20 @@ class _AttendanceAnalyticsPageState extends State<AttendanceAnalyticsPage> {
   }
 
   Widget _fullBtn(String t, IconData i, Color c, bool fill) => SizedBox(
-    width: double.infinity, height: 52,
-    child: ElevatedButton.icon(
-      onPressed: () {}, icon: Icon(i, size: 20), label: Text(t, style: const TextStyle(fontWeight: FontWeight.bold)),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: fill ? c : Colors.white, foregroundColor: fill ? Colors.white : c,
-        elevation: 0, side: BorderSide(color: c), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      ),
-    ),
-  );
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _onBottomNavTapped, type: BottomNavigationBarType.fixed,
-      selectedItemColor: _primaryPurple, unselectedItemColor: Colors.grey, showUnselectedLabels: true,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_rounded), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.more_horiz_rounded), label: 'More'),
-      ],
-    );
-  }
+        width: double.infinity,
+        height: 52,
+        child: ElevatedButton.icon(
+          onPressed: () {},
+          icon: Icon(i, size: 20),
+          label: Text(t, style: const TextStyle(fontWeight: FontWeight.bold)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: fill ? c : Colors.white,
+            foregroundColor: fill ? Colors.white : c,
+            elevation: 0,
+            side: BorderSide(color: c),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          ),
+        ),
+      );
 }

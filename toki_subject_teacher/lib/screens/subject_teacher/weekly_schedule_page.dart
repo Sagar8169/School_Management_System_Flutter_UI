@@ -11,11 +11,18 @@ class WeeklySchedulePage extends StatefulWidget {
 
 class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
   int _selectedDayIndex = 0;
-  int _currentIndex = 2;
+
   bool _isTelugu = true;
   bool _isMonthlySummary = false;
 
-  final List<String> _days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  final List<String> _days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
   late Map<int, List<Map<String, dynamic>>> _weeklySchedules;
 
   final Color _primaryBlue = const Color(0xFF448AFF);
@@ -51,17 +58,6 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
     }
   }
 
-  void _onTabTapped(int index) {
-    if (_currentIndex == index) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.home); break;
-      case 1: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.search); break;
-      case 2: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.activity); break;
-      case 3: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.settings); break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +87,6 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -101,7 +96,9 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))],
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))
+        ],
       ),
       child: Row(
         children: [
@@ -113,13 +110,17 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
                 color: _primaryPurple.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(Icons.arrow_back_ios_new_rounded, color: _primaryPurple, size: 20),
+              child: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: _primaryPurple, size: 20),
             ),
           ),
           const SizedBox(width: 16),
           const Text(
             "Weekly Schedule",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF1E293B)),
           ),
           const Spacer(),
           GestureDetector(
@@ -132,7 +133,10 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
               ),
               child: Text(
                 _isTelugu ? "తెలుగు" : "English",
-                style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: _primaryPurple,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -153,11 +157,17 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Weekly Schedule", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+          const Text("Weekly Schedule",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold)),
           const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(12)),
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(12)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -165,11 +175,14 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
                   children: const [
                     Icon(Icons.calendar_today, color: Colors.white, size: 16),
                     SizedBox(width: 8),
-                    Text("Saturday, November 9, 2025", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text("Saturday, November 9, 2025",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 const SizedBox(height: 8),
-                const Text("You have 3 classes scheduled today", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                const Text("You have 3 classes scheduled today",
+                    style: TextStyle(color: Colors.white70, fontSize: 12)),
               ],
             ),
           ),
@@ -198,7 +211,9 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
               ),
               child: Text(
                 _days[index],
-                style: TextStyle(color: isSelected ? Colors.white : Colors.black87, fontSize: 13),
+                style: TextStyle(
+                    color: isSelected ? Colors.white : Colors.black87,
+                    fontSize: 13),
               ),
             ),
           );
@@ -211,7 +226,8 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
     final classes = _weeklySchedules[_selectedDayIndex] ?? [];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(children: classes.map((data) => _buildClassCard(data)).toList()),
+      child: Column(
+          children: classes.map((data) => _buildClassCard(data)).toList()),
     );
   }
 
@@ -220,26 +236,39 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.shade200)),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200)),
       child: Row(
         children: [
-          Icon(Icons.access_time, color: isCurrent ? Colors.blue : Colors.grey, size: 24),
+          Icon(Icons.access_time,
+              color: isCurrent ? Colors.blue : Colors.grey, size: 24),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(data['className'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                Text("${data['subject']} • ${data['room']}", style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                Text(data['time'], style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(data['className'],
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16)),
+                Text("${data['subject']} • ${data['room']}",
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(data['time'],
+                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
             ),
           ),
           if (isCurrent)
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, SubjectTeacherRoutes.takeAttendance),
-              style: ElevatedButton.styleFrom(backgroundColor: _primaryBlue, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-              child: const Text("Take Attendance", style: TextStyle(fontSize: 12, color: Colors.white)),
+              onPressed: () => Navigator.pushNamed(
+                  context, SubjectTeacherRoutes.takeAttendance),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: _primaryBlue,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8))),
+              child: const Text("Take Attendance",
+                  style: TextStyle(fontSize: 12, color: Colors.white)),
             ),
         ],
       ),
@@ -252,16 +281,21 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Today's Events", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          const Text("Today's Events",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.shade200)),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.grey.shade200)),
             child: Row(
               children: [
                 const Icon(Icons.person, color: Colors.orange),
                 const SizedBox(width: 16),
-                const Text("You are the class teacher for 8B today", style: TextStyle(fontSize: 13)),
+                const Text("You are the class teacher for 8B today",
+                    style: TextStyle(fontSize: 13)),
               ],
             ),
           ),
@@ -279,13 +313,23 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(_isMonthlySummary ? "This Month's Summary" : "This Week's Summary", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              Text(
+                  _isMonthlySummary
+                      ? "This Month's Summary"
+                      : "This Week's Summary",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14)),
               GestureDetector(
-                onTap: () => setState(() => _isMonthlySummary = !_isMonthlySummary),
+                onTap: () =>
+                    setState(() => _isMonthlySummary = !_isMonthlySummary),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(20)),
-                  child: Text(_isMonthlySummary ? "Monthly" : "Weekly", style: const TextStyle(fontSize: 12)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(_isMonthlySummary ? "Monthly" : "Weekly",
+                      style: const TextStyle(fontSize: 12)),
                 ),
               )
             ],
@@ -293,13 +337,19 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
           const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.shade200)),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.grey.shade200)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _summaryItem(_isMonthlySummary ? "84" : "21", "Total Classes", Colors.blue),
-                _summaryItem(_isMonthlySummary ? "72" : "18", "Completed", Colors.green),
-                _summaryItem(_isMonthlySummary ? "12" : "3", "Remaining", Colors.orange),
+                _summaryItem(_isMonthlySummary ? "84" : "21", "Total Classes",
+                    Colors.blue),
+                _summaryItem(
+                    _isMonthlySummary ? "72" : "18", "Completed", Colors.green),
+                _summaryItem(
+                    _isMonthlySummary ? "12" : "3", "Remaining", Colors.orange),
               ],
             ),
           ),
@@ -311,24 +361,10 @@ class _WeeklySchedulePageState extends State<WeeklySchedulePage> {
   Widget _summaryItem(String count, String label, Color color) {
     return Column(
       children: [
-        Text(count, style: TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.bold)),
+        Text(count,
+            style: TextStyle(
+                color: color, fontSize: 24, fontWeight: FontWeight.bold)),
         Text(label, style: const TextStyle(color: Colors.grey, fontSize: 11)),
-      ],
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onTabTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _primaryPurple,
-      unselectedItemColor: Colors.grey,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.show_chart), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.more_vert), label: 'More'),
       ],
     );
   }

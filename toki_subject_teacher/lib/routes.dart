@@ -60,7 +60,7 @@ class Routes {
 
     // 2️⃣ Normal top-level routing
     switch (settings.name) {
-    // ───────── AUTH / COMMON ─────────
+      // ───────── AUTH / COMMON ─────────
       case splash:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
@@ -79,7 +79,7 @@ class Routes {
           ),
         );
 
-    // ───────── TOP-LEVEL HOME SCREENS ─────────
+      // ───────── TOP-LEVEL HOME SCREENS ─────────
       case parentsHome:
         return MaterialPageRoute(
           builder: (_) => const HomeParents(),
@@ -92,7 +92,7 @@ class Routes {
 
       case subjectTeacherHome:
         return MaterialPageRoute(
-          builder: (_) => const HomeSubjectTeacher(),
+          builder: (_) => HomeSubjectTeacher(),
         );
 
       case fleetManagerHome:
@@ -105,13 +105,13 @@ class Routes {
           builder: (_) => const HomeDriver(),
         );
 
-
-    // ───────── EVERYTHING ELSE: DELEGATE TO OTHER FEATURE ROUTERS ─────────
+      // ───────── EVERYTHING ELSE: DELEGATE TO OTHER FEATURE ROUTERS ─────────
       default:
-      // 1. Principal routes
+        // 1. Principal routes
 
         // 2. Subject Teacher routes
-        final subjectTeacherRoute = SubjectTeacherRoutes.generateRoute(settings);
+        final subjectTeacherRoute =
+            SubjectTeacherRoutes.generateRoute(settings);
         if (subjectTeacherRoute != null) return subjectTeacherRoute;
 
         // Note: Class Teacher routes already handled at the top

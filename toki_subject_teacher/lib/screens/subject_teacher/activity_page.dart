@@ -9,10 +9,7 @@ class ActivityPage extends StatefulWidget {
 }
 
 class _ActivityPageState extends State<ActivityPage> {
-  int _currentIndex = 2;
-
   bool _isTelugu = true;
-
 
   final Color _primaryPurple = const Color(0xFF7C3AED);
   final Color _darkPurple = const Color(0xFF6D28D9);
@@ -42,17 +39,6 @@ class _ActivityPageState extends State<ActivityPage> {
     },
   ];
 
-  void _onTabTapped(int index) {
-    if (_currentIndex == index) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.home); break;
-      case 1: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.search); break;
-      case 2: break;
-      case 3: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.settings); break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,14 +60,16 @@ class _ActivityPageState extends State<ActivityPage> {
                     GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
                         childAspectRatio: 1.1,
                       ),
                       itemCount: _activityItems.length,
-                      itemBuilder: (context, index) => _buildActionCard(_activityItems[index]),
+                      itemBuilder: (context, index) =>
+                          _buildActionCard(_activityItems[index]),
                     ),
                     const SizedBox(height: 32),
                     _sectionTitle("Recent Logs"),
@@ -95,7 +83,6 @@ class _ActivityPageState extends State<ActivityPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -106,7 +93,8 @@ class _ActivityPageState extends State<ActivityPage> {
       decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
-          bottom: BorderSide(color: Color(0xFFF1F5F9), width: 1), // Subtle separator line
+          bottom: BorderSide(
+              color: Color(0xFFF1F5F9), width: 1), // Subtle separator line
         ),
       ),
       child: Row(
@@ -188,7 +176,12 @@ class _ActivityPageState extends State<ActivityPage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [BoxShadow(color: item['color'].withOpacity(0.12), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: item['color'].withOpacity(0.12),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Material(
         color: Colors.transparent,
@@ -202,13 +195,24 @@ class _ActivityPageState extends State<ActivityPage> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(color: item['color'].withOpacity(0.1), shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                      color: item['color'].withOpacity(0.1),
+                      shape: BoxShape.circle),
                   child: Icon(item['icon'], color: item['color'], size: 28),
                 ),
                 const SizedBox(height: 12),
-                Text(item['title'], textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF1E293B))),
+                Text(item['title'],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: Color(0xFF1E293B))),
                 const SizedBox(height: 4),
-                Text(item['subtitle'], style: TextStyle(color: item['color'].withOpacity(0.7), fontSize: 10, fontWeight: FontWeight.w600)),
+                Text(item['subtitle'],
+                    style: TextStyle(
+                        color: item['color'].withOpacity(0.7),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600)),
               ],
             ),
           ),
@@ -219,68 +223,89 @@ class _ActivityPageState extends State<ActivityPage> {
 
   Widget _buildRecentActivitySection() {
     final List<Map<String, dynamic>> logs = [
-      {'time': '10:30 AM', 'action': 'Class 8B Attendance', 'status': 'Done', 'color': Colors.green},
-      {'time': 'Yesterday', 'action': 'Math Test Grades', 'status': 'Done', 'color': Colors.green},
-      {'time': '2 days ago', 'action': 'Class 8A Homework', 'status': 'Pending', 'color': Colors.orange},
+      {
+        'time': '10:30 AM',
+        'action': 'Class 8B Attendance',
+        'status': 'Done',
+        'color': Colors.green
+      },
+      {
+        'time': 'Yesterday',
+        'action': 'Math Test Grades',
+        'status': 'Done',
+        'color': Colors.green
+      },
+      {
+        'time': '2 days ago',
+        'action': 'Class 8A Homework',
+        'status': 'Pending',
+        'color': Colors.orange
+      },
     ];
 
     return Column(
-      children: logs.map((log) => Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.black.withOpacity(0.03)),
-        ),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 18,
-              backgroundColor: log['color'].withOpacity(0.1),
-              child: Icon(log['status'] == 'Done' ? Icons.check_rounded : Icons.access_time_rounded, color: log['color'], size: 18),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(log['action'], style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF334155))),
-                  Text(log['time'], style: const TextStyle(fontSize: 12, color: Color(0xFF94A3B8))),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(color: log['color'].withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-              child: Text(log['status'], style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: log['color'])),
-            ),
-          ],
-        ),
-      )).toList(),
+      children: logs
+          .map((log) => Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.black.withOpacity(0.03)),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 18,
+                      backgroundColor: log['color'].withOpacity(0.1),
+                      child: Icon(
+                          log['status'] == 'Done'
+                              ? Icons.check_rounded
+                              : Icons.access_time_rounded,
+                          color: log['color'],
+                          size: 18),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(log['action'],
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF334155))),
+                          Text(log['time'],
+                              style: const TextStyle(
+                                  fontSize: 12, color: Color(0xFF94A3B8))),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                          color: log['color'].withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(log['status'],
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: log['color'])),
+                    ),
+                  ],
+                ),
+              ))
+          .toList(),
     );
   }
 
   Widget _sectionTitle(String title) {
-    return Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF1E293B), letterSpacing: -0.5));
-  }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onTabTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _primaryPurple,
-      unselectedItemColor: const Color(0xFF94A3B8),
-      backgroundColor: Colors.white,
-      elevation: 20,
-      selectedFontSize: 12,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.bolt_rounded), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), label: 'More'),
-      ],
-    );
+    return Text(title,
+        style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w900,
+            color: Color(0xFF1E293B),
+            letterSpacing: -0.5));
   }
 }

@@ -9,7 +9,6 @@ class TeacherSearchPage extends StatefulWidget {
 }
 
 class _TeacherSearchPageState extends State<TeacherSearchPage> {
-  int _currentIndex = 1;
   String _selectedFilter = "All Classes";
   bool _isTelugu = true;
   final TextEditingController _searchController = TextEditingController();
@@ -75,26 +74,17 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
     },
   ];
 
-  void _onFilterSelected(String filter) => setState(() => _selectedFilter = filter);
+  void _onFilterSelected(String filter) =>
+      setState(() => _selectedFilter = filter);
 
   void _toggleLanguage() => setState(() => _isTelugu = !_isTelugu);
-
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.home); break;
-      case 1: break;
-      case 2: Navigator.pushNamed(context, SubjectTeacherRoutes.activity); break;
-      case 3: Navigator.pushNamed(context, SubjectTeacherRoutes.morePage); break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> visibleTeachers = _teachers.where((teacher) {
       if (_selectedFilter == "All Classes") return true;
-      return (teacher['classes'] as String).contains(_selectedFilter.split(' ').last);
+      return (teacher['classes'] as String)
+          .contains(_selectedFilter.split(' ').last);
     }).toList();
 
     return Scaffold(
@@ -124,7 +114,6 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -134,7 +123,9 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
         color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))],
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))
+        ],
       ),
       child: Row(
         children: [
@@ -146,14 +137,18 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
                 color: _primaryPurple.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(Icons.arrow_back_ios_new_rounded, color: _primaryPurple, size: 20),
+              child: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: _primaryPurple, size: 20),
             ),
           ),
           const SizedBox(width: 16),
           const Expanded(
             child: Text(
               "Faculty Directory",
-              style: TextStyle(color: Color(0xFF1E293B), fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Color(0xFF1E293B),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           GestureDetector(
@@ -166,7 +161,10 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
               ),
               child: Text(
                 _isTelugu ? 'తెలుగు' : 'English',
-                style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: _primaryPurple,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -184,14 +182,20 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: const Color(0xFFE2E8F0)),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                blurRadius: 10,
+                offset: const Offset(0, 4))
+          ],
         ),
         child: TextField(
           controller: _searchController,
           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
           decoration: InputDecoration(
             hintText: "Search name, subject or class...",
-            prefixIcon: Icon(Icons.search_rounded, color: _primaryPurple, size: 22),
+            prefixIcon:
+                Icon(Icons.search_rounded, color: _primaryPurple, size: 22),
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(vertical: 15),
           ),
@@ -218,7 +222,8 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
               decoration: BoxDecoration(
                 color: selected ? _primaryPurple : Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: selected ? _primaryPurple : Colors.grey.shade300),
+                border: Border.all(
+                    color: selected ? _primaryPurple : Colors.grey.shade300),
               ),
               alignment: Alignment.center,
               child: Text(
@@ -245,8 +250,17 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('FACULTY PROFILES', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Colors.blueGrey.withOpacity(0.6), letterSpacing: 1)),
-              Text('${teachers.length} Found', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF64748B))),
+              Text('FACULTY PROFILES',
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.blueGrey.withOpacity(0.6),
+                      letterSpacing: 1)),
+              Text('${teachers.length} Found',
+                  style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF64748B))),
             ],
           ),
         ),
@@ -262,7 +276,9 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, SubjectTeacherRoutes.teacherProfile, arguments: t),
+        onTap: () => Navigator.pushNamed(
+            context, SubjectTeacherRoutes.teacherProfile,
+            arguments: t),
         borderRadius: BorderRadius.circular(24),
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -270,36 +286,54 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: const Color(0xFFF1F5F9)),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))],
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.02),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4))
+            ],
           ),
           child: Column(
             children: [
               Row(
                 children: [
                   Container(
-                    width: 50, height: 50,
-                    decoration: BoxDecoration(color: accentColor.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
-                    child: Icon(Icons.person_pin_rounded, color: accentColor, size: 26),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: accentColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Icon(Icons.person_pin_rounded,
+                        color: accentColor, size: 26),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(t['name'], style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
-                        Text(t['subject'], style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
+                        Text(t['name'],
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1E293B))),
+                        Text(t['subject'],
+                            style: TextStyle(
+                                color: Colors.grey.shade500, fontSize: 12)),
                       ],
                     ),
                   ),
                   _buildRoleBadge(t['role'], isCT),
                 ],
               ),
-              const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Divider(height: 1, color: Color(0xFFF1F5F9))),
+              const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Divider(height: 1, color: Color(0xFFF1F5F9))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildMetric("EXP", t['experience'], accentColor),
-                  _buildMetric("CLASSES", t['classes'], const Color(0xFF475569)),
+                  _buildMetric(
+                      "CLASSES", t['classes'], const Color(0xFF475569)),
                   _buildMetric("STATUS", "Online", const Color(0xFF10B981)),
                 ],
               ),
@@ -319,7 +353,10 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
       ),
       child: Text(
         label.toUpperCase(),
-        style: TextStyle(color: isCT ? const Color(0xFF16A34A) : const Color(0xFF64748B), fontSize: 9, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            color: isCT ? const Color(0xFF16A34A) : const Color(0xFF64748B),
+            fontSize: 9,
+            fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -328,24 +365,15 @@ class _TeacherSearchPageState extends State<TeacherSearchPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.grey.shade400)),
+        Text(label,
+            style: TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade400)),
         const SizedBox(height: 2),
-        Text(value, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: color)),
-      ],
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-      selectedItemColor: _primaryPurple, unselectedItemColor: const Color(0xFF94A3B8),
-      elevation: 10, showUnselectedLabels: true,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.bolt_rounded), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'More'),
+        Text(value,
+            style: TextStyle(
+                fontSize: 13, fontWeight: FontWeight.bold, color: color)),
       ],
     );
   }

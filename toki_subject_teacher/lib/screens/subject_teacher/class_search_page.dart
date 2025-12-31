@@ -9,7 +9,6 @@ class ClassSearchPage extends StatefulWidget {
 }
 
 class _ClassSearchPageState extends State<ClassSearchPage> {
-  int _currentIndex = 1;
   String _selectedFilter = "All Classes";
   bool _isTelugu = true;
   final TextEditingController _searchController = TextEditingController();
@@ -94,28 +93,6 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
     setState(() => _selectedFilter = filter);
   }
 
-  void _onBottomNavTapped(int index) {
-    if (_currentIndex == index) return;
-    setState(() => _currentIndex = index);
-
-    switch (index) {
-      case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          SubjectTeacherRoutes.home,
-              (route) => false,
-        );
-        break;
-      case 1:
-        break;
-      case 2:
-        _navigateTo(SubjectTeacherRoutes.activity);
-        break;
-      case 3:
-        _navigateTo(SubjectTeacherRoutes.settings);
-        break;
-    }
-  }
-
   void _onClassTap(Map<String, dynamic> classData) {
     _navigateTo(SubjectTeacherRoutes.classDetails, arguments: classData);
   }
@@ -153,17 +130,18 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
                             BoxShadow(
                                 color: Colors.black.withOpacity(0.04),
                                 blurRadius: 10,
-                                offset: const Offset(0, 4)
-                            )
+                                offset: const Offset(0, 4))
                           ],
                         ),
                         child: TextField(
                           controller: _searchController,
                           decoration: InputDecoration(
                             hintText: "Search classes...",
-                            prefixIcon: Icon(Icons.search, color: _primaryPurple),
+                            prefixIcon:
+                                Icon(Icons.search, color: _primaryPurple),
                             border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(vertical: 15),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 15),
                           ),
                         ),
                       ),
@@ -185,20 +163,27 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
                             onTap: () => _onFilterSelected(tab),
                             child: Container(
                               margin: const EdgeInsets.only(right: 8),
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               decoration: BoxDecoration(
-                                color: isSelected ? _primaryPurple : Colors.white,
+                                color:
+                                    isSelected ? _primaryPurple : Colors.white,
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
-                                    color: isSelected ? _primaryPurple : Colors.grey.shade300
-                                ),
+                                    color: isSelected
+                                        ? _primaryPurple
+                                        : Colors.grey.shade300),
                               ),
                               alignment: Alignment.center,
                               child: Text(
                                 tab,
                                 style: TextStyle(
-                                  color: isSelected ? Colors.white : Colors.grey.shade700,
-                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.grey.shade700,
+                                  fontWeight: isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.w500,
                                   fontSize: 13,
                                 ),
                               ),
@@ -216,7 +201,8 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
                       physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemCount: visibleClasses.length,
-                      itemBuilder: (context, index) => _buildModernClassCard(visibleClasses[index]),
+                      itemBuilder: (context, index) =>
+                          _buildModernClassCard(visibleClasses[index]),
                     ),
 
                     const SizedBox(height: 30),
@@ -227,7 +213,6 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -255,7 +240,8 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
                 color: _primaryPurple.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(Icons.arrow_back_ios_new_rounded, color: _primaryPurple, size: 20),
+              child: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: _primaryPurple, size: 20),
             ),
           ),
           const SizedBox(width: 16),
@@ -279,7 +265,10 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
               ),
               child: Text(
                 _isTelugu ? 'తెలుగు' : 'English',
-                style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: _primaryPurple,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -294,7 +283,12 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.02),
+              blurRadius: 10,
+              offset: const Offset(0, 4))
+        ],
       ),
       child: InkWell(
         onTap: () => _onClassTap(classData),
@@ -306,10 +300,17 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
               Row(
                 children: [
                   Container(
-                    width: 48, height: 48,
-                    decoration: BoxDecoration(color: _primaryPurple.withOpacity(0.1), shape: BoxShape.circle),
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                        color: _primaryPurple.withOpacity(0.1),
+                        shape: BoxShape.circle),
                     child: Center(
-                      child: Text(classData['circle'].toString(), style: TextStyle(color: _primaryPurple, fontWeight: FontWeight.bold, fontSize: 14)),
+                      child: Text(classData['circle'].toString(),
+                          style: TextStyle(
+                              color: _primaryPurple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14)),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -317,15 +318,28 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(classData['className'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1E293B))),
-                        Text(classData['section'], style: TextStyle(color: Colors.grey.shade500, fontSize: 12)),
+                        Text(classData['className'],
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Color(0xFF1E293B))),
+                        Text(classData['section'],
+                            style: TextStyle(
+                                color: Colors.grey.shade500, fontSize: 12)),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: Colors.green.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
-                    child: Text("${classData['avgGrade']}%", style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Text("${classData['avgGrade']}%",
+                        style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12)),
                   ),
                 ],
               ),
@@ -336,15 +350,25 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Class Teacher", style: TextStyle(color: Colors.grey, fontSize: 11)),
-                      Text(classData['teacher'], style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF334155))),
+                      const Text("Class Teacher",
+                          style: TextStyle(color: Colors.grey, fontSize: 11)),
+                      Text(classData['teacher'],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                              color: Color(0xFF334155))),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text("Students", style: TextStyle(color: Colors.grey, fontSize: 11)),
-                      Text("${classData['totalStudents']}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Color(0xFF334155))),
+                      const Text("Students",
+                          style: TextStyle(color: Colors.grey, fontSize: 11)),
+                      Text("${classData['totalStudents']}",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                              color: Color(0xFF334155))),
                     ],
                   ),
                 ],
@@ -353,23 +377,6 @@ class _ClassSearchPageState extends State<ClassSearchPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: _primaryPurple,
-      unselectedItemColor: Colors.grey,
-      showUnselectedLabels: true,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.more_horiz_rounded), label: 'More'),
-      ],
     );
   }
 

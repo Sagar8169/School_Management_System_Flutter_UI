@@ -11,7 +11,6 @@ class TeacherProfilePage extends StatefulWidget {
 }
 
 class _TeacherProfilePageState extends State<TeacherProfilePage> {
-  int _currentIndex = 1;
   bool _isTelugu = true;
 
   final List<Map<String, dynamic>> _assignedClasses = [
@@ -40,36 +39,6 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       Navigator.pushNamed(context, routeName, arguments: arguments);
     } else {
       Navigator.pushNamed(context, routeName);
-    }
-  }
-
-  void _onBottomNavTapped(int index) {
-    if (index == _currentIndex) return;
-
-    setState(() {
-      _currentIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          SubjectTeacherRoutes.home,
-              (route) => false,
-        );
-        break;
-      case 1:
-        Navigator.pushNamed(context, SubjectTeacherRoutes.search);
-        break;
-      case 2:
-        Navigator.pushNamed(context, SubjectTeacherRoutes.activity);
-        break;
-      case 3:
-        Navigator.pushNamed(
-          context,
-          SubjectTeacherRoutes.morePage,
-          arguments: {'section': null},
-        );
-        break;
     }
   }
 
@@ -105,7 +74,6 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -132,11 +100,8 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                 color: const Color(0xFF7C3AED).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: Color(0xFF7C3AED),
-                  size: 20
-              ),
+              child: const Icon(Icons.arrow_back_ios_new_rounded,
+                  color: Color(0xFF7C3AED), size: 20),
             ),
           ),
           const SizedBox(width: 16),
@@ -155,7 +120,8 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFF7C3AED).withOpacity(0.3)),
+                border:
+                    Border.all(color: const Color(0xFF7C3AED).withOpacity(0.3)),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -179,21 +145,37 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFFBE481E), Color(0xFFD75B28)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: const LinearGradient(
+            colors: [Color(0xFFBE481E), Color(0xFFD75B28)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight),
         borderRadius: BorderRadius.circular(28),
-        boxShadow: [BoxShadow(color: const Color(0xFFBE481E).withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: const Color(0xFFBE481E).withOpacity(0.3),
+              blurRadius: 15,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Column(
         children: [
           Row(
             children: [
               Container(
-                width: 65, height: 65,
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(18)),
+                width: 65,
+                height: 65,
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(18)),
                 alignment: Alignment.center,
                 child: Text(
-                  widget.teacherData['name'].toString().isNotEmpty ? widget.teacherData['name'].toString()[0].toUpperCase() : "?",
-                  style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                  widget.teacherData['name'].toString().isNotEmpty
+                      ? widget.teacherData['name'].toString()[0].toUpperCase()
+                      : "?",
+                  style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
               const SizedBox(width: 18),
@@ -201,24 +183,40 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.teacherData['name'].toString(), style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text(widget.teacherData['name'].toString(),
+                        style: const TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
                     const SizedBox(height: 6),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
-                      child: Text(widget.teacherData['role']?.toString() ?? 'Teacher', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Text(
+                          widget.teacherData['role']?.toString() ?? 'Teacher',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600)),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Divider(color: Colors.white24, height: 1)),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Divider(color: Colors.white24, height: 1)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _heroMetric("Subject", widget.teacherData['subject']?.toString() ?? 'N/A'),
-              _heroMetric("Experience", widget.teacherData['experience']?.toString() ?? 'N/A'),
+              _heroMetric("Subject",
+                  widget.teacherData['subject']?.toString() ?? 'N/A'),
+              _heroMetric("Experience",
+                  widget.teacherData['experience']?.toString() ?? 'N/A'),
             ],
           ),
         ],
@@ -226,11 +224,16 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
   }
 
-  Widget _heroMetric(String l, String v) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Text(l, style: const TextStyle(color: Colors.white70, fontSize: 13)),
-    const SizedBox(height: 4),
-    Text(v, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-  ]);
+  Widget _heroMetric(String l, String v) =>
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(l, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+        const SizedBox(height: 4),
+        Text(v,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold)),
+      ]);
 
   Widget _buildContactInformation() {
     return Padding(
@@ -241,14 +244,23 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: Colors.black.withOpacity(0.05)),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4))]
-        ),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.02),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4))
+            ]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Contact Information", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+            const Text("Contact Information",
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF1E293B))),
             const SizedBox(height: 20),
-            _infoRow(Icons.email_outlined, "Email Address", "raghini.sharma@adityaschool.edu"),
+            _infoRow(Icons.email_outlined, "Email Address",
+                "raghini.sharma@adityaschool.edu"),
             const Divider(height: 24, color: Color(0xFFF1F5F9)),
             _infoRow(Icons.phone_outlined, "Phone Number", "+91 98765 43210"),
             const Divider(height: 24, color: Color(0xFFF1F5F9)),
@@ -261,30 +273,33 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
 
   // ✅ FIXED INFO ROW: Full Email Visibility with Vertical Layout
   Widget _infoRow(IconData i, String t, String v) => Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Icon(i, color: const Color(0xFF64748B), size: 20),
-      const SizedBox(width: 12),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(t, style: const TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w500)),
-            const SizedBox(height: 2),
-            Text(
-              v,
-              softWrap: true, // ✅ NEXT LINE ME AA JAYEGA PURA DIKHEGA
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Color(0xFF1E293B)
-              ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(i, color: const Color(0xFF64748B), size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(t,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500)),
+                const SizedBox(height: 2),
+                Text(
+                  v,
+                  softWrap: true, // ✅ NEXT LINE ME AA JAYEGA PURA DIKHEGA
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Color(0xFF1E293B)),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   Widget _buildAssignedClasses() {
     return Padding(
@@ -292,42 +307,62 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Assigned Classes", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+          const Text("Assigned Classes",
+              style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E293B))),
           const SizedBox(height: 16),
           ..._assignedClasses.map((c) => Container(
-            margin: const EdgeInsets.only(bottom: 12),
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.black.withOpacity(0.05)),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8, offset: const Offset(0, 2))]
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text(c['className'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1E293B))),
-                    const SizedBox(height: 4),
-                    Text("${c['students']} students", style: const TextStyle(color: Colors.grey, fontSize: 13)),
-                  ]),
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.black.withOpacity(0.05)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.02),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2))
+                    ]),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(c['className'],
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Color(0xFF1E293B))),
+                            const SizedBox(height: 4),
+                            Text("${c['students']} students",
+                                style: const TextStyle(
+                                    color: Colors.grey, fontSize: 13)),
+                          ]),
+                    ),
+                    _miniStat("Avg Grade", "${c['avgGrade']}%", Colors.orange),
+                    const SizedBox(width: 20),
+                    _miniStat(
+                        "Attendance", "${c['attendance']}%", Colors.green),
+                  ],
                 ),
-                _miniStat("Avg Grade", "${c['avgGrade']}%", Colors.orange),
-                const SizedBox(width: 20),
-                _miniStat("Attendance", "${c['attendance']}%", Colors.green),
-              ],
-            ),
-          )),
+              )),
         ],
       ),
     );
   }
 
-  Widget _miniStat(String l, String v, Color c) => Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-    Text(l, style: const TextStyle(fontSize: 11, color: Colors.grey)),
-    const SizedBox(height: 4),
-    Text(v, style: TextStyle(fontWeight: FontWeight.bold, color: c, fontSize: 15)),
-  ]);
+  Widget _miniStat(String l, String v, Color c) =>
+      Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+        Text(l, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+        const SizedBox(height: 4),
+        Text(v,
+            style:
+                TextStyle(fontWeight: FontWeight.bold, color: c, fontSize: 15)),
+      ]);
 
   Widget _buildPerformanceSummary() {
     return Padding(
@@ -338,8 +373,9 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: Colors.black.withOpacity(0.05)),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10)]
-        ),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10)
+            ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -352,10 +388,12 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
   }
 
   Widget _statBox(String v, String l, Color c) => Column(children: [
-    Text(v, style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: c)),
-    const SizedBox(height: 6),
-    Text(l, style: const TextStyle(color: Colors.grey, fontSize: 13)),
-  ]);
+        Text(v,
+            style:
+                TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: c)),
+        const SizedBox(height: 6),
+        Text(l, style: const TextStyle(color: Colors.grey, fontSize: 13)),
+      ]);
 
 // --- ACTION BUTTONS: REDIRECTION ADDED ---
   Widget _buildActionButtons() {
@@ -374,33 +412,24 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
   }
 
   Widget _btn(String t, Color c, bool primary, VoidCallback onTap) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    child: SizedBox(
-      height: 54, width: double.infinity,
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primary ? c : Colors.white,
-          foregroundColor: primary ? Colors.white : c,
-          elevation: 0, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          side: primary ? null : BorderSide(color: c.withOpacity(0.4)),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: SizedBox(
+          height: 54,
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: onTap,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: primary ? c : Colors.white,
+              foregroundColor: primary ? Colors.white : c,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              side: primary ? null : BorderSide(color: c.withOpacity(0.4)),
+            ),
+            child: Text(t,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          ),
         ),
-        child: Text(t, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-      ),
-    ),
-  );
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _onBottomNavTapped,
-      selectedItemColor: const Color(0xFF2962FF), unselectedItemColor: const Color(0xFF6B7280),
-      type: BottomNavigationBarType.fixed, backgroundColor: Colors.white,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_outlined), activeIcon: Icon(Icons.search), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics_outlined), activeIcon: Icon(Icons.analytics), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.more_horiz_outlined), activeIcon: Icon(Icons.more_horiz), label: 'More'),
-      ],
-    );
-  }
+      );
 }

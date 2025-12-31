@@ -10,7 +10,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  int _currentIndex = 3; // 'More' tab is active
   bool _isDarkMode = false;
   bool _isTelugu = true;
 
@@ -24,13 +23,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _isTelugu = !_isTelugu;
     });
-  }
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    ClassTeacherRoutes.handleBottomNavTap(context, index);
   }
 
   @override
@@ -74,13 +66,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildMenuCard(
                       icon: Icons.download_rounded,
                       title: 'Download Reports',
-                      trailing: Icon(Icons.chevron_right, color: Colors.grey[600], size: 22),
+                      trailing: Icon(Icons.chevron_right,
+                          color: Colors.grey[600], size: 22),
                     ),
                     const SizedBox(height: 12),
                     _buildMenuCard(
                       icon: Icons.language,
                       title: 'Language Preferences',
-                      trailing: Icon(Icons.chevron_right, color: Colors.grey[600], size: 22),
+                      trailing: Icon(Icons.chevron_right,
+                          color: Colors.grey[600], size: 22),
                     ),
                     const SizedBox(height: 24),
                     const Text(
@@ -95,19 +89,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildMenuCard(
                       icon: Icons.security,
                       title: 'Privacy & Security',
-                      trailing: Icon(Icons.chevron_right, color: Colors.grey[600], size: 22),
+                      trailing: Icon(Icons.chevron_right,
+                          color: Colors.grey[600], size: 22),
                     ),
                     const SizedBox(height: 12),
                     _buildMenuCard(
                       icon: Icons.headset_mic,
                       title: 'Contact Support',
-                      trailing: Icon(Icons.chevron_right, color: Colors.grey[600], size: 22),
+                      trailing: Icon(Icons.chevron_right,
+                          color: Colors.grey[600], size: 22),
                     ),
                     const SizedBox(height: 12),
                     _buildMenuCard(
                       icon: Icons.info,
                       title: 'About Toki Tech',
-                      trailing: Icon(Icons.chevron_right, color: Colors.grey[600], size: 22),
+                      trailing: Icon(Icons.chevron_right,
+                          color: Colors.grey[600], size: 22),
                     ),
                     const SizedBox(height: 24),
                     _buildLogoutButton(),
@@ -121,7 +118,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -141,7 +137,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Center(
-              child: Text('A', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+              child: Text('A',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20)),
             ),
           ),
           const SizedBox(width: 12),
@@ -150,7 +150,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               Text(
                 'Aditya International School',
-                style: TextStyle(color: _textDark, fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: _textDark,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 'Powered by Toki Tech',
@@ -169,7 +172,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               child: Text(
                 _isTelugu ? 'తెలుగు' : 'English',
-                style: TextStyle(color: _primaryBlue, fontSize: 13, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: _primaryBlue,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -253,7 +259,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) {
         return Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
@@ -263,7 +270,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Center(
                   child: Text(
                     "Profile Details",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: _textDark),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: _textDark),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -277,7 +287,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Center(
                   child: Text(
                     "Read-only access",
-                    style: TextStyle(color: Colors.grey[400], fontSize: 12, fontStyle: FontStyle.italic),
+                    style: TextStyle(
+                        color: Colors.grey[400],
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -287,9 +300,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onPressed: () => Navigator.pop(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _primaryBlue,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text("Close", style: TextStyle(color: Colors.white)),
+                    child: const Text("Close",
+                        style: TextStyle(color: Colors.white)),
                   ),
                 )
               ],
@@ -313,7 +328,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 4),
           Text(
             value,
-            style: TextStyle(color: _textDark, fontSize: 15, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                color: _textDark, fontSize: 15, fontWeight: FontWeight.w500),
           ),
           Divider(color: Colors.grey[200]),
         ],
@@ -321,11 +337,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildMenuCard({
-    required IconData icon,
-    required String title,
-    required Widget trailing
-  }) {
+  Widget _buildMenuCard(
+      {required IconData icon,
+      required String title,
+      required Widget trailing}) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -416,7 +431,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 '/', // Navigate to login screen
-                    (route) => false,
+                (route) => false,
               );
             },
             child: const Text('Logout', style: TextStyle(color: Colors.red)),
@@ -438,51 +453,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Text(
             '© 2025 Toki Tech',
             style: TextStyle(color: Colors.grey[500], fontSize: 12),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.shade200)),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: _primaryBlue,
-        unselectedItemColor: Colors.grey,
-        selectedFontSize: 10,
-        unselectedFontSize: 10,
-        elevation: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(_currentIndex == 0 ? Icons.home_filled : Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(_currentIndex == 1 ? Icons.search : Icons.search_outlined),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: _currentIndex == 2 ? const Color(0xFFEADDFF) : Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Icon(Icons.show_chart, size: 22),
-            ),
-            label: 'Activity',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(_currentIndex == 3 ? Icons.more_vert : Icons.more_vert_outlined),
-            label: 'More',
           ),
         ],
       ),

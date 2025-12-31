@@ -9,41 +9,72 @@ class AttendanceSummaryPage extends StatefulWidget {
 }
 
 class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
-  int _currentIndex = 2;
   bool _isTelugu = false;
   int _selectedToggleIndex = 0;
 
   // Selection Data - Original Values Ke Sath
   final List<Map<String, dynamic>> _todayClasses = [
-    {"className": "Class 8B", "percent": "95.5%", "present": "42", "absent": "2", "total": "44", "color": "green"},
-    {"className": "Class 9A", "percent": "90.5%", "present": "38", "absent": "4", "total": "42", "color": "blue"},
-    {"className": "Class 10C", "percent": "95.7%", "present": "44", "absent": "2", "total": "46", "color": "green"},
+    {
+      "className": "Class 8B",
+      "percent": "95.5%",
+      "present": "42",
+      "absent": "2",
+      "total": "44",
+      "color": "green"
+    },
+    {
+      "className": "Class 9A",
+      "percent": "90.5%",
+      "present": "38",
+      "absent": "4",
+      "total": "42",
+      "color": "blue"
+    },
+    {
+      "className": "Class 10C",
+      "percent": "95.7%",
+      "present": "44",
+      "absent": "2",
+      "total": "46",
+      "color": "green"
+    },
   ];
 
   final List<Map<String, dynamic>> _weekClasses = [
-    {"className": "Class 8B", "percent": "94.2%", "present": "208", "absent": "12", "total": "220", "color": "green"},
-    {"className": "Class 9A", "percent": "91.0%", "present": "190", "absent": "20", "total": "210", "color": "blue"},
-    {"className": "Class 10C", "percent": "96.5%", "present": "222", "absent": "8", "total": "230", "color": "green"},
+    {
+      "className": "Class 8B",
+      "percent": "94.2%",
+      "present": "208",
+      "absent": "12",
+      "total": "220",
+      "color": "green"
+    },
+    {
+      "className": "Class 9A",
+      "percent": "91.0%",
+      "present": "190",
+      "absent": "20",
+      "total": "210",
+      "color": "blue"
+    },
+    {
+      "className": "Class 10C",
+      "percent": "96.5%",
+      "present": "222",
+      "absent": "8",
+      "total": "230",
+      "color": "green"
+    },
   ];
 
   final Color _primaryPurple = const Color(0xFF7C3AED);
   final Color _greenPrimary = const Color(0xFF2DC58C);
   final Color _bgLight = const Color(0xFFF8FAFC);
 
-  void _onTabTapped(int index) {
-    if (_currentIndex == index) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.home); break;
-      case 1: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.search); break;
-      case 2: break;
-      case 3: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.settings); break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final currentList = _selectedToggleIndex == 0 ? _todayClasses : _weekClasses;
+    final currentList =
+        _selectedToggleIndex == 0 ? _todayClasses : _weekClasses;
     final averageStr = _selectedToggleIndex == 0 ? "93.9%" : "94.5%";
 
     return Scaffold(
@@ -57,7 +88,8 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    _buildWeeklyStyleHero(averageStr), // ✅ Styled Like Weekly Schedule
+                    _buildWeeklyStyleHero(
+                        averageStr), // ✅ Styled Like Weekly Schedule
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -65,13 +97,18 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
                         children: [
                           _buildCustomToggle(),
                           const SizedBox(height: 24),
-                          const Text("Detailed Breakdown", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFF1E293B))),
+                          const Text("Detailed Breakdown",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFF1E293B))),
                           const SizedBox(height: 12),
                           ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: currentList.length,
-                            itemBuilder: (context, index) => _buildClassItem(currentList[index]),
+                            itemBuilder: (context, index) =>
+                                _buildClassItem(currentList[index]),
                           ),
                         ],
                       ),
@@ -83,7 +120,6 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -91,26 +127,41 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
   Widget _buildExactHeader() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))]),
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))
+      ]),
       child: Row(
         children: [
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: _primaryPurple.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-              child: Icon(Icons.arrow_back_ios_new_rounded, color: _primaryPurple, size: 20),
+              decoration: BoxDecoration(
+                  color: _primaryPurple.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: _primaryPurple, size: 20),
             ),
           ),
           const SizedBox(width: 16),
-          const Text("Attendance Summary", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+          const Text("Attendance Summary",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E293B))),
           const Spacer(),
           GestureDetector(
             onTap: () => setState(() => _isTelugu = !_isTelugu),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(border: Border.all(color: _primaryPurple.withOpacity(0.3)), borderRadius: BorderRadius.circular(20)),
-              child: Text(_isTelugu ? 'ಕನ್ನಡ' : 'English', style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold)),
+              decoration: BoxDecoration(
+                  border: Border.all(color: _primaryPurple.withOpacity(0.3)),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(_isTelugu ? 'ಕನ್ನಡ' : 'English',
+                  style: TextStyle(
+                      color: _primaryPurple,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold)),
             ),
           ),
         ],
@@ -148,12 +199,19 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
             children: [
               const Text(
                 "Overall Performance",
-                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w900, letterSpacing: 0.5),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(12)),
-                child: const Icon(Icons.auto_graph_rounded, color: Colors.white, size: 20),
+                decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12)),
+                child: const Icon(Icons.auto_graph_rounded,
+                    color: Colors.white, size: 20),
               ),
             ],
           ),
@@ -182,7 +240,10 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
                     ),
                     Text(
                       avg.replaceAll('%', ''),
-                      style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w900),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900),
                     ),
                   ],
                 ),
@@ -193,12 +254,19 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
                     children: [
                       const Text(
                         "AVG. ATTENDANCE",
-                        style: TextStyle(color: Colors.white70, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1.2),
+                        style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 1.2),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         avg,
-                        style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w900),
                       ),
                     ],
                   ),
@@ -209,7 +277,8 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
           const SizedBox(height: 20),
           Row(
             children: [
-              _headerQuickStat(Icons.people_alt_rounded, "${_selectedToggleIndex == 0 ? '132' : '660'} Students"),
+              _headerQuickStat(Icons.people_alt_rounded,
+                  "${_selectedToggleIndex == 0 ? '132' : '660'} Students"),
               const SizedBox(width: 16),
               _headerQuickStat(Icons.class_rounded, "3 Classes"),
             ],
@@ -226,7 +295,8 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
         const SizedBox(width: 6),
         Text(
           label,
-          style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w500),
+          style: const TextStyle(
+              color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w500),
         ),
       ],
     );
@@ -237,7 +307,10 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
     return Container(
       height: 54,
       padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey.shade200)),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey.shade200)),
       child: Row(
         children: [
           _toggleBtn("Today", 0),
@@ -257,10 +330,21 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
           decoration: BoxDecoration(
             color: isSelected ? _greenPrimary : Colors.transparent,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: isSelected ? [BoxShadow(color: _greenPrimary.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4))] : [],
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                        color: _greenPrimary.withOpacity(0.3),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4))
+                  ]
+                : [],
           ),
           child: Center(
-            child: Text(label, style: TextStyle(color: isSelected ? Colors.white : Colors.grey.shade500, fontWeight: FontWeight.bold, fontSize: 14)),
+            child: Text(label,
+                style: TextStyle(
+                    color: isSelected ? Colors.white : Colors.grey.shade500,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14)),
           ),
         ),
       ),
@@ -269,32 +353,53 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
 
   // --- 4. CLASS BREAKDOWN CARDS ---
   Widget _buildClassItem(Map<String, dynamic> data) {
-    Color badgeColor = data['color'] == 'green' ? _greenPrimary : const Color(0xFF448AFF);
+    Color badgeColor =
+        data['color'] == 'green' ? _greenPrimary : const Color(0xFF448AFF);
 
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, SubjectTeacherRoutes.classAttendance, arguments: data),
+      onTap: () => Navigator.pushNamed(
+          context, SubjectTeacherRoutes.classAttendance,
+          arguments: data),
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(28),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 10))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 20,
+                offset: const Offset(0, 10))
+          ],
         ),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(data['className'], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF1E293B))),
+                Text(data['className'],
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF1E293B))),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(color: badgeColor.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-                  child: Text(data['percent'], style: TextStyle(color: badgeColor, fontWeight: FontWeight.bold, fontSize: 12)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                      color: badgeColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(data['percent'],
+                      style: TextStyle(
+                          color: badgeColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12)),
                 ),
               ],
             ),
-            const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Divider(height: 1)),
+            const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Divider(height: 1)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -313,22 +418,14 @@ class _AttendanceSummaryPageState extends State<AttendanceSummaryPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(val, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: color)),
-        Text(label, style: TextStyle(color: Colors.grey.shade400, fontSize: 11, fontWeight: FontWeight.bold)),
-      ],
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _onTabTapped, type: BottomNavigationBarType.fixed,
-      selectedItemColor: _primaryPurple, unselectedItemColor: const Color(0xFF94A3B8), backgroundColor: Colors.white,
-      selectedFontSize: 11, unselectedFontSize: 11, elevation: 20,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.bolt_rounded), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.more_horiz_rounded), label: 'More'),
+        Text(val,
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w900, color: color)),
+        Text(label,
+            style: TextStyle(
+                color: Colors.grey.shade400,
+                fontSize: 11,
+                fontWeight: FontWeight.bold)),
       ],
     );
   }

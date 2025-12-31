@@ -15,15 +15,17 @@ class GradesAnalyticsPage extends StatefulWidget {
   State<GradesAnalyticsPage> createState() => _GradesAnalyticsPageState();
 }
 
-
-
 class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
-  int _currentIndex = 2;
   int _selectedTimeFilter = 0;
   bool _isTelugu = true;
 
   bool _sortAscending = false;
-  final List<String> _timeFilters = ['This Month', 'Last 3 Months', 'Term 1', 'Term 2'];
+  final List<String> _timeFilters = [
+    'This Month',
+    'Last 3 Months',
+    'Term 1',
+    'Term 2'
+  ];
 
   // Mock data for class performance with grade distribution
   List<Map<String, dynamic>> _classPerformance = [
@@ -284,29 +286,6 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
-  void _onBottomNavTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        Navigator.of(context).pushNamedAndRemoveUntil(
-          SubjectTeacherRoutes.home,
-              (route) => false,
-        );
-        break;
-      case 1:
-        _navigateTo(SubjectTeacherRoutes.search);
-        break;
-      case 2:
-        break;
-      case 3:
-        _navigateTo(SubjectTeacherRoutes.morePage);
-        break;
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -346,9 +325,9 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
+
 // --- HEADER: UPDATED TO MATCH PREVIOUS PAGES ---
   Widget _buildHeader() {
     return Container(
@@ -370,14 +349,12 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF7C3AED).withOpacity(0.1), // Purple Accent
+                color:
+                    const Color(0xFF7C3AED).withOpacity(0.1), // Purple Accent
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: Color(0xFF7C3AED),
-                  size: 20
-              ),
+              child: const Icon(Icons.arrow_back_ios_new_rounded,
+                  color: Color(0xFF7C3AED), size: 20),
             ),
           ),
           const SizedBox(width: 16),
@@ -396,7 +373,8 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFF7C3AED).withOpacity(0.3)),
+                border:
+                    Border.all(color: const Color(0xFF7C3AED).withOpacity(0.3)),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -463,7 +441,8 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(999),
@@ -526,10 +505,17 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
                 color: isSelected ? const Color(0xFF7C3AED) : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF7C3AED) : Colors.grey.shade300,
+                  color: isSelected
+                      ? const Color(0xFF7C3AED)
+                      : Colors.grey.shade300,
                 ),
                 boxShadow: isSelected
-                    ? [BoxShadow(color: const Color(0xFF7C3AED).withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 4))]
+                    ? [
+                        BoxShadow(
+                            color: const Color(0xFF7C3AED).withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4))
+                      ]
                     : null,
               ),
               alignment: Alignment.center,
@@ -572,7 +558,8 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
               GestureDetector(
                 onTap: _toggleSortOrder,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -581,7 +568,9 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
                   child: Row(
                     children: [
                       Icon(
-                        _sortAscending ? Icons.arrow_upward : Icons.arrow_downward,
+                        _sortAscending
+                            ? Icons.arrow_upward
+                            : Icons.arrow_downward,
                         size: 16,
                         color: const Color(0xFF1D4ED8),
                       ),
@@ -620,9 +609,10 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
 
   Widget _buildClassPerformanceCard(Map<String, dynamic> classData) {
     final double average = (classData['average'] as num).toDouble();
-    final Map<String, int> distribution = Map<String, int>.from(classData['distribution'] as Map);
-    final List<Color> colors = List<Color>.from(classData['distributionColors'] as List);
-
+    final Map<String, int> distribution =
+        Map<String, int>.from(classData['distribution'] as Map);
+    final List<Color> colors =
+        List<Color>.from(classData['distributionColors'] as List);
 
     return GestureDetector(
       onTap: () {
@@ -690,8 +680,10 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
     );
   }
 
-  Widget _buildGradeDistributionPieChart(Map<String, int> distribution, List<Color> colors) {
-    final List<double> values = distribution.values.map((v) => v.toDouble()).toList();
+  Widget _buildGradeDistributionPieChart(
+      Map<String, int> distribution, List<Color> colors) {
+    final List<double> values =
+        distribution.values.map((v) => v.toDouble()).toList();
 
     return SizedBox(
       width: 70,
@@ -741,7 +733,8 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
     );
   }
 
-  Widget _buildGradeDistributionLegend(Map<String, int> distribution, List<Color> colors) {
+  Widget _buildGradeDistributionLegend(
+      Map<String, int> distribution, List<Color> colors) {
     final List<String> labels = distribution.keys.toList();
     final List<int> values = distribution.values.toList();
 
@@ -863,11 +856,13 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Download Report'),
-        content: const Text('The grades report will be downloaded in PDF format.'),
+        content:
+            const Text('The grades report will be downloaded in PDF format.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel', style: TextStyle(color: Color(0xFF6B7280))),
+            child: const Text('Cancel',
+                style: TextStyle(color: Color(0xFF6B7280))),
           ),
           ElevatedButton(
             onPressed: () {
@@ -879,8 +874,10 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
                 ),
               );
             },
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF59E0B)),
-            child: const Text('Download', style: TextStyle(color: Colors.white)),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFF59E0B)),
+            child:
+                const Text('Download', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -891,8 +888,7 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))
-      ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
       builder: (context) => Container(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -949,37 +945,6 @@ class _GradesAnalyticsPageState extends State<GradesAnalyticsPage> {
         Text(
           label,
           style: const TextStyle(fontSize: 12),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: _onBottomNavTapped,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: const Color(0xFF1D4ED8),
-      unselectedItemColor: const Color(0xFF6B7280),
-      selectedFontSize: 12,
-      unselectedFontSize: 12,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search_rounded),
-          label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.show_chart_rounded),
-          label: 'Activity',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.more_horiz_rounded),
-          label: 'More',
         ),
       ],
     );

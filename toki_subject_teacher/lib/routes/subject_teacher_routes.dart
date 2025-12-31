@@ -73,7 +73,7 @@ class SubjectTeacherRoutes {
 
     // HOME
     if (routeName == home) {
-      return MaterialPageRoute(builder: (_) => const HomeSubjectTeacher());
+      return MaterialPageRoute(builder: (_) => HomeSubjectTeacher());
     }
 
     // ---------------- ANALYTICS ----------------
@@ -90,14 +90,11 @@ class SubjectTeacherRoutes {
       return MaterialPageRoute(
         builder: (_) => const GradesAnalyticsPage(studentData: null),
       );
-    }
-
-    else if (routeName == morePage) {
+    } else if (routeName == morePage) {
       return MaterialPageRoute(
         builder: (_) => const MorePage(),
       );
     }
-
 
     // Attendance Analytics
     else if (routeName == attendanceAnalytics) {
@@ -121,9 +118,7 @@ class SubjectTeacherRoutes {
           teacherData: args is Map<String, dynamic> ? args : {},
         ),
       );
-    }
-
-    else if (routeName == settings) {
+    } else if (routeName == settings) {
       return MaterialPageRoute(builder: (_) => const SettingsScreen());
     }
 
@@ -131,30 +126,21 @@ class SubjectTeacherRoutes {
 
     else if (routeName == tasks) {
       return MaterialPageRoute(builder: (_) => const TasksListPage());
-    }
-
-    else if (routeName == taskDetails &&
+    } else if (routeName == taskDetails &&
         args is Map<String, dynamic> &&
         args['taskData'] != null) {
       return MaterialPageRoute(
         builder: (_) => TaskDetailsPage(taskData: args['taskData']),
       );
-    }
-
-    else if (routeName == homework) {
+    } else if (routeName == homework) {
       return MaterialPageRoute(builder: (_) => const HomeworkListPage());
-    }
-
-    else if (routeName == homeworkDetails &&
+    } else if (routeName == homeworkDetails &&
         args is Map<String, dynamic> &&
         args['homeworkData'] != null) {
       return MaterialPageRoute(
-        builder: (_) =>
-            HomeworkDetailsPage(homeworkData: args['homeworkData']),
+        builder: (_) => HomeworkDetailsPage(homeworkData: args['homeworkData']),
       );
-    }
-
-    else if (routeName == addHomework) {
+    } else if (routeName == addHomework) {
       return MaterialPageRoute(builder: (_) => const AddHomeworkPage());
     }
 
@@ -162,13 +148,9 @@ class SubjectTeacherRoutes {
 
     else if (routeName == takeAttendance) {
       return MaterialPageRoute(builder: (_) => const TakeAttendancePage());
-    }
-
-    else if (routeName == attendanceSummary) {
+    } else if (routeName == attendanceSummary) {
       return MaterialPageRoute(builder: (_) => const AttendanceSummaryPage());
-    }
-
-    else if (routeName == classAttendance && args is Map<String, dynamic>) {
+    } else if (routeName == classAttendance && args is Map<String, dynamic>) {
       return MaterialPageRoute(
         builder: (_) => ClassAttendanceDetailPage(classData: args),
       );
@@ -178,17 +160,11 @@ class SubjectTeacherRoutes {
 
     else if (routeName == schedule) {
       return MaterialPageRoute(builder: (_) => const WeeklySchedulePage());
-    }
-
-    else if (routeName == activity) {
+    } else if (routeName == activity) {
       return MaterialPageRoute(builder: (_) => const ActivityPage());
-    }
-
-    else if (routeName == search) {
+    } else if (routeName == search) {
       return MaterialPageRoute(builder: (_) => const SearchPage());
-    }
-
-    else if (routeName == uploadGrades) {
+    } else if (routeName == uploadGrades) {
       return MaterialPageRoute(builder: (_) => const UploadGradePage());
     }
 
@@ -196,13 +172,9 @@ class SubjectTeacherRoutes {
 
     else if (routeName == classSearch) {
       return MaterialPageRoute(builder: (_) => const ClassSearchPage());
-    }
-
-    else if (routeName == teacherSearch) {
+    } else if (routeName == teacherSearch) {
       return MaterialPageRoute(builder: (_) => const TeacherSearchPage());
-    }
-
-    else if (routeName == studentSearch) {
+    } else if (routeName == studentSearch) {
       return MaterialPageRoute(builder: (_) => const StudentSearchPage());
     }
 
@@ -212,15 +184,11 @@ class SubjectTeacherRoutes {
       return MaterialPageRoute(
         builder: (_) => ClassDetailsPage(classData: args),
       );
-    }
-
-    else if (routeName == studentProfile && args is Map<String, dynamic>) {
+    } else if (routeName == studentProfile && args is Map<String, dynamic>) {
       return MaterialPageRoute(
         builder: (_) => StudentProfilePage(studentData: args),
       );
-    }
-
-    else if (routeName == teacherProfile && args is Map<String, dynamic>) {
+    } else if (routeName == teacherProfile && args is Map<String, dynamic>) {
       return MaterialPageRoute(
         builder: (_) => TeacherProfilePage(teacherData: args),
       );

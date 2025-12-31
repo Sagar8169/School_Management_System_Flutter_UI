@@ -4,14 +4,15 @@ import 'package:toki/routes/subject_teacher_routes.dart';
 class ClassAttendanceDetailPage extends StatefulWidget {
   final Map<String, dynamic> classData;
 
-  const ClassAttendanceDetailPage({Key? key, required this.classData}) : super(key: key);
+  const ClassAttendanceDetailPage({Key? key, required this.classData})
+      : super(key: key);
 
   @override
-  State<ClassAttendanceDetailPage> createState() => _ClassAttendanceDetailPageState();
+  State<ClassAttendanceDetailPage> createState() =>
+      _ClassAttendanceDetailPageState();
 }
 
 class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
-  int _currentIndex = 2;
   bool _isTelugu = false;
 
   // New Theme Colors
@@ -20,17 +21,6 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
   final Color _indigoLight = const Color(0xFF6366F1); // New Light Indigo
   final Color _bgLight = const Color(0xFFF8FAFC);
   final Color _accentGreen = const Color(0xFF10B981); // For progress bars
-
-  void _onTabTapped(int index) {
-    if (_currentIndex == index) return;
-    setState(() => _currentIndex = index);
-    switch (index) {
-      case 0: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.home); break;
-      case 1: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.search); break;
-      case 2: break;
-      case 3: Navigator.pushReplacementNamed(context, SubjectTeacherRoutes.settings); break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +41,8 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildIndigoHeroHeader(present, absent, rate), // ✅ New Indigo Gradient Hero
+                    _buildIndigoHeroHeader(
+                        present, absent, rate), // ✅ New Indigo Gradient Hero
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
@@ -59,7 +50,11 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
                         children: [
                           const SizedBox(height: 24),
                           const Text("WEEKLY PERFORMANCE TREND",
-                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w900, color: Color(0xFF64748B), letterSpacing: 1.2)),
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFF64748B),
+                                  letterSpacing: 1.2)),
                           const SizedBox(height: 12),
                           _buildTrendSection(),
                           const SizedBox(height: 32),
@@ -75,7 +70,6 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
     );
   }
 
@@ -83,26 +77,41 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
   Widget _buildExactHeader(String title) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))]),
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(color: Colors.black12, blurRadius: 1, offset: Offset(0, 1))
+      ]),
       child: Row(
         children: [
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: _primaryPurple.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-              child: Icon(Icons.arrow_back_ios_new_rounded, color: _primaryPurple, size: 20),
+              decoration: BoxDecoration(
+                  color: _primaryPurple.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: _primaryPurple, size: 20),
             ),
           ),
           const SizedBox(width: 16),
-          Text("$title Overview", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+          Text("$title Overview",
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E293B))),
           const Spacer(),
           GestureDetector(
             onTap: () => setState(() => _isTelugu = !_isTelugu),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(border: Border.all(color: _primaryPurple.withOpacity(0.3)), borderRadius: BorderRadius.circular(20)),
-              child: Text(_isTelugu ? 'ಕನ್ನಡ' : 'English', style: TextStyle(color: _primaryPurple, fontSize: 12, fontWeight: FontWeight.bold)),
+              decoration: BoxDecoration(
+                  border: Border.all(color: _primaryPurple.withOpacity(0.3)),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(_isTelugu ? 'ಕನ್ನಡ' : 'English',
+                  style: TextStyle(
+                      color: _primaryPurple,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold)),
             ),
           ),
         ],
@@ -120,11 +129,13 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
         gradient: LinearGradient(
             colors: [_indigoDeep, _indigoLight],
             begin: Alignment.topLeft,
-            end: Alignment.bottomRight
-        ),
+            end: Alignment.bottomRight),
         borderRadius: BorderRadius.circular(32),
         boxShadow: [
-          BoxShadow(color: _indigoDeep.withOpacity(0.4), blurRadius: 25, offset: const Offset(0, 12))
+          BoxShadow(
+              color: _indigoDeep.withOpacity(0.4),
+              blurRadius: 25,
+              offset: const Offset(0, 12))
         ],
       ),
       child: Column(
@@ -133,8 +144,13 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Today's Summary", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w900)),
-              Icon(Icons.insights_rounded, color: Colors.white.withOpacity(0.5), size: 24),
+              const Text("Today's Summary",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900)),
+              Icon(Icons.insights_rounded,
+                  color: Colors.white.withOpacity(0.5), size: 24),
             ],
           ),
           const SizedBox(height: 20),
@@ -143,8 +159,7 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
             decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Colors.white.withOpacity(0.2))
-            ),
+                border: Border.all(color: Colors.white.withOpacity(0.2))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -164,9 +179,18 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
   Widget _heroStatCol(String val, String label) {
     return Column(
       children: [
-        Text(val, style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w900)),
+        Text(val,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w900)),
         const SizedBox(height: 2),
-        Text(label.toUpperCase(), style: const TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 0.5)),
+        Text(label.toUpperCase(),
+            style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 9,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.5)),
       ],
     );
   }
@@ -178,8 +202,12 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(28),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 10))]
-      ),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 20,
+                offset: const Offset(0, 10))
+          ]),
       child: Column(
         children: [
           _buildTrendRow("Mon", 0.932, "93.2%"),
@@ -199,7 +227,13 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
   Widget _buildTrendRow(String day, double value, String label) {
     return Row(
       children: [
-        SizedBox(width: 45, child: Text(day, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF334155)))),
+        SizedBox(
+            width: 45,
+            child: Text(day,
+                style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF334155)))),
         Expanded(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -207,12 +241,15 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
                 value: value,
                 backgroundColor: const Color(0xFFF1F5F9),
                 color: _accentGreen,
-                minHeight: 10
-            ),
+                minHeight: 10),
           ),
         ),
         const SizedBox(width: 12),
-        Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Color(0xFF475569))),
+        Text(label,
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
+                color: Color(0xFF475569))),
       ],
     );
   }
@@ -223,13 +260,19 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
       children: [
         Expanded(
           child: OutlinedButton(
-            onPressed: () => Navigator.pushNamed(context, SubjectTeacherRoutes.attendanceSummary),
+            onPressed: () => Navigator.pushNamed(
+                context, SubjectTeacherRoutes.attendanceSummary),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 18),
               side: BorderSide(color: _primaryPurple, width: 2),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18)),
             ),
-            child: Text("History", style: TextStyle(color: _primaryPurple, fontWeight: FontWeight.w900, fontSize: 15)),
+            child: Text("History",
+                style: TextStyle(
+                    color: _primaryPurple,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 15)),
           ),
         ),
         const SizedBox(width: 16),
@@ -237,34 +280,30 @@ class _ClassAttendanceDetailPageState extends State<ClassAttendanceDetailPage> {
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                boxShadow: [BoxShadow(color: _primaryPurple.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8))]
-            ),
+                boxShadow: [
+                  BoxShadow(
+                      color: _primaryPurple.withOpacity(0.3),
+                      blurRadius: 15,
+                      offset: const Offset(0, 8))
+                ]),
             child: ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, SubjectTeacherRoutes.takeAttendance),
+              onPressed: () => Navigator.pushNamed(
+                  context, SubjectTeacherRoutes.takeAttendance),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 backgroundColor: _primaryPurple,
                 elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)),
               ),
-              child: const Text("Take Today", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 15)),
+              child: const Text("Take Today",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 15)),
             ),
           ),
         ),
-      ],
-    );
-  }
-
-  Widget _buildBottomNav() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex, onTap: _onTabTapped, type: BottomNavigationBarType.fixed,
-      selectedItemColor: _primaryPurple, unselectedItemColor: const Color(0xFF94A3B8), backgroundColor: Colors.white,
-      selectedFontSize: 11, unselectedFontSize: 11, elevation: 25,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search_rounded), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.bolt_rounded), label: 'Activity'),
-        BottomNavigationBarItem(icon: Icon(Icons.more_horiz_rounded), label: 'More'),
       ],
     );
   }
